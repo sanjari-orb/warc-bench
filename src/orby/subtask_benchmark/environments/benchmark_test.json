@@ -1,0 +1,3342 @@
+[
+  {
+    "task_id": "online.0",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 75%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 75'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.1",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 5%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 5'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.2",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 1 Jan 2014 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Wed Jan 01 2014 00:00:00 GMT+0000 (Coordinated Universal Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.3",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 1 October 2030 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Tue Oct 01 2030 00:00:00 GMT+0000 (Coordinated Universal Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.4",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/material"
+    },
+    "goal": "Select date 21 March 2024 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Thu Mar 21 2024 00:00:00 GMT+0000 (Coordinated Universal Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.6",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow-dark"
+    },
+    "goal": "Find the date picker on the page and clear the date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: null'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.7",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select color picker #EDC55E in the ColorPicker tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: #EDC55E'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.8",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Pick the red color in ColorSelect tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: #ff4c3b'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.9",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select option 'One' in MultiCombo box and remove other options.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.wx-tags.svelte-1xr1yzt\").innerText == \"One\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.10",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select August 30 2025 as the departing date and 1 October 2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"08/30/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"10/01/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.11",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select Feb 2 2026 as the departing date and Feb 4 2026 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"02/02/2026\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"02/04/2026\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.12",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on the icon for Reporting in the side bar",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://orby-ai.zendesk.com/agent/reporting/explore/period:0"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.13",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on the icon for Organizations in the side bar",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://orby-ai.zendesk.com/agent/organizations"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.14",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the ticket \"Are products ethically sourced?\" and return the name of the Requester as a JSON formatted string {\"requester_name\": \"....\"}",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"requester_name\": \"Zhang Wei Xu\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.15",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Return the name of the account holder by checking the profile details on the top right. Do not return anything else.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Michael S"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.16",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Return the number of solved tickets this week in the \"Ticket Statistics\" section in the top right corner",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "0"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.17",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the settings/Admin page from the side menu and  return the number of the pod my zendesk is hosted in. Only return the integer value",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "27"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.18",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click the '+Add' button so that you start creating a new ticket. Add a user to the Requester field with name 'Sanjari S', email abc@orby.ai, user type-Staff Member and role \"Administrator\". Stop right before you submit the 'Add new user' form though, ie do not click on the 'Add' button in the dialog box.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll(\"input[name='User type']\")[1].checked && document.querySelector(\"div[data-test-id=create-user-modal-usertype-staff-dropdown]\").innerText ==\"Role\\nAdministrator\" && document.querySelector(\"input[data-test-id=create-user-modal-email]\").value == \"abc@orby.ai\" && document.querySelector(\"input[data-test-id=create-user-modal-name]\").value == \"Sanjari S\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.19",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the ticket \"Do I put it together?\" and follow it",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div[data-test-id=qa-email_ccs__email_label]\").innerText==\"Michael S\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.20",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Compile a list of all the current open tickets as a JSON list; each ticket should be a JSON object with fields \"customer name\" and \"ticket title\"",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[{\"customer name\": \"The Customer\",\"ticket title\": \"SAMPLE TICKET: Meet the ticket\"},{\"customer name\": \"Ingrid Van Dijk\",\"ticket title\": \"SAMPLE TICKET: New delivery address\"},{\"customer name\": \"Zhang Wei Xu\",\"ticket title\": \"SAMPLE TICKET: Shipping cost\"},{\"customer name\": \"Soobin Do\",\"ticket title\": \"SAMPLE TICKET: Do I put it together?\"},{\"customer name\": \"Customer\",\"ticket title\": \"SAMPLE: How does Zendesk work\"},{\"customer name\": \"Zhang Wei Xu\",\"ticket title\": \"SAMPLE TICKET: Are products ethically sourced\"}]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.21",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on '+Add' button and write \"I want to open a feature request\" in the reply text box in draft mode.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[aria-label='Draft mode'\").getAttribute(\"data-active\") && document.querySelector(\"div[data-test-id=ticket-rich-text-editor]\").innerText==\"I want to open a feature request\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.22",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the text 'Engineering has to respond to this ticket by 12 Jan' in the user notes",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"textarea[data-garden-container-id='containers.field.input']\").value == 'Engineering has to respond to this ticket by 12 Jan'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.23",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the text in text box for publicly replying that '\"Flat pack delivery\" at our company means that the furniture will be not be shipped to you in disassembled style, the packaging will just look flatter.'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerText=='\"Flat pack delivery\" at our company means that the furniture will be not be shipped to you in disassembled style, the packaging will just look flatter.'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.24",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the following text in text box for public reply: I will support you in this request:<newline>Michael: +11234567891.\nMichael: +11234567891 should be italicized and underlined and the <newline> means an actual newline character should be input in the text box.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerHTML==\"<p>I will support you in this request:</p><p><i><u>Michael: +11234567891</u></i></p>\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.25",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Write \"Hi Michael S,<newline>Let me get back to you in 5 days.\" in the text box to publicly reply to Michael S. Do not do anything else except for entering the text. The newline should be an actual new line character.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerText==\"Hi Michael S,\\n\\nLet me get back to you in 5 days.\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.26",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Turn off quick tips",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"input[data-test-id=quickTips-toggle]\").checked == false"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.27",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Find and click on the Side Conversations button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-w1sw06-1.sc-5tuaod-2.bAFeJI.kHvqxZ > div > h2\").innerText==\"Side conversations\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.28",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Hide the interaction history",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-xvk8cr-0.cUaIuY > button\").getAttribute('aria-expanded')=='false'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.29",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter Email as cheng@orby.ai. Do not click Next.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"login_id\"]').value === \"cheng@orby.ai\" && document.querySelector('button[id=\"nextbtn\"][class=\"btn blue\"]').innerText === \"Next\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.30",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter email as cheng@orby.ai, enter password as orbyai@2025! but don't submit the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"password\"][name=\"PASSWORD\"][type=\"password\"]').value === \"orbyai@2025!\" && document.querySelector('button[class=\"btn blue\"][id=\"nextbtn\"]').innerText === \"Sign in\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.32",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Enter Phone number as 1234567890",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[class=\"dialphone\"][id=\"mobile\"][name=\"r_address/1.phone\"][aria-label=\"Phone Number\"]').value === \"1234567890\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.34",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Click to agree to the terms and policy of Service. Refresh the page if you have to.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[class=\"za-tos\"][id=\"tos\"][name=\"tos\"][type=\"checkbox\"]').checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.35",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Expand the All Product dropdown",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li[role=\"button\"]')?.matches('.zwc-all-product.active[aria-expanded=\"true\"]');"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.38",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Under All Products , display all options starting with the word \"Sales\" in the search bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div.zwcg-search-product-results-wrapper.zwcg-suggestion-active') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.39",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Return the second reason for Why people choose Zoho Desk? Note, only return the second reason.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Dedicated training program with shallow learning curve"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.40",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_desk_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Get the list of all the apps listed on this page that integrate with Zoho Desk. Return the answer as a JSON list and maintain the case of the app names.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"twilio\", \"Zoho FSM\", \"zapier\", \"Zoho CRM\", \"shopify\", \"Zoho Assist\",  \"slack\", \"INTUIT mailchimp\", \"Google Workspace\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.43",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Select the option to write an Internal Note as a reply to the ticket",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('button[data-test-id=omnichannel-channel-switcher-button]').getAttribute('aria-label')==\"Internal note\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.44",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Set the filter so that only Internal notes of the ticket are displayed. Keep the filter dropdown open after the selection so that user can verify the selection.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll(\"li[data-test-id=omni-header-filter-menu-item]\")[2].getAttribute('aria-checked')=='true'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.45",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Open the list of apps from the right hand side pane and return a JSON list of app names under \"Apps to get you started\". Maintain the case of the app name strings.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"User Data\", \"Five Most Recent\", \"Zoom\",  \"TeamViewer\", \"Zendesk Workforce Management\", \"Trello\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.46",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "What is the last date for which flight options are shown on this page? Return only the date in MM/DD/YYYY format",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "07/15/2025"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.47",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "What is the cost of the most expensive Premium seat available on a flight on July 15th? Provide the answer in a format like $1,23,456 (i.e. with currency and commas)",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "$1,105"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.48",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Display only the Non-Stop flights",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[id=btn-stops-filter]\").innerText==\"Nonstop only\\nFilter flights by Stops\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.49",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "How many premium seats are left in AA 2994 on Jul 9? Only return the integer value",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "5"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.50",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Expand the details of the \"Main\" ticket of the flight JFK - DCA AA 4538 -> DCA - ORD AA 1200. Do not select any fares yet.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div[class='grid-x fares'\").innerText=='Viewing 1 of 5 Main fare product options including Premium Economy and Premium fares.\\nRound trip\\nBasic Economy Benefits\\nBasic Economy\\n$280per person\\nFee icon\\nPay to check bags\\nFee icon\\nPay for a Main Cabin seat\\nFee icon\\nPay for an extra legroom seat\\nRestriction icon\\nBoard in last group\\nRestriction icon\\nNo changes allowed\\nFee icon\\nPay to choose another same-day flight\\nNo refunds allowed\\nSelect\\nSelect Round trip Basic Economy fare for $280 departing from JFK to ORD 1 stop\\nViewing 2 of 5 Main fare product options including Premium Economy and Premium fares.\\nRound trip\\nMain Benefits\\nMain\\n$370per person\\nFee icon\\nPay to check bags\\nCheckmark icon\\nChoose a Main Cabin seat\\nFee icon\\nPay for an extra legroom seat\\nCheckmark icon\\nBoard in general group (6-8)\\nCheckmark icon\\nChanges allowed\\nFee icon\\nPay to choose another same-day flight\\nSelect refund policy with radio button\\n\\tFull refund to travel credit\\nSelect refund policy with radio button\\n\\tFull refund to original form of payment+ $131\\nSelect\\nSelect Round trip Main fare for $370 departing from JFK to ORD 1 stop\\nViewing 3 of 5 Main fare product options including Premium Economy and Premium fares.\\nRound trip\\nMain Plus Benefits\\nMain Plus\\n$484per person\\nCheckmark icon\\nCheck 1 bag free\\nCheckmark icon\\nChoose a Main Cabin seat\\nCheckmark icon\\nChoose an extra legroom seat\\nCheckmark icon\\nBoard earlier with Group 5\\nCheckmark icon\\nChanges allowed\\nFee icon\\nPay to choose another same-day flight\\nFull refund to travel credit\\nSelect\\nSelect Round trip Main Plus fare for $484 departing from JFK to ORD 1 stop\\nViewing 4 of 5 Main fare product options including Premium Economy and Premium fares.\\nRound trip\\nMain Select Benefits\\nMain Select\\n$524per person\\nFee icon\\nPay to check bags\\nCheckmark icon\\nChoose a Main Cabin seat\\nCheckmark icon\\nChoose an extra legroom seat\\nCheckmark icon\\nPriority check-in and boarding access (Group 4)\\nCheckmark icon\\nChanges allowed\\nCheckmark icon\\nChoose another same-day flight\\nFull refund to original form of payment\\nSelect\\nSelect Round trip Main Select fare for $524 departing from JFK to ORD 1 stop\\nViewing 5 of 5 Premium fare product options.\\nRound trip\\nFirst Benefits\\nFirst\\n$2,219per person\\nCheckmark icon\\nCheck 2 bags free\\nCheckmark icon\\nChoose our largest, most comfortable seat\\nCheckmark icon\\nPriority check-in and boarding access (Group 1)\\nCheckmark icon\\nChanges allowed\\nCheckmark icon\\nChoose another same-day flight\\nSelect refund policy with radio button\\n\\tFull refund to travel credit\\nSelect refund policy with radio button\\n\\tFull refund to original form of payment+ $170\\nSelect\\nSelect Round trip First fare for $2,219 departing from JFK to ORD 1 stop'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.51",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Explore the details of the \"Main\" ticket of the flight JFK - DCA AA 4538 -> DCA - ORD AA 1200 and return a JSON list consisting of dictionaries with keys \"fare_type\" (eg Main) and \"price\" (123) listed for this ticket. Only return the integer values for the prices.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[{\"fare_type\": \"Basic Economy\", \"price\": 280}, {\"fare_type\": \"Main\", \"price\": 370},{\"fare_type\": \"Main Plus\", \"price\": 484},{\"fare_type\": \"Main Select\", \"price\": 524},{\"fare_type\": \"First\", \"price\": 2219}]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.52",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Sort the  flight list in ascending order of Departure time",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[id=btn-sort-by-departure]\").getAttribute(\"class\")==\"departure_asc\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.53",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Go to the page for the departure date of July 15th",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#carousel-2025-07-15\").hasAttribute(\"selected\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.54",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_summary.wacz",
+      "start_url": "https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "What is the extra price customer will have to pay to upgrade the tickets to Flagship business for all passengers? Only output the integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2450"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.55",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_summary.wacz",
+      "start_url": "https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "What is the travel time of the second flight? Provide the answer in the format \"123h 123m\" (eg 1h 45m)",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "8h 30m"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.57",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/NeMo"
+    },
+    "goal": "Make a repo-wide search for \"ctc\" using the top most search bar.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div.logged-in.env-production.page-responsive > div.application-main > main > react-app > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-PageLayoutRoot-1zlEO.Search-module__SplitPageLayout--vH5Ht > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-ContentWrapper-b-QRo.Search-module__SplitPageLayout_Content--mt9an > div.Box-sc-g0xbh4-0.prc-PageLayout-Content--F7-I > div > div > div:nth-child(1) > div > span > span.Box-sc-g0xbh4-0.fcqJJh.prc-Text-Text-0ima0 > div\").innerHTML === \"506 files \""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.59",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "How many contributions did the user make on November 26th 2024? We know that the user made non-zero contributions that day. Return only the integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "9"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.60",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "What is this github user's icloud email? Please return only the email and no other text.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "williamz@icloud.com"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.61",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Switch to the branch \"neftune\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#branch-picker-repos-header-ref-selector > span > span.prc-Button-Label-pTQ3x > div > div.Box-sc-g0xbh4-0.ffLUq.ref-selector-button-text-container > span\").innerHTML.includes(\"neftune\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.62",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to Repositories and display the public repositories",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://github.com/jimhalpert123?tab=repositories&q=&type=public&language=&sort="
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.63",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to the repositories page and list the repostories with an Apache License 2.0 . Return the output as a JSON list while maintaining the case formatting of the repository names.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"NeMo\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.64",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Display all of the activity of jimHalpert123 in the year 2024",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://github.com/jimhalpert123?tab=overview&from=2024-11-01&to=2024-11-30"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.65",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Return the number of commits present in the noise_emb branch of jimHalpert123/NeMo. Only return integer values (no commas)",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "5964"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.66",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/noise_emb"
+    },
+    "goal": "Output the instructions for installing this library using pip (not using source). Return only the newline separated code.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "apt-get update && apt-get install -y libsndfile1 ffmpeg\npip install Cython\npip install nemo_toolkit['all']"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.67",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "Open the Next-js-boilerplate repository",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://github.com/jimhalpert123/Next-js-Boilerplate"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.68",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/tree/main/src"
+    },
+    "goal": "Find and open the file 0000_snapshot.json in the migrations folder displayed on the left. Only click the left/down arrows to interact with the directory menu.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div[data-testid=breadcrumbs-filename]\").innerText == '/0000_snapshot.json'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.69",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/commits/main/migrations/meta/0000_snapshot.json"
+    },
+    "goal": "Copy the full SHA of the commit \"chore: update dependencies to the latest version\" and only generate the SHA string as the output. You should be able to view commit details.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "a3eb1fc1aac543506f299d850b1315581b0d46ce"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.71",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add an Eagle .gitignore template",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rq\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes(\"Eagle\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.72",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add an Erlang .gitignore template",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rq\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes(\"Erlang\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.73",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add the highest version of BSD license in the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rv\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes('BSD 3-Clause \"New\" or \"Revised\" License')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.74",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "What is the name of the first trending repository shown on this page? Ouput only the name.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "yeongpin/cursor-free-vip"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.75",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "How many hooray reactions does the v3.3.4 release by laurent22/joplin have? Return only the integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "8"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.76",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "Start filling the form on this page to create a new private repository with the name megatron. Do not submit the form though and ignore any errors.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rk\\\\:\").value=='private'&&document.querySelector(\"#\\\\:r9\\\\:\").value=='megatron'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.77",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/web-tools/edit/main/README.md"
+    },
+    "goal": "Remove any existing contents of the README and write 'Starting a new README.'. Do not perform any other action.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#repo-content-pjax-container > react-app > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-PageLayoutRoot-1zlEO > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-ContentWrapper-b-QRo.CodeView-module__SplitPageLayout_Content--qxR1C > div.Box-sc-g0xbh4-0.prc-PageLayout-Content--F7-I > div > div:nth-child(3) > div.Box-sc-g0xbh4-0.cvtrAK > div > div.Box-sc-g0xbh4-0.elNkLh.react-code-view-edit > file-attachment > div > div > div.cm-scroller > div.cm-content.cm-lineWrapping\").innerHTML == '<div class=\"cm-line\" dir=\"auto\">Starting a new README.</div>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.78",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/kaiser_doctors_locations.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/shop-plans"
+    },
+    "goal": "Update the Kaiser Permanente page to shop for plans in the \"Washington\" region",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://healthy.kaiserpermanente.org/washington/shop-plans"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.79",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter email as \"cheng@orby.ai\"  and select forgot password",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://accounts.zoho.com/password?servicename=ZohoSupport&signupurl=https%3A%2F%2Fwww.zoho.com%2Fdesk%2Fsignup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.80",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter phone no as : \"123456789\" and set the country extension as \"+971\". Do not submit the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input.select_input.select_input--country_implement.select_input_cntry_code').value === '+971'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.81",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter phone no as : \"123456789\" and set the country as Yemen. Do not submit the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input.select_input.select_input--country_implement.select_input_cntry_code').value === '+967'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.82",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter phone no as : \"123456789\" and set the country as Mongolia. Do not submit the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input.select_input.select_input--country_implement.select_input_cntry_code').value === '+976'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.83",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter phone no as : \"123456789\" and click on down arrow next to country extension",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div.selectbox_options_container.country_code_select.selectbox_options_container--open').offsetParent !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.84",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter phone no as : \"123456789\" and click on down arrow next to country extension. Return the extension codes of all countries starting with \"St.\" as a json list with format: [{\"country\": string, \"code\": int}]",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[{\"country\": \"St. Barthélemy\", \"code\": 590}, {\"country\": \"St. Helena\", \"code\": 290}, {\"country\": \"St. Kitts & Nevis\", \"code\": 1}, {\"country\": \"St. Lucia\", \"code\": 1}, {\"country\": \"St. Martin\", \"code\": 590}, {\"country\": \"St. Pierre & Miquelon\", \"code\": 508}, {\"country\": \"St. Vincent & Grenadines\", \"code\": 1}]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.85",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter email as \"cheng@orby.ai\" > Click on \"Forgot Password\" > Hover on audio icon, return the tooltip string",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Try audio CAPTCHA"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.86",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter email as \"cheng@orby.ai\" > Click on \"Forgot Password\" > Select the correct answer in the captcha but don't press verify",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"input[id='op3']\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.90",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What were the total number of property crime rate per 100000 population commited in year 2021? Give the answer in JSON format with the key \"crime_rate_per_100000\". Do not include any commas in the values.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"crime_rate_per_100000\": 2160.1}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.91",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics-archive"
+    },
+    "goal": "What were the total number of property crime rate per 100000 population commited in year 2016 to 2020 (both years included)? Give the answer in JSON format with the key \"total_crime_rate_per_100000\". Do not include any commas in the values.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"total_crime_rate_per_100000\": 11930.7}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.92",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What were the total number of crimes against property reported in the Feb 2025? Only return the integer value, no commas.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2913"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.93",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What were the grand total UCR PART ONE CRIMES reported in JAN and FEB months of 2023?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "4617"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.94",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics-archive"
+    },
+    "goal": "What were the number of sexual orientation based hate crimes in the year 2019? Return only the integer value",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "10"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.95",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at timestamp 0.46",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "So update line ten here and then save the file before"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.96",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at timestamp 0.02",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Do you know what's a little bit cool? It is that what"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.97",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen 50 seconds into the video",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "After you've done that, just click on the play icon in"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.98",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at the end of the video",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Best of luck, and happy coding."
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.99",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Find the shortest course on Scrimba under `Courses`. Return only the title of the course, do not add any quotes and maintain case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Intro to Astro"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.100",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Find the longest course on Scrimba under `Courses`. Return only the title of the course, do not add any quotes and maintain case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "The Fullstack Developer Path"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.101",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "What is the length (in time) of the 14th topic in the contents for this course?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2.5 hrs"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.102",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "What is the length (in time) of the 5th topic in the contents for this course?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "95 min"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.103",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to About > Return the name of the person who gave the last testimonial.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Oskar Dragon"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.104",
+    "env": {
+      "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
+      "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
+    },
+    "goal": "Go to About > Return the name of the 5th person who gave a testimonial.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "May Mariam"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.106",
+    "env": {
+      "data_path": "environments/web_archives/capsule/capsule-archive.wacz",
+      "start_url": "https://orby.capsulecrm.com/party/person/new",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start Adding a project (option present in top menu) and select 29 April 2025 as the Expected Close Date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[aria-label=\"Date\"]').value=='04/29/2025'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.108",
+    "env": {
+      "data_path": "environments/web_archives/capsule/capsule-archive.wacz",
+      "start_url": "https://orby.capsulecrm.com/party/person/new"
+    },
+    "goal": "Open the page for Marketing",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://orby.capsulecrm.com/transpond?referrer=app-switcher"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.109",
+    "env": {
+      "data_path": "environments/web_archives/capsule/capsule-archive.wacz",
+      "start_url": "https://orby.capsulecrm.com/party/person/new"
+    },
+    "goal": "Click the button for Notifications",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"notification-center__header\"]').innerText=='Notifications'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.110",
+    "env": {
+      "data_path": "environments/web_archives/google/googleearth-archive-drag-search.wacz",
+      "start_url": "https://earth.google.com/static/multi-threaded/versions/10.89.0.3/index.html?"
+    },
+    "goal": "Find Ghana on the map and click on it to open the information window. Return the description listed for it. Do not use the search bar that will not work.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Ghana, officially the Republic of Ghana, is a country in West Africa. It is situated with the Gulf of Guinea and the Atlantic Ocean to the south, and shares borders with Côte d'Ivoire to the west, Burkina Faso to the north, and Togo to the east."
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.111",
+    "env": {
+      "data_path": "environments/web_archives/google/googleearth-archive-drag-search.wacz",
+      "start_url": "https://earth.google.com/static/multi-threaded/versions/10.89.0.3/index.html?"
+    },
+    "goal": "Find Brazil on the map and click on it to open the information window. Return the description listed for it. Do not use the search bar that will not work.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Brazil, officially the Federative Republic of Brazil, is the largest country in South America. It is also the world's fifth-largest country by area and the seventh-largest by population, with over 213 million people."
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.112",
+    "env": {
+      "data_path": "environments/web_archives/google/googleearth-archive-drag-search.wacz",
+      "start_url": "https://earth.google.com/static/multi-threaded/versions/10.89.0.3/index.html?"
+    },
+    "goal": "Find United Kingdom on the map and click on it to open the information window. Return the description listed for it. Do not use the search bar that will not work.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "The United Kingdom, made up of England, Scotland, Wales and Northern Ireland, is an island nation in northwestern Europe. England – birthplace of Shakespeare and The Beatles – is home to the capital, London, a globally influential centre of finance and culture. England is also site of Neolithic Stonehenge, Bath's Roman spa and centuries-old universities at Oxford and"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.113",
+    "env": {
+      "data_path": "environments/web_archives/google/googleearth-archive-drag-search.wacz",
+      "start_url": "https://earth.google.com/static/multi-threaded/versions/10.89.0.3/index.html?"
+    },
+    "goal": "Find San Francisco on the map and click on it to open the information window. Return the description listed for it. Do not use the search bar.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "San Francisco, officially the City and County of San Francisco, is a commercial, financial, and cultural center of Northern California."
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.114",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "Hover on claims in the header and then click on claims overview",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.mercuryinsurance.com/claims/"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.115",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "Hover on any of the options in the top bar menu like Insurance, claims, about us, resources, or my accounts",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div.dropdown-content.access-show') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.116",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "In the main menu at the top, hover on claims and select File a Claim. Find the option to \"find a claim online\" and click it.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://mercury.assured.claims/"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.117",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "In the main menu at the top, hover on claims and select File a Claim. Scroll to find the phone number to 'Get a Quote'. Retain format while returning the number.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "(800) 956-3728"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.118",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "Click on \"Get a quote\" without entering the zipcode",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('label[for=\"gaq-zip-code\"][role=\"alert\"].error:not([style*=\"display: none\"])') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.119",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "Click on the search icon at the top",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[id=\"search-box\"][aria-expanded=\"true\"]') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.120",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://www.mercuryinsurance.com/"
+    },
+    "goal": "Find Condo Insurance in top dropdown and select it. Note that you should only hover on options until you find the right menu option to click. Ignore any errors that come up on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.mercuryinsurance.com/insurance/condo/"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.121",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://mercury.assured.claims/"
+    },
+    "goal": "Start filing a new auto insurance claim. You do not need a tow truck and your name and phone number are John Doe and 2345678911. Stop once you click agree and continue.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#page-title > div\").innerText=='When did the incident occur?'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.122",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://mercury.assured.claims/"
+    },
+    "goal": "Start filing a new auto insurance claim.  You do not need a tow truck and your name and phone number are John Doe and 2345678911. Set time of the incident to April 16, 8:30 AM and stop on that page (do not press continue).",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#b108bf6afc-trigger\").value =='April 16, 2025 8:30 AM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.123",
+    "env": {
+      "data_path": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+      "start_url": "https://mercury.assured.claims/"
+    },
+    "goal": "Start filing a new auto insurance claim.  You are uninsured, filling for yourself, do not need a tow truck and your name and phone number are John Doe and 2345678911. User default time of incident and stop once you reach the page asking for 'Mercury policyholder name/number'.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#mercury-policyholder-name-label\").innerText == 'Mercury policyholder name'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.124",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select 15/08/2025 as the departing date and 10/10/2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"08/15/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"10/10/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.125",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select August 15 2025 as the departing date and 10 October 2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"08/15/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"10/10/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.126",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 1 April 2026 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Wed Apr 01 2026 00:00:00 GMT+0000 (Coordinated Universal Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.127",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 31/10/2030 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Thu Oct 31 2030 00:00:00 GMT+0000 (Coordinated Universal Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.128",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Get \"Total Count\" by clicking the button in the top right corner.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"zd_v2-globalnotification-container zd_v26a70202f26 zd_v2bec37a2bbe zd_v2fd3b1bbb3b zd_v2bd11ce84cf\"]') .innerText == 'Unable to get records count'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.129",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Open the menu in the top right corner to see different views the page can be rendered in",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[data-selector-id=\"dropBox_subcontainer\"]').innerText=='Classic View\\nCompact View\\nTable View\\nWORK MODES\\nStatus Mode\\nHandshake Mode\\nCountdown Mode\\nPriority Mode'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.130",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Expand the all tickets (click on arrow icon next to all tickets)",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[data-id=\"customViewListPopup_subcontainer\"][data-selector-id=\"dropBox_subcontainer\"]') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.131",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Find the user ID associated with this account.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "883782992"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.132",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Open notifications using the option in the top bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('div[data-test-id=\"notificationsContainer\"]').length == 1"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.133",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on arrow icon next to + on the top header bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('button[data-id=\"addModule_icon\"][aria-expanded=\"true\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.134",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on any of the tickets",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/edit/1103682000000318320"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.135",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new ticket (+ sign in top bar). Do not fill the form yet.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/new"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.136",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Do not fill the form yet.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://desk.zoho.com/agent/orbyai/orby-ai/knowledge-base/page#Solutions/new"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.137",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). In the main text box, fill the text \"This is a placeholder page of contents for our product XYZ.\\n\" In a numbered list (use editor's list) add items \"Topic 1\", \"Topic 2\", \"Topic 3\" right after the previous text.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('iframe')[1].contentDocument.querySelector('body[role=\"textbox\"]').innerHTML == '<div>This is a placeholder page of contents for our product XYZ.<br></div><ol><li style=\"list-style-type: decimal;\">Topic 1<br></li><li style=\"list-style-type: decimal;\">Topic 2<br></li><li style=\"list-style-type: decimal;\">Topic 3</li></ol>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.138",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Click Cancel.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://desk.zoho.com/agent/orbyai/orby-ai/knowledge-base/page#Solutions/list/en/published"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.139",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). In the main text box, fill the text \"This is my first knowledge base.\". Bold and underline this text.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('iframe')[1].contentDocument.querySelector('body[role=\"textbox\"]').innerHTML=='<div><b><u>This is my first knowledge base.</u></b></div>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.140",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). In the main text box, write the text \"This is a placeholder page of contents for our product XYZ.\". Select it and make it a warning.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('iframe')[1].contentDocument.querySelector('body[role=\"textbox\"]').innerHTML=='<div><div><span class=\"KB_New_Editor_Highlights\" style=\"background-color: rgb(252, 177, 177); border-right: 5px solid rgb(252, 139, 139); margin: 10px 0px; position: relative; display: inline-block; padding: 10px 10px 10px 40px;\"><img alt=\"Warning\" data-image=\"contentStyle\" style=\"position: absolute;left: 12px;top:14px;width: 15px;\" data-type=\"non-resize\" src=\"https://static.zohocdn.com/zoho-desk-editor/static/images/caution.png/\"><div>This is a placeholder page of contents for our product XYZ.</div></span></div></div>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.141",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (+ sign in top bar). In the main text box, insert a table with 4 rows, 4 columns and dashed borders.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('iframe')[1].contentDocument.querySelector('body[role=\"textbox\"]').innerHTML=='<div><table cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%; border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); table-layout: fixed; text-align: initial; word-break: break-word; overflow-wrap: break-word; border-collapse: collapse; background-color: transparent;\"><tbody><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td></tr><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td></tr><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td></tr><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td></tr></tbody></table><br><br></div>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.142",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). In the main text box, insert a 2x2 table with dashed borders and row headers 'Name, Place'.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('iframe')[1].contentDocument.querySelector('body[role=\"textbox\"]').innerHTML=='<div><table cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%; border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); table-layout: fixed; text-align: initial; word-break: break-word; overflow-wrap: break-word; border-collapse: collapse; background-color: transparent;\"><tbody><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div>Name</div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div>Place</div></td></tr><tr><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td><td style=\"border-width: 1px; border-style: dashed; border-color: rgb(51, 51, 51); min-height: 50px; min-width: 50px;\"><div><br></div></td></tr></tbody></table><br><br></div>'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.143",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Check the box to Noindex and Nofollow.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[aria-label=\"Noindex and Nofollow\"]').children[0].checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.144",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Set Article Expiry (under the Article section) to  1 April 2025, 01:00 PM.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelector('div[data-id=\"calender_target\"]').innerText=='04/01/2025 01:00 PM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.145",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Set Article Expiry (under the Article section) to 20 July 2025. Don't change time.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelector('div[data-id=\"calender_target\"]').innerText=='07/20/2025 02:05 PM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.146",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Set Article Expiry (under the Article section) to 17 Aug 2027. Don't change time.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelector('div[data-id=\"calender_target\"]').innerText=='08/17/2027 02:05 PM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.147",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Set Article Expiry (under the Article section) to  1 Dec 2020, 06:06 AM.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelector('div[data-id=\"calender_target\"]').innerText == '12/01/2020 06:06 AM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.148",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Start adding a new article (Arrow next to + sign in top bar). Set Article Expiry (under the Article section) to  14th May, 05:00 PM.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelector('div[data-id=\"calender_target\"]').innerText == '05/14/2025 05:00 PM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.149",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Navigate to Learning > New Approaches to Learning. Hover on menu options until you can find the right link to click. Ignore any error on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/learning/new-approaches-learning"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.150",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Navigate to Calendar > Calendars. Hover on menu options until you can find the right link to click. Ignore any error on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/calendars"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.151",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Navigate to Information for > Job Seekers. Ignore any error on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/human-resources/join-sfusd"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.152",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Return the second (to be read left to right)  card title under section `Know your rights`.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Cyberbullying"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.153",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "In the information banner near the top of the page, click `learn more` on the third banner. Ignore any errors on resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/services/family-supports-services/immigration-policy-resources"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.154",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "In the information banner near the top of the page, return the title of the 5th banner. Preserve the case formatting.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "STUDENT SUCCESS STORIES"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.155",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "In the information banner near the top of the page, click learn more on the 4th banner. Ignore any errors on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/bond/overview"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.156",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "In the information banner near the top of the page, go to the last banner and return the title of the banner. Preserve case formatting.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "EXPANDED FREE TRANSITIONAL KINDERGARTEN"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.157",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Click the link of the last card under `Essential Resources`. Ignore errors on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/services/family-supports-services/sfusd-student-family-school-resource-link"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.158",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Scroll to the testimonials banner under `We are SFUSD`. Return the name of the second person on the 2nd page in lower case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "franny wu"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.159",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Scroll to the testimonials banner under `We are SFUSD`. Return the name of the first person on the last page in lower case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "marc bayangos"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.160",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Scroll to the testimonials banner under `We are SFUSD`. Return the name of the first person on the 10th page in lower case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "naroth than"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.161",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Scroll to the testimonials banner under `We are SFUSD`. Return the name of the first person on the 15th page in lower case.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "nicole majors"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.162",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Scroll and find the contact phone number for contacting SFUSD office on this page.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "415-241-6000"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.163",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Open the school directory. Note that you should hover on options until you can find the correct link to click.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#hero > div.hero_header > h1\").innerText == \"Directory of Schools\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.164",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Open the 4th page of the school directory.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/directory?page=3"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.165",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Search for the \"rosa parks\" school using the searchbar on the school directory page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/directory?field_schoolname_value=rosa+parks"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.166",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory?field_schoolname_value=rosa+parks"
+    },
+    "goal": "What's the address and phone number of the Rosa Parks Elementary school? Return the answer as a JSON dictionary with keys \"address\" and \"phone_number\". The address should be a comma separated string containing the street name, city name, state name and zipcode. The phone number should be a string with format \"xxx-xxx-xxxx\", where x is a digit.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"address\": \"1501 O'Farrell Street, San Francisco, California, 94115\", \"phone_number\": \"415-749-3519\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.167",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Navigate to the School Finder Page. Hover on menu options until you find the correct option to click.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/enroll/discover/school-finder"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.168",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select Rhode Island as the state in the Wellcare's provider network interest form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderState > div > div > div.selectric > p\").innerText == 'Rhode Island'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.169",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select DME as the speciality",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderSpecialty > div > div > div.selectric > p\").innerText  == 'Durable Medical Equipment (DME)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.170",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select PSYD as the Degree Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderDegreeType > div > div > div.selectric > p\").innerText == 'PSYD'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.171",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Hover on Explore plans > Click C-SNP plans. Ignore any errors on resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.wellcare.com/en/explore-plans/medicare-advantage-plans/csnp"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.172",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Open the wellcare page for state Iowa. Ignore any errors on resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.wellcare.com/en/iowa"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.173",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Select California as state in Locations Served and select Orange and Santa Clara County in counties served",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions.length==2&&document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions[0].innerHTML=='ORANGE (CA)' && document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions[1].innerHTML=='SANTA CLARA (CA)'&&document.querySelector('select[id=\"lbStatesServed\"]').selectedIndex==6"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.174",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Enter 1001 Page Mill Rd in the first line of address, under UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP)",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_10_1\").value == '1001 Page Mill Rd'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.175",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Enter 1100220058 in Toll Free Number field, under UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP):",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_11\").value == '1100220058'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.176",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Select TRICARE Overseas Program Prime as the desired prime option; under USFHP section",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#choice_4_14_3\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.177",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "There is a typo in the first address line. Fix it to `530 Seventieth Avenue`, under UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP).",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_10_1\").value=='530 Seventieth Avenue'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.178",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Copy the fax number into the toll free number field under UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP).",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_11\").value == '1-212-356-4949'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.179",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Copy the fax number from UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP) section to the REGIONAL CONTRACTOR section.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_8\").value  == '1-212-356-4949'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.180",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Copy the fax and toll free numbers from UNIFORMED SERVICES FAMILY HEALTH PLAN (USFHP) section to the REGIONAL CONTRACTOR section.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#input_4_7\").value=='1-800-241-4848' && document.querySelector(\"#input_4_8\").value  == '1-212-356-4949'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.182",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Hover on \"Members\" on top dropdown bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "getComputedStyle(document.querySelector('.menu-item-264 .sub-menu')).display !== 'none'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.183",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Scroll down and determine the current step number of the form. Return integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "1"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.184",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Scroll to Application options and click on link for the TRICARE website under Notes. Ignore any errors on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.tricare.mil/"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.185",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Remove N/A  from Region field in REGIONAL CONTRACTOR, and fill \"California\" instead.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[name=\"input_5\"][id=\"input_4_5\"]').value === 'California'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.186",
+    "env": {
+      "data_path": "environments/web_archives/stvincent/stvincent.wacz",
+      "start_url": "https://usfhp.net/eligibility/enrollment-form/"
+    },
+    "goal": "Choose third option in \"Tricare Prime Option Desired\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[name=\"input_14\"][value=\"TRICARE Prime Remote: If eligible, you may be enrolled in TRICARE Prime Remote or TRICARE Prime Remote for Active Duty Family Members.\"]').checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.187",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Sort the table by the Duration column in descending order.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.wx-sort.svelte-naho36 .wxi-arrow-down') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.188",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Add a new subtask under Testing. You can use the default values within the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.wx-row.svelte-j6puvz[data-id*=\"temp\"]').closest('.wx-data').querySelector('[data-id=\"4\"]') !== null && document.querySelector('.wx-row.svelte-j6puvz[data-id*=\"temp\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.189",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "drag and expand the width of duration column",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.wx-cell.wx-text-center.svelte-naho36[data-header-id=\"duration\"]').style.minWidth> '100px'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.190",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Return the percentage of the Project Management work which would be completed between  06-04-2024 and 10-04-2024. Return an integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "40"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.191",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "get the percentage progress made for project planning, by hovering over the relevant bar. Return integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "30"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.192",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "get the percentage progress made for Testing, by hovering over the relevant bar. Return integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "3"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.193",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Update the percentage progress for Testing to 70%. Progress can be updated by opening the side pane by clicking Testing. Do not close the side pane.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[placeholder=\"Add task name\"]').value=='Testing' && document.querySelector('input[type=\"range\"]').value=='70'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.194",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Update the percentage progress for Project Management  to 40%. Progress can be updated by dragging the pointer on the relevant bar.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div > div.content.wx-willow-theme.svelte-1ce69k1 > div.wx-gantt.svelte-1dzadpy > div > div.wx-content.svelte-1dzadpy > div.wx-chart.svelte-1ff484e > div > div.wx-bars.svelte-1qryx5p > div:nth-child(5) > div.wx-progress-marker.svelte-1qryx5p\").getAttribute('style')=='left:calc(40% - 10px);'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.195",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Update the percentage progress for Testing  to 20%. Progress can be updated by dragging the pointer on the relevant bar.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div > div.content.wx-willow-theme.svelte-1ce69k1 > div.wx-gantt.svelte-1dzadpy > div > div.wx-content.svelte-1dzadpy > div.wx-chart.svelte-1ff484e > div > div.wx-bars.svelte-1qryx5p > div:nth-child(14) > div.wx-progress-marker.svelte-1qryx5p\").getAttribute('style')=='left:calc(20% - 10px);'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.196",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Sort the table by Start dates in descending order.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div > div.content.wx-willow-theme.svelte-1ce69k1 > div.wx-gantt.svelte-1dzadpy > div > div.wx-table-wrapper.svelte-1v5std3 > div > div > div > div > div > div > div.wx-header-wrapper.svelte-j6puvz > div > div > div:nth-child(2) > div.wx-sort.svelte-naho36 > i\").getAttribute('class')=='wxi-arrow-down'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.197",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Sort the table by Start dates in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div > div.content.wx-willow-theme.svelte-1ce69k1 > div.wx-gantt.svelte-1dzadpy > div > div.wx-table-wrapper.svelte-1v5std3 > div > div > div > div > div > div > div.wx-header-wrapper.svelte-j6puvz > div > div > div:nth-child(2) > div.wx-sort.svelte-naho36 > i\").getAttribute('class')=='wxi-arrow-up'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.198",
+    "env": {
+      "data_path": "environments/web_archives/windy/windy-archive.wacz",
+      "start_url": "https://www.windy.com/?26.589,75.388,7"
+    },
+    "goal": "Switch the view from 3D to 2D",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#plugin-rhbottom > nav.rhbottom__map-tools.switch.switch--uiswitch.switch--stretch.mb-10.svelte-1kspnlr > a.rhbottom__map-tools__globe.switch__item.tooltip--up\").innerText=='2D'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.199",
+    "env": {
+      "data_path": "environments/web_archives/windy/windy-archive.wacz",
+      "start_url": "https://www.windy.com/?26.589,75.388,7"
+    },
+    "goal": "Click the button for forecasted weather",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#plugin-rhbottom > nav.rhbottom__pois-controls.switch.switch--uiswitch.size-m.mb-10.svelte-1fcfmpu > div > a.switch__item.iconfont.tooltip--up.svelte-1fcfmpu.selected\").innerHTML == '&amp;'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.200",
+    "env": {
+      "data_path": "environments/web_archives/windy/windy-archive.wacz",
+      "start_url": "https://www.windy.com/?26.589,75.388,7"
+    },
+    "goal": "Check the options for Airp., PWS and ShipBuoy under Reported Wind",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[0,2,3].every(i => document.querySelector(\"#plugin-rhbottom > nav.rhbottom__pois-controls.switch.switch--uiswitch.size-m.mb-10.svelte-1fcfmpu.rhbottom__pois-controls--extend > div.rhbottom__pois-controls__extended-checkbox.svelte-1fcfmpu\").childNodes[i].getAttribute('class') == 'checkbox noselect' ) &&  document.querySelector(\"#plugin-rhbottom > nav.rhbottom__pois-controls.switch.switch--uiswitch.size-m.mb-10.svelte-1fcfmpu.rhbottom__pois-controls--extend > div.rhbottom__pois-controls__extended-checkbox.svelte-1fcfmpu\").childNodes[1].getAttribute('class') == 'checkbox noselect checkbox--off'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.201",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Click the link of the second to last card under `Essential Resources`. Ignore errors on the resultant page.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/services/family-supports-services/family-school-communications/sign-district-and-school-notifications"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.202",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "get the percentage progress made for \"Testing basic features\", by hovering over the relevant bar. Return integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "0"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.203",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "get the percentage progress made for \"Resource Management\", by hovering over the relevant bar. Return integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "10"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.204",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket  > Replace the first sentence in textbox \"Welcome to Zoho Desks new Unified Ticket Screen.\" with \"My name is Lawrence.\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('div')[4].innerText=='My name is Lawrence. Here, you have complete context of the ticket. Now that you had received your first ticket, did you notice that it has been assigned to you? To respond to this ticket smartly, check out the Auto-Suggested Solutions in the pane to your left.\\n'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.205",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket > Bold the sentence  \"Whatever action you perform, be rest assured that you can always track them under the ticket's history. With that, you're one step closer to delivering top-notch customer service!\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll('iframe')[0].contentDocument.querySelectorAll('div')[8].innerHTML==\"<b>Whatever action you perform, be rest assured that you can always track them under the ticket's history. With that, you're one step closer to delivering top-notch customer service!</b><br>\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.206",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket  > Update the phone number field to +12345678911. Maintain same formatting as before.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#ZD_27\").value=='1 234 567 8911'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.206",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket  > Update the email to support1@zohodesk.com",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#ZD_26\").value=='support1@zohodesk.com'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.207",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket > Mark ticket owner as unassigned.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#react > desk > div.zd_v2-appcontainer-container.zd_v2-deskapp-container.zd_v2-deskapp-app.zd_v2ff266bc91b.zd_v273a3ca0b12.zd_v2166972493c > div > div.zd_v2ff266bc91b.zd_v273a3ca0b12.zd_v2166972493c > div.zd_v2-deskappcontainer-deskapp.zd_v2050393fdda.zd_v2d6f24eb601.zd_v2577c9fa95f > div.zd_v2ff266bc91b.zd_v273a3ca0b12.zd_v2166972493c > div > div > div > section > div.zd_v2050393fdda.zd_v2d6f24eb601.zd_v2577c9fa95f > div > div > div.zd_v2-formlayout-leftPanel.zd_v2050393fdda.zd_v2d6f24eb601.zd_v2577c9fa95f > main > div > section:nth-child(1) > div > div:nth-child(2) > div > div > div:nth-child(8) > div > div > div.zd_v2-fields-fieldContainer.zd_v2-fields-fieldMargin_medium > div > div.zd_v2ff266bc91b.zd_v273a3ca0b12.zd_v2fd3b1bbb3b.zd_v2bd11ce84cf > div.zd_v2050393fdda.zd_v2d6f24eb601.zd_v2577c9fa95f > div\").innerText == 'Unassigned'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.209",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket > Set due date to 31 Dec 2036, 5:00 PM",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#ZD_34\").value=='31 Dec 2036 05:00 PM'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.210",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_tickets_portal_sep92025.wacz",
+      "start_url": "https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"
+    },
+    "goal": "Click on tags on the side menu > Click on edit on on the row for the first ticket  > Set Language as Hindi",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[data-id=\"language_textBox\"').value=='Hindi'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.211",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "What is the cost of the most expensive Premium seat available on a flight on July 9th? Provide the answer in a format like $1,23,456 (i.e. with currency and commas)",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "$2,408"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.212",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "How many seats are left on the flight 'AA 2994  319-Airbus A319' on July 9th, premium ticket? Return only the integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "5"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.213",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select digestive disorders as the speciality",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderSpecialty > div > div > div.selectric > p\").innerText =='Gastroenterology (Digestive Disorders)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.214",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select Missouri as state in the provider form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderState > div > div > div.selectric > p\").innerText=='Missouri'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.215",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "When will Development milestone end? Return the date following the same format as the gantt chart.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "15-05-2024"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.216",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_gantt.wacz",
+      "start_url": "https://docs.svar.dev/svelte/gantt/samples/#/base/willow"
+    },
+    "goal": "Return the percentage of the Testing work which would be completed by 15-04-2024.Round the result to an integer value.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "13"
+        }
+      ]
+    }
+  }
+]

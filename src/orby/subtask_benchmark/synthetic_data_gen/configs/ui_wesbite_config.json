@@ -1,0 +1,31 @@
+{
+    "prompt_file_path": "src/subtask_benchmark/synthetic_data_gen/prompts/online_website_prompt.txt",
+    "dom_extractor_type": "online",
+    "synthetic_data_config": {
+        "output_file_path": "src/subtask_benchmark/synthetic_data_gen/data/ui_website_data.csv",
+        "output_format": "csv",
+        "num_data_points": 50
+    },
+    "online_urls": [
+        "https://mui.com/x",
+        "https://chakra-ui.com/playground",
+        "https://ui.shadcn.com/",
+        "https://www.radix-ui.com/themes/example-music-app",
+        "https://www.radix-ui.com/themes/example-ecommerce",
+        "https://catalyst-demo.tailwindui.com/",
+        "https://jqueryui.com/themeroller/",
+        "https://dashboard-template.nuxt.dev/",
+        "https://vuejs.org/examples/#form-bindings",
+        "https://ej2.syncfusion.com/react/demos/schedule/overview/",
+        "https://ej2.syncfusion.com/react/demos/grid/foreign-key/",
+        "https://ej2.syncfusion.com/react/demos/chat-ui/default/",
+        "https://ej2.syncfusion.com/react/demos/document-editor/default/",
+        "https://ej2.syncfusion.com/react/demos/pdfviewer/default/",
+        "https://demos.telerik.com/kendo-ui/scheduler/index",
+        "https://demos.telerik.com/kendo-ui/grid/index",
+        "https://webix.com/demos/filemanager/",
+        "https://webix.com/demos/kanban/",
+        "https://webix.com/demos/desktop/",
+        "https://webix.com/demos/scheduler/"
+    ]
+}

@@ -1,0 +1,18 @@
+# GitHub Pages Configuration for Orby Web Agent
+
+# Site settings
+title: Orby Web Agent
+description: A web agent framework using WARC file servers and BrowserGym environments
+author: Orby Team
+
+# Build settings
+theme: null  # Using custom HTML/CSS
+
+# Exclude from processing
+exclude:
+  - README.md
+  - LICENSE
+
+# Include files
+include:
+  - _config.yml

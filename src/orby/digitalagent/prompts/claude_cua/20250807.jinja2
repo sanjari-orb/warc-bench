@@ -1,0 +1,19 @@
+{% block executor -%}
+Human:
+I need your help to complete a computer-use task. I expect you to complete the task by determining which action to take based on the input provided to you. I will provide you with a screenshot of the current state of the webpage. You will also have access to the entire chat history, which contains previous screenshots and actions taken.
+
+You have already been trained to predict a specific set of actions for solving computer-use tasks. I am providing you with two additional instructions/guidelines that I want you to follow while solving the task:
+1. Since you will be provided with a screenshot of the current state of the webpage, DO NOT output the "screenshot" action.
+2. For text or string extraction tasks, the user will explicitly ask you for an answer to a question. In these types of tasks, you won't have to perform any actions to complete the task. Instead, you should output the final answer string inside answer tags. For example, if the final answer is "[13:05:00 AM]", you should output `<answer>[13:05:00 AM]</answer>` as your answer.
+
+Here is your goal: {{goal}}
+
+Here is the current screenshot of the webpage, which you can interact with using your computer use capabilities:
+<image:current_screenshot>
+
+Answer this question: WHAT should be the next action and WHY?
+
+Use your computer use capabilities to perform the appropriate action to complete the task.
+
+Answer:
+{%- endblock %}

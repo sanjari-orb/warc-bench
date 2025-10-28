@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Orby Web Agent - A web agent framework using WARC file servers and BrowserGym environments">
+    <title>Orby Web Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1 class="logo">Orby Web Agent</h1>
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#structure">Structure</a></li>
+                    <li><a href="#components">Components</a></li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li><a href="https://github.com/orby-ai-engineering/warc-bench" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Orby Web Agent</h1>
+                <p class="subtitle">A web agent framework using WARC file servers and BrowserGym environments</p>
+                <div class="hero-buttons">
+                    <a href="#installation" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/orby-ai-engineering/warc-bench" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <div class="container">
+                <h2>Overview</h2>
+                <p>Orby Web Agent is a comprehensive framework for automated web interaction and benchmarking. It combines multiple components into a unified monorepo structure, providing tools for:</p>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>🌐 WARC Server</h3>
+                        <p>Serve archived web pages as live websites for agent interaction</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤖 Vision Agents</h3>
+                        <p>Pure-vision agents for short-horizon web tasks using state-of-the-art models</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📊 Benchmarking</h3>
+                        <p>Comprehensive evaluation framework with metrics and trajectory recording</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔧 BrowserGym Integration</h3>
+                        <p>Seamless integration with BrowserGym environments for web automation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="section bg-light">
+            <div class="container">
+                <h2>Installation</h2>
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Python >= 3.9</li>
+                    <li>Node.js and npm (required for building the WARC server)</li>
+                    <li>Git</li>
+                </ul>
+
+                <h3>Install from Source</h3>
+                <div class="code-block">
+                    <pre><code># Clone the repository
+git clone https://github.com/orby-ai-engineering/warc-bench.git
+cd warc-bench
+
+# Install in editable mode
+pip install -e .
+
+# For development with additional tools
+pip install -e ".[dev]"</code></pre>
+                </div>
+
+                <p>The installation will automatically:</p>
+                <ol>
+                    <li>Install all Python dependencies from <code>pyproject.toml</code></li>
+                    <li>Build the <code>webreplay-standalone</code> Node.js binary for serving WARC files</li>
+                    <li>Install the <code>orby</code> package with all submodules</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="structure" class="section">
+            <div class="container">
+                <h2>Project Structure</h2>
+                <p>This is a monorepo combining multiple components into a unified <code>orby</code> package:</p>
+                <div class="code-block">
+                    <pre><code>warc-bench/
+├── src/orby/                          # Main package namespace
+│   ├── subtask_benchmark/             # Benchmark runner with WARC server
+│   │   ├── environments/              # Environment configurations
+│   │   ├── replays/                   # WARC replay files
+│   │   ├── webreplay-standalone/      # Node.js WARC server
+│   │   ├── config/                    # Configuration management
+│   │   ├── utils/                     # Utility functions
+│   │   ├── evaluator/                 # Task evaluation logic
+│   │   └── synthetic_data_gen/        # Synthetic data generation
+│   │
+│   ├── digitalagent/                  # Agent implementations
+│   │   ├── agent/                     # Agent implementations (sva_v4, etc.)
+│   │   ├── model/                     # Foundation model interfaces
+│   │   ├── evaluation/                # Evaluation runners and metrics
+│   │   ├── actions/                   # BrowserGym action definitions
+│   │   ├── prompts/                   # Agent prompts
+│   │   └── utils/                     # Utilities
+│   │
+│   ├── prompt_utils/                  # Prompt template management
+│   └── protos/                        # Protocol buffer definitions
+│
+├── scripts/                           # Utility scripts
+├── pyproject.toml                     # Package configuration
+└── setup.py                           # Setup script</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="components" class="section bg-light">
+            <div class="container">
+                <h2>Package Components</h2>
+
+                <div class="component">
+                    <h3>1. orby.subtask_benchmark</h3>
+                    <p>Benchmark runner that provides:</p>
+                    <ul>
+                        <li>WARC file rendering and serving</li>
+                        <li>Task evaluation framework</li>
+                        <li>Environment configurations</li>
+                        <li>Synthetic data generation</li>
+                    </ul>
+                </div>
+
+                <div class="component">
+                    <h3>2. orby.digitalagent</h3>
+                    <p>Agent implementations and evaluation framework:</p>
+                    <ul>
+                        <li>Multiple agent architectures (primary: <code>sva_v4</code>)</li>
+                        <li>Foundation model interfaces (OpenAI, Anthropic, Fireworks)</li>
+                        <li>Evaluation runners and metrics</li>
+                        <li>Trajectory recording and visualization</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Key Agent: SvaV4</strong> - Pure-vision agent for short-horizon tasks (≤5 steps) with single model call efficiency
+                    </div>
+                </div>
+
+                <div class="component">
+                    <h3>3. orby.prompt_utils</h3>
+                    <p>Utilities for managing prompt templates:</p>
+                    <ul>
+                        <li>Template loading and formatting</li>
+                        <li>Prompt composition helpers</li>
+                    </ul>
+                </div>
+
+                <div class="component">
+                    <h3>4. orby.protos</h3>
+                    <p>Protocol buffer definitions for visualization:</p>
+                    <ul>
+                        <li>Action data structures</li>
+                        <li>LLM interaction data</li>
+                        <li>Trajectory data for recording agent behavior</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="usage" class="section">
+            <div class="container">
+                <h2>Usage</h2>
+
+                <h3>Importing Modules</h3>
+                <div class="code-block">
+                    <pre><code># Import the main package
+import orby
+
+# Import subtask benchmark components
+from orby.subtask_benchmark import config, evaluator
+
+# Import agent implementations
+from orby.digitalagent.agent.sva_v4 import SvaV4
+from orby.digitalagent.model import FoundationModel
+
+# Import utilities
+from orby.prompt_utils import template
+
+# Import protocol buffers for visualization
+from orby.protos.fm import action_data_pb2, trajectory_data_pb2</code></pre>
+                </div>
+
+                <h3>Using the SvaV4 Agent</h3>
+                <p>The main agent implementation is <code>SvaV4</code>, a pure-vision agent designed for short-horizon tasks.</p>
+                <div class="code-block">
+                    <pre><code>from orby.digitalagent.agent.sva_v4 import SvaV4
+
+agent = SvaV4(
+    actions="browsergym",
+    model_configs={"executor": {"model": "claude-3-opus"}},
+)
+
+# Agent supports BrowserGym actions:
+# click, type, scroll, hover, drag_and_release,
+# key_press, wait, complete</code></pre>
+                </div>
+
+                <h3>WARC Server</h3>
+                <p>The <code>webreplay-standalone</code> directory contains a Node.js application that serves WARC (Web ARChive) files as live websites.</p>
+                <div class="code-block">
+                    <pre><code># Building manually:
+cd src/orby/subtask_benchmark/webreplay-standalone
+npm install
+npm run build</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="migration" class="section bg-light">
+            <div class="container">
+                <h2>Migration from Old Structure</h2>
+                <p>This monorepo combines code from four previous repositories:</p>
+
+                <div class="migration-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Old Repository</th>
+                                <th>New Location</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>subtask-benchmark</td>
+                                <td>orby.subtask_benchmark</td>
+                                <td>Docker code removed, WARC server retained</td>
+                            </tr>
+                            <tr>
+                                <td>digital-agent</td>
+                                <td>orby.digitalagent</td>
+                                <td>Only sva_v4 agent and dependencies kept</td>
+                            </tr>
+                            <tr>
+                                <td>prompt-template-manager</td>
+                                <td>orby.prompt_utils</td>
+                                <td>Utils integrated for agent usage</td>
+                            </tr>
+                            <tr>
+                                <td>protos</td>
+                                <td>orby.protos</td>
+                                <td>Visualization objects retained</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Import Changes</h3>
+                <div class="code-comparison">
+                    <div class="code-old">
+                        <h4>Old Imports</h4>
+                        <pre><code>from subtask_benchmark.config import Config
+from prompt_template_manager import Template
+from fm.trajectory_data_pb2 import TrajectoryData</code></pre>
+                    </div>
+                    <div class="code-new">
+                        <h4>New Imports</h4>
+                        <pre><code>from orby.subtask_benchmark.config import Config
+from orby.prompt_utils import Template
+from orby.protos.fm.trajectory_data_pb2 import TrajectoryData</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dependencies" class="section">
+            <div class="container">
+                <h2>Core Dependencies</h2>
+                <p>See <code>pyproject.toml</code> for the complete list. Key dependencies include:</p>
+                <div class="dependencies-grid">
+                    <div class="dependency-card">
+                        <strong>playwright</strong>
+                        <p>Browser automation</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>openai</strong>
+                        <p>OpenAI API integration</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>anthropic</strong>
+                        <p>Anthropic API integration</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>browsergym</strong>
+                        <p>Browser gym environment</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>torch</strong>
+                        <p>PyTorch for ML models</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>transformers</strong>
+                        <p>Hugging Face transformers</p>
+                    </div>
+                    <div class="dependency-card">
+                        <strong>streamlit</strong>
+                        <p>Visualization UI</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Orby Team. This is an academic research project.</p>
+            <p>
+                <a href="https://github.com/orby-ai-engineering/warc-bench" target="_blank">GitHub Repository</a> |
+                <a href="https://github.com/orby-ai-engineering/warc-bench/issues" target="_blank">Report Issues</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

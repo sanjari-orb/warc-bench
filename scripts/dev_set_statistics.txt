@@ -1,0 +1,22 @@
+DEV SET STATISTICS
+==================================================
+
+Total unique task types: 14
+Total task type instances: 323
+
+Task Type Counts (sorted by frequency):
+----------------------------------------
+  1. menu navigation                          :  68
+  2. table manipulation                       :  51
+  3. form filling                             :  48
+  4. list navigation                          :  29
+  5. datepicker                               :  28
+  6. drag and drop                            :  26
+  7. data extraction                          :  25
+  8. search and autocomplete                  :  14
+  9. icon recognition                         :  13
+ 10. dropdown option selection                :  10
+ 11. generic grounding                        :   5
+ 12. document editing                         :   3
+ 13. computation                              :   2
+ 14. dialog boxes                             :   1

@@ -1,0 +1,41 @@
+LOW_LEVEL_ACTIONS_VOCAB = {
+    # General category description ->  Seed vocabulary  words for low level actions
+    "action_words": [
+        "press",
+        "submit",
+        "reset",
+        "clear",
+        "open",
+        "close",
+        "refresh",
+        "reload",
+        "enable",
+        "disable",
+        "apply",
+    ],
+    "information_handling": [
+        "read",
+        "search",
+        "sort",
+        "fill",
+        "filter",
+        "download",
+        "count",
+        "save",
+        "record",
+        "note",
+        "scan",
+        "print",
+        "autocomplete",
+    ],
+    "navigation": [
+        "zoom in",
+        "zoom out",
+        "go to top",
+        "go to bottom",
+        "navigate to",
+    ],
+    "tool use": [
+        "switch to tab",
+    ],
+}

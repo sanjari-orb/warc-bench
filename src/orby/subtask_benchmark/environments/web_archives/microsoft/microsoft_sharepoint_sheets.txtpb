@@ -1,0 +1,11 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./archive.wacz"
+  start_url: "https://orbyai0-my.sharepoint.com/:w:/r/personal/cheng_orbyai0_onmicrosoft_com/_layouts/15/doc2.aspx?sourcedoc=%7B3DFB8DDD-7821-47C3-B5E3-1D85382FB7DF%7D&file=Document%201.docx&action=default&mobileredirect=true&DefaultItemOpen=1&wdOrigin=APPHOME-WEB.DIRECT%2CAPPHOME-WEB.UNAUTH%2CAPPHOME-WEB.SHELL.SIGNIN%2CAPPHOME-WEB.FILEBROWSER.RECENT&wdPreviousSession=70696d9ed732f987d6cf605813d6043b&wdPreviousSessionSrc=AppHomeWeb&ct=1745013198931"
+  timestamp: {
+    seconds: 1745013157
+    nanos: 341000000
+  }
+}

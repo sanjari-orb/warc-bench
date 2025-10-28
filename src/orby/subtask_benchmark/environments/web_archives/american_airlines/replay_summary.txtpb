@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./american_airlines_summary.wacz"
+  start_url: "https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c"
+}

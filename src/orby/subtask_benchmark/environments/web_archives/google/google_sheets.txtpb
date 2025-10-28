@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./archive.wacz"
+  start_url: "https://docs.google.com/spreadsheets/d/14g75rsmdaIoZARfJz8FWtNjJPx3vPLB01TiqlYlGax4/edit?gid=0"
+}

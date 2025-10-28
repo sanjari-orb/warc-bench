@@ -1,0 +1,46 @@
+run_name: test
+
+runner:
+  threads: 4
+  output_dir: s3://orby-llm/browsergym_eval
+  wandb_project: sva_benchmark
+  seed: 17
+  timeout_secs: 600
+
+model_configs:
+  claude:
+    provider: anthropic
+    name: claude-sonnet-4-20250514
+    temperature: 0
+
+agents:
+  run1:
+    name: sva_v4
+    model_config_name: claude
+benchmarks:
+  subtaskbench:
+    dataset: subtaskbench_test
+    max_examples: -1
+    max_steps: 20
+    headless: false
+    reset_env: false
+    viewport_size:
+      # Size to use for headless mode
+      width: 1272
+      height: 859 # 720 original recorded height + 40 debugger banner height + 100 b/c somehow the height is at 620 when 760 is set here. But we need to offset by a pixel to get 1280x720.
+    example_ids_to_skip:
+      - browsergym/subtaskbench.online.31
+      - browsergym/subtaskbench.online.33
+      - browsergym/subtaskbench.online.41
+      - browsergym/subtaskbench.online.42
+      - browsergym/subtaskbench.online.58
+      - browsergym/subtaskbench.online.70
+      - browsergym/subtaskbench.online.87
+      - browsergym/subtaskbench.online.88
+      - browsergym/subtaskbench.online.89
+      - browsergym/subtaskbench.online.5
+      - browsergym/subtaskbench.online.36
+      - browsergym/subtaskbench.online.37
+      - browsergym/subtaskbench.online.56
+      - browsergym/subtaskbench.online.181
+      - browsergym/subtaskbench.online.208

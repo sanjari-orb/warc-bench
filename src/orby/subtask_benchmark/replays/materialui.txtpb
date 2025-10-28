@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "/Users/sanjari/orby/BrowserGym/browsergym/subtaskbench/src/browsergym/subtaskbench/data/materialui.wacz",
+  start_url: "https://mui.com/material-ui/api/accordion-actions/"
+}

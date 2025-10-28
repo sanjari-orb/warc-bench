@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "__ROOT__/archives/multiplan.wacz",
+  start_url: "https://www.multiplan.com/providernominations/provider"
+}

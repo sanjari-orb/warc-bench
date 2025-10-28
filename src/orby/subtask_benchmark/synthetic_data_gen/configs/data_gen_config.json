@@ -1,0 +1,35 @@
+{
+    "prompt_file_path": "/Users/manpreet/Desktop/orby/subtask_benchmark/src/subtask_benchmark/synthetic_data_gen/prompts/warc_website_prompt.txt",
+    "dom_extractor_type": "wacz",
+    "synthetic_data_config": {
+        "output_file_path": "/Users/manpreet/Desktop/orby/subtask_benchmark/src/subtask_benchmark/synthetic_data_gen/data/synthetic_data.csv",
+        "output_format": "csv",
+        "num_data_points": 20
+    },
+    "web_archives": [
+        {
+            "web_archive_file": "environments/web_archives/zoho/zoho_login.wacz",
+            "urls": ["https://www.zoho.com/desk/?zsrc=fromproduct"]
+        },
+        {
+            "web_archive_file": "environments/web_archives/zoho/zoho_login_forgot_password.wacz",
+            "urls": ["https://www.zoho.com/desk/?zsrc=fromproduct"]
+        },
+        {
+            "web_archive_file": "environments/web_archives/zoho/zoho_tickets_portal.wacz",
+            "urls": ["https://desk.zoho.com/agent/orbyai/orby-ai/tickets/list/all-cases"]
+        },
+        {
+            "web_archive_file": "environments/web_archives/mercury_insurance/mercury_insurance.wacz",
+            "urls": ["https://www.mercuryinsurance.com/"]
+        },
+        {
+            "web_archive_file": "environments/web_archives/microsoft/microsoft_sharepoint_sheets.wacz",
+            "urls": ["https://orbyai0-my.sharepoint.com/:w:/r/personal/cheng_orbyai0_onmicrosoft_com/_layouts/15/doc2.aspx?sourcedoc=%7B3DFB8DDD-7821-47C3-B5E3-1D85382FB7DF%7D&file=Document%201.docx&action=default&mobileredirect=true&DefaultItemOpen=1&wdOrigin=APPHOME-WEB.DIRECT%2CAPPHOME-WEB.UNAUTH%2CAPPHOME-WEB.SHELL.SIGNIN%2CAPPHOME-WEB.FILEBROWSER.RECENT&wdPreviousSession=70696d9ed732f987d6cf605813d6043b&wdPreviousSessionSrc=AppHomeWeb&ct=1745013198931"]
+        },
+        {
+            "web_archive_file": "environments/web_archives/svelte/svelte_gantt.wacz",
+            "urls": ["https://docs.svar.dev/svelte/gantt/samples/#/base/willow"]
+        }
+    ]
+}

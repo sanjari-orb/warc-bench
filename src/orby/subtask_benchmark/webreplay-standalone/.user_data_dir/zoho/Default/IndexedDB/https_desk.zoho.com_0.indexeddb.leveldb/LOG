@@ -1,0 +1,4 @@
+2025/09/16-14:27:56.481 a503 Reusing MANIFEST /Users/sanjari/orby/subtask_benchmark/src/subtask_benchmark/webreplay-standalone/.user_data_dir/zoho/Default/IndexedDB/https_desk.zoho.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/09/16-14:27:56.481 a503 Recovering log #3
+2025/09/16-14:27:56.481 a503 Reusing old log /Users/sanjari/orby/subtask_benchmark/src/subtask_benchmark/webreplay-standalone/.user_data_dir/zoho/Default/IndexedDB/https_desk.zoho.com_0.indexeddb.leveldb/000003.log 
+2025/09/16-14:27:56.498 9e03 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)

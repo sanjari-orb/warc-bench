@@ -1,0 +1,4502 @@
+[
+  {
+    "task_id": "online.0",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Open the side menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('a[href=\"#/base/willow\"]') != null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.1",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 40%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 40'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.2",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 6 June 2024 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent ==  'x changed: Thu Jun 06 2024 00:00:00 GMT-0700 (Pacific Daylight Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.3",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/ribbon/willow"
+    },
+    "goal": "Select the font Times from the dropdown",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"wx-label svelte-1ccyn9c\"]').textContent == 'Times'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.4",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select March 21 2025 as the departing date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"03/21/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.5",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select March 21 2025 as the departing date and April 21 2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"03/21/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"04/21/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.6",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Set the adults count to 3 and add 1 child of age 14",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.left-top.svelte-1gb4rvd > div.datepicker-pax-container.svelte-1gb4rvd > div.passenger-selects.svelte-1gb4rvd > auro-select\").shadowRoot.querySelector(\"#triggerFocus > auro-menuoption\").value === \"3\" && document.querySelector(\"#dropdown > div:nth-child(3) > div:nth-child(1) > span.inputNumber.svelte-18kg6tv\").innerHTML === \"1\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.7",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Continue filling the search form using the following information: {\"one way\": True, \"use miles\": True, \"upgrade\": \"MVP Gold 75K\"}",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#upgradeType\").shadowRoot.querySelector(\"#triggerFocus > auro-menuoption\").innerHTML.includes(\"MVP® Gold 75K\") && document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.left-top.svelte-1gb4rvd > auro-radio-group > auro-radio:nth-child(3)\").checked && document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.right-bottom.svelte-1gb4rvd > div > div.use-miles-container.svelte-1gb4rvd > auro-checkbox\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.8",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Swap the From and To airports in 1 step",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#fromCity\").value.includes(\"San Francisco, CA (SFO-San Francisco Intl.)\") && document.querySelector(\"#toCity\").value.includes(\"New York, NY (JFK-Kennedy)\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.9",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Display only the tickets with \"open\" status. Keep the filter dropdown menu open for the user to verify your selection.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li.StyledOption-sc-jl4wn6-0.StyledItem-sc-1jp99dq-0.abTCS.cdkcNA').getAttribute('aria-checked') === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.10",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Go to the Organizations page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.StyledCol-sc-inuw62-0.bpLBzO.sc-1556ne7-6.dFcVTi > h1\").innerText === \"Organizations\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.11",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Open my profile menu on the top right",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#header_profile_menu_button\").getAttribute(\"aria-expanded\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.12",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Write \"Thank you for your business.\" and bold it to reply to the customer",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"Thank you for your business.\") && document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"<strong>\") && document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"<\\strong>\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.13",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Change the ticket type to Task",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.StyledField-sc-12gzfsu-0.iRSmTf.sc-e3l2vm-0.dzRuAP > div > div\").innerText === \"Task\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.14",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Add a new ticket with type Question, topic Delivery, and normal priority; assign Michael S to it; add the tag \"speedup\" to it; leave everything else blank",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[title=\"Delivery\"').innerText == 'Delivery' && document.querySelector(\"div.StyledTag-sc-1jvbe03-0.dtVBQv > span\").innerText=='speedup' && document.querySelector('div[title=\"Michael S\"').innerText == 'Michael S' && JSON.stringify(Array.from(document.querySelectorAll(\"div.StyledField-sc-12gzfsu-0.iRSmTf.sc-e3l2vm-0.dzRuAP > div > div\")).map((x)=>x.innerText))==JSON.stringify(['Question', 'Normal'])"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.15",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Go to the Add a New Ticket page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"html\").innerHTML.includes(\"New ticket\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.16",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Answer the question: what is the cheapest ticket option displayed on this page (start date July 9th, 2025)? Answer your question as a JSON dictionary with the fields \"flight_number\", \"duration\", and \"price\". The format of duration should be \"xh ym\". Do not include dollar sign in the ticket price answer.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"flight_number\": \"AA 2994\", \"duration\": \"2h 44m\", \"price\": 240}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.17",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Sort the main cabin ticket price in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#btn-sort-by-MAIN\").getAttribute(\"class\") === \"product_group_MAIN_desc\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.18",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_summary.wacz",
+      "start_url": "https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "How many passengers are the Total price displayed on this page for? Only provide the number as the output",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.19",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123?tab=overview&from=2024-12-01&to=2024-12-31"
+    },
+    "goal": "When did William Zhao first join GitHub? Answer in the format of MM/DD/YYYY",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "11/15/2024"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.20",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Select neftune from the branch dropdown menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#branch-picker-repos-header-ref-selector > span > span.prc-Button-Label-pTQ3x > div > div.Box-sc-g0xbh4-0.ffLUq.ref-selector-button-text-container > span\").innerHTML.includes(\"neftune\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.21",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Select noise_emb from the branch dropdown menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#branch-picker-repos-header-ref-selector > span > span.prc-Button-Label-pTQ3x > div > div.Box-sc-g0xbh4-0.ffLUq.ref-selector-button-text-container > span\").innerHTML.includes(\"noise_emb\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.22",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/NeMo"
+    },
+    "goal": "Find where the variable `use_pytorch_lightning` in the jimhalpert123/NeMo repo is defined and return it's file path (include directories starting from NeMo/), line number, and value. Give the answer as a comma separated list of strings, for example [\"aaa\", \"bbb\", \"ccc\"].",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"NeMo/nemo/deploy/deploy_base.py\", \"19\", \"True\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.23",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to my Repository page and filter the list of repositories I have by programming languages, such that only the ones in TypeScript remain",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#user-repositories-list > div.TableObject.border-bottom.color-border-muted.py-3 > div.user-repo-search-results-summary.TableObject-item.TableObject-item--primary.v-align-top\").innerText==\"1 result for repositories written in TypeScript sorted by last updated\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.24",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Are there any of my repositories with MIT License? If so, return the name(s) in a comma-separated list of strings, for example: [\"repo1\", \"repo2\"]",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"web-tools\", \"Next-js-Boilerplate\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.25",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "Click on project-one in the left menu",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://github.com/jimhalpert123/project-one"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.26",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/tree/main/src"
+    },
+    "goal": "Find 0000_snapshot.json in the migrations folder displayed on the left. Only click the down arrows to interact with the directory menu.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:r59\\\\: > span\").innerHTML.includes(\"0000_snapshot.json\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.27",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/commits/main/migrations/meta/0000_snapshot.json"
+    },
+    "goal": "Display only the commits made by me for 0000_snapshot.json",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:R1crab\\\\: > span.prc-Button-ButtonContent-HKbr- > span > div > div.Box-sc-g0xbh4-0.dGVxWp\").innerHTML.includes(\"jimhalpert123\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.28",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Select the option to Add a readme to the repository",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rm\\\\:\").getAttribute(\"aria-checked\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.29",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Mark my new repo as private",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rk\\\\:\").getAttribute(\"aria-checked\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.30",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add the highest version of GNU license available to this new repo",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rv\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes(\"GNU General Public License v3.0\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.31",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to my repository page and click on more Star options for the jimhalpert123 repository",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#details-user-list-894774357-unstarred\").open"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.32",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/enter_zipcode.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/front-door"
+    },
+    "goal": "Open the page to shop for health insurance plans provided by Kaiser",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#servicearea-component2 > div > div.service-area-box.section.left > div.h2\").innerText == \"Enter your ZIP code\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.33",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/enter_zipcode.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/shop-plans"
+    },
+    "goal": "Enter Zipcode 94040 and submit the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(1) > span.h2.doctors-count\").innerText == 78 && document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(2) > span.h2.facilities-count\").innerText == 1458"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.34",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What is the total number of crimes committed against people and property in the month of February, 2025? Give the answer in JSON format with keys \"num_crimes_against_people\" and \"num_crimes_against_property\"",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"num_crimes_against_people\": 1105, \"num_crimes_against_property\": 2913}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.35",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What were the total number of property crimes and property crime rate per 100000 population commited in year 2020? Give the answer in JSON format with the keys \"total_crimes\" and \"crime_rate_per_100000\". Do not include any commas in the values.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"total_crimes\": 23847, \"crime_rate_per_100000\": 2272.9}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.36",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/about-us/organization/bureau-of-field-operations/traffic-enforcement-unit/towed-vehicle-information"
+    },
+    "goal": "Find the total towing fee for a car that has been towed overnight for 4 hours. Give the answer as a JSON string with key \"total_tow_fee\" and just the integer value of fee (no $ or cents)",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"total_tow_fee\":  657}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.37",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Expand the sections Customer Saved searches, Sales and Billing Operations one by one. Do not click the Expand All button directly.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[data-task-id=\"-20304\"').getAttribute('data-expanded')== 'true' &&  document.querySelector('div[data-task-id=\"-20305\"').getAttribute('data-expanded') == 'true' &&  document.querySelector('div[data-task-id=\"-20307\"').getAttribute('data-expanded')=='true'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.38",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Date/Time and format it as [DD:MM:YYYY|hh:mm a/pm]. Include the braces.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[11:03:2025|08:00 am]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.39",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Historical Name. Only extract the text and nothing else",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "NS ACS | Billing Operation Sched - 5 Days(2) - MX"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.40",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Description. Only extract the text and nothing else",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Billing schedule for 5 day customers for MX subsidiary"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.41",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Move the KPI Meter box to be above Billing Links",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[id=\"dashboard-column-1\"]').children[1].getAttribute('data-portlet-type')=='kpimeter'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.42",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Display Billing Operations for 6th March 2025 (Not including 7th)",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#segment_fs > span.uir-pagination-select > span:nth-child(1)').getHTML()=='3/6/2025(2)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.43",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Enter 'CA Sales Tax Audit' in search bar.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"uif42_input\"').value =='CA Sales Tax Audit'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.44",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Remove the Billing Links widget from the page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[id=\"dashboard-column-1\"]').children.length == 2 && document.querySelector('div[id=\"dashboard-column-1\"]').children[1].getAttribute('data-portlet-type')=='kpimeter' && document.querySelector('div[id=\"dashboard-column-1\"]').children[0].getAttribute('data-portlet-type')=='reminders'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.45",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter '000116666' in Federal Tax ID",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtFederalTaxID\"]').value == '000116666'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.46",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter 12345678 in CAQH number",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtCAQHNumber\"]').value == '12345678'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.47",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter John Doe in First and Last Name",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtProviderPOCName\"]').value==\"John Doe\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.48",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Format (804)-(813)-(8888) without any special characters and fill in the phone number field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtProviderPOCPhone\"]').value==\"8048138888\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.49",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter 95015 in zip code",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtZipCode\"]').value==\"95015\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.50",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "You want to travel to Seattle. Fill the relevant field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[aria-describedby=\"bigsearch-query-location-description\"]').value=='Seattle'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.51",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "Select 4 guests and 1 pet. Leave the dropdown menu opened. Do not try to submit the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v v13ly71q atm_ll_exct8b dir dir-ltr\"]').innerText == '4 guests, 1 pet'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.52",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "Select 1 guest and close the relevant dropdown after setting the value. Do not try submitting anything else.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v dir dir-ltr\"]').innerText =='1 guest'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.53",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter Gregory as Provider's First Name in the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderProviderFirstName > span > input\").value == \"Gregory\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.54",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter House as Provider's Last Name",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderProviderLastName > span > input\").value == \"House\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.55",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter MD as Degree Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderDegreeType > div > div > div.selectric > p\").innerText == \"MD\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.56",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select the boxes \"Check to add provider to existing agreement\" and \"Check to join as a group\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(2) > div > input[type=checkbox]\").checked && document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(3) > div > input[type=checkbox]\").checked && !document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(4) > div > input[type=checkbox]\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.57",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select Neurology as Specialty from the dropdown list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderSpecialty > div > div > div.selectric > p\").innerText == \"Neurology\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.58",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter zipcode 08544 in the ZIP Code field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderZIPCode > span > input\").value == \"08544\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.59",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter phone number (615) 938-5930 in the Phone Number field under Your Contact Infomation section",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderPhoneNumber > span > input\").value == \"(615) 938-5930\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.60",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter \"Product Analysis\" in cell A1 of the spreadsheet",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#spreadsheetBody > tr:nth-child(1) > td:nth-child(2) > input\").value==\"Product Analysis\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.61",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Apply the \"Bold\" formatting button from the spreadsheet toolbar to cell E4",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#spreadsheetBody > tr:nth-child(4) > td:nth-child(6) > input\").value=='=C4*D4'&& document.querySelector(\"#spreadsheetBody > tr:nth-child(4) > td:nth-child(6) > input\").getAttribute('style').includes('bold')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.62",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Choose \"Full-time\" employment type radio button in the employee management form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#fullTime\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.63",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Switch to the \"Project Management\" tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div[id=project]\").children[0].children[0].innerHTML=='Project Creation &amp; Management'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.64",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Click the \"Add Row\" button in the spreadsheet toolbar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#spreadsheetBody\").children.length == 21"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.65",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter \"1500\" in cell D3 of the spreadsheet",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#spreadsheetBody > tr:nth-child(3) > td:nth-child(5) > input\").value==\"1500\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.66",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Go to Expense Reports tab and enter \"250.75\" in the expense amount field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#expenseAmount\").value==\"250.75\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.67",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "Choose \"Credit Card\" radio button for payment method under Expense Reports tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#creditCard\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.68",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "Check the \"Reimbursable\" checkbox in expense type options under Expense Reports tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#reimbursable\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.69",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "Enter \"John\" in the First Name field of the employee form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#firstName\").value==\"John\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.70",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "In the Expense Reports tab, check the \"Recurring Expense\" checkbox in expense type options",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#recurring\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.71",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "Fill in the email address field with \"test@company.com\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#email\").value==\"test@company.com\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.72",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/test_tab.html"
+    },
+    "goal": "Enter \"150.75\" in the expense amount field under Expense Reports tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#expenseAmount\").value==\"150.75\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.73",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Navigate to the \"Document Editor\" tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#document-editor').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.74",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Click the Bold (B) button in the document editor toolbar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[title=Bold]\").getAttribute('class')=='editor-btn active'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.75",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Click the \"Save Document\" button to save the current document in the document editor tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#notification').textContent.includes('saved')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.76",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Switch to the \"Data Analytics\" tab to view analytics dashboard",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[data-subtask='data-analysis'\").innerHTML=='Generate Report'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.77",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Enter \"500.00\" in the Amount field of the expense form under the Expense Reports tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#expenseAmount\").value==\"500.00\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.78",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Navigate to the \"Expense Reports\" tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#expense-reports').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.79",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/visual.html"
+    },
+    "goal": "Enter \"Website Redesign\" in the Project Name field under Project Management",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#projectName\").value==\"Website Redesign\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.80",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Use the search bar to find \"Project Tracking\" and navigate to that section",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#project-form').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.81",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Search for \"Website Redesign\" project using the main search bar. Only enter the text, do not perform the search.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#mainSearch').value.includes(\"Website Redesign\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.82",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Fill in the First Name field with \"John\" in the Employee Information form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"input[name=firstName]\").value==\"John\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.83",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Switch to the \"Project Tracking\" tab by clicking on it",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#project-form').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.84",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Use the search bar to find and navigate to \"Mobile App Development\" project",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#project-form').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.85",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Search for \"travel expenses\" and navigate to relevant result",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#expense-form').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.86",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/search_and_autocomplete.html"
+    },
+    "goal": "Fill in \"Business Trip to NYC\" as the Report Title in expense form under Expense Reports tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"input[name=reportTitle\").value==\"Business Trip to NYC\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.87",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the \"Design Homepage Mockup\" card from To Do to In Progress column under Project Kanban",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.kanban-column[data-status=\"in-progress\"]').querySelector('[data-task-id=\"1\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.88",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the \"User Authentication Flow\" card from To Do to Review column under Project Kanban",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.kanban-column[data-status=\"review\"]').querySelector('[data-task-id=\"2\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.89",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the \"API Integration Testing\" card from Review to Done column under Project Kanban",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.kanban-column[data-status=\"done\"]').querySelector('[data-task-id=\"6\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.90",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the \"Frontend Development\" card from In Progress to Review column under Project Kanban",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.kanban-column[data-status=\"review\"]').querySelector('[data-task-id=\"4\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.91",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the \"Security Vulnerability Scan\" card from In Progress to Done column under Project Kanban",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.kanban-column[data-status=\"done\"]').querySelector('[data-task-id=\"5\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.92",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the Engineering Department budget slider to $500,000 under Resource Allocation",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#eng-budget').value == \"500000\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.93",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the Marketing Department budget slider to $350,000 under Resource Allocation",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#marketing-budget').value == \"350000\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.94",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the Mobile App Development capacity slider to 90%  under Resource Allocation",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#mobile-capacity').value == \"90\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.95",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the Data Migration Project capacity slider to 60% under Resource Allocation",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#data-capacity').value == \"60\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.96",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Drag the Security Audit capacity slider to 100% under Resource Allocation",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#security-capacity').value == \"100\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.97",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/drag_drop_test.html"
+    },
+    "goal": "Select \"2025-01-01\" in the Date From field under Data Analytics tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#analytics-date-from').value == \"2025-01-01\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.98",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Scroll down in the document list to find \"Terms of Service Agreement\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "(document.querySelector('#documentList').scrollTop > 0)"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.99",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Set the start date to January 15, 2024 using the date picker in the Employee Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#startDate').value == \"2024-01-15\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.100",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "In the Project Management tab, open the \"Create New Project\" modal by clicking the button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#projectModal').style.display == 'block'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.101",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Navigate to the Project Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#projects').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.102",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "In the Expense Reports tab, enter \"250.00\" as the amount for an expense item",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.expense-row input[type=\"number\"]').value == \"250.00\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.103",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Navigate to the Employee Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employees').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.104",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Search for \"Employee Handbook\" in the document search box",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.search-input').value.toLowerCase().includes('employee handbook')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.105",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/list_nav.html"
+    },
+    "goal": "Check the \"Health Insurance\" checkbox in benefits enrollment under the Employee Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#healthInsurance\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.106",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Click on the briefcase icon in the icon gallery",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.icon-item[data-name=\"briefcase\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.107",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Select the handshake icon and then click Save Selection",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.icon-item[data-name=\"handshake\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.108",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Click on the computer icon in the technology category",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.icon-item[data-name=\"computer\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.109",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Search for \"calendar\" and select the found icon",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#iconSearch').value.toLowerCase().includes('calendar') && document.querySelector('.icon-item[data-name=\"calendar\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.110",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Click on the cloud icon",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.icon-item[data-name=\"cloud\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.111",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Select the money icon from the finance category",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('.icon-item[data-name=\"money\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.112",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Switch to the Employee Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employee').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.113",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/icon_recognition.html"
+    },
+    "goal": "Click the \"Export to CSV\" button in data analytics",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#data').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.114",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Search for 'Mobile' in the project search box",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#projectSearch').value.toLowerCase().includes('mobile')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.115",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Enter '250.00' in the first expense amount field under the Expense Report tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[name=\"expenseAmount\"]').value==\"250.00\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.116",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "In the Expense Report tab, enter 'Hotel accommodation' in the first expense description field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[name=\"expenseDescription\"]').value ==='Hotel accommodation'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.117",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Select 'Contract' radio button in Employment Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#contract').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.118",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Select 'Part-time' radio button in Employment Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#partTime').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.119",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Check the '401k Plan' checkbox in benefits",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#retirement401k').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.120",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Check the 'Dental Insurance' checkbox in benefits",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#dentalInsurance').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.121",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Enter 'EMP-2024-001' in the Employee ID field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeId').value === 'EMP-2024-001'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.122",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Check the 'Vision Insurance' checkbox in benefits",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#visionInsurance\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.123",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Scroll down in the expense items container",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "(document.querySelector(#expenseItems).scrollTop > 0)"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.124",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Scroll down in the employee directory to see all employees",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "(document.querySelector('#employeeList').scrollTop > 0)"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.125",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/hrcore_management_portal.html"
+    },
+    "goal": "Scroll down in the project list container to see all projects",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "(document.querySelector('#projectList').scrollTop > 0)"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.126",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Drag the Marketing Budget slider to $75,000",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#marketing-slider').value == '75000'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.127",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Set the Development Budget slider to $100,000",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#development-slider').value == '100000'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.128",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Adjust the Operations Budget slider to $60,000",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#operations-slider').value == '60000'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.129",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Move the Team Productivity slider to 85%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#productivity-slider').value == '85'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.130",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Drag the Revenue Target slider to $750K",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#revenue-slider').value == '750'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.131",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Adjust the Staff Count slider to 35 employees",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#staff-slider').value == '35'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.132",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Set the Project Timeline slider to 9 months",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#timeline-slider').value == '9'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.133",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Drag the Risk Tolerance slider to High",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#risk-slider').value == '4'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.134",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Move the Marketing Budget slider to its minimum value",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#marketing-slider').value ==document.querySelector('#marketing-slider').min"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.135",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Set the Development Budget slider to its maximum value",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#development-slider').value ==document.querySelector('#development-slider').max"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.136",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Select the Python checkbox in Skills & Certifications",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#python\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.137",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Switch to the Project Management tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#project').classList.contains('active')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.138",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/portal.html"
+    },
+    "goal": "Set the Project Timeline slider to 12 months",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#timeline-slider').value == '12'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.139",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Project Tracking tab, drag 'Website Redesign' to 'In Progress'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-status=\"inprogress\"]').querySelector('[data-project-id=\"1\"]') !== null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.140",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Register a new employee with salary range $135,000",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('salaryRange').value === '135000'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.141",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Project Tracking tab and move 'User Authentication' from 'Done' column back to 'In Progress' column",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"projects\"]').classList.contains('active') && document.querySelector('[data-status=\"inprogress\"]').querySelector('[data-project-id=\"6\"]') !== null && document.querySelector('[data-status=\"done\"]').querySelector('[data-project-id=\"6\"]') === null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.142",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Sort employees by start date in ascending order and select every employee that appears in the first 3 table rows",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"startDate\"] .sort-indicator').textContent === '↑' && Array.from(document.querySelectorAll('input.row-checkbox')).slice(0,3).every(checkbox => checkbox.checked === true)"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.143",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar System tab and create an event titled 'Budget Review'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.getElementById('eventTitle').value === 'Budget Review'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.144",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Fill in the employee registration form with first name 'Dr. Sarah' and last name 'Chen-Williams'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('firstName').value === 'Dr. Sarah' && document.getElementById('lastName').value === 'Chen-Williams'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.145",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Filter employees by department in ascending order, then select exactly the first 2 employees in the filtered list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"department\"] .sort-indicator').textContent === '↑' && Array.from(document.getElementById('employeeList').children).slice(0,2).every(item => item.classList.contains('selected'))"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.146",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Open the Advanced Options modal and enable all three remote work authorization checkboxes simultaneously",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('advancedModal').style.display === 'block' && document.getElementById('remoteFullTime').checked && document.getElementById('remoteHybrid').checked && document.getElementById('remoteOccasional').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.147",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Search for 'Manager' in the employee directory and select exactly the third employee from the filtered search results",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value.toLowerCase() === 'manager' && Array.from(document.getElementById('employeeList').children)[2] && Array.from(document.getElementById('employeeList').children)[2].classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.148",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar tab, go to next month, and select the 28th day of that month",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.querySelector('.calendar-day.selected') && document.querySelector('.calendar-day.selected').textContent === '28'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.149",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar tab, create a new event, and enter September 23, 2025 as the event date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.getElementById('eventDate').value === '2025-09-23'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.150",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "From the Employee Directory select the seventh employee in the list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Array.from(document.getElementById('employeeList').children)[6].classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.151",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar tab, go back two months, and select the 21st day of that month",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.querySelector('.calendar-day.selected') && document.querySelector('.calendar-day.selected').textContent === '21'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.152",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar tab, click 'Add Event', and enter March 15, 2025 in the event date field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.getElementById('eventDate').value === '2025-03-15'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.153",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Navigate to Calendar tab, start creating an event, and enter July 4, 2025 as the event date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-tab=\"calendar\"]').classList.contains('active') && document.getElementById('eventDate').value === '2025-07-04'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.154",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Search for 'Sales' in the employee directory and select exactly the third employee from the filtered search results",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value.toLowerCase() === 'sales' && Array.from(document.getElementById('employeeList').children)[2] && Array.from(document.getElementById('employeeList').children)[2].classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.155",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Search for 'Developer' in the employee directory and select exactly the second employee from the filtered search results",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value.toLowerCase() === 'developer' && Array.from(document.getElementById('employeeList').children)[1] && Array.from(document.getElementById('employeeList').children)[1].classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.156",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Sort the employee table by name in ascending order, then select the first employee in the sorted results",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"name\"] .sort-indicator').textContent === '↑' && Array.from(document.querySelectorAll('input.row-checkbox'))[0].checked === true && document.querySelectorAll('input.row-checkbox:checked').length === 1"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.157",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Sort the employee table by salary in descending order, then select the highest-paid employee",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"salary\"] .sort-indicator').textContent === '↓' && Array.from(document.querySelectorAll('input.row-checkbox'))[0].checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.158",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Sort employees by experience level in ascending order, then select the second employee in the sorted table",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"experience\"] .sort-indicator').textContent === '↑' && Array.from(document.querySelectorAll('input.row-checkbox'))[1].checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.159",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/enhanced_gui_benchmark.html"
+    },
+    "goal": "Sort employees by start date in ascending order, then select the employee with the earliest start date (first row)",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"startDate\"] .sort-indicator').textContent === '↑' && Array.from(document.querySelectorAll('input.row-checkbox'))[0].checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.160",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter 'MacBook Pro' in cell A1",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"1\"][data-col=\"A\"]').value === 'MacBook Pro'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.161",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "In the Data Spreadsheet, select cell C3 and enter the value '599.99'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"3\"][data-col=\"C\"]').value === '599.99'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.162",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Select cell E1 in the spreadsheet and apply bold formatting using the toolbar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"1\"][data-col=\"E\"]').style.fontWeight === 'bold'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.163",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Select cells B1 through D1 and apply italic formatting to all selected cells",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"6\"][data-col=\"B\"]').style.fontStyle === 'italic'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.164",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Apply underline formatting to cells F3",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"3\"][data-col=\"F\"]').style.textDecoration === 'underline'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.165",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Add a new row to the spreadsheet using the 'Add Row' button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('spreadsheetBody').children.length === 21"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.166",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Delete the last row from the spreadsheet using the 'Delete Row' button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('spreadsheetBody').children.length === 19"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.167",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Navigate to Data Analytics tab and search for 'John' in the employee search box",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.getElementById('searchInput').value === 'John'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.168",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Navigate to Data Analytics tab and sort the employee table by clicking on the 'Name' column header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick=\"sortTable(1)\"]').textContent.includes('Name')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.169",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Navigate to Data Analytics tab and search for '2023' to find all employees who started in 2023",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.getElementById('searchInput').value === '2023'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.170",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Navigate to Data Analytics tab and export the current table data using the 'Export Data' button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('button[onclick=\"exportTableData()\"]').textContent.includes('Export Data')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.171",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter 'Wireless Keyboard' in cell A11",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"11\"][data-col=\"A\"]').value === 'Wireless Keyboard'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.172",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Type the formula '=C10*D10' in cell E10 to calculate total value",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"10\"][data-col=\"E\"]').value === '=C10*D10'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.173",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter 'Electronics' in cell B17",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"17\"][data-col=\"B\"]').value === 'Electronics'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.174",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Type 'iPhone 15 Pro' in cell A15",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"15\"][data-col=\"A\"]').value === 'iPhone 15 Pro'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.175",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter '1299.99' in cell C8",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"8\"][data-col=\"C\"]').value === '1299.99'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.176",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Navigate to Data Spreadsheet tab and type 'Product Name' in cell A19",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"19\"][data-col=\"A\"]').value === 'Product Name'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.177",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter '1499.00' in cell C18, then apply italic formatting to it",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"18\"][data-col=\"C\"]').value === '1499.00' && document.querySelector('[data-row=\"18\"][data-col=\"C\"]').style.fontStyle === 'italic'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.178",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Type 'Premium Laptop' in cell B19, then apply bold formatting to it",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"19\"][data-col=\"B\"]').value === 'Premium Laptop' && document.querySelector('[data-row=\"19\"][data-col=\"B\"]').style.fontWeight === 'bold'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.179",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Type '899.99' in cell C17, then select it and apply underline formatting",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"17\"][data-col=\"C\"]').value === '899.99' && document.querySelector('[data-row=\"17\"][data-col=\"C\"]').style.textDecoration === 'underline'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.180",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_manipulation.html"
+    },
+    "goal": "Enter 'Smartphones' in cell B16, then select it and apply italic formatting",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-row=\"16\"][data-col=\"B\"]').value === 'Smartphones' && document.querySelector('[data-row=\"16\"][data-col=\"B\"]').style.fontStyle === 'italic'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.181",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Status' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"status\"] .sort-indicator').textContent === '↑'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.182",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Start Date' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"startDate\"] .sort-indicator').textContent === '↑'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.183",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Position' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "ocument.querySelector('[data-sort=\"position\"] .sort-indicator').textContent === '↑'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.184",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Department' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"department\"] .sort-indicator').textContent === '↑'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.185",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Salary' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"salary\"] .sort-indicator').textContent === '↓'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.186",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Sort the Employee Management Table by 'Name' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('[data-sort=\"name\"] .sort-indicator').textContent === '↑'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.187",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll down in the employee directory list to select \"Justin Adams\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList [data-employee-id=\"25\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.188",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the employee directory to locate \"Michelle Rodriguez\" and select her",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList [data-employee-id=\"12\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.190",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll to the bottom of the employee directory list to find the last employee",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList').scrollTop + document.querySelector('#employeeList').clientHeight >= document.querySelector('#employeeList').scrollHeight - 10"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.191",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Use the search bar to find employees in the 'marketing' department",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value === 'marketing'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.192",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Search for 'Jennifer Martinez' using the employee directory search bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value ===  'Jennifer Martinez'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.193",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Enter 'Manager' in the search bar to filter employees with manager positions",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value ===  'Manager'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.194",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Search for employees with 'Developer' in their position using the search input",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('searchInput').value === 'Developer'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.195",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Click 'Select All' button in the employee directory section",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.getElementById('selectAllBtn').textContent ===  'Select All'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.196",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll down in the Employee Management Table to find \"Kimberly Green\" from Operations",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Array.from(document.querySelectorAll('#employeeTable tbody tr')).some(row => {const rect = row.getBoundingClientRect(); const tableRect = document.querySelector('.table-container').getBoundingClientRect(); return row.cells[0].textContent === 'Kimberly Green'});"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.197",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the Employee Management Table to locate \"Daniel Clark\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Array.from(document.querySelectorAll('#employeeTable tbody tr')).some(row => {const rect = row.getBoundingClientRect(); const tableRect = document.querySelector('.table-container').getBoundingClientRect(); return row.cells[0].textContent === 'Daniel Clark'});"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.198",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the Employee Management Table to locate \"Rachel Lewis\"  from HR department",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Array.from(document.querySelectorAll('#employeeTable tbody tr')).some(row => {const rect = row.getBoundingClientRect(); const tableRect = document.querySelector('.table-container').getBoundingClientRect(); return row.cells[0].textContent === 'Rachel Lewis'});"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.199",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll down in the employee directory list to find \"Stephanie Hall\" from Operations",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Array.from(document.querySelectorAll('#employeeList .list-item')).some(item => {const rect = item.getBoundingClientRect(); const listRect = document.querySelector('#employeeList').getBoundingClientRect(); return item.querySelector('.employee-name').textContent === 'Stephanie Hall' &&   item.querySelector('.employee-details').textContent.includes('operations') && rect.top >= listRect.top && rect.bottom <= listRect.bottom && document.querySelector('#employeeList').scrollTop > 0;});"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.200",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the employee directory to locate \"Daniel Clark\" with pending status and select him",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList [data-employee-id=\"15\"]').classList.contains('selected') && document.querySelector('#employeeList [data-employee-id=\"15\"] .status-badge').textContent.includes('PENDING')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.201",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the employee directory to locate \"Rachel Lewis\" from HR and select her",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList [data-employee-id=\"16\"]').classList.contains('selected') && document.querySelector('#employeeList [data-employee-id=\"16\"] .status-badge').textContent.includes('ACTIVE')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.202",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/scroll_test.html"
+    },
+    "goal": "Scroll through the employee directory to locate \"Brian Hill\" and select him",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#employeeList [data-employee-id=\"23\"]').classList.contains('selected') && document.querySelector('#employeeList [data-employee-id=\"23\"] .status-badge').textContent.includes('PENDING')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.203",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the Expense Reports Table by 'Employee' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 0)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.204",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the expense table by clicking on the 'Employee' column header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 0)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.205",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the Expense Reports Table by 'Status' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 5)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.206",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the Expense Reports Table by 'Status' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 5)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.207",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the Expense Reports Table by 'Amount' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 3)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.208",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports tab and sort the Expense Reports Table by 'Date' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 1)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.209",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to the Expense Reports tab and sort the Expense Reports Table by the 'Category' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th[onclick*=\"sortTable(\\'expenseTable\\', 2)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.210",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Avg Amount' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 5)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.211",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Rejected' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 4)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.212",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Pending' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 3)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.213",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Approved' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 2)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.214",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Category' column header in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 0)\"]').classList.contains('sort-desc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.215",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Analytics Dashboard and sort the Expense Analysis Table by 'Category' column header in ascending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('analytics')\\\"]\").classList.contains('active') && document.querySelector('th[onclick*=\"sortTable(\\'expenseStatsTable\\', 0)\"]').classList.contains('sort-asc')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.216",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to '2024-11-12'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-11-12'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.217",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to '2024-08-05'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-08-05'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.218",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to '2024-05-20'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-05-20'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.219",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to '2024-01-10'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-01-10'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.220",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Set start date to January 1, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('employees')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2024-01-01'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.221",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Set start date to March 15, 2023",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('employees')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2023-03-15'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.222",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Employee Management and set start date to June 30, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('employees')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2024-06-30'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.223",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Employee Management and set start date to September 1, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('employees')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2024-09-01'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.224",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_test.html"
+    },
+    "goal": "Navigate to Project Management and set project start date to April 15, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-button[onclick=\\\"switchTab('projects')\\\"]\").classList.contains('active') && document.getElementById('projectStartDate').value === '2024-04-15'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.225",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Expense Reports and set expense date to April 1, 2023",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2023-04-01'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.226",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to '2024-11-30'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-11-30'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.227",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Expense Reports and set expense date to August 15, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-08-15'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.228",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Expense Reports and set the expense date field to  '2024-05-20'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('expenses')\\\"]\").classList.contains('active') && document.getElementById('expenseDate').value === '2024-05-20'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.229",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Employee Management and set start date to February 14, 2025",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('employee')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2025-02-14'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.230",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Employee Management and set the start date field to '2024-09-01'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('employee')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2024-09-01'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.231",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Employee Management and set start date to December 25, 2023",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('employee')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2023-12-25'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.232",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Employee Management and set start date to June 30, 2024",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('employee')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2024-06-30'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.233",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Navigate to Employee Management and set the start date field to  '2023-03-15'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\".tab-btn[onclick=\\\"switchTab('employee')\\\"]\").classList.contains('active') && document.getElementById('startDate').value === '2023-03-15'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.234",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Select the Start Date column by clicking on the column header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th.col-header[onclick=\"selectColumn(5)\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.235",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Select Employee ID column",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th.col-header[onclick=\"selectColumn(0)\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.236",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Select the Full Name column by clicking on the column header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('th.col-header[onclick=\"selectColumn(1)\"]').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.237",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Select row 3 by clicking on the row header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#spreadsheetBody tr:nth-child(3) .row-header').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.238",
+    "env": {
+      "data_path": "environments/web_archives/synthetic/synthetic_dev.wacz",
+      "start_url": "https://leecharlene.github.io/synthetic/table_tab.html"
+    },
+    "goal": "Select the row containing 'John Smith'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#spreadsheetBody tr:nth-child(1) .row-header').classList.contains('selected')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.0",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select 10th grade in the School Finder form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(1) > div > div > div\").innerText == \"10th Grade\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.1",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Autism in Special Needs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(2) > div > div > div\").innerText == \"Autism\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.2",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Graphic Design under Arts & Enrichment Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(3) > div > div > div\").innerText == \"Graphic Design\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.3",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Track & Field in Sports field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(4) > div > div > div\").innerText == \"Track & Field\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.6",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Debate Team in After School Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(5) > div > div > div\").innerText == \"Debate Team\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.7",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select All under Before School Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(6) > div > div > div\").innerText == \"All\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.8",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Open the School Application Form",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/schools/application"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.9",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/application"
+    },
+    "goal": "Open Picnic Reservations page under Recreation",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/recreation/reservations"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.10",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/reservations"
+    },
+    "goal": "Search for Baylands Park by typing the park's name in the search bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation2.css-1mbunh-MuiPaper-root > ul > li > div > span\").innerText == \"Baylands Park\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.11",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/reservations"
+    },
+    "goal": "Open the page for Alum Rock Park",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/parks/picnic/reservation/15"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.12",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "What are the amenities in Alum Rock Park? Return the answer as a comma-separated list of strings, for example: [\"amenity_1\", \"amenity_2\"]",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"BBQ Grill\", \"Outdoor Tables\", \"Hiking Trails\", \"Playground\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.13",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Select 11 June, 2025 date in the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:r65\\\\:\").value == \"2025-06-11\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.15",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Select time slots 4PM-5:30PM on date 31st August 2025. What is the total cost of reservation? The answer string should contain the dollar sign and the dollar value should contain upto 2 decimal places.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "$75.00"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.16",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Open the Parks and Trails page under Recreation",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/recreation/parks"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.17",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "What's the name of the walking trail in Crystal Lake Park? What's the level of difficulty of this trail? Give the answer a JSON object, with the following keys - \"trail_name\" and \"difficulty_level\".",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"trail_name\": \"Lakeside Trail\", \"difficulty_level\": \"Easy\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.18",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "Till what time is the riverside park open? Return the answer as a JSON object with the following keys \"opening_time\" and \"closing_time\". The time should follow this format - \"HH:MM AM/PM\"",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"opening_time\": \"6:00 AM\", \"closing_time\": \"10:00 PM\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.19",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "What is the name of the bike trail in the Riverside Park and what is the difficulty level of this trail. Return the answer as a JSON object, with answer following the keys \"trail_name\" and \"difficulty_level\".",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"trail_name\": \"Riverside Loop\", \"difficulty_level\": \"Moderate\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.20",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "Open the page containing Police Department public records",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/records/police"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.21",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display 20 police records per page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"1–20 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.22",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display police records from 11-20 on the next page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"11–20 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.23",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display 41st to 50th police records",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"41–50 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.24",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "How many police cases listed on this page are under investigation? Return the answer as a string. The answer should be a number with no decimal places",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.25",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "What are the case numbers of closed police cases on this page. Give the full answer as a list of strings, where each string corresponds to the closed police case number",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"PD-2024-0004\", \"PD-2024-0007\", \"PD-2024-0010\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.26",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "How many notifications does this account have? The number should be an integer i.e. no decimal places.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "7"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.27",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "What is the title of the oldest notification?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Marketing campaign performance report available"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.28",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "Open the customer support page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/support"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.29",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "What is the contact information of customer support? Return the answer with both phone number and email address as a comma-separated list of strings, for example [\"phone_number\", \"email_address\"]. Phone number should follow format xxx-xxx-xxxx where x is a digit",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"800-123-4567\", \"support@example.com\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.30",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "Open the settings page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/settings"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.31",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "Navigate to the Clients list from Dashboard",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/clients"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.32",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Update the phone number of Dunder Mifflin Inc to 415-123-9877.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(3)\").innerText\n == \"(415) 123-9877\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.33",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Delete the first 3 clients in the list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(2)\").innerText == \"Global Industries Inc.\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.34",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Display 10 rows per page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiTablePagination-root.css-7mt0f-MuiTablePagination-root > div > p.MuiTablePagination-displayedRows.css-11cfq65-MuiTablePagination-displayedRows\").innerText == \"1–10 of 10\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.35",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Who is the point of contact for Dunder Mifflin LLC?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Michael Scott"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.36",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Add a new client with the following information: Business Name - Beet Farms Inc.; Phone number - 415-567-2341; Address - 736 Hamilton Ave, Scranton, PA, 18519; Contact - Dwight Shrute",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(2)\").innerText == \"Beet Farms Inc.\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(3)\").innerText == \"(415) 567-2341\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(4)\").innerText == \"736 Hamilton Ave, Scranton, PA, 18519\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(5)\").innerText == \"Dwight Shrute\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.37",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Open the page of Policy Center from the Menu",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/policy-center"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.38",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Open the Marketing page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/marketing"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.39",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Change the status of Product Launch campaign from Scheduled to Active",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > span\").innerText == \"Active\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.40",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Change the status of Re-engagement campaign from Draft to Scheduled",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > div > span\").innerText == \"Scheduled\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.41",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Delete Customer Retention campaign from the table",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(3) > td:nth-child(1)\").innerText != \"Customer Retention\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.42",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Open the Analytics tab in the Marketing page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-1 > div > div > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.css-1e6mdzd-MuiPaper-root > h6\").innerText == \"Key Metrics\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.43",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "What is the email open rate? Give the answer as a percentage and include the percentage sign in the answer string.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "24.6%"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.44",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Has the Click-through Rate seen an increase or decrease in Year-over-Year change? Give the answer as one of the two options - \"increase\" or \"decrease\".",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "increase"
+        }
+      ]
+    }
+  }
+]

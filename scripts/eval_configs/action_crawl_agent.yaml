@@ -1,0 +1,31 @@
+run_name: test
+
+runner:
+  threads: 10
+  output_dir: s3://orby-osu-va/action-data/wa_websites_crawl/test
+  wandb_project: wa_crawl
+  seed: 100
+  batch_size: 1
+
+benchmarks:
+  action_crawl-gpt:
+    dataset: wa_action_crawl 
+    max_examples: 10
+    url_pool: orby.digitalagent.agent.WEBARENA_ACTION_CRAWL_URLS
+    max_steps: 15
+    headless: true
+    reset_env: false
+    viewport_size:
+      width: 1024
+      height: 1024
+
+agents:
+  action_crawl_gpt4o:
+    name: action_crawler 
+    model_config_name: gpt_4o
+
+model_configs:
+  gpt_4o:
+    provider: openai
+    name: gpt-4o
+    temperature: 0

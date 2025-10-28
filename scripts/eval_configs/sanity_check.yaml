@@ -1,0 +1,34 @@
+run_name: test
+
+runner:
+  threads: 8
+  output_dir: s3://orby-llm/browsergym_eval
+  wandb_project: webarena-evals
+  seed: 17
+
+model_configs:
+  claude4:
+    provider: anthropic
+    name: claude-sonnet-4-20250514
+    temperature: 0
+
+benchmarks:
+  webarena:
+    dataset: webarena
+    max_examples: -1
+    max_steps: 20
+    headless: false
+    reset_env: false
+    viewport_size:
+      width: 1280
+      height: 720
+  miniwob_50:
+    dataset: miniwob
+    max_examples: -1 
+    max_steps: 2
+    headless: false
+
+agents:
+  hsm_v2_gpt_4o:
+    name: hsm_v2
+    model_config_name: gpt_4o

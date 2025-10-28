@@ -1,0 +1,2106 @@
+[
+  {
+    "task_id": "online.0",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Open the side menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('a[href=\"#/base/willow\"]') != null"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.1",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 40%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 40'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.2",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 6 June 2024 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent ==  'x changed: Thu Jun 06 2024 00:00:00 GMT-0700 (Pacific Daylight Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.3",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Move to the last page using the widget at the bottom of the page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent ==  'x changed: 5'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.4",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/ribbon/willow"
+    },
+    "goal": "Select the font Times from the dropdown",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"wx-label svelte-1ccyn9c\"]').textContent == 'Times'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.5",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select March 21 2025 as the departing date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"03/21/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.6",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select March 21 2025 as the departing date and April 21 2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"03/21/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"04/21/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.7",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Set the adults count to 3 and add 1 child of age 14",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.left-top.svelte-1gb4rvd > div.datepicker-pax-container.svelte-1gb4rvd > div.passenger-selects.svelte-1gb4rvd > auro-select\").shadowRoot.querySelector(\"#triggerFocus > auro-menuoption\").value === \"3\" && document.querySelector(\"#dropdown > div:nth-child(3) > div:nth-child(1) > span.inputNumber.svelte-18kg6tv\").innerHTML === \"1\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.8",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Continue filling the search form using the following information: {\"one way\": True, \"use miles\": True, \"upgrade\": \"MVP Gold 75K\"}",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#upgradeType\").shadowRoot.querySelector(\"#triggerFocus > auro-menuoption\").innerHTML.includes(\"MVP® Gold 75K\") && document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.left-top.svelte-1gb4rvd > auro-radio-group > auro-radio:nth-child(3)\").checked && document.querySelector(\"body > div:nth-child(1) > main > div > div.planbook.svelte-1gb4rvd > div.planbook-input-container.svelte-1gb4rvd > div.right-bottom.svelte-1gb4rvd > div > div.use-miles-container.svelte-1gb4rvd > auro-checkbox\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.9",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true"
+    },
+    "goal": "Swap the From and To airports in 1 step",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#fromCity\").value.includes(\"San Francisco, CA (SFO-San Francisco Intl.)\") && document.querySelector(\"#toCity\").value.includes(\"New York, NY (JFK-Kennedy)\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.10",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Display only the tickets with \"open\" status",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li.StyledOption-sc-jl4wn6-0.StyledItem-sc-1jp99dq-0.abTCS.cdkcNA').getAttribute('aria-checked') === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.11",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Go to the Organizations page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.StyledCol-sc-inuw62-0.bpLBzO.sc-1556ne7-6.dFcVTi > h1\").innerText === \"Organizations\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.12",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Open my profile menu on the top right",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#header_profile_menu_button\").getAttribute(\"aria-expanded\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.13",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Write \"Thank you for your business.\" and bold it to reply to the customer",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"Thank you for your business.\") && document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"<strong>\") && document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div > p\").innerHTML.includes(\"<\\strong>\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.14",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Change the ticket type to Task",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.StyledField-sc-12gzfsu-0.iRSmTf.sc-e3l2vm-0.dzRuAP > div > div\").innerText === \"Task\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.15",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Add a new ticket with type Question, topic Delivery, and normal priority; assign Michael S to it; add the tag \"speedup\" to it; leave everything else blank",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[title=\"Delivery\"').innerText == 'Delivery' && document.querySelector(\"div.StyledTag-sc-1jvbe03-0.dtVBQv > span\").innerText=='speedup' && document.querySelector('div[title=\"Michael S\"').innerText == 'Michael S' && JSON.stringify(Array.from(document.querySelectorAll(\"div.StyledField-sc-12gzfsu-0.iRSmTf.sc-e3l2vm-0.dzRuAP > div > div\")).map((x)=>x.innerText))==JSON.stringify(['Question', 'Normal'])"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.16",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Compile a list of all the current open tickets as a JSON-formatted string; each ticket should be a JSON object with fields \"customer name\" and \"ticket title\"",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"customer name\", \"ticket title\", \"The Customer\", \"Meet the ticket\", \"Ingrid Van Dijk\", \"New delivery address\", \"Zhang Wei Xu\", \"Shipping cost\", \"Soobin Do\", \"Do I put it together\", \"How does Zendesk work\", \"Are products ethically sourced\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.17",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Go to the Add a New Ticket page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"html\").innerHTML.includes(\"New ticket\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.18",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Answer the question: what is the cheapest ticket option displayed on this page (start date July 9th, 2025)? Answer your question as a JSON dictionary with the fields \"flight_number\", \"duration\", and \"price\". The format of duration should be \"xh ym\". Do not include dollar sign in the ticket price answer.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"flight_number\": \"AA 2994\", \"duration\": \"2h 44m\", \"price\": 240}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.19",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Go to the page for the departure date of July 15th",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#carousel-2025-07-15\").hasAttribute(\"selected\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.20",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_flights.wacz",
+      "start_url": "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "Sort the main cabin ticket price in descending order",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#btn-sort-by-MAIN\").getAttribute(\"class\") === \"product_group_MAIN_desc\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.21",
+    "env": {
+      "data_path": "environments/web_archives/american_airlines/american_airlines_summary.wacz",
+      "start_url": "https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c",
+      "timestamp": {
+        "seconds": 1743541551,
+        "nanos": 0
+      }
+    },
+    "goal": "How many passengers are the Total price displayed on this page for? Only provide the number as the output",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.22",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/NeMo"
+    },
+    "goal": "Make a repo-wide search for ctc",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"body > div.logged-in.env-production.page-responsive > div.application-main > main > react-app > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-PageLayoutRoot-1zlEO.Search-module__SplitPageLayout--vH5Ht > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-ContentWrapper-b-QRo.Search-module__SplitPageLayout_Content--mt9an > div.Box-sc-g0xbh4-0.prc-PageLayout-Content--F7-I > div > div > div:nth-child(1) > div > span > span.Box-sc-g0xbh4-0.fcqJJh.prc-Text-Text-0ima0 > div\").innerHTML === \"506 files \""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.23",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123?tab=overview&from=2024-12-01&to=2024-12-31"
+    },
+    "goal": "When did William Zhao first join GitHub? Answer in the format of MM/DD/YYYY",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "11/15/2024"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.24",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Select neftune from the branch dropdown menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#branch-picker-repos-header-ref-selector > span > span.prc-Button-Label-pTQ3x > div > div.Box-sc-g0xbh4-0.ffLUq.ref-selector-button-text-container > span\").innerHTML.includes(\"neftune\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.25",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
+    },
+    "goal": "Select noise_emb from the branch dropdown menu",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#branch-picker-repos-header-ref-selector > span > span.prc-Button-Label-pTQ3x > div > div.Box-sc-g0xbh4-0.ffLUq.ref-selector-button-text-container > span\").innerHTML.includes(\"noise_emb\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.26",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/NeMo"
+    },
+    "goal": "Find where the variable `use_pytorch_lightning` in the jimhalpert123/NeMo repo is defined and return it's file path (include directories starting from NeMo/), line number, and value. Give the answer as a comma separated list of strings, for example [\"aaa\", \"bbb\", \"ccc\"].",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"NeMo/nemo/deploy/deploy_base.py\", \"19\", \"True\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.27",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123/web-tools/edit/main/README.md"
+    },
+    "goal": "Write \"\\nThis is a tool for web development.\\n\" after the title in the README and italicize it.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#repo-content-pjax-container > react-app > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-PageLayoutRoot-1zlEO > div > div > div.Box-sc-g0xbh4-0.prc-PageLayout-ContentWrapper-b-QRo.CodeView-module__SplitPageLayout_Content--qxR1C > div.Box-sc-g0xbh4-0.prc-PageLayout-Content--F7-I > div > div:nth-child(3) > div.Box-sc-g0xbh4-0.cvtrAK > div > div.Box-sc-g0xbh4-0.elNkLh.react-code-view-edit > file-attachment > div > div > div.cm-scroller > div.cm-content.cm-lineWrapping\").innerHTML.includes('<span class=\"ͼi ͼe\">_</span><span class=\"ͼi\">This is a tool for web development.</span><span class=\"ͼi ͼe\">_</span>')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.28",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to my Repository page and filter the list of repositories I have by programming languages, such that only the ones in TypeScript remain",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#user-repositories-list > div.TableObject.border-bottom.color-border-muted.py-3 > div.user-repo-search-results-summary.TableObject-item.TableObject-item--primary.v-align-top\").innerText==\"1 result for repositories written in TypeScript sorted by last updated\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.29",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to the repository page and filter the list of repositories to display the one wirtten in Python and is public",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#user-repositories-list > div.TableObject.border-bottom.color-border-muted.py-3 > div.user-repo-search-results-summary.TableObject-item.TableObject-item--primary.v-align-top\").innerHTML.includes(\"<strong>1</strong>\") && document.querySelector(\"#user-repositories-list > div.TableObject.border-bottom.color-border-muted.py-3 > div.user-repo-search-results-summary.TableObject-item.TableObject-item--primary.v-align-top\").innerHTML.includes(\"<strong>public</strong>\") && document.querySelector(\"#user-repositories-list > div.TableObject.border-bottom.color-border-muted.py-3 > div.user-repo-search-results-summary.TableObject-item.TableObject-item--primary.v-align-top\").innerHTML.includes(\"<strong>Python</strong>\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.30",
+    "env": {
+      "data_path": "environments/web_archives/github/github_1.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Are there any of my repositories with MIT License? If so, return the name(s) in a comma-separated list of strings, for example: [\"repo1\", \"repo2\"]",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"web-tools\", \"Next-js-Boilerplate\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.31",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/"
+    },
+    "goal": "Click on project-one in the left menu",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://github.com/jimhalpert123/project-one"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.32",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/tree/main/src"
+    },
+    "goal": "Find 0000_snapshot.json in the migrations folder displayed on the left. Only click the down arrows to interact with the directory menu.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:r59\\\\: > span\").innerHTML.includes(\"0000_snapshot.json\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.33",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/commits/main/migrations/meta/0000_snapshot.json"
+    },
+    "goal": "Copy the full SHA of the commit \"chore: update dependencies to the latest version\" and only generate the SHA string as the output.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "a3eb1fc1aac543506f299d850b1315581b0d46ce"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.34",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123/Next-js-Boilerplate/commits/main/migrations/meta/0000_snapshot.json"
+    },
+    "goal": "Display only the commits made by me for 0000_snapshot.json",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:R1crab\\\\: > span.prc-Button-ButtonContent-HKbr- > span > div > div.Box-sc-g0xbh4-0.dGVxWp\").innerHTML.includes(\"jimhalpert123\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.35",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add a readme to my new repository",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rm\\\\:\").getAttribute(\"aria-checked\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.36",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Mark my new repo as private",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rk\\\\:\").getAttribute(\"aria-checked\") === \"true\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.37",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add a C++ .gitignore template",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rq\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes(\"C++\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.38",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/new"
+    },
+    "goal": "Add the highest version of GNU license available to this new repo",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:rv\\\\: > span.prc-Button-ButtonContent-HKbr- > span\").innerHTML.includes(\"GNU General Public License v3.0\")"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.39",
+    "env": {
+      "data_path": "environments/web_archives/github/github_2.wacz",
+      "start_url": "https://github.com/jimhalpert123"
+    },
+    "goal": "Go to my repository page and click on more Star options for the jimhalpert123 repository",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#details-user-list-894774357-unstarred\").open"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.40",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/enter_zipcode.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/front-door"
+    },
+    "goal": "Open the page to shop for health insurance plans provided by Kaiser",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#servicearea-component2 > div > div.service-area-box.section.left > div.h2\").innerText == \"Enter your ZIP code\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.41",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/enter_zipcode.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/shop-plans"
+    },
+    "goal": "Enter Zipcode 94040 and submit the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(1) > span.h2.doctors-count\").innerText == 78 && document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(2) > span.h2.facilities-count\").innerText == 1458"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.42",
+    "env": {
+      "data_path": "environments/web_archives/kaiser/enter_zipcode.wacz",
+      "start_url": "https://healthy.kaiserpermanente.org/northern-california/shop-plans"
+    },
+    "goal": "Enter Zipcode 94128, submit the form and select San Francisco when the dropdown list appears and submit the form again",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(1) > span.h2.doctors-count\").innerText == 60 && document.querySelector(\"#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(2) > span.h2.facilities-count\").innerText == 656"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.43",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/"
+    },
+    "goal": "Go to the Crime Statistics page under Records section.",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.44",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What is the total number of crimes committed against people and property in the month of February, 2025? Give the answer in JSON format with keys \"num_crimes_against_people\" and \"num_crimes_against_property\"",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"num_crimes_against_people\": 1105, \"num_crimes_against_property\": 2913}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.45",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "What were the total number of property crimes and property crime rate per 100000 population commited in year 2020? Give the answer in JSON format with the keys \"total_crimes\" and \"crime_rate_per_100000\". Do not include any commas in the values.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"total_crimes\": 23847, \"crime_rate_per_100000\": 2272.9}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.46",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+    },
+    "goal": "Find the phone number of SJPD tow assistance line to inquire about the status of a towed vehicle. The phone number should follow format \"xxx-xxx-xxxx\" where x is a digit",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "408-277-4263"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.47",
+    "env": {
+      "data_path": "environments/web_archives/sjpd/crime_stats.wacz",
+      "start_url": "https://www.sjpd.org/about-us/organization/bureau-of-field-operations/traffic-enforcement-unit/towed-vehicle-information"
+    },
+    "goal": "Find the total towing fee for a car that has been towed overnight for 4 hours. Give the answer as a JSON string with key \"total_tow_fee\" and just the integer value of fee (no $ or cents)",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"total_tow_fee\":  657}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.48",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/"
+    },
+    "goal": "Open the school directory",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#hero > div.hero_header > h1\").innerText == \"Directory of Schools\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.49",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Open the 4th page of the school directory",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/directory?page=3"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.50",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Search for the \"Rosa Parks\" school using the searchbar on the school directory page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/directory?field_schoolname_value=rosa+parks"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.51",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory?field_schoolname_value=rosa+parks"
+    },
+    "goal": "What's the address and phone number of the Rosa Parks Elementary school? Return the answer as a JSON dictionary with keys \"address\" and \"phone_number\". The address should be a comma separated string containing the street name, city name, state name and zipcode. The phone number should be a string with format \"xxx-xxx-xxxx\", where x is a digit.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"address\": \"1501 O'Farrell Street, San Francisco, California, 94115\", \"phone_number\": \"415-749-3519\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.52",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/directory"
+    },
+    "goal": "Navigate to the School Finder Page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://www.sfusd.edu/schools/enroll/discover/school-finder"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.53",
+    "env": {
+      "data_path": "environments/web_archives/sfusd/school_finder.wacz",
+      "start_url": "https://www.sfusd.edu/schools/enroll/discover/school-finder"
+    },
+    "goal": "Set the following filters on the School Finder Page - Grade 5, Start Time: 7:50AM, Special Education - Autism, Before School Program - Checked, After School Program - Checked",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#wrapper > div.table-scroll > table > thead > tr > th:nth-child(1) > h3 > a\").innerText == \"Starr King Elementary School\" && document.querySelector(\"#wrapper > div.table-scroll > table > thead > tr > th:nth-child(2) > h3 > a\").innerText == \"Alamo Elementary School\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.54",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Open the billings page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.55",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Expand the sections Customer Saved searches, Sales and Billing Operations one by one. Do not click the Expand All button directly.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[data-task-id=\"-20304\"').getAttribute('data-expanded')== 'true' &&  document.querySelector('div[data-task-id=\"-20305\"').getAttribute('data-expanded') == 'true' &&  document.querySelector('div[data-task-id=\"-20307\"').getAttribute('data-expanded')=='true'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.56",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Date/Time and format it as [DD:MM:YYYY|hh:mm a/pm]. Include the braces.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[11:03:2025|08:00 am]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.57",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Historical Name. Only extract the text and nothing else",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "NS ACS | Billing Operation Sched - 5 Days(2) - MX"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.58",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449"
+    },
+    "goal": "Extract the Description. Only extract the text and nothing else",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Billing schedule for 5 day customers for MX subsidiary"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.59",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Move the KPI Meter box to be above Billing Links",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[id=\"dashboard-column-1\"]').children[1].getAttribute('data-portlet-type')=='kpimeter'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.60",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Display Billing Operations for 6th March 2025 (Not including 7th)",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('#segment_fs > span.uir-pagination-select > span:nth-child(1)').getHTML()=='3/6/2025(2)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.61",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Find link 'http://google.com'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[placeholder=\"Find Link...\"').value =='http://google.com'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.62",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Enter 'CA Sales Tax Audit' in search bar.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"uif42_input\"').value =='CA Sales Tax Audit'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.63",
+    "env": {
+      "data_path": "environments/web_archives/netsuite_samsara/netsuite_samsara_billing.wacz",
+      "start_url": "https://4146860-sb1.app.netsuite.com/app/center/card.nl?sc=-100&whence="
+    },
+    "goal": "Remove the Billing Links widget from the page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[id=\"dashboard-column-1\"]').children.length == 2 && document.querySelector('div[id=\"dashboard-column-1\"]').children[1].getAttribute('data-portlet-type')=='kpimeter' && document.querySelector('div[id=\"dashboard-column-1\"]').children[0].getAttribute('data-portlet-type')=='reminders'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.64",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter Institution in Practice Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[id=\"ddlTypeOfPractice\"]').selectedIndex == 3"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.65",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter '000116666' in Federal Tax ID",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtFederalTaxID\"]').value == '000116666'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.66",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter Institution in Practice Type and check Billing under Multiple TIN",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"chkBillingUnderMultipleTINS\"]').checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.67",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter 12345678 in CAQH number",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtCAQHNumber\"]').value == '12345678'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.68",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Select California as state in Locations Served and select Orange and Santa Clara County in counties served",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions.length==2&&document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions[0].innerHTML=='ORANGE (CA)' && document.querySelector('select[id=\"lbCountiesServed\"]').selectedOptions[1].innerHTML=='SANTA CLARA (CA)'&&document.querySelector('select[id=\"lbStatesServed\"]').selectedIndex==6"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.69",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Select No for ACO or PCMH?",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[id=\"ddlACOorPCMH\"]').selectedIndex ==2"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.70",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter Institution in Practice Type and Pediatric in Facility Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[id=\"ddlTypeOfPractice\"]').selectedIndex == 3 && document.querySelector('select[id=\"ddlFacilityType\"]').selectedIndex ==4"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.71",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter Institution in Practice Type and select Inpatient, skilled nursing facility, professional services and behavorial health partial hospitalization program in Types of Services",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "JSON.stringify(Array.from(document.querySelector('select[id=\"lbInstitutionTypesOfServices\"]').selectedOptions).map((x)=>x.innerHTML)) == JSON.stringify(['Inpatient', 'Skilled Nursing Facility', 'Professional Services', 'Behavioral Health Partial Hospitalization Program']) && document.querySelector('select[id=\"ddlTypeOfPractice\"]').selectedIndex == 3"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.72",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter John Doe in First and Last Name",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtProviderPOCName\"]').value==\"John Doe\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.73",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Format (804)-(813)-(8888) without any special characters and fill in the phone number field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtProviderPOCPhone\"]').value==\"8048138888\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.74",
+    "env": {
+      "data_path": "environments/web_archives/triwest/triwest.wacz",
+      "start_url": "https://joinournetwork.triwest.com/"
+    },
+    "goal": "Enter 95015 in zip code",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"txtZipCode\"]').value==\"95015\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.75",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "You want to travel to Seattle. Fill the relevant field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[aria-describedby=\"bigsearch-query-location-description\"]').value=='Seattle'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.76",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "You can check in on any 2 days around June 2nd 2025. Fill the relevant field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v v13ly71q atm_ll_exct8b dir dir-ltr\"]').innerText =='Jun 2±2'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.77",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "You can check in on June 2nd 2025. Fill the relevant field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v dir dir-ltr\"]').innerText=='Jun 2'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.78",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "You want to check in on April 23 2025 and checkout 4 weeks later. Fill the relevant fields.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "JSON.stringify(Array.from(document.querySelectorAll('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v dir dir-ltr\"]')).map((x)=>x.innerText)) == JSON.stringify(['Apr 23', 'May 21'])"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.79",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "Select 4 guests and 1 pet. Leave the dropdown menu opened. Do not try to submit the form.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v v13ly71q atm_ll_exct8b dir dir-ltr\"]').innerText == '4 guests, 1 pet'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.80",
+    "env": {
+      "data_path": "environments/web_archives/airbnb/airbnb_search.wacz",
+      "start_url": "https://www.airbnb.com/"
+    },
+    "goal": "Select 1 guest and close the relevant dropdown after setting the value. Do not try submitting anything else.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"v1v28j4b atm_c8_km0zk7 atm_g3_18khvle atm_fr_1m9t47k atm_7l_dezgoh atm_cs_10d11i2 atm_ks_15vqwwr atm_sq_1l2sidv atm_vy_1osqo2v dir dir-ltr\"]').innerText =='1 guest'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.81",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter Gregory as Provider's First Name in the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderProviderFirstName > span > input\").value == \"Gregory\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.82",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter House as Provider's Last Name",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderProviderLastName > span > input\").value == \"House\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.83",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter MD as Degree Type",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderDegreeType > div > div > div.selectric > p\").innerText == \"MD\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.84",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select the boxes \"Check to add provider to existing agreement\" and \"Check to join as a group\"",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(2) > div > input[type=checkbox]\").checked && document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(3) > div > input[type=checkbox]\").checked && !document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ Provider > label:nth-child(4) > div > input[type=checkbox]\").checked"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.85",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Select Neurology as Specialty from the dropdown list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderSpecialty > div > div > div.selectric > p\").innerText == \"Neurology\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.86",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter zipcode 08544 in the ZIP Code field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderZIPCode > span > input\").value == \"08544\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.87",
+    "env": {
+      "data_path": "environments/web_archives/wellcare/wellcare_form.wacz",
+      "start_url": "https://www.wellcare.com/Become-a-Provider"
+    },
+    "goal": "Enter phone number (615) 938-5930 in the Phone Number field under Your Contact Infomation section",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#DivDropdownBecome\\\\ A\\\\ ProviderPhoneNumber > span > input\").value == \"(615) 938-5930\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.0",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select 10th grade in the School Finder form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(1) > div > div > div\").innerText == \"10th Grade\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.1",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Autism in Special Needs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(2) > div > div > div\").innerText == \"Autism\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.2",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Graphic Design under Arts & Enrichment Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(3) > div > div > div\").innerText == \"Graphic Design\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.3",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Track & Field in Sports field",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(4) > div > div > div\").innerText == \"Track & Field\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.6",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select Debate Team in After School Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(5) > div > div > div\").innerText == \"Debate Team\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.7",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Select All under Before School Programs",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > form > div > div:nth-child(6) > div > div > div\").innerText == \"All\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.8",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/finder"
+    },
+    "goal": "Open the School Application Form",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/schools/application"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.9",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/schools/application"
+    },
+    "goal": "Open Picnic Reservations page under Recreation",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/recreation/reservations"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.10",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/reservations"
+    },
+    "goal": "Search for Baylands Park by typing the park's name in the search bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation2.css-1mbunh-MuiPaper-root > ul > li > div > span\").innerText == \"Baylands Park\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.11",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/reservations"
+    },
+    "goal": "Open the page for Alum Rock Park",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/parks/picnic/reservation/15"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.12",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "What are the amenities in Alum Rock Park? Return the answer as a comma-separated list of strings, for example: [\"amenity_1\", \"amenity_2\"]",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"BBQ Grill\", \"Outdoor Tables\", \"Hiking Trails\", \"Playground\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.13",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Select 11 June, 2025 date in the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#\\\\:r65\\\\:\").value == \"2025-06-11\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.15",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Select time slots 4PM-5:30PM on date 31st August 2025. What is the total cost of reservation? The answer string should contain the dollar sign and the dollar value should contain upto 2 decimal places.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "$75.00"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.16",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/parks/picnic/reservation/15"
+    },
+    "goal": "Open the Parks and Trails page under Recreation",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/recreation/parks"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.17",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "What's the name of the walking trail in Crystal Lake Park? What's the level of difficulty of this trail? Give the answer a JSON object, with the following keys - \"trail_name\" and \"difficulty_level\".",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"trail_name\": \"Lakeside Trail\", \"difficulty_level\": \"Easy\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.18",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "Till what time is the riverside park open? Return the answer as a JSON object with the following keys \"opening_time\" and \"closing_time\". The time should follow this format - \"HH:MM AM/PM\"",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"opening_time\": \"6:00 AM\", \"closing_time\": \"10:00 PM\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.19",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "What is the name of the bike trail in the Riverside Park and what is the difficulty level of this trail. Return the answer as a JSON object, with answer following the keys \"trail_name\" and \"difficulty_level\".",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"trail_name\": \"Riverside Loop\", \"difficulty_level\": \"Moderate\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.20",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/recreation/parks"
+    },
+    "goal": "Open the page containing Police Department public records",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/records/police"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.21",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display 20 police records per page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"1–20 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.22",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display police records from 11-20 on the next page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"11–20 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.23",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "Display 41st to 50th police records",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > div > div > div > div > div.MuiBox-root.css-faujvq > div.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root > div > p\").innerText == \"41–50 of 50\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.24",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "How many police cases listed on this page are under investigation? Return the answer as a string. The answer should be a number with no decimal places",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "2"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.25",
+    "env": {
+      "data_path": "environments/static_web_apps/government",
+      "start_url": "http://localhost:3000/records/police"
+    },
+    "goal": "What are the case numbers of closed police cases on this page. Give the full answer as a list of strings, where each string corresponds to the closed police case number",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"PD-2024-0004\", \"PD-2024-0007\", \"PD-2024-0010\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.26",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "How many notifications does this account have? The number should be an integer i.e. no decimal places.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "7"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.27",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "What is the title of the oldest notification?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Marketing campaign performance report available"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.28",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/home"
+    },
+    "goal": "Open the customer support page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/support"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.29",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "What is the contact information of customer support? Return the answer with both phone number and email address as a comma-separated list of strings, for example [\"phone_number\", \"email_address\"]. Phone number should follow format xxx-xxx-xxxx where x is a digit",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"800-123-4567\", \"support@example.com\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.30",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "Open the settings page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/settings"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.31",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/support"
+    },
+    "goal": "Navigate to the Clients list from Dashboard",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/clients"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.32",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Update the phone number of Dunder Mifflin Inc to 415-123-9877.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(3)\").innerText\n == \"(415) 123-9877\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.33",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Delete the first 3 clients in the list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(2)\").innerText == \"Global Industries Inc.\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.34",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Display 10 rows per page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiTablePagination-root.css-7mt0f-MuiTablePagination-root > div > p.MuiTablePagination-displayedRows.css-11cfq65-MuiTablePagination-displayedRows\").innerText == \"1–10 of 10\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.35",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Who is the point of contact for Dunder Mifflin LLC?",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Michael Scott"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.36",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Add a new client with the following information: Business Name - Beet Farms Inc.; Phone number - 415-567-2341; Address - 736 Hamilton Ave, Scranton, PA, 18519; Contact - Dwight Shrute",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(2)\").innerText == \"Beet Farms Inc.\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(3)\").innerText == \"(415) 567-2341\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(4)\").innerText == \"736 Hamilton Ave, Scranton, PA, 18519\" && \ndocument.querySelector(\"#root > div > main > div.MuiContainer-root.MuiContainer-maxWidthLg.css-1kj2szu-MuiContainer-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-y2ff7i-MuiPaper-root-MuiTableContainer-root > table > tbody > tr:nth-child(1) > td:nth-child(5)\").innerText == \"Dwight Shrute\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.37",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Open the page of Policy Center from the Menu",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/policy-center"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.38",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/clients"
+    },
+    "goal": "Open the Marketing page",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "http://localhost:3000/marketing"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.39",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Change the status of Product Launch campaign from Scheduled to Active",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > span\").innerText == \"Active\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.40",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Change the status of Re-engagement campaign from Draft to Scheduled",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > div > span\").innerText == \"Scheduled\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.41",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Delete Customer Retention campaign from the table",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-0 > div > div > table > tbody > tr:nth-child(3) > td:nth-child(1)\").innerText != \"Customer Retention\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.42",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Open the Analytics tab in the Marketing page",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"#marketing-tabpanel-1 > div > div > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.css-1e6mdzd-MuiPaper-root > h6\").innerText == \"Key Metrics\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.43",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "What is the email open rate? Give the answer as a percentage and include the percentage sign in the answer string.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "24.6%"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "static.44",
+    "env": {
+      "data_path": "environments/static_web_apps/crm",
+      "start_url": "http://localhost:3000/marketing"
+    },
+    "goal": "Has the Click-through Rate seen an increase or decrease in Year-over-Year change? Give the answer as one of the two options - \"increase\" or \"decrease\".",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "increase"
+        }
+      ]
+    }
+  }
+]

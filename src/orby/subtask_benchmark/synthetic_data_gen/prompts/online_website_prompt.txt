@@ -1,0 +1,70 @@
+I want to synthetically create a benchmark and training dataset for testing GUI-based VLM agents. I will provide the full screenshot of the webpage for creating this dataset. As a reference, I will also share examples of goals and evaluators that will be a part of this dataset. The dataset should contain the following fields: data_path, subtask_type, subtask_goal, start_url, eval_type, and evaluation. Below is an explanation of each field:
+a) data_path - This field is simply "ONLINE". Use exactly this string.
+b) subtask_type - A subtask represents a category of small, atomic actions that typically require around 5–6 GUI interactions to complete. We have defined the following types of subtasks in the list below, and the generated, synthetic data points should aim to cover all of them as much as possible. Each synthetic goal should involve a minimum of 1 and a maximum of 3 subtasks to complete. Please ensure that no goal requires more than 3 subtasks.
+    Below is a description of all the subtask types for which we seek to generate data:
+    1. dropdown_option_selection: Select an option from a drop-down menu and its sub-options.
+    2. table_manipulation: Use a table rendered directly on the HTML to find, filter, sort, and perform other actions.
+    3. menu_navigation: Select options and sub-options from the top, bottom, or side navigation menus.
+    4. computation: Perform basic arithmetic based on information presented on one or multiple pages.
+    5. search_and_autocomplete: Lead the user to relevant information by searching for user-provided string and clicking on relevant results.
+    6. icon_recognition: Understand and interact with an icon to achieve the desired action.
+    7. data_extraction: Find and return relevant information from the web page.
+    8. form_filling: Fill out multiple text boxes, radio buttons, dropdowns, etc with user-specific information to submit data to the website.
+    9. datepicker: Choose an item on a calendar.
+    10. sheet_editing: Edit, delete, and add items to a Google Sheet, Microsoft Excel sheet, or similar.
+    11. document_editing: Edit, delete, and add content to a rich-text or code editing element.
+    12. pagination: Scroll through lists of displayed items by clicking the next or previous buttons, entering a page number, or searching for or recording information along the way.
+    13. dialog_boxes: While conducting a task, have the ability to close or interact with a pop-up window to continue the task.
+    14. generic_grounding: Click or interact with an element based on a natural language description of the user’s intention or the element itself. This covers a broad range of tasks not included in other categories.
+    15. list_navigation: Find and interact with an item on a scrollable list.
+    16. drag_and_drop_interaction: For example, dragging a slider or a table component.
+    DO NOT USE ANY OTHER SUBTASK TYPES BESIDE THE ONES LISTED ABOVE. Find the most relevant type and use that. DO NOT CREATE YOUR OWN TYPE.
+c) subtask_goal - A short natural language instruction describing the specific task an AI agent should perform on the webpage, typically targeting a single interaction like selecting an option, filling a field, or navigating a menu.
+    When generating these goals, please following these guidelines:
+    - The task should be simple, in the sense that it should be a task that takes 3-4 steps to complete, and the answer, if required, is not too long. For example, "Select 'lactose intolerant' in the dietary restriction drop down menu" is a reasonable task. This is the most important rule.
+    - Each task must be related to the content of the website. For example, if you are looking at a website about a restaurant, a task like "Extract the name of the chef's special for today" is a good task, while "Extract the temperature for tomorrow" is not.
+    - Each task must be achieveable by a typical human user within a few minutes. For example, "Check plane tickets from New York to London on January 16th" is a good task, while "Build a personal website" is not.
+    - Tasks should be diverse in category mentioned above
+    - I want the task to be very VERY specific, such that a typical human user will know exactly what to do to complete the task.
+    - I want the tasks to be highly self-contained. They should NOT depend on each other.
+    - I want these tasks to be completed only with a web browser, without access to an OS system. For example, I don't want any task that requires downloading or emailing.
+    - None of the task should cause ANY real-world changes to the state of the internet, except spaces I own. For example, I don't want to post a new post on any public server that I do not own, or actually use my credit card information to purchase anything.
+d) start_url - This is the URL on which the subtask will be performed.
+e) eval_type - Evaluator types can be one of the following - "string_matcher", "url_matcher", "js_matcher", "json_matcher". Detailed description about each of these is provided below.
+f) evaluation - The evaluation string or script will determine whether the action performed by an LLM agent is correct or not. We are defining 4 types of evaluators to judge an agent.
+        1. String evaluator (string_matcher) - This evaluator will be used when the output of an LLM is a string. This is especially true for data extraction tasks where we will ask an AI agent to output a phone number, an address or something similar.
+        2. JSON evaluator (json_matcher) - This evaluator verifies the AI agent’s output by comparing it against an expected JSON structure. It supports both list-based and dictionary-based evaluations, checking whether the generated output matches the expected content and structure.
+        3. URL evaluator (url_matcher) - This evaluator is used for tasks such as menu navigation and pagination, where a new page is loaded. It verifies the AI agent’s action by matching the loaded page’s URL against the expected ground truth URL. 
+        4. JavaScript evaluator (js_matcher) - This evaluator uses JavaScript to verify whether the action performed by the AI agent has correctly modified the webpage. After the agent interacts with the page, the HTML DOM and JavaScript state are expected to change. The js_matcher evaluator runs a JavaScript condition to uniquely determine whether the resulting page state matches the expected outcome.
+
+Here’s a few examples to follow. Each row contains the fields data_path, subtask_type, subtask_goal, start_url, eval_type, and evaluation. All the values are comma-separated.
+1. "sfusd/school_finder.wacz", "pagination", "Open the 4th page of the school directory", "https://www.sfusd.edu/schools/directory", "url_matcher", "https://www.sfusd.edu/schools/directory?page=3"
+2. "sjpd/crime_stats.wacz", "menu_navigation", "Go to the Crime Statistics page under Records section.", "https://www.sjpd.org/", "url_matcher", "https://www.sjpd.org/records/crime-stats-maps/crime-statistics"
+3. "netsuite_samsara/netsuite_samsara_billing.wacz", "data_extraction", "Extract the Date/Time and format it as [DD:MM:YYYY|hh:mm a/pm]", "https://4146860-sb1.app.netsuite.com/app/accounting/transactions/billingworkcenter/billrunresult.nl?id=868449", "string_matcher", "[11:03:2025|08:00 am]"
+4. "american_airlines/american_airlines_flights.wacz", "computation", "How many passengers are the Total price displayed on this page for? Only provide the number as the output", https://www.aa.com/booking/your-trip-summary?sid=1a1fb273c0cf15b77427d49d5c91a33c, "string_matcher", "2"
+5. "american_airlines/american_airlines_flights.wacz", "data_extraction","Answer the question: what is the cheapest ticket option displayed on this page (start date July 9th, 2025)? Answer your question as a JSON dictionary with the fields "flight_number", "duration", and "price". The format of duration should be ""xh ym"". Do not include dollar sign for ticket price answer.",https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42,"json_matcher",{"flight_number": "AA 2994", "duration": "2h 44m", "price": 240}
+6. "github/github_1.wacz", "data_extraction,generic_grounding","Are there any of my repositories with MIT License? If so, return the name(s) in a comma-separated list of strings, for example: [\"repo1\", \"repo2\"]",https://github.com/jimhalpert123,"json_matcher",["web-tools", "Next-js-Boilerplate"]
+7. "kaiser/enter_zipcode.wacz", "form_filling","Enter Zipcode 94040 and submit the form","https://healthy.kaiserpermanente.org/northern-california/shop-plans","js_matcher","document.querySelector(""#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(1) > span.h2.doctors-count"").innerText == 78 && document.querySelector(""#employerCoverageComponent > div.midContainer.margin-bottom-2u > div.teaserContainer > app-doctors-locations-card > div > div > div > div:nth-child(1) > div:nth-child(2) > span.h2.facilities-count"").innerText == 1459"
+
+Create examples similar to the ones above. For subtasks which have js_matcher evaluators, leave the evaluator as an empty string.
+The above examples are a list of comma separated values. However, you should generate the output as a list of JSON objects, as follows 
+"""
+[
+    {
+        "data_path": "zoho/zoho_login.wacz",
+        "subtask_type": "form_filling",
+        "subtask_goal": "Fill in name and email",
+        "start_url": "https://zoho.com"
+        "eval_type": "js_matcher",
+        "evaluation": {"key": "value"},
+    },
+    ...
+]
+"""
+
+Create different variations of goals, subtask types and evaluator types for all the different UI elements and data on this page. 
+Create up to $num_data_points data points. Directly output data samples of the benchmark, do not generate any other text or messages.
+Here is the DOM tree of the webpage
+$html_dom
+
+Here is a screenshot of the webpage

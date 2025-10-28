@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./zendesk_ticket.wacz"
+  start_url: "https://orby-ai.zendesk.com/agent/tickets/5"
+}

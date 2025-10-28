@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./american_airlines_flights.wacz"
+  start_url: "https://www.aa.com/booking/choose-flights/1?sid=04d6f2c96013ced16dfcc8dee82fcc42"
+}

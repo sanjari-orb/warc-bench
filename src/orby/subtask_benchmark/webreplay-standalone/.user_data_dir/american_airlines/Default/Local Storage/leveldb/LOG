@@ -1,0 +1,6 @@
+2025/10/08-12:35:07.685 3903 Reusing MANIFEST /Users/sanjari/orby/subtask_benchmark/src/subtask_benchmark/webreplay-standalone/.user_data_dir/american_airlines/Default/Local Storage/leveldb/MANIFEST-000001
+2025/10/08-12:35:07.689 3903 Recovering log #6
+2025/10/08-12:35:07.690 3903 Reusing old log /Users/sanjari/orby/subtask_benchmark/src/subtask_benchmark/webreplay-standalone/.user_data_dir/american_airlines/Default/Local Storage/leveldb/000006.log 
+2025/10/08-12:38:31.947 3d07 Level-0 table #10: started
+2025/10/08-12:38:31.954 3d07 Level-0 table #10: 32675 bytes OK
+2025/10/08-12:38:31.958 3d07 Delete type=0 #6

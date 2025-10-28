@@ -1,0 +1,26 @@
+run_name: test 
+
+runner:
+  threads: 5
+  output_dir: s3://orby-llm/browsergym_eval
+  wandb_project: sanity_check
+  seed: 17
+  timeout_secs: 900
+
+benchmarks:
+  webarena_50:
+    dataset: webarena
+    max_examples: 50
+    max_steps: 15 
+    headless: true
+    viewport_size:
+      width: 1280
+      height: 720
+
+agents:
+  hsm_v2_hANe4R:
+    name: hsm_v2
+    model:
+      provider: mosaic-vllm 
+      name: hANe4R-no-flash-infer
+      temperature: 0

@@ -1,0 +1,7 @@
+# proto-file: protos/pb/v1alpha1/orbot_replay.proto
+# proto-message: Replay
+
+env {
+  warc_file_path: "./archive.wacz"
+  start_url: "https://us-east-1.console.aws.amazon.com/s3/buckets/sagemaker-studio-522180606016-f2ok66ma5j6?region=us-east-1&bucketType=general&tab=objects"
+}

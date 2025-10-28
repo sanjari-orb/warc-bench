@@ -1,0 +1,698 @@
+[
+  {
+    "task_id": "online.0",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 75%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 75'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.1",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/"
+    },
+    "goal": "Go to Button types in side menu and move slider to 5%",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: 5'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.2",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 1 Jan 2014 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Wed Jan 01 2014 00:00:00 GMT-0800 (Pacific Standard Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.3",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select date 1 October 2030 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Tue Oct 01 2030 00:00:00 GMT-0700 (Pacific Daylight Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.4",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/material"
+    },
+    "goal": "Select date 21 March 2024 in the date picker",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: Thu Mar 21 2024 00:00:00 GMT-0700 (Pacific Daylight Time)'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.5",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Find the date picker on the page and clear the date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: null'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.6",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow-dark"
+    },
+    "goal": "Find the date picker on the page and clear the date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: null'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.7",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select color picker #EDC55E in the ColorPicker tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: #EDC55E'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.8",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/ribbon/willow"
+    },
+    "goal": "Pick the red color in ColorSelect tab",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div[class=\"demo-status\"]').textContent == 'x changed: #ff4c3b'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.9",
+    "env": {
+      "data_path": "environments/web_archives/svelte/svelte_toolbar.wacz",
+      "start_url": "https://docs.svar.dev/svelte/core/samples-toolbar/#/buttons/willow"
+    },
+    "goal": "Select option 'One' in MultiCombo box and remove other options.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.wx-tags.svelte-1xr1yzt\").innerText == \"One\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.10",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select August 30 2025 as the departing date and 1 October 2025 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"08/30/2025\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"10/01/2025\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.11",
+    "env": {
+      "data_path": "environments/web_archives/alaska_airlines/alaska_airlines_flight_booking.wacz",
+      "start_url": "https://www.alaskaair.com/search/?A=1&C=0&L=0&O=JFK&D=SFO&OD=2025-02-18&DD=2025-02-18&RT=true&errorRedirect=true",
+      "timestamp": {
+        "seconds": 1741648127,
+        "nanos": 0
+      }
+    },
+    "goal": "Select Feb 2 2026 as the departing date and Feb 4 2026 as the returning date",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('auro-datepicker').getAttribute(\"calendarfocusdate\")==\"02/02/2026\" && document.querySelector('auro-datepicker').getAttribute(\"valueend\")==\"02/04/2026\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.12",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on the icon for Reporting in the side bar",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://orby-ai.zendesk.com/agent/reporting/explore/period:0"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.13",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on the icon for Organizations in the side bar",
+    "eval": {
+      "eval_type": "url_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "https://orby-ai.zendesk.com/agent/organizations"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.14",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the ticket \"Are products ethically sourced?\" and return the name of the Requester as a JSON formatted string {\"requester_name\": \"....\"}",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "{\"requester_name\": \"Zhang Wei Xu\"}"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.15",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Return the name of the account holder by checking the profile details on the top right. Do not return anything else.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Michael S"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.16",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Return the number of solved tickets this week in the \"Ticket Statistics\" section in the top right corner",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "0"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.17",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the settings/Admin page from the side meny and  return the number of the pod my zendesk is hosted in.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "27"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.18",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click the '+Add' button so that you start creating a new ticket. Add a user to the Requester field with name 'Sanjari S', email abc@orby.ai, user type-Staff Member and role \"Administrator\". Stop right before you submit the 'Add new user' form though, ie do not click on the 'Add' button in the dialog box.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelectorAll(\"input[name='User type']\")[1].checked && document.querySelector(\"div[data-test-id=create-user-modal-usertype-staff-dropdown]\").innerText ==\"Role\\nAdministrator\" && document.querySelector(\"input[data-test-id=create-user-modal-email]\").value == \"abc@orby.ai\" && document.querySelector(\"input[data-test-id=create-user-modal-name]\").value == \"Sanjari S\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.19",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Open the ticket \"Do I put it together?\" and follow it",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div[data-test-id=qa-email_ccs__email_label]\").innerText==\"Michael S\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.20",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Compile a list of all the current open tickets as a JSON; each ticket should be a JSON object with fields \"customer name\" and \"ticket title\"",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"customer name\", \"ticket title\", \"The Customer\", \"Meet the ticket\", \"Ingrid Van Dijk\", \"New delivery address\", \"Zhang Wei Xu\", \"Shipping cost\", \"Soobin Do\", \"Do I put it together\", \"How does Zendesk work\", \"Are products ethically sourced\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.21",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_home.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/home/tickets"
+    },
+    "goal": "Click on '+Add' button and write \"Hello\" in the text box in draft mode.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"button[aria-label='Draft mode'\").getAttribute(\"data-active\") && document.querySelector(\"div[data-test-id=ticket-rich-text-editor]\").innerText==\"I want to open a feature request\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.22",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the text 'Engineering has to respond to this ticket by 12 Jan'' in the user notes",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"textarea[data-garden-container-id='containers.field.input']\").value == 'Engineering has to respond to this ticket by 12 Jan'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.23",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the text in text box for publicly replying that '\"Flat pack delivery\" at our company means that the furniture will be not be shipped to you in disassembled style, the packaging will just look flatter.'",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerText=='\"Flat pack delivery\" at our company means that the furniture will be not be shipped to you in disassembled style, the packaging will just look flatter.'"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.24",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Enter the following text in text box for public reply: I will support you in this request:<newline>Michael: +11234567891.\nMichael: +11234567891 should be italicized and underlined and the <newline> means an actual newline character should be input in the text box.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerHTML==\"<p>I will support you in this request:</p><p><i><u>Michael: +11234567891</u></i></p>\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.25",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Write \"Hi Michael S,<newline>Let me get back to you in 5 days.\" in the text box to publicly reply to Michael S. Do not do anything else except for entering the text. The newline should be an actual new line character.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-1g65fhz-0.dxtWiG.zendesk-editor--rich-text-container > div.sc-1ft1b2r-1.jtPeUU > div\").innerText==\"Hi Michael S,\\n\\nLet me get back to you in 5 days.\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.26",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Turn off quick tips",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"input[data-test-id=quickTips-toggle]\").checked == false"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.27",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Find and click on the Side Conversations button",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-w1sw06-1.sc-5tuaod-2.bAFeJI.kHvqxZ > div > h2\").innerText==\"Side conversations\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.28",
+    "env": {
+      "data_path": "environments/web_archives/zendesk/zendesk_ticket.wacz",
+      "start_url": "https://orby-ai.zendesk.com/agent/tickets/5"
+    },
+    "goal": "Hide the interaction history",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector(\"div.sc-w1sw06-1.sc-5tuaod-2.bAFeJI.kHvqxZ > div > h2\").innerText==\"Side conversations\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.29",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter Email as cheng@orby.ai. Do not click Next.",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"login_id\"]').value === \"cheng@orby.ai\" && document.querySelector('button[id=\"nextbtn\"][class=\"btn blue\"]').innerText === \"Next\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.30",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_login.wacz",
+      "start_url": "https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Ddirect%253Adesk%257Cdirect%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%253Fzsrc%253Dfromproduct"
+    },
+    "goal": "Enter email as cheng@orby.ai, enter password as orbyai@2025! but don't submit the form",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[id=\"password\"][name=\"PASSWORD\"][type=\"password\"]').value === \"orbyai@2025!\" && document.querySelector('button[class=\"btn blue\"][id=\"nextbtn\"]').innerText === \"Sign in\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.31",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Fill ‘Jane Smith’ as Full Name and select ‘Australia’ as Country,",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[placeholder=\"Full Name *\"]').value.includes('Jane Smith') && document.querySelector('select#country_code').value.includes('AU')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.32",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Enter Phone number as 1234567890",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[class=\"dialphone\"][id=\"mobile\"][name=\"r_address/1.phone\"][aria-label=\"Phone Number\"]').value === \"1234567890\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.33",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Select state as california",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[aria-label=\"Change the State\"][class=\"za-globalstate-signup\"][name=\"country_state\"]').value === \"california\" && document.querySelector('select[aria-label=\"Change the State\"] option[value=\"california\"]').innerHTML === \"California\""
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.34",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Click to agree the terms and policy of Service",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input[class=\"za-tos\"][id=\"tos\"][name=\"tos\"][type=\"checkbox\"]').checked === true"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.35",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Expand the All Product dropdown",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li[role=\"button\"]')?.matches('.zwc-all-product.active[aria-expanded=\"true\"]');"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.36",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Hover on CRM Plus on the top header",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li.zwc-product-crmplus:hover') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.37",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Hover on Features to see the list of options on top right",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('li.leaf.first.zmenu-features.expanded.dropdown.active') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.38",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Under All Products , display all options starting with the word \"Sales\" in the search bar",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('div.zwcg-search-product-results-wrapper.zwcg-suggestion-active') !== null;"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.39",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Return the second reason for Why people choose Zoho Desk? Note, only return the second reason.",
+    "eval": {
+      "eval_type": "string_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "Dedicated training program with shallow learning curve"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.40",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Get the list of all the apps listed on this page that integrate with Zoho Desk. Return the answer as a JSON list and maintain the case of the app names.",
+    "eval": {
+      "eval_type": "json_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "[\"twilio\", \"Zoho FSM\", \"zapier\", \"Zoho CRM\", \"shopify\", \"Zoho Assist\",  \"slack\", \"INTUIT mailchimp\", \"Google Workspace\"]"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.41",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Choose the third option from dropdown list in phone number extension",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('input#dialcodecontactnumber').value.includes('+213')"
+        }
+      ]
+    }
+  },
+  {
+    "task_id": "online.42",
+    "env": {
+      "data_path": "environments/web_archives/zoho/zoho_landing_page.wacz",
+      "start_url": "https://www.zoho.com/desk/"
+    },
+    "goal": "Choose sixth option in state dropdown list",
+    "eval": {
+      "eval_type": "js_matcher",
+      "evaluate_scripts": [
+        {
+          "script": "document.querySelector('select[aria-label=\"Change the State\"] option[value=\"california\"]').innerHTML === \"California\""
+        }
+      ]
+    }
+  }
+]
