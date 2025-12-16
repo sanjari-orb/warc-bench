@@ -1,10 +1,43 @@
-# Orby Web Agent
+# WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions
 
-A web agent framework using WARC file servers and BrowserGym environments for automated web interaction and benchmarking.
+A challenging benchmark with 438 tasks for evaluating multimodal AI agents on web navigation subtasks using Web ARChive files for sandboxed, realistic interactions.
 
-📖 **[View Full Documentation](https://orby-ai-engineering.github.io/warc-bench/)** | 🐙 **[GitHub Repository](https://github.com/orby-ai-engineering/warc-bench)**
+🌐 **[Project Website](#)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 📖 **[Documentation](https://orby-ai-engineering.github.io/warc-bench/)** | 🐙 **[GitHub](https://github.com/orby-ai-engineering/warc-bench)** | 📊 **[Dataset](#)**
 
 ---
+
+## Overview
+
+Training web agents to navigate complex, real-world websites requires them to master **subtasks** - short-horizon interactions on multiple UI components (e.g., choosing the correct date in a date picker, or scrolling in a container to extract information). WARC-Bench addresses this critical capability gap with:
+
+- **438 diverse tasks** designed to evaluate multimodal AI agents on web subtasks
+- **Sandboxed interactions** with dynamic and realistic webpages using Web ARChive files
+- **Challenging benchmark**: Leading computer-use models achieve up to 64.8% success rate
+- **Training support**: Includes infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)
+
+### Performance Benchmarks
+
+| Approach | Success Rate |
+|----------|-------------|
+| Leading frontier models | 64.8% |
+| SFT models | 48.8% |
+| RLVR (over SFT) | 52.8% |
+
+Our analysis shows that mastering these subtasks is essential for robust web planning and navigation - a capability not extensively evaluated by existing benchmarks.
+
+---
+
+## What are Subtasks?
+
+Subtasks are fundamental, short-horizon interactions that agents must master to navigate real-world websites effectively. Examples include:
+
+- **Date pickers**: Selecting specific dates across various calendar UI designs
+- **Scrolling containers**: Extracting information by scrolling within specific page elements
+- **Dropdown menus**: Navigating and selecting from complex multi-level dropdowns
+- **Form interactions**: Filling out forms with proper validation and error handling
+- **Dynamic content**: Interacting with JavaScript-heavy components that update asynchronously
+
+These capabilities form the building blocks for more complex web navigation tasks.
 
 ## Quick Start
 
@@ -15,6 +48,9 @@ cd warc-bench
 
 # Install in editable mode
 pip install -e .
+
+# Run benchmark evaluation
+python scripts/run_evaluation.py --agent sva_v4 --model claude-3-opus
 ```
 
 See the [full documentation site](https://orby-ai-engineering.github.io/warc-bench/) for detailed installation instructions and usage examples.
@@ -103,29 +139,44 @@ This project depends on BrowserGym, which should be installed separately. The Br
 
 ## Usage
 
-### Importing Modules
+### Running Benchmark Evaluations
 
 ```python
 # Import the main package
 import orby
-
-# Import subtask benchmark components
 from orby.subtask_benchmark import config, evaluator
-
-# Import agent implementations
 from orby.digitalagent.agent import SvaV4
-from orby.digitalagent.model import FoundationModel
+from orby.digitalagent.evaluation import eval_runner
 
-# Import utilities
-from orby.prompt_utils import template
+# Configure evaluation
+eval_config = {
+    "benchmark_name": "warc-bench",
+    "num_tasks": 438,
+    "agent_type": "sva_v4",
+}
 
-# Import protocol buffers for visualization
-from orby.protos.fm import action_data_pb2, trajectory_data_pb2
+# Run evaluation
+results = eval_runner.run_evaluation(eval_config)
 ```
 
-### Key Agent: SvaV4
+### Training with RLVR
 
-The main agent implementation is `SvaV4`, located in `src/orby/digitalagent/agent/sva_v4.py`. This is a pure-vision agent designed for short-horizon tasks (typically 5 steps or less).
+WARC-Bench supports training with Reinforcement Learning with Verifiable Rewards (RLVR). The benchmark provides automatic reward signals based on task completion:
+
+```python
+from orby.digitalagent.rewards import verifiable_reward
+from orby.digitalagent.evaluation import eval_loop
+
+# Training loop with RLVR
+for episode in range(num_episodes):
+    trajectory = agent.run_episode(task)
+    reward = verifiable_reward.compute(trajectory, task.goal)
+    agent.update_policy(trajectory, reward)
+```
+
+### Agent Architecture: SvaV4
+
+The main agent implementation is `SvaV4`, a pure-vision agent designed for short-horizon subtasks (typically 5 steps or less).
 
 **Features:**
 - Single model call for efficiency
@@ -135,12 +186,14 @@ The main agent implementation is `SvaV4`, located in `src/orby/digitalagent/agen
 **Example:**
 ```python
 from orby.digitalagent.agent.sva_v4 import SvaV4
-from orby.digitalagent.model import FoundationModel
 
 agent = SvaV4(
     actions="browsergym",
     model_configs={"executor": {"model": "claude-3-opus"}},
 )
+
+# Run on a single task
+result = agent.run_task(task_config)
 ```
 
 ### WARC Server
@@ -157,40 +210,43 @@ npm run build
 ## Package Components
 
 ### 1. `orby.subtask_benchmark`
-Benchmark runner that provides:
-- WARC file rendering and serving
-- Task evaluation framework
-- Environment configurations
-- Synthetic data generation
+Core benchmark infrastructure with 438 web navigation subtasks:
+- **WARC file rendering**: Sandboxed replay of archived websites
+- **Task evaluation**: Automated verification of task completion
+- **438 diverse tasks**: Covering date pickers, scrolling, dropdowns, forms, and dynamic content
+- **Synthetic data generation**: Tools for creating additional subtask variations
 
 **Key Modules:**
-- `environments/`: Environment setup and configuration
-- `evaluator/`: Task completion verification
-- `webreplay-standalone/`: Node.js WARC server
+- `environments/`: 438 task configurations and environment setups
+- `evaluator/`: Automated task completion verification with verifiable rewards
+- `webreplay-standalone/`: Node.js WARC server for sandboxed web interactions
+- `synthetic_data_gen/`: Tools for generating new subtask variations
 
 ### 2. `orby.digitalagent`
-Agent implementations and evaluation framework:
-- Multiple agent architectures (primary: `sva_v4`)
-- Foundation model interfaces (OpenAI, Anthropic, Fireworks)
-- Evaluation runners and metrics
-- Trajectory recording and visualization
+Agent implementations and training infrastructure:
+- **SvaV4 agent**: Vision-based agent for short-horizon subtasks
+- **SFT training**: Supervised fine-tuning infrastructure
+- **RLVR training**: Reinforcement learning with verifiable rewards
+- **Foundation model interfaces**: OpenAI, Anthropic, Fireworks
+- **Evaluation framework**: Comprehensive metrics and trajectory recording
 
-**Key Agent Files:**
-- `agent/sva_v4.py`: Main vision agent (keep)
-- `agent/agent.py`: Base agent class
-- `model/fm.py`: Foundation model interface
-- `evaluation/eval_runner.py`: Evaluation orchestration
+**Key Modules:**
+- `agent/sva_v4.py`: Main vision agent achieving 48.8% (SFT) / 52.8% (RLVR) success rate
+- `agent/agent.py`: Base agent class for custom implementations
+- `rewards/`: Verifiable reward computation for RLVR training
+- `evaluation/`: Evaluation runners, metrics, and analysis tools
+- `model/`: Foundation model interfaces for multiple providers
 
 ### 3. `orby.prompt_utils`
-Utilities for managing prompt templates:
+Prompt engineering utilities:
 - Template loading and formatting
-- Prompt composition helpers
+- Prompt composition helpers for task instructions
 
 ### 4. `orby.protos`
-Protocol buffer definitions for visualization:
-- Action data structures
-- LLM interaction data
-- Trajectory data for recording agent behavior
+Protocol buffer definitions for data interchange:
+- Action data structures (BrowserGym actions)
+- LLM interaction logging
+- Trajectory data for visualization and analysis
 
 ## Migration Notes
 
@@ -229,15 +285,29 @@ from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
 
 ## Development
 
-### Running Scripts
+### Running Benchmark Scripts
 
 ```bash
 # Test package imports
 python scripts/test_imports.py
 
-# Check WARC server
+# Verify WARC server is working
 python scripts/webreplay_server_check.py
+
+# Generate benchmark statistics
+python scripts/generate_benchmark_json.py
+
+# Analyze task type distribution
+python scripts/analyze_task_types.py
 ```
+
+### Adding New Tasks
+
+To add new subtasks to the benchmark:
+1. Create WARC files for the target websites
+2. Define task configurations in `src/orby/subtask_benchmark/environments/`
+3. Implement verification logic in `src/orby/subtask_benchmark/evaluator/`
+4. Add task metadata and goals
 
 ### Adding New Agents
 
@@ -245,6 +315,24 @@ New agent implementations should:
 1. Extend `orby.digitalagent.agent.Agent` base class
 2. Be placed in `src/orby/digitalagent/agent/`
 3. Follow the pattern established by `sva_v4.py`
+4. Support BrowserGym action space
+5. Implement task completion detection
+
+### Training Custom Models
+
+```bash
+# Supervised fine-tuning
+python -m orby.digitalagent.evaluation.eval_runner \
+    --mode train \
+    --training_type sft \
+    --model your-model
+
+# RLVR training (after SFT)
+python -m orby.digitalagent.evaluation.eval_runner \
+    --mode train \
+    --training_type rlvr \
+    --checkpoint path/to/sft/model
+```
 
 ## Dependencies
 
@@ -257,10 +345,34 @@ Core dependencies (see `pyproject.toml` for full list):
 - `transformers==4.46.2` - Hugging Face transformers
 - `streamlit==1.39.0` - Visualization UI
 
+## Citation
+
+If you use WARC-Bench in your research, please cite our paper:
+
+```bibtex
+@misc{srivastava2025warcbenchwebarchivebased,
+    title={WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions},
+    author={Sanjari Srivastava and Gang Li and Cheng Chang and Rishu Garg and Manpreet Kaur and Charlene Y. Lee and Yuezhang Li and Yining Mao and Ignacio Cases and Yanan Xie and Peng Qi},
+    year={2025},
+    eprint={2510.09872},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG},
+    url={https://arxiv.org/abs/2510.09872},
+}
+```
+
 ## License
 
 MIT
 
 ## Contributing
 
-This is an academic research project. Please ensure all contributions maintain compatibility with BrowserGym environments and follow the established agent architecture patterns.
+This is an academic research project accompanying the paper "WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions" ([arXiv:2510.09872](https://arxiv.org/abs/2510.09872)).
+
+We welcome contributions that:
+- Add new subtask types to the benchmark
+- Improve agent implementations and training methods
+- Enhance evaluation metrics and analysis tools
+- Maintain compatibility with BrowserGym environments
+
+Please open an issue or pull request to discuss your contributions.
