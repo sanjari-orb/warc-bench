@@ -3,332 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Orby Web Agent - A web agent framework using WARC file servers and BrowserGym environments">
-    <title>Orby Web Agent</title>
-    <link rel="stylesheet" href="style.css">
+    <title>WARC-Bench - Web Archive Based Benchmark for GUI Subtask Executions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* Links Section */
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .link-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-button svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        /* Section Styling */
+        section {
+            margin: 60px 0;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+            margin: 0 auto 40px;
+            border-radius: 2px;
+        }
+
+        /* Abstract Section */
+        .abstract {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            border-left: 4px solid #2d3436;
+        }
+
+        .abstract p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Video Gallery */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .video-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .video-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            background-color: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Disclaimer Box */
+        .disclaimer {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .disclaimer h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Citation Section */
+        .citation {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .citation h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .citation pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2d3436;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 80px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .video-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .link-button {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="container">
-                <h1 class="logo">Orby Web Agent</h1>
-                <ul class="nav-links">
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#structure">Structure</a></li>
-                    <li><a href="#components">Components</a></li>
-                    <li><a href="#usage">Usage</a></li>
-                    <li><a href="https://github.com/orby-ai-engineering/warc-bench" target="_blank">GitHub</a></li>
-                </ul>
+        <div class="container">
+            <h1>WARC-Bench</h1>
+            <p class="subtitle">Web Archive Based Benchmark for GUI Subtask Executions</p>
+
+            <div class="links">
+                <a href="#" class="link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Paper
+                </a>
+                <a href="#" class="link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    arXiv
+                </a>
+                <a href="https://github.com/orby-ai-engineering/warc-bench" class="link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="#" class="link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Dataset
+                </a>
+                <a href="#" class="link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Leaderboard
+                </a>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Orby Web Agent</h1>
-                <p class="subtitle">A web agent framework using WARC file servers and BrowserGym environments</p>
-                <div class="hero-buttons">
-                    <a href="#installation" class="btn btn-primary">Get Started</a>
-                    <a href="https://github.com/orby-ai-engineering/warc-bench" class="btn btn-secondary" target="_blank">View on GitHub</a>
+    <div class="container">
+        <!-- Abstract Section -->
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <div class="section-divider"></div>
+            <div class="abstract">
+                <p>
+                    We present Orby Web Agent, a comprehensive framework for developing and evaluating vision-based web agents using WARC (Web ARChive) file servers and BrowserGym environments. Our system enables realistic benchmarking of automated web interaction by serving archived web pages as live websites, providing reproducible and controlled testing environments.
+                </p>
+                <p>
+                    The framework features SvaV4, a pure-vision agent optimized for short-horizon tasks with combined task completion evaluation and action generation in a single model call. Our approach supports diverse web automation scenarios including both real-world environments (ZenDesk, GitHub) and synthetic test cases, enabling comprehensive evaluation of agent capabilities across different interaction patterns.
+                </p>
+                <p>
+                    This work provides researchers and practitioners with a unified toolkit for developing, testing, and benchmarking web agents in reproducible environments, advancing the state of automated web interaction and multi-step task completion.
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section id="features">
+            <h2>Key Features</h2>
+            <div class="section-divider"></div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>WARC-Based Replay</h3>
+                    <p>Serve archived web pages as live websites for reproducible benchmarking with controlled, deterministic environments.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Vision-Driven Agent</h3>
+                    <p>SvaV4 agent uses pure vision for web interaction with efficient single-call execution for short-horizon tasks.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>BrowserGym Integration</h3>
+                    <p>Seamless integration with BrowserGym for standardized action spaces including click, type, scroll, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Comprehensive Evaluation</h3>
+                    <p>Built-in evaluation framework with trajectory recording, visualization, and task completion metrics.</p>
                 </div>
             </div>
         </section>
 
-        <section id="overview" class="section">
-            <div class="container">
-                <h2>Overview</h2>
-                <p>Orby Web Agent is a comprehensive framework for automated web interaction and benchmarking. It combines multiple components into a unified monorepo structure, providing tools for:</p>
-                <div class="features">
-                    <div class="feature-card">
-                        <h3>🌐 WARC Server</h3>
-                        <p>Serve archived web pages as live websites for agent interaction</p>
+        <!-- Demonstrations -->
+        <section id="demonstrations">
+            <h2>Demonstrations</h2>
+            <div class="section-divider"></div>
+
+            <div class="disclaimer">
+                <h3>Disclaimer</h3>
+                <p>
+                    The names and data portrayed in these demonstrations are either synthetic or sourced from openly
+                    available real websites. They hold absolutely no connection to the authors, direct or indirect.
+                </p>
+            </div>
+
+            <div class="video-gallery">
+                <div class="video-item">
+                    <h3>Real World: ZenDesk Environment</h3>
+                    <div class="video-wrapper">
+                        <img src="video1.gif" alt="ZenDesk demonstration showing agent interaction">
                     </div>
-                    <div class="feature-card">
-                        <h3>🤖 Vision Agents</h3>
-                        <p>Pure-vision agents for short-horizon web tasks using state-of-the-art models</p>
+                    <p class="video-description">
+                        Agent navigating a real-world customer support interface from ZenDesk, demonstrating multi-step task completion.
+                    </p>
+                </div>
+
+                <div class="video-item">
+                    <h3>Real World: GitHub Repository</h3>
+                    <div class="video-wrapper">
+                        <img src="video2.gif" alt="GitHub demonstration showing agent interaction">
                     </div>
-                    <div class="feature-card">
-                        <h3>📊 Benchmarking</h3>
-                        <p>Comprehensive evaluation framework with metrics and trajectory recording</p>
+                    <p class="video-description">
+                        Agent interacting with a public GitHub repository, showcasing navigation and information extraction capabilities.
+                    </p>
+                </div>
+
+                <div class="video-item">
+                    <h3>Synthetic Environment: Form Interaction</h3>
+                    <div class="video-wrapper">
+                        <img src="video3.gif" alt="Synthetic environment demonstration 1">
                     </div>
-                    <div class="feature-card">
-                        <h3>🔧 BrowserGym Integration</h3>
-                        <p>Seamless integration with BrowserGym environments for web automation</p>
+                    <p class="video-description">
+                        Agent completing complex form interactions in a controlled synthetic environment designed for evaluation.
+                    </p>
+                </div>
+
+                <div class="video-item">
+                    <h3>Synthetic Environment: Multi-Step Navigation</h3>
+                    <div class="video-wrapper">
+                        <img src="video4.gif" alt="Synthetic environment demonstration 2">
                     </div>
+                    <p class="video-description">
+                        Agent performing multi-step navigation tasks in a synthetic environment with dynamic content.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section id="installation" class="section bg-light">
-            <div class="container">
-                <h2>Installation</h2>
-                <h3>Prerequisites</h3>
-                <ul>
-                    <li>Python >= 3.9</li>
-                    <li>Node.js and npm (required for building the WARC server)</li>
-                    <li>Git</li>
-                </ul>
-
-                <h3>Install from Source</h3>
-                <div class="code-block">
-                    <pre><code># Clone the repository
-git clone https://github.com/orby-ai-engineering/warc-bench.git
-cd warc-bench
-
-# Install in editable mode
-pip install -e .
-
-# For development with additional tools
-pip install -e ".[dev]"</code></pre>
-                </div>
-
-                <p>The installation will automatically:</p>
-                <ol>
-                    <li>Install all Python dependencies from <code>pyproject.toml</code></li>
-                    <li>Build the <code>webreplay-standalone</code> Node.js binary for serving WARC files</li>
-                    <li>Install the <code>orby</code> package with all submodules</li>
-                </ol>
+        <!-- Citation -->
+        <section id="citation">
+            <h2>Citation</h2>
+            <div class="section-divider"></div>
+            <div class="citation">
+                <h3>BibTeX</h3>
+                <pre><code>@misc{srivastava2025warcbenchwebarchivebased,
+                    title={WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions}, 
+                    author={Sanjari Srivastava and Gang Li and Cheng Chang and Rishu Garg and Manpreet Kaur and Charlene Y. Lee and Yuezhang Li and Yining Mao and Ignacio Cases and Yanan Xie and Peng Qi},
+                    year={2025},
+                    eprint={2510.09872},
+                    archivePrefix={arXiv},
+                    primaryClass={cs.LG},
+                    url={https://arxiv.org/abs/2510.09872}, 
+              }</code></pre>
             </div>
         </section>
-
-        <section id="structure" class="section">
-            <div class="container">
-                <h2>Project Structure</h2>
-                <p>This is a monorepo combining multiple components into a unified <code>orby</code> package:</p>
-                <div class="code-block">
-                    <pre><code>warc-bench/
-├── src/orby/                          # Main package namespace
-│   ├── subtask_benchmark/             # Benchmark runner with WARC server
-│   │   ├── environments/              # Environment configurations
-│   │   ├── replays/                   # WARC replay files
-│   │   ├── webreplay-standalone/      # Node.js WARC server
-│   │   ├── config/                    # Configuration management
-│   │   ├── utils/                     # Utility functions
-│   │   ├── evaluator/                 # Task evaluation logic
-│   │   └── synthetic_data_gen/        # Synthetic data generation
-│   │
-│   ├── digitalagent/                  # Agent implementations
-│   │   ├── agent/                     # Agent implementations (sva_v4, etc.)
-│   │   ├── model/                     # Foundation model interfaces
-│   │   ├── evaluation/                # Evaluation runners and metrics
-│   │   ├── actions/                   # BrowserGym action definitions
-│   │   ├── prompts/                   # Agent prompts
-│   │   └── utils/                     # Utilities
-│   │
-│   ├── prompt_utils/                  # Prompt template management
-│   └── protos/                        # Protocol buffer definitions
-│
-├── scripts/                           # Utility scripts
-├── pyproject.toml                     # Package configuration
-└── setup.py                           # Setup script</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <section id="components" class="section bg-light">
-            <div class="container">
-                <h2>Package Components</h2>
-
-                <div class="component">
-                    <h3>1. orby.subtask_benchmark</h3>
-                    <p>Benchmark runner that provides:</p>
-                    <ul>
-                        <li>WARC file rendering and serving</li>
-                        <li>Task evaluation framework</li>
-                        <li>Environment configurations</li>
-                        <li>Synthetic data generation</li>
-                    </ul>
-                </div>
-
-                <div class="component">
-                    <h3>2. orby.digitalagent</h3>
-                    <p>Agent implementations and evaluation framework:</p>
-                    <ul>
-                        <li>Multiple agent architectures (primary: <code>sva_v4</code>)</li>
-                        <li>Foundation model interfaces (OpenAI, Anthropic, Fireworks)</li>
-                        <li>Evaluation runners and metrics</li>
-                        <li>Trajectory recording and visualization</li>
-                    </ul>
-                    <div class="highlight">
-                        <strong>Key Agent: SvaV4</strong> - Pure-vision agent for short-horizon tasks (≤5 steps) with single model call efficiency
-                    </div>
-                </div>
-
-                <div class="component">
-                    <h3>3. orby.prompt_utils</h3>
-                    <p>Utilities for managing prompt templates:</p>
-                    <ul>
-                        <li>Template loading and formatting</li>
-                        <li>Prompt composition helpers</li>
-                    </ul>
-                </div>
-
-                <div class="component">
-                    <h3>4. orby.protos</h3>
-                    <p>Protocol buffer definitions for visualization:</p>
-                    <ul>
-                        <li>Action data structures</li>
-                        <li>LLM interaction data</li>
-                        <li>Trajectory data for recording agent behavior</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="usage" class="section">
-            <div class="container">
-                <h2>Usage</h2>
-
-                <h3>Importing Modules</h3>
-                <div class="code-block">
-                    <pre><code># Import the main package
-import orby
-
-# Import subtask benchmark components
-from orby.subtask_benchmark import config, evaluator
-
-# Import agent implementations
-from orby.digitalagent.agent.sva_v4 import SvaV4
-from orby.digitalagent.model import FoundationModel
-
-# Import utilities
-from orby.prompt_utils import template
-
-# Import protocol buffers for visualization
-from orby.protos.fm import action_data_pb2, trajectory_data_pb2</code></pre>
-                </div>
-
-                <h3>Using the SvaV4 Agent</h3>
-                <p>The main agent implementation is <code>SvaV4</code>, a pure-vision agent designed for short-horizon tasks.</p>
-                <div class="code-block">
-                    <pre><code>from orby.digitalagent.agent.sva_v4 import SvaV4
-
-agent = SvaV4(
-    actions="browsergym",
-    model_configs={"executor": {"model": "claude-3-opus"}},
-)
-
-# Agent supports BrowserGym actions:
-# click, type, scroll, hover, drag_and_release,
-# key_press, wait, complete</code></pre>
-                </div>
-
-                <h3>WARC Server</h3>
-                <p>The <code>webreplay-standalone</code> directory contains a Node.js application that serves WARC (Web ARChive) files as live websites.</p>
-                <div class="code-block">
-                    <pre><code># Building manually:
-cd src/orby/subtask_benchmark/webreplay-standalone
-npm install
-npm run build</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <section id="migration" class="section bg-light">
-            <div class="container">
-                <h2>Migration from Old Structure</h2>
-                <p>This monorepo combines code from four previous repositories:</p>
-
-                <div class="migration-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Old Repository</th>
-                                <th>New Location</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>subtask-benchmark</td>
-                                <td>orby.subtask_benchmark</td>
-                                <td>Docker code removed, WARC server retained</td>
-                            </tr>
-                            <tr>
-                                <td>digital-agent</td>
-                                <td>orby.digitalagent</td>
-                                <td>Only sva_v4 agent and dependencies kept</td>
-                            </tr>
-                            <tr>
-                                <td>prompt-template-manager</td>
-                                <td>orby.prompt_utils</td>
-                                <td>Utils integrated for agent usage</td>
-                            </tr>
-                            <tr>
-                                <td>protos</td>
-                                <td>orby.protos</td>
-                                <td>Visualization objects retained</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>Import Changes</h3>
-                <div class="code-comparison">
-                    <div class="code-old">
-                        <h4>Old Imports</h4>
-                        <pre><code>from subtask_benchmark.config import Config
-from prompt_template_manager import Template
-from fm.trajectory_data_pb2 import TrajectoryData</code></pre>
-                    </div>
-                    <div class="code-new">
-                        <h4>New Imports</h4>
-                        <pre><code>from orby.subtask_benchmark.config import Config
-from orby.prompt_utils import Template
-from orby.protos.fm.trajectory_data_pb2 import TrajectoryData</code></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="dependencies" class="section">
-            <div class="container">
-                <h2>Core Dependencies</h2>
-                <p>See <code>pyproject.toml</code> for the complete list. Key dependencies include:</p>
-                <div class="dependencies-grid">
-                    <div class="dependency-card">
-                        <strong>playwright</strong>
-                        <p>Browser automation</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>openai</strong>
-                        <p>OpenAI API integration</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>anthropic</strong>
-                        <p>Anthropic API integration</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>browsergym</strong>
-                        <p>Browser gym environment</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>torch</strong>
-                        <p>PyTorch for ML models</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>transformers</strong>
-                        <p>Hugging Face transformers</p>
-                    </div>
-                    <div class="dependency-card">
-                        <strong>streamlit</strong>
-                        <p>Visualization UI</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Orby Team. This is an academic research project.</p>
-            <p>
-                <a href="https://github.com/orby-ai-engineering/warc-bench" target="_blank">GitHub Repository</a> |
-                <a href="https://github.com/orby-ai-engineering/warc-bench/issues" target="_blank">Report Issues</a>
-            </p>
-        </div>
+        <p>&copy; 2024 WARC-Bench. All rights reserved.</p>
+        <p>Built with WARC replay technology and BrowserGym environments.</p>
     </footer>
 </body>
 </html>

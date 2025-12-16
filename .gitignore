@@ -52,9 +52,9 @@ npm-debug.log*
 
 # Old structure (to be removed after verification)
 # Uncomment these after you've verified the new structure works:
-# digital-agent/
-# prompt_template_manager/
-# protos/
+digital-agent/
+prompt_template_manager/
+protos/
 # src/subtask_benchmark/
 
 # Build artifacts
