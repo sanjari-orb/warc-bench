@@ -59,16 +59,17 @@ docs/
 └── .nojekyll        # Disables Jekyll processing
 ```
 
-## Updating Links
+## Current Links
 
-Once the website is live, you can update the placeholder links in the website:
+The website includes the following links:
 
-1. **Project Website** - Already set to https://sanjari-orb.github.io/warc-bench/
-2. **arXiv Paper** - Already set to https://arxiv.org/abs/2510.09872
-3. **GitHub** - Already set to https://github.com/sanjari-orb/warc-bench
-4. **Dataset** - Update with your dataset hosting URL (HuggingFace, Google Drive, etc.)
+1. **Paper** - Link to paper (placeholder)
+2. **arXiv** - https://arxiv.org/abs/2510.09872
+3. **GitHub** - https://github.com/sanjari-orb/warc-bench
+4. **Models** - https://huggingface.co/Uniphore/actio-ui-7b-rlvr (RLVR trained model)
+5. **Leaderboard** - Placeholder for future leaderboard
 
-Edit `docs/index.html` and find the links section to update the dataset placeholder.
+To update any placeholder links, edit `docs/index.html` and find the links section in the header.
 
 ## Troubleshooting
 

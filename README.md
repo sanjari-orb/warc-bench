@@ -2,7 +2,7 @@
 
 A challenging benchmark with 438 tasks for evaluating multimodal AI agents on web navigation subtasks using Web ARChive files for sandboxed, realistic interactions.
 
-🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 📖 **[Documentation](https://orby-ai-engineering.github.io/warc-bench/)** | 🐙 **[GitHub](https://github.com/sanjari-orb/warc-bench)** | 📊 **[Dataset](#)**
+🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 🤖 **[Models](https://huggingface.co/Uniphore/actio-ui-7b-rlvr)** | 📖 **[Documentation](https://orby-ai-engineering.github.io/warc-bench/)** | 🐙 **[GitHub](https://github.com/sanjari-orb/warc-bench)**
 
 ---
 
