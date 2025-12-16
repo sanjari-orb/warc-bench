@@ -68,3 +68,10 @@ npm-debug.log*
 
 # Logs
 *.log
+
+# Large data files
+*.zip
+*.parquet
+.cache/
+**/web_archives/*.zip
+**/.cache/*.parquet
