@@ -55,58 +55,6 @@ python scripts/run_evaluation.py --agent sva_v4 --model claude-3-opus
 
 See the [full documentation site](https://orby-ai-engineering.github.io/warc-bench/) for detailed installation instructions and usage examples.
 
-## Project Structure
-
-This is a monorepo combining multiple components into a unified `orby` package:
-
-```
-warc-bench/
-├── src/orby/                          # Main package namespace
-│   ├── __init__.py
-│   ├── subtask_benchmark/             # Benchmark runner with WARC server
-│   │   ├── environments/              # Environment configurations
-│   │   ├── replays/                   # WARC replay files
-│   │   ├── webreplay-standalone/      # Node.js WARC server (requires npm build)
-│   │   ├── config/                    # Configuration management
-│   │   ├── utils/                     # Utility functions
-│   │   ├── evaluator/                 # Task evaluation logic
-│   │   └── synthetic_data_gen/        # Synthetic data generation
-│   │
-│   ├── digitalagent/                  # Agent implementations and evaluation
-│   │   ├── agent/                     # Agent implementations (sva_v4, etc.)
-│   │   ├── model/                     # Foundation model interfaces
-│   │   ├── evaluation/                # Evaluation runners and metrics
-│   │   ├── actions/                   # BrowserGym action definitions
-│   │   ├── prompts/                   # Agent prompts
-│   │   ├── utils/                     # Utilities (includes visualizer_utils)
-│   │   ├── vision_grounder/           # Vision-based grounding
-│   │   ├── rewards/                   # Reward models and trajectory evaluation
-│   │   └── environments/              # Environment wrappers
-│   │
-│   ├── prompt_utils/                  # Prompt template management
-│   │   ├── template.py                # Template handling
-│   │   └── utils.py                   # Prompt utilities
-│   │
-│   └── protos/                        # Protocol buffer definitions
-│       ├── fm/                        # Compiled protobuf files
-│       │   ├── action_data_pb2.py
-│       │   ├── llm_data_pb2.py
-│       │   └── trajectory_data_pb2.py
-│       ├── action_data.proto          # Proto definitions
-│       ├── llm_data.proto
-│       └── trajectory_data.proto
-│
-├── scripts/                           # Utility scripts
-│   ├── test_imports.py                # Test package imports
-│   ├── webreplay_server_check.py      # Verify WARC server
-│   ├── generate_benchmark_json.py     # Generate benchmark data
-│   └── analyze_task_types.py          # Task analysis
-│
-├── pyproject.toml                     # Unified package configuration
-├── setup.py                           # Setup script
-└── custom_build.py                    # Custom build for webreplay-standalone
-```
-
 ## Installation
 
 ### Prerequisites
@@ -123,9 +71,6 @@ cd /path/to/warc-bench
 
 # Install in editable mode
 pip install -e .
-
-# For development with additional tools
-pip install -e ".[dev]"
 ```
 
 The installation will automatically:
@@ -135,7 +80,7 @@ The installation will automatically:
 
 ### BrowserGym Dependency
 
-This project depends on BrowserGym, which should be installed separately. The BrowserGym repository is located at `~/orby/BrowserGym`.
+This project depends on BrowserGym, which should be installed separately. 
 
 ## Usage
 
@@ -159,20 +104,6 @@ eval_config = {
 results = eval_runner.run_evaluation(eval_config)
 ```
 
-### Training with RLVR
-
-WARC-Bench supports training with Reinforcement Learning with Verifiable Rewards (RLVR). The benchmark provides automatic reward signals based on task completion:
-
-```python
-from orby.digitalagent.rewards import verifiable_reward
-from orby.digitalagent.evaluation import eval_loop
-
-# Training loop with RLVR
-for episode in range(num_episodes):
-    trajectory = agent.run_episode(task)
-    reward = verifiable_reward.compute(trajectory, task.goal)
-    agent.update_policy(trajectory, reward)
-```
 
 ### Agent Architecture: SvaV4
 
@@ -248,57 +179,14 @@ Protocol buffer definitions for data interchange:
 - LLM interaction logging
 - Trajectory data for visualization and analysis
 
-## Migration Notes
-
-This monorepo combines code from four previous repositories:
-
-1. **subtask-benchmark** → `orby.subtask_benchmark`
-   - Docker code removed
-   - WARC server code retained
-
-2. **digital-agent** → `orby.digitalagent`
-   - Only `sva_v4` agent and dependencies kept
-   - Visualization code simplified
-   - Evaluation code retained
-
-3. **prompt-template-manager** → `orby.prompt_utils`
-   - Utils integrated for agent usage
-
-4. **protos** → `orby.protos`
-   - Visualization objects retained
-
-### Import Changes
-
-**Old imports:**
-```python
-from subtask_benchmark.config import Config
-from prompt_template_manager import Template
-from fm.trajectory_data_pb2 import TrajectoryData
-```
-
-**New imports:**
-```python
-from orby.subtask_benchmark.config import Config
-from orby.prompt_utils import Template
-from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
-```
 
 ## Development
 
 ### Running Benchmark Scripts
 
 ```bash
-# Test package imports
-python scripts/test_imports.py
-
 # Verify WARC server is working
 python scripts/webreplay_server_check.py
-
-# Generate benchmark statistics
-python scripts/generate_benchmark_json.py
-
-# Analyze task type distribution
-python scripts/analyze_task_types.py
 ```
 
 ### Adding New Tasks
@@ -318,21 +206,6 @@ New agent implementations should:
 4. Support BrowserGym action space
 5. Implement task completion detection
 
-### Training Custom Models
-
-```bash
-# Supervised fine-tuning
-python -m orby.digitalagent.evaluation.eval_runner \
-    --mode train \
-    --training_type sft \
-    --model your-model
-
-# RLVR training (after SFT)
-python -m orby.digitalagent.evaluation.eval_runner \
-    --mode train \
-    --training_type rlvr \
-    --checkpoint path/to/sft/model
-```
 
 ## Dependencies
 
