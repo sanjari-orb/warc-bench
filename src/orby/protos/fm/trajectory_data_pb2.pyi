@@ -38,9 +38,7 @@ class TrajectoryData(google.protobuf.message.Message):
             *,
             answer: builtins.str = ...,
         ) -> None: ...
-        def ClearField(
-            self, field_name: typing.Literal["answer", b"answer"]
-        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["answer", b"answer"]) -> None: ...
 
     @typing.final
     class ResultFailure(google.protobuf.message.Message):
@@ -50,37 +48,20 @@ class TrajectoryData(google.protobuf.message.Message):
             ValueType = typing.NewType("ValueType", builtins.int)
             V: typing_extensions.TypeAlias = ValueType
 
-        class _FailureMessageEnumTypeWrapper(
-            google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
-                TrajectoryData.ResultFailure._FailureMessage.ValueType
-            ],
-            builtins.type,
-        ):
+        class _FailureMessageEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TrajectoryData.ResultFailure._FailureMessage.ValueType], builtins.type):
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-            FAILURE_MESSAGE_UNSPECIFIED: (
-                TrajectoryData.ResultFailure._FailureMessage.ValueType
-            )  # 0
-            MAX_STEPS_EXCEEDED: (
-                TrajectoryData.ResultFailure._FailureMessage.ValueType
-            )  # 1
+            FAILURE_MESSAGE_UNSPECIFIED: TrajectoryData.ResultFailure._FailureMessage.ValueType  # 0
+            MAX_STEPS_EXCEEDED: TrajectoryData.ResultFailure._FailureMessage.ValueType  # 1
             """the maximum number of steps allowed for the trajectory has been exceeded"""
-            REPORT_INFEASIBLE: (
-                TrajectoryData.ResultFailure._FailureMessage.ValueType
-            )  # 2
+            REPORT_INFEASIBLE: TrajectoryData.ResultFailure._FailureMessage.ValueType  # 2
             """the agent deemed the goal infeasible"""
-            REPETITIVE_ACTIONS: (
-                TrajectoryData.ResultFailure._FailureMessage.ValueType
-            )  # 3
+            REPETITIVE_ACTIONS: TrajectoryData.ResultFailure._FailureMessage.ValueType  # 3
             """the agent repeated the same action multiple times"""
             UNKNOWN_ERROR: TrajectoryData.ResultFailure._FailureMessage.ValueType  # 4
             """we encountered irrecoverable errors during crawling"""
 
-        class FailureMessage(
-            _FailureMessage, metaclass=_FailureMessageEnumTypeWrapper
-        ): ...
-        FAILURE_MESSAGE_UNSPECIFIED: (
-            TrajectoryData.ResultFailure.FailureMessage.ValueType
-        )  # 0
+        class FailureMessage(_FailureMessage, metaclass=_FailureMessageEnumTypeWrapper): ...
+        FAILURE_MESSAGE_UNSPECIFIED: TrajectoryData.ResultFailure.FailureMessage.ValueType  # 0
         MAX_STEPS_EXCEEDED: TrajectoryData.ResultFailure.FailureMessage.ValueType  # 1
         """the maximum number of steps allowed for the trajectory has been exceeded"""
         REPORT_INFEASIBLE: TrajectoryData.ResultFailure.FailureMessage.ValueType  # 2
@@ -91,16 +72,14 @@ class TrajectoryData(google.protobuf.message.Message):
         """we encountered irrecoverable errors during crawling"""
 
         FAILURE_MESSAGE_FIELD_NUMBER: builtins.int
-        failure_message: global___TrajectoryData.ResultFailure.FailureMessage.ValueType
+        failure_message: Global___TrajectoryData.ResultFailure.FailureMessage.ValueType
         """the reason for the failure"""
         def __init__(
             self,
             *,
-            failure_message: global___TrajectoryData.ResultFailure.FailureMessage.ValueType = ...,
+            failure_message: Global___TrajectoryData.ResultFailure.FailureMessage.ValueType = ...,
         ) -> None: ...
-        def ClearField(
-            self, field_name: typing.Literal["failure_message", b"failure_message"]
-        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["failure_message", b"failure_message"]) -> None: ...
 
     BASE_URL_FIELD_NUMBER: builtins.int
     GOAL_FIELD_NUMBER: builtins.int
@@ -115,19 +94,15 @@ class TrajectoryData(google.protobuf.message.Message):
     domain: builtins.str
     """the domain name of the URL where the trajectory started"""
     @property
-    def actions(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        fm.action_data_pb2.ActionData
-    ]:
+    def actions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[fm.action_data_pb2.ActionData]:
         """the sequence of actions taken by the agent"""
 
     @property
-    def success(self) -> global___TrajectoryData.ResultSuccess:
+    def success(self) -> Global___TrajectoryData.ResultSuccess:
         """the result that satisfies the goal"""
 
     @property
-    def failure(self) -> global___TrajectoryData.ResultFailure:
+    def failure(self) -> Global___TrajectoryData.ResultFailure:
         """indicate goal is not satisfied and the reason for the failure"""
 
     def __init__(
@@ -136,37 +111,12 @@ class TrajectoryData(google.protobuf.message.Message):
         base_url: builtins.str = ...,
         goal: builtins.str = ...,
         actions: collections.abc.Iterable[fm.action_data_pb2.ActionData] | None = ...,
-        success: global___TrajectoryData.ResultSuccess | None = ...,
-        failure: global___TrajectoryData.ResultFailure | None = ...,
+        success: Global___TrajectoryData.ResultSuccess | None = ...,
+        failure: Global___TrajectoryData.ResultFailure | None = ...,
         domain: builtins.str = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "failure", b"failure", "result", b"result", "success", b"success"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "actions",
-            b"actions",
-            "base_url",
-            b"base_url",
-            "domain",
-            b"domain",
-            "failure",
-            b"failure",
-            "goal",
-            b"goal",
-            "result",
-            b"result",
-            "success",
-            b"success",
-        ],
-    ) -> None: ...
-    def WhichOneof(
-        self, oneof_group: typing.Literal["result", b"result"]
-    ) -> typing.Literal["success", "failure"] | None: ...
+    def HasField(self, field_name: typing.Literal["failure", b"failure", "result", b"result", "success", b"success"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["actions", b"actions", "base_url", b"base_url", "domain", b"domain", "failure", b"failure", "goal", b"goal", "result", b"result", "success", b"success"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["result", b"result"]) -> typing.Literal["success", "failure"] | None: ...
 
-global___TrajectoryData = TrajectoryData
+Global___TrajectoryData: typing_extensions.TypeAlias = TrajectoryData

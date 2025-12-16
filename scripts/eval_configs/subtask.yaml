@@ -1,7 +1,7 @@
 run_name: test
 
 runner:
-  threads: 4
+  threads: 1
   output_dir: s3://orby-llm/browsergym_eval
   wandb_project: sva_benchmark
   seed: 17
@@ -20,7 +20,7 @@ agents:
 benchmarks:
   subtaskbench:
     dataset: subtaskbench_test
-    max_examples: -1
+    max_examples: 1
     max_steps: 20
     headless: false
     reset_env: false

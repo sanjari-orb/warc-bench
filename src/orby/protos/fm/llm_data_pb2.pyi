@@ -8,7 +8,13 @@ import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -28,23 +34,11 @@ class LLMContent(google.protobuf.message.Message):
         text: builtins.str = ...,
         image_url: builtins.str = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "image_url", b"image_url", "text", b"text", "type", b"type"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "image_url", b"image_url", "text", b"text", "type", b"type"
-        ],
-    ) -> None: ...
-    def WhichOneof(
-        self, oneof_group: typing.Literal["type", b"type"]
-    ) -> typing.Literal["text", "image_url"] | None: ...
+    def HasField(self, field_name: typing.Literal["image_url", b"image_url", "text", b"text", "type", b"type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["image_url", b"image_url", "text", b"text", "type", b"type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["type", b"type"]) -> typing.Literal["text", "image_url"] | None: ...
 
-global___LLMContent = LLMContent
+Global___LLMContent: typing_extensions.TypeAlias = LLMContent
 
 @typing.final
 class LLMMessage(google.protobuf.message.Message):
@@ -55,25 +49,18 @@ class LLMMessage(google.protobuf.message.Message):
     role: builtins.str
     """the role of the entity sending the message"""
     @property
-    def llm_contents(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        global___LLMContent
-    ]:
+    def llm_contents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___LLMContent]:
         """the content of the message"""
 
     def __init__(
         self,
         *,
         role: builtins.str = ...,
-        llm_contents: collections.abc.Iterable[global___LLMContent] | None = ...,
+        llm_contents: collections.abc.Iterable[Global___LLMContent] | None = ...,
     ) -> None: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal["llm_contents", b"llm_contents", "role", b"role"],
-    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_contents", b"llm_contents", "role", b"role"]) -> None: ...
 
-global___LLMMessage = LLMMessage
+Global___LLMMessage: typing_extensions.TypeAlias = LLMMessage
 
 @typing.final
 class LLMInteraction(google.protobuf.message.Message):
@@ -92,11 +79,7 @@ class LLMInteraction(google.protobuf.message.Message):
     response: builtins.str
     """the response from the model"""
     @property
-    def llm_messages(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        global___LLMMessage
-    ]:
+    def llm_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___LLMMessage]:
         """the prompt used to make the decision"""
 
     def __init__(
@@ -104,21 +87,9 @@ class LLMInteraction(google.protobuf.message.Message):
         *,
         model_family: builtins.str = ...,
         model_name: builtins.str = ...,
-        llm_messages: collections.abc.Iterable[global___LLMMessage] | None = ...,
+        llm_messages: collections.abc.Iterable[Global___LLMMessage] | None = ...,
         response: builtins.str = ...,
     ) -> None: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "llm_messages",
-            b"llm_messages",
-            "model_family",
-            b"model_family",
-            "model_name",
-            b"model_name",
-            "response",
-            b"response",
-        ],
-    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_messages", b"llm_messages", "model_family", b"model_family", "model_name", b"model_name", "response", b"response"]) -> None: ...
 
-global___LLMInteraction = LLMInteraction
+Global___LLMInteraction: typing_extensions.TypeAlias = LLMInteraction

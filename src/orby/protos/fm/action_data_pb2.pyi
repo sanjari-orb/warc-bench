@@ -14,7 +14,13 @@ import google.protobuf.timestamp_pb2
 import pb.v1alpha1.document_pb2
 import pb.v1alpha1.element_pb2
 import pb.v1alpha1.orbot_action_pb2
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -30,45 +36,24 @@ class AgentState(google.protobuf.message.Message):
     memory: builtins.str
     """the memory of the agent, can be a string or a jsonified object"""
     @property
-    def llm_interactions(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        fm.llm_data_pb2.LLMInteraction
-    ]:
+    def llm_interactions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[fm.llm_data_pb2.LLMInteraction]:
         """the list of queries made by the agent"""
 
     @property
-    def previous_failed_agent_state(self) -> global___AgentState:
+    def previous_failed_agent_state(self) -> Global___AgentState:
         """the linked list of agent state that did not get grounded into an action at this step"""
 
     def __init__(
         self,
         *,
-        llm_interactions: (
-            collections.abc.Iterable[fm.llm_data_pb2.LLMInteraction] | None
-        ) = ...,
+        llm_interactions: collections.abc.Iterable[fm.llm_data_pb2.LLMInteraction] | None = ...,
         memory: builtins.str = ...,
-        previous_failed_agent_state: global___AgentState | None = ...,
+        previous_failed_agent_state: Global___AgentState | None = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "previous_failed_agent_state", b"previous_failed_agent_state"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "llm_interactions",
-            b"llm_interactions",
-            "memory",
-            b"memory",
-            "previous_failed_agent_state",
-            b"previous_failed_agent_state",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["previous_failed_agent_state", b"previous_failed_agent_state"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_interactions", b"llm_interactions", "memory", b"memory", "previous_failed_agent_state", b"previous_failed_agent_state"]) -> None: ...
 
-global___AgentState = AgentState
+Global___AgentState: typing_extensions.TypeAlias = AgentState
 
 @typing.final
 class Viewport(google.protobuf.message.Message):
@@ -90,20 +75,10 @@ class Viewport(google.protobuf.message.Message):
         screenshot: pb.v1alpha1.document_pb2.DocumentBlob | None = ...,
         viewport_rect: pb.v1alpha1.element_pb2.Rect | None = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "screenshot", b"screenshot", "viewport_rect", b"viewport_rect"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "screenshot", b"screenshot", "viewport_rect", b"viewport_rect"
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["screenshot", b"screenshot", "viewport_rect", b"viewport_rect"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["screenshot", b"screenshot", "viewport_rect", b"viewport_rect"]) -> None: ...
 
-global___Viewport = Viewport
+Global___Viewport: typing_extensions.TypeAlias = Viewport
 
 @typing.final
 class BrowserGymObservation(google.protobuf.message.Message):
@@ -135,15 +110,8 @@ class BrowserGymObservation(google.protobuf.message.Message):
             timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
             message: builtins.str = ...,
         ) -> None: ...
-        def HasField(
-            self, field_name: typing.Literal["timestamp", b"timestamp"]
-        ) -> builtins.bool: ...
-        def ClearField(
-            self,
-            field_name: typing.Literal[
-                "message", b"message", "role", b"role", "timestamp", b"timestamp"
-            ],
-        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["message", b"message", "role", b"role", "timestamp", b"timestamp"]) -> None: ...
 
     REWARD_FIELD_NUMBER: builtins.int
     TERMINATED_FIELD_NUMBER: builtins.int
@@ -197,25 +165,15 @@ class BrowserGymObservation(google.protobuf.message.Message):
     last_action_error: builtins.str
     """the error message of the last action"""
     @property
-    def chat_messages(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        global___BrowserGymObservation.ChatMessage
-    ]:
+    def chat_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___BrowserGymObservation.ChatMessage]:
         """the chat messages observed at this state"""
 
     @property
-    def goals(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        fm.llm_data_pb2.LLMContent
-    ]:
+    def goals(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[fm.llm_data_pb2.LLMContent]:
         """the goals the agent needs to reach in the environment"""
 
     @property
-    def open_pages_urls(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    def open_pages_urls(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """the URLs of the open pages in the browser"""
 
     @property
@@ -228,9 +186,7 @@ class BrowserGymObservation(google.protobuf.message.Message):
         reward: builtins.float = ...,
         terminated: builtins.bool = ...,
         truncated: builtins.bool = ...,
-        chat_messages: (
-            collections.abc.Iterable[global___BrowserGymObservation.ChatMessage] | None
-        ) = ...,
+        chat_messages: collections.abc.Iterable[Global___BrowserGymObservation.ChatMessage] | None = ...,
         legacy_goal: builtins.str = ...,
         goals: collections.abc.Iterable[fm.llm_data_pb2.LLMContent] | None = ...,
         open_pages_urls: collections.abc.Iterable[builtins.str] | None = ...,
@@ -243,46 +199,10 @@ class BrowserGymObservation(google.protobuf.message.Message):
         last_action_error: builtins.str = ...,
         elapsed_time: google.protobuf.duration_pb2.Duration | None = ...,
     ) -> None: ...
-    def HasField(
-        self, field_name: typing.Literal["elapsed_time", b"elapsed_time"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "active_page_index",
-            b"active_page_index",
-            "axtree",
-            b"axtree",
-            "chat_messages",
-            b"chat_messages",
-            "dom",
-            b"dom",
-            "elapsed_time",
-            b"elapsed_time",
-            "extra_element_properties",
-            b"extra_element_properties",
-            "focused_element_bid",
-            b"focused_element_bid",
-            "goals",
-            b"goals",
-            "last_action",
-            b"last_action",
-            "last_action_error",
-            b"last_action_error",
-            "legacy_goal",
-            b"legacy_goal",
-            "open_pages_urls",
-            b"open_pages_urls",
-            "reward",
-            b"reward",
-            "terminated",
-            b"terminated",
-            "truncated",
-            b"truncated",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["elapsed_time", b"elapsed_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["active_page_index", b"active_page_index", "axtree", b"axtree", "chat_messages", b"chat_messages", "dom", b"dom", "elapsed_time", b"elapsed_time", "extra_element_properties", b"extra_element_properties", "focused_element_bid", b"focused_element_bid", "goals", b"goals", "last_action", b"last_action", "last_action_error", b"last_action_error", "legacy_goal", b"legacy_goal", "open_pages_urls", b"open_pages_urls", "reward", b"reward", "terminated", b"terminated", "truncated", b"truncated"]) -> None: ...
 
-global___BrowserGymObservation = BrowserGymObservation
+Global___BrowserGymObservation: typing_extensions.TypeAlias = BrowserGymObservation
 
 @typing.final
 class WebState(google.protobuf.message.Message):
@@ -296,7 +216,6 @@ class WebState(google.protobuf.message.Message):
     VIEWPORT_FIELD_NUMBER: builtins.int
     ROOT_ELEMENT_FIELD_NUMBER: builtins.int
     BROWSER_GYM_OBSERVATION_FIELD_NUMBER: builtins.int
-    ROOT_ELEMENT_WRAPPER_FIELD_NUMBER: builtins.int
     fingerprint: builtins.str
     """the fingerprint of the page generated as a random hash (uuid.uuid4()[:SOME_CUTOFF])"""
     url: builtins.str
@@ -304,20 +223,16 @@ class WebState(google.protobuf.message.Message):
     html: builtins.str
     """the HTML content of the page"""
     @property
-    def viewport(self) -> global___Viewport:
+    def viewport(self) -> Global___Viewport:
         """the viewport of the page"""
 
     @property
     def root_element(self) -> pb.v1alpha1.element_pb2.Element:
-        """the dom tree of the page; deprecated in favor of root_element_wrapper"""
+        """the dom tree of the page"""
 
     @property
-    def browser_gym_observation(self) -> global___BrowserGymObservation:
+    def browser_gym_observation(self) -> Global___BrowserGymObservation:
         """the raw representation of a web page observation from BrowserGym"""
-
-    @property
-    def root_element_wrapper(self) -> pb.v1alpha1.element_pb2.ElementWrapper:
-        """the dom tree of the page in the form of an ElementWrapper"""
 
     def __init__(
         self,
@@ -325,45 +240,14 @@ class WebState(google.protobuf.message.Message):
         fingerprint: builtins.str = ...,
         url: builtins.str = ...,
         html: builtins.str = ...,
-        viewport: global___Viewport | None = ...,
+        viewport: Global___Viewport | None = ...,
         root_element: pb.v1alpha1.element_pb2.Element | None = ...,
-        browser_gym_observation: global___BrowserGymObservation | None = ...,
-        root_element_wrapper: pb.v1alpha1.element_pb2.ElementWrapper | None = ...,
+        browser_gym_observation: Global___BrowserGymObservation | None = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "browser_gym_observation",
-            b"browser_gym_observation",
-            "root_element",
-            b"root_element",
-            "root_element_wrapper",
-            b"root_element_wrapper",
-            "viewport",
-            b"viewport",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "browser_gym_observation",
-            b"browser_gym_observation",
-            "fingerprint",
-            b"fingerprint",
-            "html",
-            b"html",
-            "root_element",
-            b"root_element",
-            "root_element_wrapper",
-            b"root_element_wrapper",
-            "url",
-            b"url",
-            "viewport",
-            b"viewport",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["browser_gym_observation", b"browser_gym_observation", "root_element", b"root_element", "viewport", b"viewport"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["browser_gym_observation", b"browser_gym_observation", "fingerprint", b"fingerprint", "html", b"html", "root_element", b"root_element", "url", b"url", "viewport", b"viewport"]) -> None: ...
 
-global___WebState = WebState
+Global___WebState: typing_extensions.TypeAlias = WebState
 
 @typing.final
 class BrowserGymAction(google.protobuf.message.Message):
@@ -379,11 +263,9 @@ class BrowserGymAction(google.protobuf.message.Message):
         *,
         action_string: builtins.str = ...,
     ) -> None: ...
-    def ClearField(
-        self, field_name: typing.Literal["action_string", b"action_string"]
-    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["action_string", b"action_string"]) -> None: ...
 
-global___BrowserGymAction = BrowserGymAction
+Global___BrowserGymAction: typing_extensions.TypeAlias = BrowserGymAction
 
 @typing.final
 class ActionData(google.protobuf.message.Message):
@@ -414,23 +296,23 @@ class ActionData(google.protobuf.message.Message):
         """the action taken by the agent"""
 
     @property
-    def decision(self) -> global___Decision:
+    def decision(self) -> Global___Decision:
         """the decision made by the agent; deprecated in favor of agent_state"""
 
     @property
-    def before_state(self) -> global___WebState:
+    def before_state(self) -> Global___WebState:
         """the state of the page before the action"""
 
     @property
-    def after_state(self) -> global___WebState:
+    def after_state(self) -> Global___WebState:
         """the state of the page after the action"""
 
     @property
-    def browser_gym_action(self) -> global___BrowserGymAction:
+    def browser_gym_action(self) -> Global___BrowserGymAction:
         """the raw representation of an action from BrowserGym"""
 
     @property
-    def agent_state(self) -> global___AgentState:
+    def agent_state(self) -> Global___AgentState:
         """the state of the agent after the action"""
 
     def __init__(
@@ -439,58 +321,18 @@ class ActionData(google.protobuf.message.Message):
         id: builtins.str = ...,
         base_url: builtins.str = ...,
         action: pb.v1alpha1.orbot_action_pb2.Action | None = ...,
-        decision: global___Decision | None = ...,
-        before_state: global___WebState | None = ...,
-        after_state: global___WebState | None = ...,
+        decision: Global___Decision | None = ...,
+        before_state: Global___WebState | None = ...,
+        after_state: Global___WebState | None = ...,
         playwright_trace: builtins.bytes = ...,
         domain: builtins.str = ...,
-        browser_gym_action: global___BrowserGymAction | None = ...,
-        agent_state: global___AgentState | None = ...,
+        browser_gym_action: Global___BrowserGymAction | None = ...,
+        agent_state: Global___AgentState | None = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing.Literal[
-            "action",
-            b"action",
-            "after_state",
-            b"after_state",
-            "agent_state",
-            b"agent_state",
-            "before_state",
-            b"before_state",
-            "browser_gym_action",
-            b"browser_gym_action",
-            "decision",
-            b"decision",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "action",
-            b"action",
-            "after_state",
-            b"after_state",
-            "agent_state",
-            b"agent_state",
-            "base_url",
-            b"base_url",
-            "before_state",
-            b"before_state",
-            "browser_gym_action",
-            b"browser_gym_action",
-            "decision",
-            b"decision",
-            "domain",
-            b"domain",
-            "id",
-            b"id",
-            "playwright_trace",
-            b"playwright_trace",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["action", b"action", "after_state", b"after_state", "agent_state", b"agent_state", "before_state", b"before_state", "browser_gym_action", b"browser_gym_action", "decision", b"decision"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "after_state", b"after_state", "agent_state", b"agent_state", "base_url", b"base_url", "before_state", b"before_state", "browser_gym_action", b"browser_gym_action", "decision", b"decision", "domain", b"domain", "id", b"id", "playwright_trace", b"playwright_trace"]) -> None: ...
 
-global___ActionData = ActionData
+Global___ActionData: typing_extensions.TypeAlias = ActionData
 
 @typing.final
 class Decision(google.protobuf.message.Message):
@@ -514,9 +356,7 @@ class Decision(google.protobuf.message.Message):
     nl_output: builtins.str
     """the natural language output of the agent"""
     @property
-    def failed_decisions(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    def failed_decisions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """the list of failed decisions that the agent made THIS TURN"""
 
     @property
@@ -534,27 +374,7 @@ class Decision(google.protobuf.message.Message):
         failed_decisions: collections.abc.Iterable[builtins.str] | None = ...,
         action: pb.v1alpha1.orbot_action_pb2.Action | None = ...,
     ) -> None: ...
-    def HasField(
-        self, field_name: typing.Literal["action", b"action"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing.Literal[
-            "action",
-            b"action",
-            "action_description",
-            b"action_description",
-            "failed_decisions",
-            b"failed_decisions",
-            "high_level_task",
-            b"high_level_task",
-            "low_level_task",
-            b"low_level_task",
-            "method",
-            b"method",
-            "nl_output",
-            b"nl_output",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["action", b"action"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "action_description", b"action_description", "failed_decisions", b"failed_decisions", "high_level_task", b"high_level_task", "low_level_task", b"low_level_task", "method", b"method", "nl_output", b"nl_output"]) -> None: ...
 
-global___Decision = Decision
+Global___Decision: typing_extensions.TypeAlias = Decision

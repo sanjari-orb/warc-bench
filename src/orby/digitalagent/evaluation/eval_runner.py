@@ -23,7 +23,7 @@ import browsergym.core  # register the openended task as a gym environment
 import browsergym.miniwob  # register miniwob tasks as gym environments
 import browsergym.webarena  # register webarena tasks as gym environments
 import browsergym.visualwebarena  # register visualwebarena tasks as gym environments
-import browsergym.workarena  # register workarena tasks as gym environments
+#`import browsergym.workarena  # register workarena tasks as gym environments
 import gymnasium as gym
 from copy import deepcopy
 from tqdm.auto import tqdm

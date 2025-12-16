@@ -15,7 +15,7 @@ import traceback
 
 from browsergym.core.action.highlevel import HighLevelActionSet
 import browsergym.visualwebarena  # register visualwebarena tasks as gym environments
-import browsergym.workarena  # register workarena tasks as gym environments
+# import browsergym.workarena  # register workarena tasks as gym environments
 import gymnasium as gym
 from orby.digitalagent.utils import action_parsing_utils
 from orby.digitalagent.utils import env_utils
@@ -29,7 +29,7 @@ from fm import action_data_pb2
 import multiprocessing
 
 import browsergym.subtaskbench
-from subtask_benchmark.utils import (
+from orby.subtask_benchmark.utils import (
     WebReplayServerSessionHandler,
     StaticWebAppServerSessionHandler,
 )
