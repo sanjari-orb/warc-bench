@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+import "pb/v1alpha1/web_socket.proto";
+import "pb/v1alpha1/machine_identity_service.proto";
+
+message ClientToClientMessage {
+    // Unique Id for the message.
+    string message_id = 1;
+    // Id corresponding to message this message was triggered.
+    string correlation_id = 2;
+
+    oneof message {
+        Heartbeat heartbeat = 3;
+        Ack ack = 4;
+
+        // When a Client is first starting, it won't have the arguments yet.
+        // So a request should be empty. The response will contain the dedicated auth code.
+        GenerateAuthCodeRequest generate_auth_code_request = 5;
+        GenerateAuthCodeResponse generate_auth_code_response = 6;
+    }
+}
+

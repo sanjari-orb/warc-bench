@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package pb.orby_internal;
+
+import "pb/v1alpha1/orbot_assets.proto";
+import "pb/v1alpha1/variables.proto";
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/internal_app";
+
+message UiExtractionRequest {
+  message Observation {
+    pb.v1alpha1.UiState ui_state = 1;
+  }
+  Observation observation = 1;
+  string instruction = 2;
+  pb.v1alpha1.VariableType schema = 3;
+  repeated UiExtractionDataSample demonstrations = 4;
+}
+
+message UiExtractionResponse {
+  pb.v1alpha1.VariableValue result = 1;
+  message DebugInfo {
+    string raw_response = 1;
+    string raw_answer = 2;
+    string error_message = 3;
+    float cost = 4;
+  }
+  DebugInfo debug_info = 2;
+}
+
+message UiExtractionDataSample {
+  UiExtractionRequest request = 1;
+  UiExtractionResponse response = 2;
+}
+
+message UiExtractionDataSamples {
+  string name = 1;
+  repeated UiExtractionDataSample samples = 2;
+}

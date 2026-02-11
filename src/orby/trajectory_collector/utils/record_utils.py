@@ -13,17 +13,17 @@ from PIL import Image
 from google.protobuf.timestamp_pb2 import Timestamp
 from google.protobuf.duration_pb2 import Duration
 
-from fm.action_data_pb2 import (
+from orby.protos.fm.action_data_pb2 import (
     WebState,
     ActionData,
     Viewport,
     AgentState,
     BrowserGymObservation,
 )
-from fm.trajectory_data_pb2 import TrajectoryData
-from fm.llm_data_pb2 import LLMInteraction, LLMMessage, LLMContent
-from pb.v1alpha1.document_pb2 import DocumentBlob
-from pb.v1alpha1.element_pb2 import Rect
+from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
+from orby.protos.fm.llm_data_pb2 import LLMInteraction, LLMMessage, LLMContent
+from orby.pb.v1alpha1.document_pb2 import DocumentBlob
+from orby.pb.v1alpha1.element_pb2 import Rect
 from orby.digitalagent.utils import image_utils
 from orby.digitalagent.utils import file_utils
 

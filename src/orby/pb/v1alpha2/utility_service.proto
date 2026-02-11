@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package pb.v1alpha2;
+
+import "automation_mining/ontology/data_models.proto";
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha2";
+
+
+service Utility {
+    // Do not use will be deprecated later once all logic is migrated to GetEmailLabels
+    rpc GetGmailLabels(GetGmailLabelsRequest) returns (GetGmailLabelsResponse) {}
+    rpc GetEmailLabels(GetEmailLabelsRequest) returns (GetEmailLabelsResponse) {}
+    // Only for internal use
+    rpc GetScheduleTasks(GetScheduleTasksRequest) returns (GetScheduleTasksResponse) {}
+    // Only for internal use for debugging and by orby.ai users
+    rpc GetSignedGCSUri(GetSignedGCSUriRequest) returns (GetSignedGCSUriResponse) {}
+    // This will only be used to get onedrive files for 
+    // MSFT users who have logged in using application credentials
+    // 
+    // Use the existing Onedrive file picker for users who have logged 
+    // in using SSO
+    rpc GetOnedriveFiles(GetOnedriveFilesRequest) 
+        returns (GetOnedriveFilesResponse) {}
+}
+
+// Do not use: For backward compatibility, will be removed once all logic is migrated to GetEmailLabelsRequest.
+message GetGmailLabelsRequest {}
+
+message GetEmailLabelsRequest {
+    enum MailType {
+        MAIL_TYPE_UNSPECIFIED = 0;  // Default value if none is specified.
+        MAIL_TYPE_GMAIL = 1;
+        MAIL_TYPE_OUTLOOK = 2;
+    }
+    MailType mail_type = 1;
+    // Only used for outlook mail type
+    // This is the user id of the outlook account which is used only
+    // when its application credentials and not a SSO login
+    optional string microsoft_user_id = 2;
+    // Only used for outlook mail type
+    // This is the application config id of the outlook account which is used only
+    // when its application credentials and not a SSO login
+    optional string microsoft_application_config_id = 3;
+}
+
+// Do not use: For backward compatibility, will be removed once all logic is migrated to GetEmailLabelsResponse.
+message GetGmailLabelsResponse {
+    repeated automation_mining.ontology.GmailLabel labels = 1;
+}
+
+message GetEmailLabelsResponse {
+    repeated automation_mining.ontology.EmailLabel labels = 1;
+}
+
+
+message GetScheduleTasksRequest {
+    string org_resource_name = 1;
+    int32 page_no = 2;
+}
+
+message GetScheduleTasksResponse {
+    repeated ScheduleTask tasks = 1;
+}
+
+message ScheduleTask {
+    string name = 1;
+    google.protobuf.Timestamp  upload_time = 2;
+    google.protobuf.Timestamp orby_scheduled_time = 3;
+    string workflow_name = 4;
+    int64 priority = 5;
+    string status = 6;
+}
+
+message GetSignedGCSUriRequest {
+    string uri = 1;
+}
+
+message GetSignedGCSUriResponse {
+    string signed_uri = 1;
+}
+
+message GetOnedriveFilesRequest {
+    // If not provided, the root folder will be used
+    optional string parent_id = 1;
+    // The microsoft user id of the user
+    string microsoft_user_id = 2 
+        [(buf.validate.field).string.min_len = 1];
+    string microsoft_application_config_id = 3 
+        [(buf.validate.field).string.min_len = 1];
+
+    // The next link to get the next page of files
+    // If this is not provided, there are no more files to get
+    // If this is provided, the client should make a new request 
+    // with this next link
+    optional string next_link = 4;
+}
+
+message GetOnedriveFilesResponse {
+    repeated OnedriveFile files = 1;
+
+    // The next link to get the next page of files
+    // If this is not provided, there are no more files to get
+    // If this is provided, the client should make a new request 
+    // with this next link
+    optional string next_link = 2;
+}
+
+message OnedriveFile {
+    string name = 1;
+    string id = 2;
+    string parent_id = 3;
+    string web_url = 4;
+    // The mime type of the file
+    // This will be empty for folders
+    string mime_type = 5;
+    bool is_folder = 6;
+    // The path of the file
+    // This will be / if the file or folder is in the root folder
+    // For child folders, it will be the path from the root folder
+    // For example, for a file in the folder "Parent Folder", the 
+    // path will be "/Parent Folder/File Name"
+    string path = 7;
+}

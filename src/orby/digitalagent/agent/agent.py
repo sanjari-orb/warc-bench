@@ -5,7 +5,7 @@ from retry import retry
 
 from orby.digitalagent.model import FoundationModel
 from orby.digitalagent.agent import utils as agent_utils
-from fm import llm_data_pb2
+from orby.protos.fm import llm_data_pb2
 
 
 def trace_generate(original_act_func):

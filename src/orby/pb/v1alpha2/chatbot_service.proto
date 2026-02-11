@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package pb.v1alpha2;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha2";
+
+service ChatbotService {
+  // This is a streaming RPC that returns a stream of messages.
+  rpc StreamChatMessage(SendChatMessageRequest) returns (stream StreamChatMessageResponse);
+
+  // Allows users to submit feedback (thumbs up/down) for a specific
+  // assistant message.
+  rpc SubmitChatFeedback(SubmitChatFeedbackRequest) returns(google.protobuf.Empty);
+}
+
+message SendChatMessageRequest {
+  // Optional: ID of an existing chat session. If empty, a new chat is started.
+  optional string session_id = 1;
+
+  // Required: The latest user input.
+  string message_content = 2;
+
+  // Required: Contextual information about where the user initiated the chat.
+  ConversationContext context = 3;
+}
+
+message StreamChatMessageResponseHeader {
+  string session_id = 1;
+  string message_id = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message StreamChatMessageResponse {
+  oneof response {
+    StreamChatMessageResponseHeader header = 1;
+    bytes content = 2;
+  }
+}
+
+message ConversationMessage {
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ROLE_USER = 1;
+    ROLE_ASSISTANT = 2;
+  }
+
+  // Optional: backend will auto-generate the `message_id` field.
+  optional string message_id = 1;
+  Role role = 2;
+  string content = 3;
+  // Optional: backend will auto-generate the `timestamp` field.
+  optional google.protobuf.Timestamp timestamp = 4;
+  // Optional: feedback for the message.
+  optional ChatFeedback feedback = 5;
+}
+
+message ChatFeedback {
+  FeedbackRating rating = 1;
+  optional string explanation = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message ConversationContext {
+  string process_id = 1;
+}
+
+message SubmitChatFeedbackRequest {
+  // Required: The ID of the chat session containing the message.
+  string session_id = 1;
+
+  // Required: The ID of the message to be rated.
+  string message_id = 2;
+
+  // Required: The rating given by the user.
+  FeedbackRating rating = 3;
+
+  // Optional: User's textual explanation for their rating.
+  optional string explanation = 4;
+}
+
+
+// Enum defining the possible feedback ratings
+enum FeedbackRating {
+  FEEDBACK_RATING_UNSPECIFIED = 0;
+  FEEDBACK_RATING_THUMBS_UP = 1;
+  FEEDBACK_RATING_THUMBS_DOWN = 2;
+}
+
+message MLChatbotResponseGenerationInput {
+  string session_id = 1;
+  // The history of the conversation messages. The last message is the user's current input.
+  repeated ConversationMessage conversations = 2;
+  ConversationContext context = 3;
+  // Database to query for to give the chatbot context
+  string mongo_db_name = 4;
+}
+
+message MLChatbotResponseGenerationOutput {
+  string session_id = 1;
+  string answer = 2; // The final natural language response
+  optional MLError error = 3; // If response generation failed
+}
+
+// Specific Error structure for ML operations
+message MLError {
+  string code = 1; // e.g., "AMBIGUOUS_QUERY", "RESPONSE_GENERATION_FAILED"
+  string message = 2;
+}

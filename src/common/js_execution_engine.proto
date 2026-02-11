@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package common;
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/common";
+
+message JsExecutionEngineRequest {
+  string function_body = 1;
+  // Names of the parameters
+  repeated string param_names = 2;
+  // JSON serialized parameter values
+  repeated string param_values = 3;
+
+}
+
+message JsExecutionEngineResponse {
+  oneof result {
+    // JSON serialized output   
+    string output = 1;
+    string error = 2;
+  }
+  // Time taken to execute the function in milliseconds
+  int32 execution_time_ms = 3;
+}

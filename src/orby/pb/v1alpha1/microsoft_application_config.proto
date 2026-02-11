@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+// MicrosoftApplicationConfig is the configuration for the Microsoft 
+// application in our database.
+message MicrosoftApplicationConfig {
+  // Id of config in our database. This will point to the client id
+  // and client secret of the corresponding Microsoft application.
+  string id = 1;
+  // Client id of the Microsoft application.
+  string client_id = 2;
+  // Client secret of the Microsoft application.
+  string client_secret = 3;
+  // Name of the Microsoft application.
+  string name = 4;
+  // Application id of the Microsoft application.
+  string application_id = 5;
+}

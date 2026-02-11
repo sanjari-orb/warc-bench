@@ -1,5 +1,5 @@
 from typing import Any, Callable
-from pb.v1alpha1 import element_pb2
+from orby.pb.v1alpha1 import element_pb2
 
 
 ELEMENTS_TO_REMOVE = set(

@@ -6,7 +6,7 @@ from typing import List, Dict
 import warnings
 
 from orby.digitalagent.utils.image_utils import numpy_to_base64
-from fm import llm_data_pb2
+from orby.protos.fm import llm_data_pb2
 
 # TODO: make sure removing the \n\n from the user delimiter works for sva_v3
 HUMAN_DELIMITER = "\n\nHuman:"

@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+import "pb/v1alpha1/orbot_workflow.proto";
+import "pb/v1alpha1/orbot_action.proto";
+import "pb/v1alpha1/execution.proto";
+import "common/data_query_params.proto";
+import "google/protobuf/field_mask.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+service ExecutionService {
+  // Creates a new execution in the execution collection. This is different from the workflow execution service in v1alpha2 which uses the execution_view, 
+  // that will be migrated to the execution collection soon.
+  // As of today (2025-01-20) it's only being used by Orbot.
+  rpc CreateExecution(CreateExecutionRequest)
+    returns (CreateExecutionResponse) {}
+  rpc ListExecutions(ListExecutionsRequest)
+      returns (ListExecutionsResponse) {}
+}
+
+// This api request should only be used for creating the first execution in a workflow ran by the user.
+// Hence we may not need to send in the process_id and by default it will use the first process_id from the workflow.
+// All the subsequent executions will be created by the node executor workflow.
+message CreateExecutionRequest {
+  string workflow_id = 1;
+  // Since a user creates an execution, we need to know from which connection the request is initiated.
+  // Only a user can create an execution from an API request.
+  // The UserId can be fetched from the request metadata.
+  // We may need to revisit this once we unify both Orby and Orbot executions.
+  string connection_id = 2;
+  repeated WorkflowVariable variables = 4;
+}
+
+message CreateExecutionResponse {
+  WorkflowTask execution = 1;
+}
+
+message ListExecutionsRequest {
+  int32 page_size = 1;
+  int32 page_number = 2;
+  // The order of fields will effect the sorting order.
+  // Supported fields: display_name, start_time, last_updated_time
+  repeated common.SortField sort = 3;
+  // Use this to send only relevant data in response
+  // - If Field Mask is not send or is sent with empty paths then the result will contain
+  //    the complete object
+  // - Valid values for field mask are: id, display_name, workflow_id, discover_time,
+  //    start_time, last_updated_time, end_time, status, error_message, deleted_object_info,
+  //    message_id, task_id, total_review_tasks, child_statuses
+  google.protobuf.FieldMask field_mask = 4;
+  // Filters for listing workflows
+  message ExecutionFilters {
+    string name_prefix = 1;
+    //{UNIX_TIME_SEC}
+    int64 start_time_lt = 2;
+    //{UNIX_TIME_SEC}
+    int64 start_time_gt = 3;
+    repeated string status = 4;
+    repeated string issues = 5;
+    repeated string workflow_ids = 6;
+  }
+
+  ExecutionFilters execution_filters = 5;
+}
+
+message ListExecutionsResponse {
+  int32 total_size = 1;
+  repeated Execution executions = 2;
+}

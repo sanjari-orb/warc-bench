@@ -25,7 +25,7 @@ from orby.digitalagent.agent import AGENT_NAME_TO_BUILDER
 from orby.digitalagent.evaluation.eval_config import BenchmarkConfig, AgentConfig
 from orby.trajectory_collector.utils import record_utils
 from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
-from fm import action_data_pb2
+from orby.protos.fm import action_data_pb2
 import multiprocessing
 
 import browsergym.subtaskbench

@@ -1,0 +1,724 @@
+syntax = "proto3";
+
+package pb.v1alpha2;
+
+import "buf/validate/validate.proto";
+import "common/data_query_params.proto";
+import "common/user_profile.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "pb/process_discovery/dataset.proto";
+import "pb/process_discovery/observation_session.proto";
+import "pb/process_discovery/process.proto";
+import "pb/v1alpha1/orbot_action.proto";
+import "pb/v1alpha1/user.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha2";
+
+service ProcessDiscovery {
+  // ============== Process Intake APIs ==============
+
+  // This endpoint is used to generate a process configuration and optionally 
+  // a SOP document.
+  rpc GenerateDocumentation(GenerateDocumentationRequest) 
+    returns (GenerateDocumentationResponse) {}
+
+  // This endpoint is used to genearte sop from process instance.
+  rpc GenerateSOPFromProcessInstance(GenerateSOPFromProcessInstanceRequest) 
+    returns (GenerateSOPFromProcessInstanceResponse) {}
+
+  // This endpoint is used to create a process object in database using the 
+  // user defined process in the request.
+  rpc CreateProcess(CreateProcessRequest) returns (CreateProcessResponse) {}
+
+  // This endpoint is used to update a process object in the database.
+  rpc UpdateProcess(UpdateProcessRequest) returns (UpdateProcessResponse) {}
+
+  // This endpoint is used to get the process definition for a process.
+  rpc GetProcessDefinition(GetProcessDefinitionRequest) 
+    returns (GetProcessDefinitionResponse) {}
+
+  // This endpoint is used to list all the processes in the database.
+  rpc ListProcesses(ListProcessesRequest) returns (ListProcessesResponse) {}
+
+  // This endpoint is used to delete a process object in the database.
+  rpc DeleteProcess(DeleteProcessRequest) returns (google.protobuf.Empty) {}
+
+  // This endpoint is used to get the process map for a process.
+  // If the process map is not generated, then it will be generated 
+  // and returned after ML pipeline is completed.
+  rpc GetProcessMap(GetProcessMapRequest) returns (GetProcessMapResponse) {}
+
+  // This endpoint is used to list all the process instances for a process.
+  rpc ListProcessInstances(ListProcessInstancesRequest) 
+    returns (ListProcessInstancesResponse) {}
+
+  // This endpoint is used to get a process instance for a process along with
+  // all the screenshots for each action.
+  rpc GetProcessInstance(GetProcessInstanceRequest) 
+    returns (GetProcessInstanceResponse) {}
+
+  // This endpoint is used to update a process instance in the database during
+  // the process discovery HITL.
+  rpc UpdateProcessInstance(UpdateProcessInstanceRequest) 
+    returns (UpdateProcessInstanceResponse) {}
+
+  // This endpoint is used to get the variant paths for a process.
+  rpc GetVariantPaths(GetVariantPathsRequest) 
+    returns (GetVariantPathsResponse) {}
+
+  // This Endpoint is used to delete both variant path and process path.
+  rpc DeleteProcessPath(DeleteProcessPathRequest)
+    returns (google.protobuf.Empty) {}
+
+  // ============== Single Trace View APIs ==============
+
+  // List all the traces for a process. This returns a paginated list of traces.
+  rpc ListTraces(ListTracesRequest) returns (ListTracesResponse) {}
+
+  // Get a single trace for a process. This returns the 
+  // list of actions performed in the trace.
+  rpc GetTrace(GetTraceRequest) returns (GetTraceResponse) {}
+
+  // Delete a trace for a process. This will make sure the trace 
+  // is unlearned by ML.
+  rpc DeleteTrace(DeleteTraceRequest) returns (google.protobuf.Empty) {}
+
+  // Update a trace for a process. 
+  rpc UpdateTrace(UpdateTraceRequest) returns (UpdateTraceResponse) {}
+
+  // List the users who create the traces under the process.
+  rpc GetTraceUsers(GetTraceUsersRequest) returns (GetTraceUsersResponse) {}
+
+  // ============== Deprecated APIs ==============
+
+  // Deprecated: Use GetProcessMap, ListProcessInstances, 
+  // GetProcessInstance instead.
+  rpc GetProcess(GetProcessRequest) returns (GetProcessResponse) {}
+}
+
+
+// This is how the user defines for the process and will be stored in the
+// database. 
+// The DB object will also store the some additional fields 
+// such as the generated processMaps etc.
+message UserDefinedProcess {
+  string id = 1;
+  // The name of the process
+  string name = 2;
+  // The description of the process
+  string description = 3;
+
+  // The base step definitions for the process.
+  // Only the display name, description and application are 
+  // inputted by the user.
+  repeated pb.process_discovery.StepType base_step_definition = 4;
+
+  // The variant step definitions for the process
+  repeated pb.process_discovery.StepType variant_step_definition = 5;
+
+  // User defines the attributes for the application and ML will 
+  // associate the attributes with the step definitions.
+  repeated ApplicationAttributes application_attributes = 6;
+
+  // The users that are associated with the process
+  repeated string user_ids = 7;
+
+  google.protobuf.Timestamp create_time = 8;
+  google.protobuf.Timestamp last_update_time = 9;
+
+  // User who created the process
+  common.UserProfileInfo creator = 10;
+
+  // The total number of process instances for the process 
+  // This number will be added by the server when listing processes.
+  int32 total_instances = 11;
+
+  // The process paths for the process
+  repeated pb.process_discovery.ProcessPath process_paths = 12;
+
+  // The GCS URI of the where the Process SOP is stored.
+  pb.process_discovery.SopSource sop_source = 13;
+
+  // The attributes for the process
+  repeated pb.process_discovery.Attribute process_attributes = 14;
+
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_DRAFT = 1;
+    STATUS_PUBLISHED = 2;
+    STATUS_GENERATING_DOCUMENTATION = 3;
+  }
+  Status status = 15;
+
+  // The applications allowed to be used in the process
+  repeated Application allowed_applications = 16;
+}
+
+message Application {
+  string id = 1;
+  // The name of the application
+  string name = 2;
+  // The description of the application
+  optional string description = 3;
+  // The logo of the application 
+  optional string application_logo_url = 4;
+  // The url of the application which we need to add to allowlist of the process
+  string application_url = 5;
+}
+
+message ApplicationAttributes {
+  string application = 1;
+  // The attributes associated with the application
+  repeated pb.process_discovery.Attribute attributes = 2;
+}
+
+message CreateProcessRequest {
+  // The id, creator, create_time, last_update_time inside 
+  // the user_defined_process are added by BE.
+  UserDefinedProcess user_defined_process = 1 
+    [(buf.validate.field).required = true];
+}
+
+message CreateProcessResponse {
+  UserDefinedProcess user_defined_process = 1 
+    [(buf.validate.field).required = true];
+}
+
+message GetProcessDefinitionRequest {
+  string process_id = 1 
+    [(buf.validate.field).string.min_len = 1];
+}
+
+message GetProcessDefinitionResponse {
+  UserDefinedProcess process = 1;
+}
+
+message GetProcessRequest {
+  string process_id = 1 
+    [(buf.validate.field).string.min_len = 1];
+}
+
+// GetProcessResponse takes in the id of the user_defined_process and 
+// returns the corresponding processMap.
+message GetProcessResponse {
+  pb.process_discovery.Process process = 1 
+    [(buf.validate.field).required = true];
+}
+
+// ListProcessesRequest is the request for listing all the processes.
+message ListProcessesRequest {
+  // Maximum number of results to return
+  int32 page_size = 4 
+    [(buf.validate.field).int32 = {gte: 1, lte: 100}];
+  // Page number for the current request
+  int32 page_number = 5 
+    [(buf.validate.field).int32 = {gte: 1}];
+  // Supported filter: "name_prefix={SEARCH_KEY},
+  // applications={semicolon separated applications},
+  // creators={semicolon separated creator ids},
+  // start_time={UNIX_TIME_SEC},end_time={UNIX_TIME_SEC}"
+  // start_time and end_time in the filter filters the sessions with 
+  // session end time between start_time and end_time. Both start_time and 
+  // end_time are required to filter based on time range.
+  // name_prefix is used to search for a process with a given prefix
+  // applications is used to filter the processes for a given application
+  // creators is used to filter the processes for a given creator
+  string filter = 6;
+  // optional: Currently support sort on name, time
+  repeated common.SortField sort_fields = 7;
+
+
+  reserved 1, 2, 3;
+}
+
+message ListProcessesResponse {
+  // Deprecated: Use user_defined_processes instead
+  repeated pb.process_discovery.Process processes = 1 [deprecated=true];
+  int32 total_count = 2;
+  repeated UserDefinedProcess user_defined_processes = 3;
+}
+
+message UpdateProcessRequest {
+  UserDefinedProcess user_defined_process = 1;
+  // Supported fields: name, description, base_step_definitions,
+  // variant_step_definitions, application_attributes, user_ids,
+  // sop_source, process_attributes, status, allowed_applications,
+  // process_paths
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateProcessResponse {
+  UserDefinedProcess user_defined_process = 1;
+}
+
+message DeleteProcessRequest {
+  string process_id = 1 
+    [(buf.validate.field).string.min_len = 1];
+}
+
+message GetTraceUsersFilter {
+  // Filter by user name or email, only support prefix-based name queries.
+  string name_email_prefix = 1 ;
+}
+
+message GetTraceUsersRequest {
+  string process_id = 1 [deprecated=true];
+  GetTraceUsersFilter filter = 2;
+}
+
+message GetTraceUsersResponse {
+  repeated v1alpha1.User users = 1;
+}
+
+message ListTracesRequest {
+  // Traces are not associated with a process anymore.
+  string process_id = 1 [deprecated=true];
+  // Maximum number of results to return
+  int32 page_size = 2 [(buf.validate.field).int32 = {gte: 1, lte: 100}];
+  // Page number for the current request (starts from 1)
+  int32 page_number = 3 [(buf.validate.field).int32 = {gte: 1}];
+  // optional: Currently support sort on session name and end time
+  repeated common.SortField sort_fields = 4;
+  // Supported filter: "trace_name_prefix={SEARCH_KEY},user_ids={semicolon 
+  // separated user_ids},start_time={UNIX_TIME_SEC},end_time={UNIX_TIME_SEC}"
+  // start_time and end_time in the filter filters the sessions with 
+  // session end time between start_time and end_time. Both start_time and 
+  // end_time are required to filter based on time range.
+  // trace_name_prefix is used to search for a session with a given prefix
+  // user_ids is used to filter the sessions for a given user
+  optional string filter = 5;
+}
+
+message ListTracesResponse {
+  repeated pb.process_discovery.ObservationSession traces = 1;
+  int32 total_count = 2;
+  // The total number of unique users in the traces for the process
+  int32 total_users = 3;
+}
+
+message GetTraceRequest {
+  string trace_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The field mask to specify the fields to return in the actions
+  // TODO: Define the supported fields in the field mask
+  google.protobuf.FieldMask field_mask = 2;
+}
+
+message GetTraceResponse {
+  // The actions in the trace
+  repeated pb.v1alpha1.Action actions = 1;
+}
+
+message DeleteTraceRequest {
+  string trace_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message UpdateTraceRequest {
+  string trace_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The trace to update
+  pb.process_discovery.ObservationSession trace = 
+    2 [(buf.validate.field).required = true];
+  // The field mask to specify the fields to update in the trace
+  // Supported fields: name
+  google.protobuf.FieldMask update_mask = 
+    3 [(buf.validate.field).required = true];
+}
+
+message UpdateTraceResponse {
+  pb.process_discovery.ObservationSession updated_trace = 1 
+    [(buf.validate.field).required = true];
+}
+
+message GetProcessMapRequest {
+  // The process id for which the process map is generated.
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The path ids for which the process map is generated.
+  // Optional: If not provided, the process map will be 
+  // generated for all the paths.
+  repeated string path_ids = 2;
+  // Whether regenerate the process map or just return the existing one
+  // if available.
+  bool refresh = 3;
+}
+
+message GetProcessMapResponse {
+  // The process map if it is already generated.
+  optional pb.process_discovery.Process process_map = 1;
+  // Process map generation status
+  ProcessMapGenerationStatus status = 2;
+  // The error message if the process map generation fails.
+  optional string error_message = 3;
+  
+  enum ProcessMapGenerationStatus {
+    PROCESS_MAP_GENERATION_STATUS_UNSPECIFIED = 0;
+    PROCESS_MAP_GENERATION_STATUS_GENERATED = 1;
+    PROCESS_MAP_GENERATION_STATUS_GENERATING = 2;
+    PROCESS_MAP_GENERATION_STATUS_FAILED = 3;
+    PROCESS_MAP_GENERATION_STATUS_NO_DATA = 4;
+  }
+}
+
+message GenerateDocumentationRequest {
+  message ConfigGenerationRequest {
+    // The source of the SOP document where the SOP will be stored.
+    pb.process_discovery.SopSource sop_source = 1;
+  }
+  message SopAndConfigGenerationRequest {
+    // The golden traces to generate a SOP document and process 
+    // configuration from.
+    repeated string trace_ids = 1;
+  }
+  message SopAndConfigUpdateRequest {
+    // The SOP should already exist.
+    pb.process_discovery.SopSource sop_source = 1;
+    // The user feedback for the updated SOP in natural language.
+    string user_feedback = 2;
+  }
+  message SopGenerationFromConfigUpdatesRequest {
+    // The associated traces to generate the SOP document from.
+    repeated string trace_ids = 1;
+  }
+
+  oneof request {
+    ConfigGenerationRequest config_generation_request = 1;
+    SopAndConfigGenerationRequest sop_and_config_generation_request = 2;
+    SopAndConfigUpdateRequest sop_and_config_update_request = 3;
+    SopGenerationFromConfigUpdatesRequest sop_generation_from_config_updates_request = 5;
+  }
+
+  // The process id for which the documentation is generated.
+  string process_id = 4 [(buf.validate.field).string.min_len = 1];
+}
+
+message GenerateDocumentationResponse {
+  // The generated process config which also contains the SOP document
+  // in it.
+  UserDefinedProcess process_config = 1;
+}
+
+message GenerateSOPFromProcessInstanceRequest {
+  // The process instance id which the SOP is generated.
+  string process_instance_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message GenerateSOPFromProcessInstanceResponse {
+  // The process instance will have the SOP document in it is generated.
+  // There will also be a status field to indicate the status of the SOP
+  // generation.
+  pb.process_discovery.ProcessInstance process_instance = 1;
+}
+
+message ListProcessInstancesRequest {
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The filter for the process instances.
+  // Supported filters: "step_type_ids={semicolon separated step_type_ids},;;,
+  // paths={semicolon separated path_ids},;;,
+  // fields={;,,; separated field:::type:::value}"
+  // step_type_ids is used to filter the process instances 
+  // for a given step type id
+  // paths is used to filter the process instances for a given path id
+  // fields is used to filter the process instances for a given attribute
+  optional string filter = 2;
+  // The maximum number of results to return
+  int32 page_size = 3 [(buf.validate.field).int32 = {gte: 1, lte: 100}];
+  // The page number for the current request (starts from 1)
+  int32 page_number = 4 [(buf.validate.field).int32 = {gte: 1}];
+}
+
+message ListProcessInstancesResponse {
+  repeated pb.process_discovery.ProcessInstance process_instances = 1;
+  // The total number of process instances for the process
+  int32 total_count = 2;
+}
+
+message GetProcessInstanceRequest {
+  string process_instance_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message GetProcessInstanceResponse {
+  // This will contain the process instance with all the screenshot
+  // data for each action as well
+  pb.process_discovery.ProcessInstance process_instance = 1;
+}
+
+message UpdateProcessInstanceRequest {
+  pb.process_discovery.ProcessInstance process_instance = 1 
+    [(buf.validate.field).required = true];
+  // supported fields: status, reviews, annotation
+  google.protobuf.FieldMask update_mask = 2 
+    [(buf.validate.field).required = true];
+}
+
+message UpdateProcessInstanceResponse {
+  pb.process_discovery.ProcessInstance updated_process_instance = 1 
+    [(buf.validate.field).required = true];
+}
+
+message GetVariantPathsRequest {
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message GetVariantPathsResponse {
+  message VariantPath {
+    // The id of the variant path
+    string path_id = 1;
+    // The process map for the variant path
+    pb.process_discovery.Process process = 2;
+    // The frequency of the process instances for the variant path
+    int32 process_instance_frequency = 3;
+    // The average time spent for the process instances for the variant path
+    // in seconds
+    int32 average_time_spent = 4;
+    // The longest process instance for the variant path in seconds
+    int32 longest_time_spent = 5;
+    // The shortest process instance for the variant path in seconds
+    int32 shortest_time_spent = 6;
+    // The consolidated process map for the variant path
+    // This will only have the most important steps in the process map.
+    // FE will use this to show the process map where there is space constraint.
+    pb.process_discovery.Process consolidated_process = 7;
+  }
+
+  // The list of variant paths for the process is not sorted by default and
+  // will be done by the client.
+  // This will not be a paginated response.
+  repeated VariantPath variant_paths = 1;
+}
+
+message DeleteProcessPathRequest {
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+  string path_id = 2  [(buf.validate.field).string.min_len = 1];
+}
+
+// -----------------Server-ML Communication Contracts---------------------------
+
+// Request to generate a process configuration from an existing SOP.
+message ConfigGenerationRequest {
+  // The source of the SOP document where the SOP will be stored.
+  // If the source is non-existent, then an error will be returned.
+  pb.process_discovery.SopSource sop_source = 1 
+    [(buf.validate.field).required = true];
+}
+
+// The trace to be used for the SOP generation.
+message TraceEvents {
+  string trace_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The user events for the trace.
+  repeated pb.v1alpha1.UserEvent user_events = 2 
+    [(buf.validate.field).repeated.min_items = 1];
+}
+
+// Request to generate a SOP document and process 
+// configuration from golden traces.
+message SopAndConfigGenerationRequest {
+  // The golden traces to generate a SOP document and process 
+  // configuration from.
+  repeated TraceEvents trace_events = 1 
+    [(buf.validate.field).repeated.min_items = 1];
+  // The source of the SOP document where the SOP will be stored.
+  // This will not be used to generate the process configuration.
+  pb.process_discovery.SopSource sop_source = 2 
+    [(buf.validate.field).required = true];
+
+  // If true, only the SOP will be generated and the process config
+  // will not be generated.
+  bool only_generate_sop = 3;
+}
+
+// Request to update an existing SOP and process configuration 
+// based on user feedback.
+message SopAndConfigUpdateRequest {
+  // The SOP should already exist and the updated SOP will be sent 
+  // in the response.
+  pb.process_discovery.SopSource sop_source = 1 
+    [(buf.validate.field).required = true];
+  // The user feedback for the updated SOP in natural language.
+  string user_feedback = 2 
+    [(buf.validate.field).string.min_len = 1];
+}
+
+// Request to generate a SOP document from config updates.
+message SopGenerationFromConfigUpdatesRequest {
+  // The new SOP GCS uri.
+  pb.process_discovery.SopSource sop_source = 1;
+  // The associated traces to generate a SOP document from.
+  repeated TraceEvents trace_events = 2
+    [(buf.validate.field).repeated.min_items = 1];
+}
+
+// Request to generate a SOP document from process instance.
+message SOPFromProcessInstanceRequest {
+  // The process_instance_gcs_uri for which to generate SOP.
+  string process_instance_gcs_uri = 1 [(buf.validate.field).string.min_len = 1];
+ 
+  // The source of the SOP document where the SOP will be stored.
+  pb.process_discovery.SopSource output_sop_source = 2 
+    [(buf.validate.field).required = true];
+}
+
+// This is the request format for the GenerateDocumentation 
+// ML pipeline.
+message MLGenerateDocumentationRequest {
+  oneof request {
+    ConfigGenerationRequest config_generation_request = 1;
+    SopAndConfigGenerationRequest sop_and_config_generation_request = 2;
+    SopAndConfigUpdateRequest sop_and_config_update_request = 3;
+    SopGenerationFromConfigUpdatesRequest sop_generation_from_config_updates_request = 6;
+    SOPFromProcessInstanceRequest sop_from_process_instance_request = 7;
+  }
+
+  // The metadata of the process like the process id, name, description, 
+  // allowed applications
+  //
+  // This will be used to keep the same metadata for the process config and
+  // SOP document.
+  UserDefinedProcess process_metadata = 4;
+
+  // The GCS URI where the process discovery ML debugging 
+  // information can be stored. This is passed to save PII data in 
+  // proper buckets for tenant.
+  // The GCS URI should be in the following format:
+  // gs://<bucket_name>/<directory_to_process_discovery_debugging>
+  string output_process_discovery_debugging_gcs_path = 5 
+    [(buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.pattern = 
+    "^gs://[a-z0-9._-]+/[a-zA-Z0-9/_-]+$"];
+}
+
+// This is the response format for the GenerateDocumentation 
+// ML pipeline.
+message MLGenerateDocumentationResponse {
+  // The generated process config.
+  UserDefinedProcess process_config = 1 
+    [(buf.validate.field).required = true];
+}
+
+// This is the request format for the ProcessDiscoveryAnnotation 
+// ML pipeline.
+message MLProcessDiscoveryAnnotationRequest {
+  // The list of user events for one session.
+  repeated pb.v1alpha1.UserEvent user_events = 1 
+    [(buf.validate.field).repeated.min_items = 1];
+  // The process config for which the user events are annotated.
+  UserDefinedProcess process_config = 2 
+    [(buf.validate.field).required = true];
+  // The GCS URI where the process discovery ML debugging 
+  // information can be stored. This is passed to save PII data in 
+  // proper buckets for tenant.
+  // The GCS URI should be in the following format:
+  // gs://<bucket_name>/<directory_to_process_discovery_debugging>
+  string output_process_discovery_debugging_gcs_path = 3 
+    [(buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.pattern = 
+    "^gs://[a-z0-9._-]+/[a-zA-Z0-9/_-]+$"];
+  // The GCS URI prefix where the process instances will be stored.
+  // The process instances will be stored in the following format:
+  // <output_process_instances_gcs_prefix>/<process_instance_id>.proto
+  // One trace given as input to the ML pipeline may result in multiple
+  // process instances.
+  string output_process_instances_gcs_prefix = 4 
+    [(buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.pattern = 
+    "^gs://[a-z0-9._-]+/[a-zA-Z0-9/_-]+$"];
+  
+  // The gcs uris of the annotated process instances for few shot.
+  repeated string annotated_process_instance_gcs_uris = 5;
+}
+
+// This is the response format for the ProcessDiscoveryAnnotation 
+// ML pipeline.
+message MLProcessDiscoveryAnnotationResponse {
+  message ProcessInstanceInfo {
+    // The id of the process instance.
+    string process_instance_id = 1 
+      [(buf.validate.field).string.min_len = 1];
+    // The id of the path which the process instance belongs to.
+    string path_id = 2 
+      [(buf.validate.field).string.min_len = 1];
+    // The GCS URI where the process instance will be stored.
+    // This is `pb.process_discovery.ProcessInstance` proto file.
+    // The GCS URI should be in the following format:
+    // gs://<bucket_name>/<path_to_process_instance>
+    string process_instance_gcs_uri = 3 
+      [(buf.validate.field).string.min_len = 1, 
+      (buf.validate.field).string.pattern = 
+      "^gs://[a-z0-9._-]+/[a-zA-Z0-9/_-]+$"];
+  }
+  repeated ProcessInstanceInfo process_instances = 1 
+    [(buf.validate.field).repeated.min_items = 1];
+}
+
+// This is the request format for the ProcessMapGeneration 
+// ML pipeline.
+message MLProcessMapGenerationRequest {
+  // The process id for which the process map is generated.
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The path ids for which the process map is generated.
+  // Optional: If not provided, the process map will be 
+  // generated for all the paths.
+  repeated string path_ids = 2;
+  // The process config for which the map is being generated.
+  UserDefinedProcess process_config = 6
+    [(buf.validate.field).required = true];
+  // The GCS URI where the process map will be stored.
+  string output_process_map_gcs_uri = 3 
+    [(buf.validate.field).string.min_len = 1, 
+    (buf.validate.field).string.pattern = 
+    "^gs://[a-z0-9._-]+/[a-zA-Z0-9/_-]+$"];
+  // The annotated process instances for the process map generation.
+  // Each file is a `pb.process_discovery.ProcessInstance` proto file.
+  repeated string annotated_process_instance_gcs_uris = 4 
+    [(buf.validate.field).repeated.min_items = 1];
+  // The GCS URI where the process discovery ML debugging 
+  // information can be stored. This is passed to save PII data in 
+  // proper buckets for tenant.
+  string output_process_discovery_debugging_gcs_path = 5 
+    [(buf.validate.field).string.min_len = 1];
+
+  // The database name to upload the process map to for chatbot purposes.
+  string mongo_db_name = 7;
+}
+
+// This is the response format for the ProcessMapGeneration 
+// ML pipeline.
+message MLProcessMapGenerationResponse { 
+  oneof result {
+    // The GCS URI where the process map will be stored.
+    // The GCS URI should be in the following format:
+    // gs://<bucket_name>/<path_to_process_map>
+    // This is only set if the process map generation succeeds.
+    string process_map_gcs_uri = 3;
+    // The error message if the process map generation fails.
+    // This is only set if the process map generation fails.
+    string error_message = 4;
+  }
+}
+
+// This is the request format for unknown path resolution.
+message MLUnknownProcessResolutionRequest {
+  // The process id.
+  string process_id = 1 [(buf.validate.field).string.min_len = 1];
+  // The original process config.
+  UserDefinedProcess process_config = 2
+    [(buf.validate.field).required = true];
+  // The process instances for the unknown paths.
+  // Each file is a `pb.process_discovery.ProcessInstance` proto file.
+  repeated string process_instance_gcs_uris = 3
+    [(buf.validate.field).repeated.min_items = 1];
+  // The GCS URI where the process discovery ML debugging 
+  // information can be stored. This is passed to save PII data in 
+  // proper buckets for tenant.
+  string output_process_discovery_debugging_gcs_path = 4
+    [(buf.validate.field).string.min_len = 1];
+}
+
+// This is the response format for unknown path resolution.
+message MLUnknownProcessResolutionResponse {
+  // The new UserDefinedProcess config after the unknown path resolution.
+  UserDefinedProcess new_process_config = 1 
+    [(buf.validate.field).required = true];
+  // Process instances with the new path ids.
+  repeated MLProcessDiscoveryAnnotationResponse.ProcessInstanceInfo process_instances = 2 
+    [(buf.validate.field).repeated.min_items = 1];
+}

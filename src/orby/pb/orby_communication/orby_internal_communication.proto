@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package pb.orby_communication;
+
+import "buf/validate/validate.proto";
+import "pb/v1alpha1/actionprocessing.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/orby_communication";
+
+// This service will be used for internal communication between various servers
+// that we use in the Orby stack.
+//
+// All the endpoints in this service will be enforced with mTLS authentication
+// so that only authorized servers can communicate with each other.
+service OrbyInternalCommunication {
+  rpc GetFewShotExamples(GetFewShotExamplesRequest) 
+    returns (GetFewShotExamplesResponse) {}
+}
+
+message GetFewShotExamplesRequest {
+  // The execution id for which we need to get the few shot examples
+  string execution_id = 1 
+    [(buf.validate.field).string.len = 24];
+  // The minimum number of reviewers in the tasks in the few shot examples
+  // Defaults to 1
+  int32 min_reviewers_length = 2;
+  // The number of examples to get
+  int32 example_count = 3 [(buf.validate.field).int32.gt = 0];
+  enum AutomationType {
+    AUTOMATION_TYPE_UNSPECIFIED = 0;
+    AUTOMATION_TYPE_UI_AUTOMATION = 1;
+    AUTOMATION_TYPE_API_AUTOMATION = 2;
+  }
+  // The type of automation to get the few shot examples for
+  AutomationType automation_type = 4 
+    [(buf.validate.field).enum.defined_only = true];
+  // The organization id for which we need to get the few shot examples.
+  // This is needed to be passed since we need to query 
+  // from a single tenent db for certain orgs
+  string org_id = 5 [(buf.validate.field).string.len = 24];
+}
+
+message GetFewShotExamplesResponse {
+  oneof response {
+    UIAutomationExamples ui_automation_examples = 1;
+    APIAutomationExamples api_automation_examples = 2;
+  }
+}
+
+message UIAutomationExamples {
+  repeated SmartActionExample examples = 1;
+}
+
+message APIAutomationExamples {
+  repeated string document_uris = 1;
+}
+
+message SmartActionExample {
+  v1alpha1.SmartAction request = 1;
+  v1alpha1.SmartActionResult response = 2;
+  v1alpha1.SmartActionResult corrected_response = 3;
+}

@@ -1,8 +1,8 @@
 # WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions
 
-A challenging benchmark with 438 tasks for evaluating multimodal AI agents on web navigation subtasks using Web ARChive files for sandboxed, realistic interactions.
+WARC-Bench is a comprehensive benchmark featuring 438 carefully designed tasks that evaluate AI agents on GUI subtasks—short-horizon interactions with user interface components - that form the building blocks of complex web automation. Subtasks include actions like selecting dates in a calendar picker, navigating dropdown menus, scrolling through containers to extract information, or filling out multi-step forms. We use web archive files, which are high-fidelity snapshots of real websites as interactive environments for our benchmark.  
 
-🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 🤖 **[Models](https://huggingface.co/Uniphore/actio-ui-7b-rlvr)** | 📖 **[Documentation](https://orby-ai-engineering.github.io/warc-bench/)** | 🐙 **[GitHub](https://github.com/sanjari-orb/warc-bench)**
+🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 🤖 **[Models](https://huggingface.co/Uniphore/actio-ui-7b-rlvr)** | 📖 **[Documentation]()** | 🐙 **[GitHub](https://github.com/sanjari-orb/warc-bench)**
 
 ---
 
@@ -14,14 +14,15 @@ Training web agents to navigate complex, real-world websites requires them to ma
 - **Sandboxed interactions** with dynamic and realistic webpages using Web ARChive files
 - **Challenging benchmark**: Leading computer-use models achieve up to 64.8% success rate
 - **Training support**: Includes infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)
+- **Scalable by Design**: We provide an easy way to allow users to extend the tasks in the benchmark by recording and adding web archive files
 
 ### Performance Benchmarks
 
-| Approach | Success Rate |
+| Model | Dev Success Rate | Test Success Rate |
 |----------|-------------|
-| Leading frontier models | 64.8% |
-| SFT models | 48.8% |
-| RLVR (over SFT) | 52.8% |
+| Claude Sonnet 4.0 (2025-05-14) | 83.61% | 64.8% |
+| Ours-72B-SFT | 75.9% | 48.8% |
+| Ours-72B-RLVR (SFT+RLVR) | 84.3% | 52.8% |
 
 Our analysis shows that mastering these subtasks is essential for robust web planning and navigation - a capability not extensively evaluated by existing benchmarks.
 
@@ -49,8 +50,17 @@ cd warc-bench
 # Install in editable mode
 pip install -e .
 
+# Check a the subtask environment for a task
+python scripts/webreplay_server_check.py --task-id online.20 --timeout 6000 --debugging-port 4222
+
 # Run benchmark evaluation
-python scripts/run_evaluation.py --agent sva_v4 --model claude-3-opus
+python scripts/run_eval.py scripts/eval_configs/subtask.yaml
+
+# View agent trajectories (after running evaluations)
+streamlit run scripts/trajectory_viewer.py
+
+# Check out the benchmark tasks here:
+vi src/orby/subtask_benchmark/environments/benchmark.json
 ```
 
 See the [full documentation site](https://orby-ai-engineering.github.io/warc-bench/) for detailed installation instructions and usage examples.

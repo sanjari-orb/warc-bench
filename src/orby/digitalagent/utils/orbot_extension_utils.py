@@ -4,7 +4,7 @@
 import dotenv
 from typing import Optional
 from playwright.sync_api import BrowserContext, Page, Error
-from pb.v1alpha1 import element_pb2
+from orby.pb.v1alpha1 import element_pb2
 import base64
 
 dotenv.load_dotenv()

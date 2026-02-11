@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package pb.executor;
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/executor";
+
+import "pb/v1alpha1/machine_identity_service.proto";
+import "pb/v1alpha1/orbot_workflow.proto";
+import "pb/v1alpha1/variables.proto";
+
+
+// This is the input for the executor workflow in the orchestrator package.
+// Link - https://github.com/orby-ai-engineering/orby-web-app/blob/main/packages/orchestrator/src/workflows/execution/executor-workflow.ts#L98
+message ExecutorWorkflowInput {
+    string user_id_or_machine_id = 1;
+    string execution_id = 2;
+    string org_id = 3;
+    string user_connection_id = 4;
+    repeated pb.v1alpha1.MachineIdentity.Agent machine_agents = 5;
+
+    // Following fields are used when the workflow is triggered during a test run.
+
+    // We need to have the workflow object, if it's a test run.
+    pb.v1alpha1.Workflow workflow = 6;
+    // Following fields are optional, which may be needed for test runs, however if the workflow needs them and if not provided we will throw an error.
+    // Environment variables required for running the action
+    // Key is the name of the environment variable
+    map<string, pb.v1alpha1.VariableValue> env_variables = 7;
+    // Referenced variables from previous action outputs required for running the action
+    // Key is the action id of a previous action
+    map<string, pb.v1alpha1.VariableValue> action_variables = 8;    
+}
+
+message ExecutorWorkflowOutput {
+    // The output corresponding to each action id inside the workflow
+    map<string, pb.v1alpha1.VariableValue> action_outputs = 1;
+    // Map of action ids to their review task ids
+    map<string, string> review_task_id = 2;
+}

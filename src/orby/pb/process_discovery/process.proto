@@ -1,0 +1,200 @@
+syntax = "proto3";
+
+package pb.process_discovery;
+
+import "common/user_profile.proto";
+import "google/protobuf/timestamp.proto";
+import "pb/process_discovery/dataset.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/process_discovery";
+
+// A process is a collection of step types, step nodes, and observations.
+
+// This is the final output layer that represents the discovered processes. It defines:
+// Process: A structured representation of a business process with steps and transitions
+// StepNode: Nodes in a process graph/tree that represent individual steps
+// Transition: Connections between steps showing how the process flows
+// ProcessInstance: Actual examples of the process being executed
+// Think of this as the final "map" of the business process that was discovered.
+
+message Process {
+  // The id of the process
+  string id = 1;
+  // The name of the process
+  string name = 2;
+  // The description of the process
+  string description = 3;
+
+  // A global list of step types used by this process
+  // (could be system-defined or user-defined).
+  repeated StepType step_types = 4;
+
+  // A global list of StepNodes. Each StepNode references exactly one StepType.
+  // The structure of step nodes can be a tree (no merges) or a graph (with merges).
+  // The first node in the list is a special "Start" node.
+  repeated StepNode step_nodes = 5;
+
+  // A list of instances of this process
+  repeated ProcessInstance process_instances = 6;
+
+  // The creation time of the process
+  google.protobuf.Timestamp create_time = 7;
+  // The last updated timestamp of the process
+  google.protobuf.Timestamp last_updated_time = 8;
+}
+
+// A step node is a node in the tree/graph structure of the process.
+message StepNode {
+  // Unique ID for this node, useful for recursive reference
+  string id = 1;
+
+  // The StepType that this node references.
+  // Must match one of the StepType.id in the same Process.
+  string step_type_id = 2;
+
+  // For a tree approach, each node can have multiple child transitions
+  // leading to different branches. This can also form a graph
+  // if a step_node_id references an existing node.
+  repeated Transition transitions = 3;
+}
+
+// A transition from this node to a child node, plus optional branching condition or metrics.
+message Transition {
+  // The id of the child node
+  string step_node_id = 1;
+
+  // A branching condition for a child transition (e.g., “priority == HIGH”)
+  message BranchCondition {
+    // The expression for the branching condition
+    string expression = 1;
+    // TODO: Other fields for branching logic
+  }
+  BranchCondition branch_condition = 2;
+  
+  // The frequency of this transition in the process
+  int32 frequency = 3;
+}
+
+message ProcessInstanceStats {
+  // The total time taken to complete the process in seconds
+  // Calculated as the difference between the timestamp of the
+  // last observation of the last step node instance and the timestamp of the
+  // first observation of the first step node instance.
+  int32 time_taken_seconds = 1;
+}
+
+// A single instance of a process.
+message ProcessInstance {
+  reserved 4,5;
+  // The id of the execution
+  string id = 1;
+
+  // The user that executed this path
+  common.UserProfileInfo user = 2;
+
+  // The actual observations of each step node in the path
+  repeated StepNodeInstance step_node_instances = 3;
+
+  // The status of the process instance
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    // The process instance has been reviewed and accepted
+    // by the user
+    STATUS_COMPLETED = 1;
+    // The process instance is ready for review 
+    // by the user
+    STATUS_READY_FOR_REVIEW = 2;
+    // The process instance is obsolete when the process 
+    // config has changed and the process instance is no longer
+    // relevant.
+    STATUS_OBSOLETE = 3;
+    // The process instance is in error when the process 
+    // instance fails to complete due to some error.
+    STATUS_ERROR = 4;
+    // The process instance has been rejected by the user
+    // when the process instance is incorrect.
+    STATUS_REJECTED_INCORRECT = 5;
+  }
+  
+  // This will be set by the server when returning list of process instances.
+  // This field is not set when creating a process instance by the ML pipeline.
+  Status status = 6;
+
+  // Process annotation for the process instance.
+  ProcessAnnotation process_annotation = 7;
+
+  // Step annotations for the process instance.
+  // Assume that a process instance has following observations with their step types:
+  // o1, o2, o3, o4, o5, o6
+  // s1, s1, s2, s2, s1, s3
+  // Then the step annotations with observations will be as follows. The sequence will 
+  // be maintained. Only continuous observations are included.
+  // step_annotations_with_observations: [
+  //   {
+  //     step_type_id: "s1"
+  //     observations: [o1, o2]
+  //   },
+  //   {
+  //     step_type_id: "s2"
+  //     observations: [o3, o4]
+  //   },
+  //   {
+  //     step_type_id: "s1"
+  //     observations: [o5]
+  //   },
+  //   {
+  //     step_type_id: "s3"
+  //     observations: [o6]
+  //   }
+  // ]
+  repeated StepAnnotationWithObservations step_annotations_with_observations = 8;
+
+  google.protobuf.Timestamp last_updated_time = 9;
+
+  // Statistics or derived metadata about the process instance.
+  ProcessInstanceStats stats = 10;
+
+  // The SOP document source for the process instance if exists. 
+  SopSource sop_source = 11;
+  
+  enum SopGenerationStatus {
+    SOP_GENERATION_STATUS_UNSPECIFIED = 0;
+    SOP_GENERATION_STATUS_GENERATED = 1;
+    SOP_GENERATION_STATUS_FAILED = 2;
+    SOP_GENERATION_STATUS_IN_PROGRESS = 3;
+  }
+  // The status of the SOP generation for the process instance.
+  SopGenerationStatus sop_generation_status = 12;
+}
+
+// Statistics or derived metadata about a StepNodeInstance.
+message StepNodeInstanceStats {
+  // The time taken to complete the step in seconds.
+  // Calculated as the difference between the timestamp of the last
+  // observation of the instance and the last observation of the
+  // previous step node instance. If the instance is the first SI instance in the PI,
+  // then the time taken is the difference between the timestamp of the
+  // last and first observation of the instance (0 if there's just one observation).
+  int32 time_taken_seconds = 1;
+}
+
+
+// A single instance of a step node in a process instance.
+message StepNodeInstance {
+  // The id of the step node
+  string step_node_id = 1;
+
+  // The attributes of the step node observation
+  map<string, AttributeValue> attributes = 2;
+
+  // The observations of the step node execution, including 
+  // actions descriptions, screenshots, etc.
+  // for the "Documentation" feature, also helpful for viewing
+  // the actions inside a step node execution.
+  repeated Observation observations = 3;
+
+  // Statistics or derived metadata about this step node instance.
+  StepNodeInstanceStats stats = 4;
+}
+
+

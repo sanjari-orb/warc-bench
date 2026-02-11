@@ -9,7 +9,7 @@ from orby.digitalagent.utils.action_parsing_utils import (
     BID_TO_COORDINATE_ACTION_CONVERSION_TABLE,
     extract_info_from_browsergym_action,
 )
-from pb.v1alpha1.element_pb2 import Element
+from orby.pb.v1alpha1.element_pb2 import Element
 
 
 class ActionError(Enum):

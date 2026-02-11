@@ -1,0 +1,61 @@
+syntax = "proto3";
+package pb.v1alpha1;
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+message Execution {
+  string id = 1;
+  string display_name = 2;
+  string workflow_id = 3;
+  // Time when the execution is discovered
+  google.protobuf.Timestamp discover_time = 4;
+  // Time when the execution starts.
+  google.protobuf.Timestamp start_time = 5;
+  // Time when the execution is completed(whether successfully or not).
+  google.protobuf.Timestamp end_time = 6;
+  google.protobuf.Timestamp last_updated_time = 7;
+  ExecutionGroupStatus status = 8;
+  string error_message = 9;
+  common.DeletedObjectInfo deleted_object_info = 10;
+  string message_id = 11;
+  string task_id = 12;
+  int32 total_review_tasks = 13;
+  repeated ChildExecution child_executions = 14;
+  string org_id = 15;
+}
+
+enum ExecutionGroupStatus {
+  STATUS_UNSPECIFIED = 0;
+  // the execution has been discovered and created, but we haven't started execution.
+  PENDING = 1;
+  // the execution has been picked up.
+  EXECUTING = 2;
+  // the execution is suspended and waiting for human review.
+  WAITING_FOR_REVIEW = 3;
+  // the execution has finished successfully.
+  SUCCESS = 4;
+  // there was error when executing the workflow and we cannot recover from it.
+  // for other cases, there could be unexpected errors which cause direct failure.
+  FAIL = 5;
+  // the execution was terminated by the user.
+  TERMINATED = 6;
+  // This represents blocked workflows
+  BLOCKED = 7;
+  // This represents executions where child executions have failed
+  COMPLETED_WITH_FAILURES = 8;
+}
+
+message ChildExecution {
+  string id = 1;
+  ExecutionGroupStatus status = 2;
+  // Time when the execution starts.
+  google.protobuf.Timestamp start_time = 3;
+  // Time when the execution is completed(whether successfully or not).
+  google.protobuf.Timestamp end_time = 4;
+  // Time when the execution is discovered
+  google.protobuf.Timestamp discover_time = 5;
+  string parent_task_id = 6;
+}

@@ -22,7 +22,7 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-from fm import action_data_pb2 as fm_dot_action__data__pb2
+from orby.protos.fm import action_data_pb2 as fm_dot_action__data__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x66m/trajectory_data.proto\x12\x02\x66m\x1a\x14\x66m/action_data.proto\"\xe4\x03\n\x0eTrajectoryData\x12\x14\n\x08\x62\x61se_url\x18\x01 \x01(\tB\x02\x18\x01\x12\x0c\n\x04goal\x18\x02 \x01(\t\x12\x1f\n\x07\x61\x63tions\x18\x03 \x03(\x0b\x32\x0e.fm.ActionData\x12\x33\n\x07success\x18\x04 \x01(\x0b\x32 .fm.TrajectoryData.ResultSuccessH\x00\x12\x33\n\x07\x66\x61ilure\x18\x05 \x01(\x0b\x32 .fm.TrajectoryData.ResultFailureH\x00\x12\x0e\n\x06\x64omain\x18\x06 \x01(\t\x1a\x1f\n\rResultSuccess\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\t\x1a\xe7\x01\n\rResultFailure\x12H\n\x0f\x66\x61ilure_message\x18\x01 \x01(\x0e\x32/.fm.TrajectoryData.ResultFailure.FailureMessage\"\x8b\x01\n\x0e\x46\x61ilureMessage\x12\x1f\n\x1b\x46\x41ILURE_MESSAGE_UNSPECIFIED\x10\x00\x12\x16\n\x12MAX_STEPS_EXCEEDED\x10\x01\x12\x15\n\x11REPORT_INFEASIBLE\x10\x02\x12\x16\n\x12REPETITIVE_ACTIONS\x10\x03\x12\x11\n\rUNKNOWN_ERROR\x10\x04\x42\x08\n\x06resultB5Z3github.com/orby-ai-engineering/web-api-server/pb/fmb\x06proto3')

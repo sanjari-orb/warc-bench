@@ -6,11 +6,44 @@ from setuptools.command.build_py import build_py
 
 
 class BuildPyCommand(build_py):
-    """Custom build command that runs npm build in webreplay-standalone and ensures files are copied to the package."""
+    """Custom build command that runs npm build in webreplay-standalone and compiles protobuf files."""
 
     def run(self):
         # Run the standard build_py first to create the directory structure
         build_py.run(self)
+
+        # Compile protobuf files
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        src_dir = os.path.join(project_root, "src")
+        pb_proto_dir = os.path.join(src_dir, "pb", "v1alpha1")
+
+        if os.path.exists(pb_proto_dir):
+            print("Compiling protobuf files...")
+            try:
+                # Check if protoc is installed
+                subprocess.check_call(["protoc", "--version"], stdout=subprocess.PIPE)
+
+                # Compile element.proto
+                element_proto = os.path.join(pb_proto_dir, "element.proto")
+                if os.path.exists(element_proto):
+                    subprocess.check_call(
+                        ["protoc", f"--python_out={src_dir}", "pb/v1alpha1/element.proto"],
+                        cwd=src_dir,
+                        stdout=subprocess.PIPE
+                    )
+                    print("Successfully compiled protobuf files")
+                else:
+                    print(f"Warning: element.proto not found at {element_proto}")
+
+            except subprocess.CalledProcessError as e:
+                print(f"Error: Failed to compile protobuf files: {e}", file=sys.stderr)
+                raise
+            except FileNotFoundError:
+                print(
+                    "Error: protoc not found. Please install Protocol Buffers compiler.",
+                    file=sys.stderr,
+                )
+                raise
 
         # Run npm build in webreplay-standalone directory
         project_root = os.path.dirname(os.path.abspath(__file__))

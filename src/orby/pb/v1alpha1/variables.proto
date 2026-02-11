@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+import "pb/v1alpha1/document.proto";
+import "pb/v1alpha1/element.proto";
+import "pb/v1alpha1/field.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+/**
+ * Data model for variable types and values for workflows.
+ *
+ * There are two categories of variables we expose in the UI:
+ * 1. Workflow action output variables
+ * For most actions, there is either no output or the type can be inferred from the action,
+ * so we don't need to explicitly store the variable type.
+ * The exceptions are:
+ * a. Extraction (either from web page or document)
+ * b. JSFunction action for custom logic
+ * c. Other smart actions
+ * In these cases, we need to explicitly define the variable type and store in the Action.
+ * Smart actions currently use FieldGroup to define output schema, the type definition should be 
+ * expressive enough to map to FieldGroup and vice versa.
+ *
+ * 2. Workflow environment variables
+ * User can provide override values for these variables to use in an execution,
+ * or it can be passed from one process to another.
+ * 
+ * Next ID: 12
+ */
+ message VariableType {
+  oneof type {
+    TextField text = 1;
+    IntegerField integer = 2;
+    FloatField float = 3;
+    BoolField boolean = 4;
+    DateField date = 5;
+    MoneyField money = 6;
+    SelectField select = 7;
+    RecordType record = 8;
+    ArrayType array = 9;
+    ResourceType resource = 10;
+  }
+}
+
+/**
+ * Types of external resources that can be referenced in workflows.
+ * They could represent different components of web pages/desktop UI that actions
+ * can interact with or extract data from during automation.
+ */
+ enum ResourceType {
+  RESOURCE_TYPE_UNSPECIFIED = 0;
+  ELEMENT = 1;
+  ELEMENT_LOCATOR = 2;
+  DOCUMENT = 3;
+}
+
+message RecordType {  
+  map<string, VariableType> fields = 2;
+}
+
+message ArrayType {
+  VariableType entry_type = 1;
+}
+
+// Represents a variable and contains its value.
+// Next ID: 14
+message VariableValue {
+  oneof value {
+    TextField.Value text = 1;
+    IntegerField.Value integer = 2;
+    FloatField.Value float = 3;
+    BoolField.Value boolean = 4;
+    DateField.Value date = 5;
+    MoneyField.Value money = 6;
+    SelectField.Value select = 7;
+    RecordValue record = 8;
+    ArrayValue array = 9;
+    Element element = 10;
+    ElementLocator element_locator = 11;
+    Document document = 12;
+  }
+}
+
+message RecordValue {
+  map<string, VariableValue> fields = 1;
+}
+
+message ArrayValue {
+  repeated VariableValue entries = 1;
+}
+
+// A variable is a named variable type and its value.
+message Variable {
+  string name = 1;
+  VariableType type = 2;
+  VariableValue value = 3;
+}

@@ -1,8 +1,8 @@
 run_name: test
 
 runner:
-  threads: 1
-  output_dir: s3://orby-llm/browsergym_eval
+  threads: 4
+  output_dir: ./eval_outputs  # Use local path to save trajectories for viewing, or S3 path for remote storage
   wandb_project: sva_benchmark
   seed: 17
   timeout_secs: 600
@@ -19,8 +19,8 @@ agents:
     model_config_name: claude
 benchmarks:
   subtaskbench:
-    dataset: subtaskbench_test
-    max_examples: 1
+    dataset: subtaskbench_manual
+    max_examples: 10
     max_steps: 20
     headless: false
     reset_env: false
@@ -28,7 +28,7 @@ benchmarks:
       # Size to use for headless mode
       width: 1272
       height: 859 # 720 original recorded height + 40 debugger banner height + 100 b/c somehow the height is at 620 when 760 is set here. But we need to offset by a pixel to get 1280x720.
-    example_ids_to_skip:
+    example_ids_to_skip: # Skip these tasks due to environment issues
       - browsergym/subtaskbench.online.31
       - browsergym/subtaskbench.online.33
       - browsergym/subtaskbench.online.41

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, Any, Tuple, List
 
-from orby.digitalagent.agent.sva_v3 import SvaV3, ExecutorResponse, RewardModelResponse
+from orby.digitalagent.agent.sva_v4 import SvaV4, ExecutorResponse
 from orby.digitalagent.utils.action_parsing_utils import (
     extract_content_by_tags,
     extract_action,
@@ -30,17 +30,17 @@ class ClaudeComputerUseResponse:
     raw_action_input: Dict[str, Any] = None
 
 
-class ClaudeComputerUseAgent(SvaV3):
+class ClaudeComputerUseAgent(SvaV4):
     """
-    ClaudeComputerUseAgent is based on SVA V3 but adapted for Claude's Computer Use model.
-    
-    Key differences from SVA V3:
+    ClaudeComputerUseAgent is based on SVA V4 but adapted for Claude's Computer Use model.
+
+    Key differences from SVA V4:
     1. Uses different prompt templates optimized for Claude's Computer Use capabilities
-    2. Handles Claude Computer Use action space and converts to SVA V3's BrowserGym action space
+    2. Handles Claude Computer Use action space and converts to SVA V4's BrowserGym action space
     3. Implements response parsing logic tailored to the unique tool use output format of Claude Computer Use
-    4. Does not make explicit reward model calls because claude cua model is checks if the task is complete in the same turn
-    
-    This agent maintains the similar overall architecture and action space as SVA V3 (executor model calls)
+    4. Uses Claude's native tool use API instead of text-based action generation
+
+    This agent maintains the similar overall architecture and action space as SVA V4 (single model call)
     but with Claude-specific adaptations for action conversion and tool use integration.
     """
 
@@ -53,7 +53,7 @@ class ClaudeComputerUseAgent(SvaV3):
     ):
         """
         Initialize the ClaudeComputerUseAgent.
-        
+
         Args:
             actions (str): Action space specification (inherited from parent)
             model_configs (dict): Configuration for the executor model
@@ -61,8 +61,8 @@ class ClaudeComputerUseAgent(SvaV3):
             claude_prompt_template_path (str): Path to Claude-specific prompt templates
         """
         action_history_length = 0
-        
-        super().__init__(actions, model_configs, None, action_history_length)
+
+        super().__init__(actions, model_configs, action_history_length)
         
         # Claude-specific prompt template path
         self.claude_prompt_template_path = claude_prompt_template_path

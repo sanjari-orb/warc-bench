@@ -1,10 +1,10 @@
 import numpy as np
 import os
 from google.cloud import storage
-from pb.v1alpha1.orbot_workflow_pb2 import Workflow
-from pb.v1alpha1.orbot_action_pb2 import UiState
-from pb.v1alpha1.element_pb2 import Element, Rect
-from pb.v1alpha1.document_pb2 import DocumentBlob
+from orby.pb.v1alpha1.orbot_workflow_pb2 import Workflow
+from orby.pb.v1alpha1.orbot_action_pb2 import UiState
+from orby.pb.v1alpha1.element_pb2 import Element, Rect
+from orby.pb.v1alpha1.document_pb2 import DocumentBlob
 from orby.protos.fm.action_data_pb2 import ActionData, WebState, Viewport
 from pymongo import MongoClient
 from bson.objectid import ObjectId

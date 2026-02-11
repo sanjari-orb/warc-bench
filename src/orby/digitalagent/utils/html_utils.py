@@ -1,4 +1,4 @@
-from pb.v1alpha1 import element_pb2
+from orby.pb.v1alpha1 import element_pb2
 from lxml import html
 
 from orby.digitalagent.utils.dom_utils import ELEMENTS_TO_REMOVE

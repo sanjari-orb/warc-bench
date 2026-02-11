@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+// Data model for a function that can passed around for generation and execution.
+// Next ID: 4
+message Function {
+  // NL description that produced the function
+  string description = 1;
+
+  // list of parameter names in function signature; order matters
+  // This is not the same as the name of the variable input
+  repeated string param_names = 2;
+
+  // TypeScript function body
+  string body = 3;
+}

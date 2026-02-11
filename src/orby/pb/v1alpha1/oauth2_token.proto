@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+// Designed based on https://pkg.go.dev/golang.org/x/oauth2#Token
+// Excluding the "raw" field which is not used in our codebase now.
+message Oauth2Token {
+  string access_token = 1;
+  string token_type = 2;
+  string refresh_token = 3;
+  google.protobuf.Timestamp expiry = 4;
+}
+
+message ExchangeAuthCodeRequest {
+  // The grant type for the token exchange.
+  // Possible values are "authorization_code" and "refresh_token".
+  string grant_type = 1;
+  // Auth Code in case of grant_type="authorization_code"
+  string code = 2;
+  // Refresh token in case of grant_type="refresh_token"
+  string refresh_token = 3;
+  string client_id = 4;
+  string client_secret = 5;
+}

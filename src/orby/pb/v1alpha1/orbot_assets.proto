@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package pb.v1alpha1;
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
+
+// File generated during action recording
+message RecordedFile {
+  string id = 1;
+  string url = 2;
+}
+
+// A snapshot of the UI.
+// Next ID: 6
+message UiState {
+  // Screenshot image of the viewport.
+  RecordedFile viewport_screenshot = 1;
+
+  // Pixel width of the viewport. Both viewport_width and viewport_height
+  // should correspond to the bounding box in element. However, they
+  // might not be consistent with the screenshot due to device pixel ratio.
+  int32 viewport_width = 2;
+  
+  // Pixel height of the viewport. See comment above for more info.
+  int32 viewport_height = 3;
+
+  // Binary proto of the root element of the UI.
+  RecordedFile root_element = 4 [deprecated = true];
+
+  // Binary proto of the root element wrapper of the UI.
+  // The file should be of the ElementWrapper proto
+  RecordedFile root_element_wrapper = 6;  
+
+  // URL of the page.
+  string url = 5;
+  
+  // Time when the snapshot was captured.
+  google.protobuf.Timestamp captured_at = 47;
+}

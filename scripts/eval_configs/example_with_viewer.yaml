@@ -1,0 +1,31 @@
+run_name: example_with_trajectories
+
+runner:
+  threads: 1  # Use 1 thread for easier debugging
+  output_dir: ./eval_outputs  # Local path to save trajectories for viewing
+  timeout_secs: 600
+
+model_configs:
+  claude:
+    provider: anthropic
+    name: claude-sonnet-4-20250514
+    temperature: 0
+    max_tokens: 1024
+
+agents:
+  sva_v4_eval:
+    name: sva_v4
+    model_config_name: claude
+
+benchmarks:
+  subtaskbench_sample:
+    dataset: subtaskbench_test
+    max_steps: 20
+    headless: false  # Set to false to see the browser
+    viewport_size:
+      width: 1272
+      height: 859
+    example_ids:  # Run just a few examples for testing
+      - browsergym/subtaskbench.online.0
+      - browsergym/subtaskbench.online.1
+      - browsergym/subtaskbench.online.2
