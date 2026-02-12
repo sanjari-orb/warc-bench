@@ -120,9 +120,9 @@ results = eval_runner.run_evaluation(eval_config)
 ```
 
 
-### Agent Architecture: SvaV4
+### Agent Architecture: Subtask Vision Agent V4 (SvaV4)
 
-The main agent implementation is `SvaV4`, a pure-vision agent designed for short-horizon subtasks (typically 5 steps or less).
+The main agent implementation is Subtask Vision Agent V4 (`SvaV4`), a pure-vision agent designed for short-horizon subtasks (typically 5 steps or less).
 
 **Features:**
 - Single model call for efficiency
