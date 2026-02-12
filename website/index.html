@@ -3,7 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WARC-Bench - Web Archive Based Benchmark for GUI Subtask Executions</title>
+    <title>WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="WARC-Bench is a comprehensive benchmark featuring 438 carefully designed tasks that evaluate AI agents on GUI subtasks using web archive files as interactive environments.">
+    <meta name="keywords" content="web agents, GUI automation, benchmark, WARC, subtasks, AI, machine learning, web navigation">
+    <meta name="author" content="WARC-Bench Team">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions">
+    <meta property="og:description" content="A comprehensive benchmark with 438 tasks for evaluating AI agents on web GUI subtasks. Features sandboxed interactions with archived websites and training support for SFT/RLVR.">
+    <meta property="og:image" content="https://sanjari-orb.github.io/warc-bench/main_figure.png">
+    <meta property="og:url" content="https://sanjari-orb.github.io/warc-bench/">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WARC-Bench: Web Archive Based Benchmark for GUI Subtasks">
+    <meta name="twitter:description" content="438 carefully designed tasks for evaluating AI agents on web GUI subtasks">
+    <meta name="twitter:image" content="https://sanjari-orb.github.io/warc-bench/main_figure.png">
+
     <style>
         * {
             margin: 0;
@@ -14,427 +33,376 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #222;
             background-color: #fff;
+            font-size: 16px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        /* Header Section */
+        /* Header */
         header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
-            color: white;
+            padding: 30px 0;
+            border-bottom: 1px solid #ddd;
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #111;
         }
 
-        .subtitle {
-            font-size: 1.2em;
-            font-weight: 300;
-            margin-bottom: 30px;
-            opacity: 0.95;
+        .authors {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
         }
 
-        /* Links Section */
+        /* Navigation Links */
         .links {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 15px;
         }
 
-        .link-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 24px;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
+        .links a {
+            color: #0066cc;
             text-decoration: none;
-            border-radius: 6px;
             font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.95em;
+            padding: 5px 10px;
+            border: 1px solid #0066cc;
+            border-radius: 3px;
+            transition: all 0.2s;
         }
 
-        .link-button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        .links a:hover {
+            background-color: #0066cc;
+            color: white;
         }
 
-        .link-button svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
+        /* Main Content */
+        main {
+            padding: 30px 0;
         }
 
-        /* Section Styling */
         section {
-            margin: 60px 0;
+            margin-bottom: 35px;
         }
 
         h2 {
-            font-size: 2em;
-            margin-bottom: 25px;
-            color: #2c3e50;
-            text-align: center;
-        }
-
-        .section-divider {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-            margin: 0 auto 40px;
-            border-radius: 2px;
-        }
-
-        /* Abstract Section */
-        .abstract {
-            background-color: #f8f9fa;
-            padding: 40px;
-            border-radius: 10px;
-            border-left: 4px solid #2d3436;
-        }
-
-        .abstract p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #555;
+            font-size: 1.5em;
             margin-bottom: 15px;
+            color: #111;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
         }
 
-        /* Video Gallery */
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .video-item {
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .video-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .video-item h3 {
+        h3 {
             font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #34495e;
+            margin: 20px 0 10px 0;
+            color: #222;
         }
 
-        .video-wrapper {
-            width: 100%;
-            background-color: #000;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-bottom: 15px;
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
         }
 
-        .video-wrapper img {
-            width: 100%;
+        ul {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .hero-image img {
+            max-width: 100%;
             height: auto;
-            display: block;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .video-description {
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.5;
+        /* Performance Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Disclaimer Box */
-        .disclaimer {
-            background-color: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 40px;
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        /* Code blocks */
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        code {
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9em;
+        }
+
+        /* Demo videos */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0 35px 0;
+        }
+
+        .demo-item {
             text-align: center;
         }
 
-        .disclaimer h3 {
-            color: #856404;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+        .demo-item img {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
 
-        .disclaimer p {
-            color: #856404;
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin: 0;
+        .demo-item p {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
         }
 
-        /* Citation Section */
+        /* Citation */
         .citation {
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 40px;
-        }
-
-        .citation h3 {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            color: #2c3e50;
+            background-color: #f9f9f9;
+            border-left: 3px solid #333;
+            padding: 15px;
+            margin: 15px 0;
         }
 
         .citation pre {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .feature-card h3 {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #2d3436;
-        }
-
-        .feature-card p {
-            color: #555;
-            line-height: 1.6;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            margin: 0;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
             color: #666;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 80px;
+            font-size: 0.9em;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
 
-            .subtitle {
-                font-size: 1em;
+            h2 {
+                font-size: 1.3em;
             }
 
-            .video-gallery {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .demo-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .links {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .link-button {
-                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>WARC-Bench</h1>
-            <p class="subtitle">Web Archive Based Benchmark for GUI Subtask Executions</p>
-
-            <div class="links">
-                <a href="#" class="link-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Paper
-                </a>
-                <a href="#" class="link-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                    arXiv
-                </a>
-                <a href="https://github.com/orby-ai-engineering/warc-bench" class="link-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
-                <a href="#" class="link-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Dataset
-                </a>
-                <a href="#" class="link-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                    Leaderboard
-                </a>
-            </div>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Abstract Section -->
-        <section id="abstract">
-            <h2>Abstract</h2>
-            <div class="section-divider"></div>
-            <div class="abstract">
+        <header>
+            <h1>WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions</h1>
+            <p class="authors">Sanjari Srivastava, Gang Li, Cheng Chang, Rishu Garg, Manpreet Kaur, Charlene Y. Lee, Yuezhang Li, Yining Mao, Ignacio Cases, Yanan Xie, Peng Qi</p>
+
+            <nav class="links">
+                <a href="https://arxiv.org/abs/2510.09872">Paper</a>
+                <a href="https://github.com/sanjari-orb/warc-bench">GitHub</a>
+                <a href="https://huggingface.co/Uniphore/actio-ui-7b-sft">Models</a>
+                <a href="https://github.com/sanjari-orb/warc-bench/blob/main/docs/TRAJECTORY_VIEWER.md">Documentation</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Abstract -->
+            <section>
+                <h2>Overview</h2>
                 <p>
-                    We present Orby Web Agent, a comprehensive framework for developing and evaluating vision-based web agents using WARC (Web ARChive) file servers and BrowserGym environments. Our system enables realistic benchmarking of automated web interaction by serving archived web pages as live websites, providing reproducible and controlled testing environments.
+                    Training web agents to navigate complex, real-world websites requires them to master <strong>subtasks</strong>—short-horizon interactions on multiple UI components (e.g., choosing the correct date in a date picker, or scrolling in a container to extract information). WARC-Bench addresses this critical capability gap with:
                 </p>
-                <p>
-                    The framework features SvaV4, a pure-vision agent optimized for short-horizon tasks with combined task completion evaluation and action generation in a single model call. Our approach supports diverse web automation scenarios including both real-world environments (ZenDesk, GitHub) and synthetic test cases, enabling comprehensive evaluation of agent capabilities across different interaction patterns.
+                <ul>
+                    <li><strong>438 diverse tasks</strong> designed to evaluate multimodal AI agents on web subtasks</li>
+                    <li><strong>Sandboxed interactions</strong> with dynamic and realistic webpages using Web ARChive files</li>
+                    <li><strong>Challenging benchmark:</strong> Leading computer-use models achieve up to 64.8% success rate</li>
+                    <li><strong>Training support:</strong> Includes infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)</li>
+                    <li><strong>Scalable by Design:</strong> Easy-to-use tools for extending tasks by recording and adding web archive files</li>
+                </ul>
+
+                <!-- Diagram -->
+                <div class="hero-image">
+                    <img src="main_figure.png" alt="WARC-Bench overview diagram showing benchmark architecture">
+                </div>
+            </section>
+
+            <!-- What are Subtasks -->
+            <section>
+                <h2>What are Subtasks?</h2>
+                <p>Subtasks are fundamental, short-horizon interactions that agents must master to navigate real-world websites effectively. Examples include:</p>
+                <ul>
+                    <li><strong>Date pickers:</strong> Selecting specific dates across various calendar UI designs</li>
+                    <li><strong>Scrolling containers:</strong> Extracting information by scrolling within specific page elements</li>
+                    <li><strong>Dropdown menus:</strong> Navigating and selecting from complex multi-level dropdowns</li>
+                    <li><strong>Form interactions:</strong> Filling out forms with proper validation and error handling</li>
+                    <li><strong>Dynamic content:</strong> Interacting with JavaScript-heavy components that update asynchronously</li>
+                </ul>
+                <p>These capabilities form the building blocks for more complex web navigation tasks.</p>
+
+                <h3>Examples of WARC-based Environments</h3>
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <img src="video1.gif" alt="ZenDesk subtask environment" loading="lazy">
+                        <p>ZenDesk - Customer support interface navigation</p>
+                    </div>
+                    <div class="demo-item">
+                        <img src="video2.gif" alt="GitHub subtask environment" loading="lazy">
+                        <p>GitHub - Repository navigation and interaction</p>
+                    </div>
+                    <div class="demo-item">
+                        <img src="video3.gif" alt="Form filling subtask environment" loading="lazy">
+                        <p>Complex form filling with validation</p>
+                    </div>
+                    <div class="demo-item">
+                        <img src="video4.gif" alt="Calendar picker subtask environment" loading="lazy">
+                        <p>Calendar picker interaction</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance -->
+            <section>
+                <h2>Performance Benchmarks</h2>
+                <p>Leading computer-use models achieve up to 64.8% success rate on the test set:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Dev Success Rate</th>
+                            <th>Test Success Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Claude Sonnet 4.0 (2025-05-14)</td>
+                            <td>83.61%</td>
+                            <td>64.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Ours-72B-SFT</td>
+                            <td>75.9%</td>
+                            <td>48.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Ours-72B-RLVR (SFT+RLVR)</td>
+                            <td>84.3%</td>
+                            <td>52.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-style: italic; color: #555;">
+                    Our analysis shows that mastering these subtasks is essential for robust web planning and navigation—a capability not extensively evaluated by existing benchmarks.
                 </p>
-                <p>
-                    This work provides researchers and practitioners with a unified toolkit for developing, testing, and benchmarking web agents in reproducible environments, advancing the state of automated web interaction and multi-step task completion.
-                </p>
-            </div>
-        </section>
+            </section>
 
-        <!-- Key Features -->
-        <section id="features">
-            <h2>Key Features</h2>
-            <div class="section-divider"></div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>WARC-Based Replay</h3>
-                    <p>Serve archived web pages as live websites for reproducible benchmarking with controlled, deterministic environments.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Vision-Driven Agent</h3>
-                    <p>SvaV4 agent uses pure vision for web interaction with efficient single-call execution for short-horizon tasks.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>BrowserGym Integration</h3>
-                    <p>Seamless integration with BrowserGym for standardized action spaces including click, type, scroll, and more.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Comprehensive Evaluation</h3>
-                    <p>Built-in evaluation framework with trajectory recording, visualization, and task completion metrics.</p>
-                </div>
-            </div>
-        </section>
+            <!-- Quick Start -->
+            <section>
+                <h2>Quick Start</h2>
+                <pre><code># Clone the repository
+git clone https://github.com/sanjari-orb/warc-bench.git
+cd warc-bench
 
-        <!-- Demonstrations -->
-        <section id="demonstrations">
-            <h2>Demonstrations</h2>
-            <div class="section-divider"></div>
+# Install in editable mode
+pip install -e .
 
-            <div class="disclaimer">
-                <h3>Disclaimer</h3>
-                <p>
-                    The names and data portrayed in these demonstrations are either synthetic or sourced from openly
-                    available real websites. 
-                </p>
-            </div>
+# Run benchmark evaluation
+python scripts/run_eval.py scripts/eval_configs/subtask.yaml
 
-            <div class="video-gallery">
-                <div class="video-item">
-                    <h3>Real World: ZenDesk Environment</h3>
-                    <div class="video-wrapper">
-                        <img src="video1.gif" alt="ZenDesk demonstration showing agent interaction">
-                    </div>
-                    <p class="video-description">
-                        Agent navigating a real-world customer support interface from ZenDesk, demonstrating multi-step task completion.
-                    </p>
+# View agent trajectories with interactive web UI
+streamlit run scripts/trajectory_viewer.py</code></pre>
+            </section>
+
+            <!-- Key Features -->
+            <section>
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>438 diverse tasks</strong> designed to evaluate multimodal AI agents on web subtasks</li>
+                    <li><strong>Sandboxed interactions</strong> with dynamic and realistic webpages using Web ARChive files</li>
+                    <li><strong>Challenging benchmark:</strong> Leading computer-use models achieve up to 64.8% success rate</li>
+                    <li><strong>Training support:</strong> Infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)</li>
+                    <li><strong>Local trajectory viewer:</strong> Streamlit-based viewer to inspect agent behavior, prompts, and responses</li>
+                    <li><strong>Scalable by design:</strong> Easy-to-use tools for extending tasks by recording and adding web archive files</li>
+                </ul>
+            </section>
+
+            <!-- Citation -->
+            <section>
+                <h2>Citation</h2>
+                <p>If you use WARC-Bench in your research, please cite:</p>
+                <div class="citation">
+                    <pre><code>@misc{srivastava2025warcbenchwebarchivebased,
+      title={WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions},
+      author={Sanjari Srivastava and Gang Li and Cheng Chang and Rishu Garg and Manpreet Kaur and Charlene Y. Lee and Yuezhang Li and Yining Mao and Ignacio Cases and Yanan Xie and Peng Qi},
+      year={2025},
+      eprint={2510.09872},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2510.09872},
+}</code></pre>
                 </div>
+            </section>
+        </main>
 
-                <div class="video-item">
-                    <h3>Real World: GitHub Repository</h3>
-                    <div class="video-wrapper">
-                        <img src="video2.gif" alt="GitHub demonstration showing agent interaction">
-                    </div>
-                    <p class="video-description">
-                        Agent interacting with a public GitHub repository, showcasing navigation and information extraction capabilities.
-                    </p>
-                </div>
-
-                <div class="video-item">
-                    <h3>Synthetic Environment: Form Interaction</h3>
-                    <div class="video-wrapper">
-                        <img src="video3.gif" alt="Synthetic environment demonstration 1">
-                    </div>
-                    <p class="video-description">
-                        Agent completing complex form interactions in a controlled synthetic environment designed for evaluation.
-                    </p>
-                </div>
-
-                <div class="video-item">
-                    <h3>Synthetic Environment: Multi-Step Navigation</h3>
-                    <div class="video-wrapper">
-                        <img src="video4.gif" alt="Synthetic environment demonstration 2">
-                    </div>
-                    <p class="video-description">
-                        Agent performing multi-step navigation tasks in a synthetic environment with dynamic content.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Citation -->
-        <section id="citation">
-            <h2>Citation</h2>
-            <div class="section-divider"></div>
-            <div class="citation">
-                <h3>BibTeX</h3>
-                <pre><code>@misc{srivastava2025warcbenchwebarchivebased,
-                    title={WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions}, 
-                    author={Sanjari Srivastava and Gang Li and Cheng Chang and Rishu Garg and Manpreet Kaur and Charlene Y. Lee and Yuezhang Li and Yining Mao and Ignacio Cases and Yanan Xie and Peng Qi},
-                    year={2025},
-                    eprint={2510.09872},
-                    archivePrefix={arXiv},
-                    primaryClass={cs.LG},
-                    url={https://arxiv.org/abs/2510.09872}, 
-              }</code></pre>
-            </div>
-        </section>
+        <footer>
+            <p>&copy; 2025 WARC-Bench. All rights reserved.</p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2024 WARC-Bench. All rights reserved.</p>
-        <p>Built with WARC replay technology and BrowserGym environments.</p>
-    </footer>
 </body>
 </html>
