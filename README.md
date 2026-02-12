@@ -221,13 +221,6 @@ Protocol buffer definitions for data interchange:
 
 ## Development
 
-### Running Benchmark Scripts
-
-```bash
-# Verify WARC server is working
-python scripts/webreplay_server_check.py
-```
-
 ### Adding New Tasks
 
 To add new subtasks to the benchmark:
