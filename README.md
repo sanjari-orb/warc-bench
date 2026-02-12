@@ -12,19 +12,21 @@ Training web agents to navigate complex, real-world websites requires them to ma
 
 - **438 diverse tasks** designed to evaluate multimodal AI agents on web subtasks
 - **Sandboxed interactions** with dynamic and realistic webpages using Web ARChive files
+- **Deterministic rewards**: Each task is configured with a programmatic reward to determine task completion
 - **Challenging benchmark**: Leading computer-use models achieve up to 64.8% success rate
 - **Training support**: Includes infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)
 - **Scalable by Design**: We provide an easy way to allow users to extend the tasks in the benchmark by recording and adding web archive files
 
-### Performance Benchmarks
+### Model Performances on WARC-Bench
 
 | Model | Dev Success Rate | Test Success Rate |
 |----------|-------------|-------------|
-| Claude Sonnet 4.0 (2025-05-14) | 83.61% | 64.8% |
+| Claude Sonnet 4.0 (2025-05-14) | 83.61% | **64.8%** |
 | Ours-72B-SFT | 75.9% | 48.8% |
-| Ours-72B-RLVR (SFT+RLVR) | 84.3% | 52.8% |
+| Ours-72B-RLVR (SFT+RLVR) | **84.3%** | 52.8% |
 
 Our analysis shows that mastering these subtasks is essential for robust web planning and navigation - a capability not extensively evaluated by existing benchmarks.
+Please find performances of other models in our paper **[here](https://arxiv.org/abs/2510.09872)**.
 
 ---
 
