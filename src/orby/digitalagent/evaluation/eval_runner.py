@@ -15,7 +15,6 @@ import sys
 import time
 import tempfile
 from typing import Callable, Optional
-import urllib
 import yaml
 from collections import defaultdict
 
@@ -235,13 +234,17 @@ def run_single_benchmark(
         print(f"Using WA service instance with IP {instance_ip}")
         setup_wa_ips(instance_ip)
 
-    visualizer_url = None
     wait_for_models(agent.model)
     if output_dir:
-        visualizer_url = "https://vis.orbyapi.com/runs/?path=" + urllib.parse.quote(
-            output_dir
-        )
-        print("Visualizer: ", visualizer_url)
+        # Print instructions for using the local trajectory viewer
+        print("=" * 80)
+        print(f"📊 Trajectories will be saved to: {output_dir}")
+        print("")
+        print("To view trajectories after evaluation completes, run:")
+        print("    streamlit run scripts/trajectory_viewer.py")
+        print("")
+        print("The viewer will open in your browser at http://localhost:8501")
+        print("=" * 80)
 
     if benchmark.reset_env and "webarena" in benchmark.dataset:
         # Reset the server
@@ -365,7 +368,17 @@ def run_single_benchmark(
         rewards = final_rewards
 
     print("Success rate:", sum(rewards) / len(rewards))
-    print("Visualizer: ", visualizer_url)
+
+    # Print reminder for viewing trajectories
+    if output_dir:
+        print("")
+        print("=" * 80)
+        print("✅ Evaluation complete!")
+        print(f"📁 Trajectories saved to: {output_dir}")
+        print("")
+        print("To view and analyze the trajectories, run:")
+        print("    streamlit run scripts/trajectory_viewer.py")
+        print("=" * 80)
 
     if instance_release_callback:
         print(f"Release instances")
@@ -374,7 +387,7 @@ def run_single_benchmark(
     return {
         "num_success": sum(rewards),
         "num_total": len(rewards),
-        "visualizer_url": visualizer_url,
+        "output_dir": output_dir,  # Changed from visualizer_url to output_dir
     }
 
 

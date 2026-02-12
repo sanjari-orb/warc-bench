@@ -148,18 +148,58 @@ def main():
                         st.caption("**Action**")
                         st.code(find_action_string(action_data), language="python")
 
-                        # Display agent thinking if available
+                        # Display agent prompt and thinking if available
                         if action_data.agent_state and action_data.agent_state.llm_interactions:
-                            st.caption("**Agent Reasoning**")
-                            for interaction in action_data.agent_state.llm_interactions:
-                                if interaction.response:
-                                    with st.container():
+                            st.caption("**LLM Interaction**")
+                            for llm_idx, interaction in enumerate(action_data.agent_state.llm_interactions):
+                                with st.container():
+                                    # Display model info
+                                    if interaction.model_name:
+                                        st.text(f"Model: {interaction.model_name}")
+
+                                    # Display prompt (llm_messages)
+                                    if interaction.llm_messages:
+                                        st.caption("**Prompt Messages:**")
+                                        for msg_idx, message in enumerate(interaction.llm_messages):
+                                            # Format the message content
+                                            content_parts = []
+                                            for content in message.llm_contents:
+                                                if content.text:
+                                                    content_parts.append(content.text)
+                                                elif content.image_url:
+                                                    content_parts.append(f"[Image: {content.image_url}]")
+
+                                            message_text = "\n".join(content_parts) if content_parts else "(empty message)"
+
+                                            st.text_area(
+                                                f"{message.role.capitalize()} Message",
+                                                message_text,
+                                                height=150,
+                                                key=f"prompt_{idx}_{llm_idx}_{msg_idx}"
+                                            )
+
+                                    # Display response
+                                    if interaction.response:
+                                        st.caption("**Model Response:**")
                                         st.text_area(
-                                            "Model Response",
+                                            "Response",
                                             interaction.response,
                                             height=150,
-                                            key=f"response_{idx}"
+                                            key=f"response_{idx}_{llm_idx}"
                                         )
+
+                        # Show observation details below the reasoning (not nested)
+                        if action_data.after_state and action_data.after_state.browser_gym_observation:
+                            obs = action_data.after_state.browser_gym_observation
+                            show_obs = st.checkbox("Show Full Observation", key=f"show_obs_{idx}")
+                            if show_obs:
+                                st.json({
+                                    "reward": obs.reward,
+                                    "terminated": obs.terminated,
+                                    "truncated": obs.truncated,
+                                    "last_action": obs.last_action,
+                                    "last_action_error": obs.last_action_error,
+                                })
 
                     with col2:
                         # Display screenshot
@@ -167,23 +207,11 @@ def main():
                         if action_data.after_state and action_data.after_state.viewport:
                             try:
                                 image = viewport_to_image(action_data.after_state.viewport, action_data)
-                                st.image(image, use_container_width=True)
+                                st.image(image, use_column_width=True)
                             except Exception as e:
                                 st.error(f"Could not load screenshot: {e}")
                         else:
                             st.info("No screenshot available for this step")
-
-                    # Show observation details in a collapsed section
-                    if action_data.after_state and action_data.after_state.browser_gym_observation:
-                        with st.expander("View Full Observation"):
-                            obs = action_data.after_state.browser_gym_observation
-                            st.json({
-                                "reward": obs.reward,
-                                "terminated": obs.terminated,
-                                "truncated": obs.truncated,
-                                "last_action": obs.last_action,
-                                "last_action_error": obs.last_action_error,
-                            })
 
         except Exception as e:
             st.error(f"Error loading trajectory: {e}")

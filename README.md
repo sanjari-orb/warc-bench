@@ -53,11 +53,16 @@ pip install -e .
 # Check a the subtask environment for a task
 python scripts/webreplay_server_check.py --task-id online.20 --timeout 6000 --debugging-port 4222
 
-# Run benchmark evaluation
+# Run benchmark evaluation (saves trajectories locally to ./eval_outputs)
 python scripts/run_eval.py scripts/eval_configs/subtask.yaml
 
-# View agent trajectories (after running evaluations)
+# View agent trajectories with interactive web UI
 streamlit run scripts/trajectory_viewer.py
+# This opens a local web interface at http://localhost:8501 where you can:
+# - Browse all saved trajectories from evaluation runs
+# - View screenshots and agent actions step-by-step
+# - Inspect complete LLM prompts and model responses
+# - See success/failure status and metrics
 
 # Check out the benchmark tasks here:
 vi src/orby/subtask_benchmark/environments/benchmark.json
@@ -136,6 +141,30 @@ agent = SvaV4(
 # Run on a single task
 result = agent.run_task(task_config)
 ```
+
+### Viewing Trajectories
+
+WARC-Bench includes a local trajectory viewer built with Streamlit that allows you to visualize and inspect agent behavior.
+
+**Launch the viewer:**
+```bash
+streamlit run scripts/trajectory_viewer.py
+```
+
+**Features:**
+- Browse all saved trajectories from evaluation runs
+- View screenshots and agent actions step-by-step
+- Inspect complete LLM prompts sent to the model
+- See model responses and reasoning
+- Success/failure indicators and metrics
+- Works completely offline - no external services needed
+
+**Setup:**
+1. Run evaluations with `output_dir` set to a local path (e.g., `./eval_outputs`)
+2. Trajectories are automatically saved during evaluation
+3. Launch the viewer to inspect saved runs
+
+For more details, see [docs/TRAJECTORY_VIEWER.md](docs/TRAJECTORY_VIEWER.md)
 
 ### WARC Server
 
