@@ -2,7 +2,7 @@
 
 WARC-Bench is a comprehensive benchmark featuring 438 carefully designed tasks that evaluate AI agents on GUI subtasks—short-horizon interactions with user interface components - that form the building blocks of complex web automation. Subtasks include actions like selecting dates in a calendar picker, navigating dropdown menus, scrolling through containers to extract information, or filling out multi-step forms. We use web archive files, which are high-fidelity snapshots of real websites as interactive environments for our benchmark.  
 
-🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 🤖 **[Models](https://huggingface.co/Uniphore/actio-ui-7b-rlvr)** **
+🌐 **[Project Website](https://sanjari-orb.github.io/warc-bench/)** | 📄 **[arXiv Paper](https://arxiv.org/abs/2510.09872)** | 🤖 **[Models](https://huggingface.co/Uniphore/actio-ui-7b-rlvr)** 
 
 ---
 
