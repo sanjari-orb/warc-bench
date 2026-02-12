@@ -19,7 +19,7 @@ Training web agents to navigate complex, real-world websites requires them to ma
 ### Performance Benchmarks
 
 | Model | Dev Success Rate | Test Success Rate |
-|----------|-------------|
+|----------|-------------|-------------|
 | Claude Sonnet 4.0 (2025-05-14) | 83.61% | 64.8% |
 | Ours-72B-SFT | 75.9% | 48.8% |
 | Ours-72B-RLVR (SFT+RLVR) | 84.3% | 52.8% |
