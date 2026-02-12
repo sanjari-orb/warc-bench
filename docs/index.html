@@ -265,20 +265,38 @@
             <section>
                 <h2>Overview</h2>
                 <p>
-                    Training web agents to navigate complex, real-world websites requires them to master <strong>subtasks</strong>—short-horizon interactions on multiple UI components (e.g., choosing the correct date in a date picker, or scrolling in a container to extract information). WARC-Bench addresses this critical capability gap with:
+                    Training web agents to navigate complex, real-world websites requires them to master <strong>subtasks</strong>—short-horizon interactions on multiple UI components (e.g., choosing the correct date in a date picker, or scrolling in a container to extract information). We introduce <strong>WARC-Bench</strong> (Web Archive Benchmark), a novel web navigation benchmark featuring <strong>438 tasks</strong> designed to evaluate multimodal AI agents on subtasks.
                 </p>
-                <ul>
-                    <li><strong>438 diverse tasks</strong> designed to evaluate multimodal AI agents on web subtasks</li>
-                    <li><strong>Sandboxed interactions</strong> with dynamic and realistic webpages using Web ARChive files</li>
-                    <li><strong>Challenging benchmark:</strong> Leading computer-use models achieve up to 64.8% success rate</li>
-                    <li><strong>Training support:</strong> Includes infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)</li>
-                    <li><strong>Scalable by Design:</strong> Easy-to-use tools for extending tasks by recording and adding web archive files</li>
-                </ul>
+                <p>
+                    WARC-Bench enables sandboxed interactions with dynamic and realistic webpages using <strong>Web ARChive files</strong>, ensuring reproducible evaluation on real-world web content. We show that WARC-Bench is challenging for leading computer-use models, with the highest observed success rate being <strong>64.8%</strong>.
+                </p>
+                <p>
+                    To improve open source models on subtasks, we explore two common training techniques: <strong>supervised fine-tuning (SFT)</strong> and <strong>reinforcement learning with verifiable rewards (RLVR)</strong>. Experiments show that SFT models obtain a 48.8% success rate on the benchmark. Training with RLVR over SFT checkpoints, even in data-scarce settings, improves the score to 52.8% on WARC-Bench, outperforming many frontier models.
+                </p>
 
                 <!-- Diagram -->
                 <div class="hero-image">
                     <img src="main_figure.png" alt="WARC-Bench overview diagram showing benchmark architecture">
                 </div>
+            </section>
+
+            <!-- Why WARC-Bench -->
+            <section>
+                <h2>Why WARC-Bench?</h2>
+                <p>
+                    Existing web navigation benchmarks primarily focus on end-to-end task completion, but overlook the fundamental building blocks: <strong>subtask execution</strong>. Mastering these subtasks is essential for robust web planning and navigation, yet this capability has not been extensively evaluated.
+                </p>
+                <p>
+                    WARC-Bench addresses this gap by:
+                </p>
+                <ul>
+                    <li><strong>Reproducible evaluation:</strong> Using web archive files ensures consistent testing conditions, eliminating website changes and availability issues</li>
+                    <li><strong>Real-world complexity:</strong> Tasks based on actual websites with dynamic JavaScript, complex layouts, and diverse interaction patterns</li>
+                    <li><strong>Verifiable rewards:</strong> Tasks use programmatic checks to determine completion, enabling automatic evaluation and reinforcement learning with reliable reward signals</li>
+                    <li><strong>Granular assessment:</strong> Focus on individual subtasks reveals specific weaknesses in agent capabilities</li>
+                    <li><strong>Training infrastructure:</strong> Complete pipeline for supervised fine-tuning and reinforcement learning with verifiable rewards</li>
+                    <li><strong>Scalable design:</strong> Tools for extending the benchmark by recording and adding new web archive files</li>
+                </ul>
             </section>
 
             <!-- What are Subtasks -->
@@ -317,8 +335,10 @@
 
             <!-- Performance -->
             <section>
-                <h2>Performance Benchmarks</h2>
-                <p>Leading computer-use models achieve up to 64.8% success rate on the test set:</p>
+                <h2>Performance Results</h2>
+                <p>
+                    We evaluate both frontier closed-source models and our trained open-source models on WARC-Bench. The results reveal significant challenges even for state-of-the-art systems:
+                </p>
 
                 <table>
                     <thead>
@@ -347,9 +367,12 @@
                     </tbody>
                 </table>
 
-                <p style="font-style: italic; color: #555;">
-                    Even state-of-the-art models struggle with these subtasks, highlighting significant room for improvement in web agent capabilities.
-                </p>
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>Challenging for frontier models:</strong> Even Claude Sonnet 4.0 achieves only 64.8% on the test set, showing substantial room for improvement</li>
+                    <li><strong>RLVR improves over SFT:</strong> Reinforcement learning with verifiable rewards boosts performance from 48.8% to 52.8%, demonstrating the value of reward-based training even in data-scarce settings</li>
+                    <li><strong>Open-source potential:</strong> Our trained models can outperform many frontier systems on specific subtasks, showing promise for specialized open-source agents</li>
+                </ul>
             </section>
 
             <!-- Quick Start -->
