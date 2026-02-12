@@ -332,7 +332,7 @@
                         <tr>
                             <td>Claude Sonnet 4.0 (2025-05-14)</td>
                             <td>83.61%</td>
-                            <td>64.8%</td>
+                            <td><strong>64.8%</strong></td>
                         </tr>
                         <tr>
                             <td>Ours-72B-SFT</td>
@@ -341,14 +341,14 @@
                         </tr>
                         <tr>
                             <td>Ours-72B-RLVR (SFT+RLVR)</td>
-                            <td>84.3%</td>
+                            <td><strong>84.3%</strong></td>
                             <td>52.8%</td>
                         </tr>
                     </tbody>
                 </table>
 
                 <p style="font-style: italic; color: #555;">
-                    Our analysis shows that mastering these subtasks is essential for robust web planning and navigation—a capability not extensively evaluated by existing benchmarks.
+                    Even state-of-the-art models struggle with these subtasks, highlighting significant room for improvement in web agent capabilities.
                 </p>
             </section>
 
@@ -367,19 +367,6 @@ python scripts/run_eval.py scripts/eval_configs/subtask.yaml
 
 # View agent trajectories with interactive web UI
 streamlit run scripts/trajectory_viewer.py</code></pre>
-            </section>
-
-            <!-- Key Features -->
-            <section>
-                <h2>Key Features</h2>
-                <ul>
-                    <li><strong>438 diverse tasks</strong> designed to evaluate multimodal AI agents on web subtasks</li>
-                    <li><strong>Sandboxed interactions</strong> with dynamic and realistic webpages using Web ARChive files</li>
-                    <li><strong>Challenging benchmark:</strong> Leading computer-use models achieve up to 64.8% success rate</li>
-                    <li><strong>Training support:</strong> Infrastructure for supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)</li>
-                    <li><strong>Local trajectory viewer:</strong> Streamlit-based viewer to inspect agent behavior, prompts, and responses</li>
-                    <li><strong>Scalable by design:</strong> Easy-to-use tools for extending tasks by recording and adding web archive files</li>
-                </ul>
             </section>
 
             <!-- Citation -->
