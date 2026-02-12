@@ -70,8 +70,6 @@ streamlit run scripts/trajectory_viewer.py
 vi src/orby/subtask_benchmark/environments/benchmark.json
 ```
 
-See the [full documentation site](https://orby-ai-engineering.github.io/warc-bench/) for detailed installation instructions and usage examples.
-
 ## Installation
 
 ### Prerequisites
