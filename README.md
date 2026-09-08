@@ -46,7 +46,7 @@ These capabilities form the building blocks for more complex web navigation task
 
 ```bash
 # Clone the repository
-git clone https://github.com/orby-ai-engineering/warc-bench.git
+git clone https://github.com/sanjari-orb/warc-bench.git
 cd warc-bench
 
 # Install in editable mode
@@ -93,9 +93,21 @@ The installation will automatically:
 2. Build the `webreplay-standalone` Node.js binary for serving WARC files
 3. Install the `orby` package with all submodules
 
-### BrowserGym Dependency
+### BrowserGym
 
-This project depends on BrowserGym, which should be installed separately. 
+WARC-Bench runs on top of BrowserGym, which is installed from PyPI as a normal
+dependency. No fork or separate install step is needed.
+
+The benchmark environments (`browsergym/subtaskbench.*`) are registered by
+`orby.subtask_benchmark.browsergym_env`, which is part of this repository.
+Importing it registers one environment per task in
+`src/orby/subtask_benchmark/environments/benchmark.json`.
+
+That package also vendors a modified copy of BrowserGym's `BrowserEnv` and its
+screenshot helper, because `browsergym-core==0.13.3` cannot attach to the
+browser started by the WARC replay server. The changes are listed in the module
+docstrings under `src/orby/subtask_benchmark/browsergym_env/`, and the upstream
+license is in `LICENSE-BrowserGym`.
 
 ## Usage
 

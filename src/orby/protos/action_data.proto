@@ -9,7 +9,6 @@ import "pb/v1alpha1/orbot_action.proto";
 import "pb/v1alpha1/document.proto";
 import "fm/llm_data.proto";
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/fm";
 
 // Tentative, information about the decision made by the agent.
 message AgentState {
@@ -27,7 +26,6 @@ message Viewport {
 // Fields overlapping with existing fields in WebState are removed.
 message BrowserGymObservation {
   // BrowserGym environment output
-  // See https://github.com/orby-ai-engineering/digital-agent/blob/d9d62cce50828d2628ea2c1334824165e2a352ee/scripts/test_run.py#L104
   float reward = 1; // the reward of the current state from BrowserGym
   bool terminated = 2; // Whether this is a terminal state
   bool truncated = 3; // Whether the observation is truncated

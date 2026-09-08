@@ -1,0 +1,162 @@
+"""SubTaskBench task definitions.
+
+Vendored from the ``browsergym-subtaskbench`` package so that WARC-Bench is
+installable without a BrowserGym fork. Task configuration and evaluators are
+loaded from :mod:`orby.subtask_benchmark`.
+"""
+
+import math
+import playwright.sync_api
+from pathlib import Path
+import logging
+
+from browsergym.core.task import AbstractBrowserTask
+from orby.subtask_benchmark import config
+from orby.subtask_benchmark.evaluator import EvaluatorRegistry
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger("chat_messages")
+
+
+class GenericSubTaskBenchTask(AbstractBrowserTask):
+    """
+    Base class for all SubTaskBench tasks.
+    """
+
+    def __init__(
+        self,
+        seed: int,
+        task_config_path: str,
+        port: str,
+    ) -> None:
+        super().__init__(seed)
+
+        # task properties, will be used to set up the browsergym environment
+        self.viewport = {"width": 1024, "height": 1024}
+        self.slow_mo = 1000  # ms
+        self.port = port
+
+    def setup(self, page: playwright.sync_api.Page) -> tuple[str, dict]:
+        """
+        Set up everything needed to execute the task.
+
+        Args:
+            page: the active playwright page.
+
+        Returns:
+            goal: str, goal of the task.
+            info: dict, custom information from the task.
+        """
+        # For static tasks, we just need to provide the original start URL
+        # since it is just a file
+        goal = self.goal
+        page.goto(self.task_start_url)
+
+        self.eval_type = self.task_config["eval"]["eval_type"]
+        self.evaluator = EvaluatorRegistry.create(
+            eval_type=self.eval_type,
+            evaluation_script=self.evaluation_script,
+        )
+
+        return goal, {}
+
+    def validate(
+        self, page: playwright.sync_api.Page, chat_messages: list[str]
+    ) -> tuple[float, bool, str, dict]:
+        """
+        Validate the task was completed successfully
+
+        Args:
+            page: the active playwright page.
+            chat_messages: the chat messages.
+
+        Returns:
+            reward: float, the reward obtained since last call to validate().
+            done: boolean flag, indicates if the task has finished or not (be it success or fail).
+            message: string, a new user message for the chat.
+            info: dictionnary, custom information from the task.
+
+        """
+        terminal_message_received = False
+        if chat_messages and chat_messages[-1]["role"] == "assistant":
+            answer = chat_messages[-1]["message"]
+            logger.info(answer)
+            terminal_message_received = True
+        elif chat_messages and chat_messages[-1]["role"] == "infeasible":
+            answer = chat_messages[-1]["message"]
+            terminal_message_received = True
+        else:
+            answer = ""
+
+        reward = self.evaluator.evaluate(answer, page)
+        logger.info(f"Reward: {reward}")
+
+        return reward, terminal_message_received, "", {}
+
+
+class StaticSubTaskBenchTask(GenericSubTaskBenchTask):
+    """
+    Class for the all tasks with static HTML content.
+    """
+
+    def __init__(
+        self, seed: int, task_id: str, task_config_path: str = "static_tests.json", port: int = 9222
+    ) -> None:
+        if not task_id.startswith("static."):
+            raise ValueError(f"Task ID {task_id} is not a static task.")
+
+        super().__init__(seed, task_config_path, port)
+
+        # Load configuration using the config module
+        self.task_config = None
+        all_configs = config.get_config()
+        for _config in all_configs:
+            if _config["task_id"] == task_id:
+                self.task_config = _config
+
+        if not self.task_config:
+            raise ValueError(f"Task ID {task_id} not found in config file.")
+        print(self.task_config)
+
+        self.timeout = 60000  # Timeout for the webserver
+
+        self.task_start_url = self.task_config["env"]["start_url"]
+        self.goal = self.task_config["goal"]
+        self.evaluation_script = self.task_config["eval"]["evaluate_scripts"][0]["script"]
+
+
+class OnlineSubTaskBenchTask(GenericSubTaskBenchTask):
+    """
+    Class for the all tasks with served web content.
+    """
+
+    def __init__(
+        self,
+        seed: int,
+        task_id: str,
+        task_config_path: str = "subtaskbench.json",
+        port: int = 9222,
+    ) -> None:
+        if not task_id.startswith("online"):
+            raise ValueError(f"Task ID {task_id} is not a online task.")
+
+        super().__init__(seed, task_config_path, port)
+
+        # Load configuration using the config module
+        self.task_config = None
+        all_configs = config.get_config()
+        for _config in all_configs:
+            if _config["task_id"] == task_id:
+                self.task_config = _config
+
+        if not self.task_config:
+            raise ValueError(f"Task ID {task_id} not found in config file.")
+        print(self.task_config)
+
+        self.timeout = 60000  # Timeout for the webserver
+
+        self.task_start_url = self.task_config["env"]["start_url"]
+        self.goal = self.task_config["goal"]
+        self.evaluation_script = self.task_config["eval"]["evaluate_scripts"][0]["script"]

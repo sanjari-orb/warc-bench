@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1apb/v1alpha1/document.proto\x12\x0bpb.v1alpha1"J\n\x0c\x44ocumentBlob\x12\x11\n\tmime_type\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x16\n\x0e\x62\x61se64_content\x18\x03 \x01(\x0c"~\n\x08\x44ocument\x12\x32\n\rdocument_blob\x18\x01 \x01(\x0b\x32\x19.pb.v1alpha1.DocumentBlobH\x00\x12\x11\n\x07gcs_uri\x18\x02 \x01(\tH\x00\x12\x11\n\x07\x66ile_id\x18\x03 \x01(\tH\x00\x12\x10\n\x08\x66ilename\x18\x04 \x01(\tB\x06\n\x04\x64\x61taB;Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1b\x06proto3'
+    b'\n\x1apb/v1alpha1/document.proto\x12\x0bpb.v1alpha1"J\n\x0cDocumentBlob\x12\x11\n\tmime_type\x18\x01 \x01(\t\x12\x0f\n\x07content\x18\x02 \x01(\x0c\x12\x16\n\x0ebase64_content\x18\x03 \x01(\x0c"~\n\x08Document\x122\n\rdocument_blob\x18\x01 \x01(\x0b2\x19.pb.v1alpha1.DocumentBlobH\x00\x12\x11\n\x07gcs_uri\x18\x02 \x01(\tH\x00\x12\x11\n\x07file_id\x18\x03 \x01(\tH\x00\x12\x10\n\x08filename\x18\x04 \x01(\tB\x06\n\x04dataB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -23,10 +23,6 @@ _builder.BuildTopDescriptorsAndMessages(
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1"
-    )
     _globals["_DOCUMENTBLOB"]._serialized_start = 43
     _globals["_DOCUMENTBLOB"]._serialized_end = 117
     _globals["_DOCUMENT"]._serialized_start = 119

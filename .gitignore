@@ -50,12 +50,11 @@ htmlcov/
 node_modules/
 npm-debug.log*
 
-# Old structure (to be removed after verification)
-# Uncomment these after you've verified the new structure works:
+# Legacy top-level copies of packages that now live under src/orby/.
+# Kept as ignore rules so stale checkouts do not get re-committed.
 digital-agent/
-prompt_template_manager/
-protos/
-# src/subtask_benchmark/
+/prompt_template_manager/
+/protos/
 
 # Build artifacts
 *.whl

@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb.v1alpha1;
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 // A rectangle for the bounding box of an element and the viewport.
 message Rect {

@@ -17,7 +17,7 @@ from orby.trajectory_collector.task_completion_verifier import TaskCompletionVer
 from orby.digitalagent.utils.action_parsing_utils import extract_action, extract_info_from_browsergym_action
 from orby.digitalagent.agent import AGENT_NAME_TO_BUILDER
 
-from fm.trajectory_data_pb2 import TrajectoryData
+from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
 
 TRAJECTORY_DATA_FINGERPRINT_LENGTH = 20
 TRAJECTORY_COLLECTOR_STARTING_MESSAGE = """\

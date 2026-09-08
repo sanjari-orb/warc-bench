@@ -6,7 +6,6 @@ import "pb/v1alpha1/document.proto";
 import "pb/v1alpha1/element.proto";
 import "pb/v1alpha1/field.proto";
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 /**
  * Data model for variable types and values for workflows.

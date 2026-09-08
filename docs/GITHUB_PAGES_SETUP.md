@@ -1,6 +1,7 @@
 # GitHub Pages Setup Instructions
 
-This document explains how to enable GitHub Pages for the Orby Web Agent documentation site.
+This document explains how to enable GitHub Pages for the WARC-Bench site.
+See also [PUBLISHING.md](../PUBLISHING.md), which covers the same setup.
 
 ## Setup Steps
 
@@ -16,7 +17,7 @@ git push origin main
 
 ### 2. Enable GitHub Pages
 
-1. Go to your GitHub repository: `https://github.com/orby-ai-engineering/warc-bench`
+1. Go to your GitHub repository: `https://github.com/sanjari-orb/warc-bench`
 2. Click on **Settings** (top navigation)
 3. In the left sidebar, click **Pages**
 4. Under "Build and deployment":
@@ -31,7 +32,7 @@ GitHub will automatically build and deploy your site. This typically takes 1-2 m
 
 Your site will be available at:
 ```
-https://orby-ai-engineering.github.io/warc-bench/
+https://sanjari-orb.github.io/warc-bench/
 ```
 
 ### 4. Verify the deployment

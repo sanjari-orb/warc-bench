@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb.v1alpha1;
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 import "pb/v1alpha1/field.proto";
 import "pb/v1alpha1/document.proto";
@@ -528,7 +527,7 @@ message FieldGroupCompareResult {
   repeated FieldCompareResult field_compare_results = 5;
 }
 
-// Compare SA request message. See go/compare-sa-design for details.
+// Compare SA request message.
 message CompareRequest {
   // Policy or instructions to follow to compare the provided data.
   Policy policy = 1;
@@ -539,7 +538,7 @@ message CompareRequest {
 }
  
  
-// Compare SA response message. See go/compare-sa-design for details.
+// Compare SA response message.
 message CompareResult {
   oneof result {
     // Result of comparing field groups.
@@ -557,7 +556,7 @@ message GenerateFunctionTestCase {
   Variable output = 2;
 }
 
-// Generate function SA request message. See go/code-gen-ui-fallback-design for rough design.
+// Generate function SA request message.
 // Next ID: 5
 message GenerateFunctionRequest {
   // The instructions to following to generate the function.
@@ -573,7 +572,7 @@ message GenerateFunctionRequest {
 }
 
 
-// Generate function SA response message. See go/code-gen-ui-fallback-design for rough design.
+// Generate function SA response message.
 // Next ID: 4
 message GenerateFunctionResult {
   // The generated code.
@@ -670,7 +669,7 @@ message GenerateWorkflowResult {
 }
 
 message SmartActionOptions {
-  // Set to true if the request is using the new smart action framework. See go/sa-framework-details for more details.
+  // Set to true if the request is using the new smart action framework.
   // This flag is used while we are migrating to new smart action framework. Deprecate this flag once the migration is complete.
   bool is_new_smart_action_framework = 1;
 

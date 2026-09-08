@@ -16,9 +16,20 @@ logger = logging.getLogger(__name__)
 
 
 def get_router_file_folder() -> str:
+    """Return the folder holding model router files.
+
+    Raises:
+        RuntimeError: if MODEL_ROUTER_DIR is not set. There is no public
+            default; point this at your own bucket or local directory.
+    """
     folder = os.environ.get("MOSAIC_VLLM_MODEL_HOST_URL", "")
     if not folder:
-        folder = "s3://orby-osu-va/model_router/"
+        folder = os.environ.get("MODEL_ROUTER_DIR", "")
+    if not folder:
+        raise RuntimeError(
+            "MODEL_ROUTER_DIR is not set. Set it to the directory or S3 prefix "
+            "holding your model router files."
+        )
     return folder
 
 

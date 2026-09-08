@@ -19,20 +19,26 @@ dependencies = [
     "openai==1.55.3",
     "anthropic==0.40.0",
 
-    # BrowserGym and related
+    # BrowserGym and related.
+    # browsergym-core is pinned exactly: orby/subtask_benchmark/browsergym_env
+    # vendors and extends internals of this version.
+    "browsergym-core==0.13.3",
     "browsergym~=0.13.3",
     "browsergym-miniwob~=0.13.3",
     "browsergym-visualwebarena~=0.13.3",
     "browsergym-webarena~=0.13.3",
     "browsergym-workarena~=0.4.1",
+    "gymnasium",
 
     # API and Web
     "fastapi==0.115.4",
     "httpx==0.27.2",
     "Authlib==1.4.0",
+    "requests",
 
     # Cloud and Storage
     "boto3==1.34.*",
+    "botocore",
     "google-cloud-storage~=2.18.2",
     "smart-open==7.1.0",
 
@@ -43,9 +49,16 @@ dependencies = [
     "numpy>=1.17",
     "pandas~=2.2.2",
     "opencv-python~=4.10.0",
+    "pillow",
+    "scipy",
+    "joblib",
 
     # NLP
     "nltk~=3.8.1",
+
+    # HTML parsing
+    "lxml",
+    "beautifulsoup4",
 
     # Utilities
     "fire==0.6.0",
@@ -53,10 +66,19 @@ dependencies = [
     "retry~=0.9.2",
     "cdifflib~=1.2.6",
     "pyparsing~=3.1.2",
+    "psutil",
+    "tqdm",
+    "PyYAML",
+    "pydantic",
+    "typing-extensions",
+    "Jinja2",
+    "Faker",
 
     # Protocols and Serialization
     "grpcio==1.71.0",
     "mypy-protobuf==3.6.0",
+    "protobuf",
+    "googleapis-common-protos",
 
     # Database
     "pymongo==4.8.0",
@@ -71,10 +93,13 @@ dependencies = [
 
     # Visualization
     "streamlit==1.39.0",
+    "matplotlib",
+    "seaborn",
 
     # External services
     "fireworks-ai~=0.15.7",
     "requests-aws4auth==1.3.1",
+    "instructor",
 ]
 
 [project.optional-dependencies]

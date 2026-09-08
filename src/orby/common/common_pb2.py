@@ -17,7 +17,7 @@ from orby.common import user_profile_pb2 as common_dot_user__profile__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19\x63ommon/user_profile.proto"\xb8\x01\n\x11\x44\x65letedObjectInfo\x12\x30\n\x0c\x64\x65leted_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\ndeleted_by\x18\x02 \x01(\t\x12\x16\n\x0e\x64\x65leted_reason\x18\x03 \x01(\t\x12\x1b\n\x13unrestorable_reason\x18\x05 \x01(\t\x12(\n\x07\x64\x65leter\x18\x06 \x01(\x0b\x32\x17.common.UserProfileInfoB9Z7github.com/orby-ai-engineering/web-api-server/pb/commonb\x06proto3'
+    b'\n\x13common/common.proto\x12\x06common\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19common/user_profile.proto"\xb8\x01\n\x11DeletedObjectInfo\x120\n\x0cdeleted_time\x18\x01 \x01(\x0b2\x1a.google.protobuf.Timestamp\x12\x12\n\ndeleted_by\x18\x02 \x01(\t\x12\x16\n\x0edeleted_reason\x18\x03 \x01(\t\x12\x1b\n\x13unrestorable_reason\x18\x05 \x01(\t\x12(\n\x07deleter\x18\x06 \x01(\x0b2\x17.common.UserProfileInfoB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -25,10 +25,6 @@ _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "common.common_pb2", _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z7github.com/orby-ai-engineering/web-api-server/pb/common"
-    )
     _globals["_DELETEDOBJECTINFO"]._serialized_start = 92
     _globals["_DELETEDOBJECTINFO"]._serialized_end = 276
 # @@protoc_insertion_point(module_scope)

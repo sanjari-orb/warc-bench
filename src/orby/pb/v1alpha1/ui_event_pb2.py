@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1apb/v1alpha1/ui_event.proto\x12\x0bpb.v1alpha1"\xa6\x03\n\x07UiEvent\x12+\n\x05mouse\x18\x01 \x01(\x0b\x32\x1a.pb.v1alpha1.UiEvent.MouseH\x00\x1a\xdf\x02\n\x05Mouse\x12\x36\n\x06\x62utton\x18\x01 \x01(\x0e\x32&.pb.v1alpha1.UiEvent.Mouse.MouseButton\x12=\n\nevent_type\x18\x02 \x01(\x0e\x32).pb.v1alpha1.UiEvent.Mouse.MouseEventType\x12\x12\n\nviewport_x\x18\x03 \x01(\x05\x12\x12\n\nviewport_y\x18\x04 \x01(\x05"J\n\x0bMouseButton\x12\x1a\n\x16MOUSE_BUTTON_UNDEFINED\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\n\n\x06MIDDLE\x10\x02\x12\t\n\x05RIGHT\x10\x03"k\n\x0eMouseEventType\x12\x1e\n\x1aMOUSE_EVENT_TYPE_UNDEFINED\x10\x00\x12\t\n\x05\x43LICK\x10\x01\x12\x10\n\x0c\x44OUBLE_CLICK\x10\x02\x12\x0c\n\x08MOUSE_UP\x10\x03\x12\x0e\n\nMOUSE_DOWN\x10\x04\x42\x0c\n\nevent_typeB;Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1b\x06proto3'
+    b'\n\x1apb/v1alpha1/ui_event.proto\x12\x0bpb.v1alpha1"\xa6\x03\n\x07UiEvent\x12+\n\x05mouse\x18\x01 \x01(\x0b2\x1a.pb.v1alpha1.UiEvent.MouseH\x00\x1a\xdf\x02\n\x05Mouse\x126\n\x06button\x18\x01 \x01(\x0e2&.pb.v1alpha1.UiEvent.Mouse.MouseButton\x12=\n\nevent_type\x18\x02 \x01(\x0e2).pb.v1alpha1.UiEvent.Mouse.MouseEventType\x12\x12\n\nviewport_x\x18\x03 \x01(\x05\x12\x12\n\nviewport_y\x18\x04 \x01(\x05"J\n\x0bMouseButton\x12\x1a\n\x16MOUSE_BUTTON_UNDEFINED\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\n\n\x06MIDDLE\x10\x02\x12\t\n\x05RIGHT\x10\x03"k\n\x0eMouseEventType\x12\x1e\n\x1aMOUSE_EVENT_TYPE_UNDEFINED\x10\x00\x12\t\n\x05CLICK\x10\x01\x12\x10\n\x0cDOUBLE_CLICK\x10\x02\x12\x0c\n\x08MOUSE_UP\x10\x03\x12\x0e\n\nMOUSE_DOWN\x10\x04B\x0c\n\nevent_typeB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -23,10 +23,6 @@ _builder.BuildTopDescriptorsAndMessages(
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1"
-    )
     _globals["_UIEVENT"]._serialized_start = 44
     _globals["_UIEVENT"]._serialized_end = 466
     _globals["_UIEVENT_MOUSE"]._serialized_start = 101

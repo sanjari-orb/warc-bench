@@ -74,7 +74,8 @@ def monkey_patch_to_python_code(obs, coordinates_multiplier: float = 1):
     Return a monkey patched python action parser which converts normalized
     coordinate inputs to unnormalized coordinates.
 
-    Copied from https://github.com/orby-ai-engineering/BrowserGym/blob/b0ad675572e01cac0d7255100112de0828877148/browsergym/core/src/browsergym/core/action/highlevel.py#L303
+    Adapted from BrowserGym's `browsergym/core/action/highlevel.py`
+    (https://github.com/ServiceNow/BrowserGym), version 0.13.3.
     """
     height, width = obs["screenshot"].shape[:2]
 

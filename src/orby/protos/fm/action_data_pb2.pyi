@@ -130,7 +130,6 @@ class BrowserGymObservation(google.protobuf.message.Message):
     ELAPSED_TIME_FIELD_NUMBER: builtins.int
     reward: builtins.float
     """BrowserGym environment output
-    See https://github.com/orby-ai-engineering/digital-agent/blob/d9d62cce50828d2628ea2c1334824165e2a352ee/scripts/test_run.py#L104
     the reward of the current state from BrowserGym
     """
     terminated: builtins.bool

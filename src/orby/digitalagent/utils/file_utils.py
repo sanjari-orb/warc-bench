@@ -114,18 +114,3 @@ def list_files(path):
         for root, _, files in os.walk(path):
             for file in files:
                 yield os.path.join(root, file)
-
-
-if __name__ == "__main__":
-    import json
-
-    with open("s3://orby-llm/test", "w") as f:
-        f.write("Hello")
-    with open("s3://orby-llm/test", "r") as f:
-        print(f.read())
-    with open(
-        "s3://orby-llm/browsergym-eval/miniwob_hsm_v2_openai_gpt-4o-mini-2024-07-18_2024-11-14_20-10-51/browsergym/miniwob.drag-box/results.json"
-    ) as f:
-        print(json.load(f))
-    for path in list_files("s3://orby-llm/browsergym-eval/"):
-        print(path)

@@ -4,7 +4,6 @@ package fm;
 
 import "fm/action_data.proto";
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/fm";
 
 // Used by FM trajectory collector to represent the recorded trajectory of the FM agent.
 message TrajectoryData {

@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1apb/v1alpha1/function.proto\x12\x0bpb.v1alpha1"B\n\x08\x46unction\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\x12\x13\n\x0bparam_names\x18\x02 \x03(\t\x12\x0c\n\x04\x62ody\x18\x03 \x01(\tB;Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1b\x06proto3'
+    b'\n\x1apb/v1alpha1/function.proto\x12\x0bpb.v1alpha1"B\n\x08Function\x12\x13\n\x0bdescription\x18\x01 \x01(\t\x12\x13\n\x0bparam_names\x18\x02 \x03(\t\x12\x0c\n\x04body\x18\x03 \x01(\tB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -23,10 +23,6 @@ _builder.BuildTopDescriptorsAndMessages(
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1"
-    )
     _globals["_FUNCTION"]._serialized_start = 43
     _globals["_FUNCTION"]._serialized_end = 109
 # @@protoc_insertion_point(module_scope)

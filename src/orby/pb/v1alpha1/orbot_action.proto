@@ -12,7 +12,6 @@ import "pb/v1alpha1/secret_manager.proto";
 import "pb/v1alpha1/field.proto";
 import "pb/v1alpha1/orbot_assets.proto";
 import "pb/v1alpha1/variables.proto";
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 // Simplified representation of a DOM / web page.
 // For example, <p>Hello <a>world</a></p> will be represented as
@@ -458,7 +457,7 @@ message ActionParamValue {
     string env_value = 3;
     // refers to runtime variable, such as the loop index
     ContextValue context_value = 4;
-    // refers to a secret ID with value stored in go/secret-manager.
+    // refers to a secret ID with value managed by a secret store.
     // TODO: remove legacy_secret_value after migration
     string legacy_secret_value = 5 [deprecated = true];
     SecretValue secret_value = 7;

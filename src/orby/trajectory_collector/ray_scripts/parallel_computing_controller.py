@@ -415,8 +415,11 @@ WARNING: Please refrain from using this script directly and use `scripts/traject
     parser.add_argument(
         "--orbot_extension_s3_uri",
         type=str,
-        default="s3://orby-osu-va/orbot_extension/dist-103024/",
-        help="The S3 uri to download the orbot extension from. Defaults to s3://orby-osu-va/orbot_extension.",
+        default=None,
+        help=(
+            "S3 URI to download the orbot extension from. No public default; "
+            "supply your own location."
+        ),
     )
     parser.add_argument(
         "--request_per_minute",

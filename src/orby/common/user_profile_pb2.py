@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x19\x63ommon/user_profile.proto\x12\x06\x63ommon"I\n\x0fUserProfileInfo\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x11\n\tfull_name\x18\x02 \x01(\t\x12\x11\n\timage_url\x18\x03 \x01(\tB9Z7github.com/orby-ai-engineering/web-api-server/pb/commonb\x06proto3'
+    b'\n\x19common/user_profile.proto\x12\x06common"I\n\x0fUserProfileInfo\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x11\n\tfull_name\x18\x02 \x01(\t\x12\x11\n\timage_url\x18\x03 \x01(\tB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -21,10 +21,6 @@ _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "common.user_profile_pb2", _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z7github.com/orby-ai-engineering/web-api-server/pb/common"
-    )
     _globals["_USERPROFILEINFO"]._serialized_start = 37
     _globals["_USERPROFILEINFO"]._serialized_end = 110
 # @@protoc_insertion_point(module_scope)

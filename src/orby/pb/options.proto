@@ -4,7 +4,6 @@ package pb;
 
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb";
 
 // Value types for ActionParamValue
 enum ValueType {

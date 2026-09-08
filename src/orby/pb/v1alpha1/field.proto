@@ -2,13 +2,11 @@ syntax = "proto3";
 
 package pb.v1alpha1;
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 /**
 * TextField/IntegerField/FloatField/BooleanField/DateField/MoneyField/SelectField
 * These messages organize schema message and value message together.
 * They are meant to be used in Field to replace previous generic TextField and NormalizedValue.
-* More details at https://docs.google.com/document/d/11sLUH423WntKiiMxwT_0tLzwRfw9k6UPi1D59oaGP-Q/edit?tab=t.1uywgdt6xpzg#bookmark=id.xkc42527i5co
 */
 message TextField {
     // To be deprecated: use more fine-grained field types instead

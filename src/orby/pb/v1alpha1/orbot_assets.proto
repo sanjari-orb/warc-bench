@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb.v1alpha1;
 import "google/protobuf/timestamp.proto";
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 // File generated during action recording
 message RecordedFile {

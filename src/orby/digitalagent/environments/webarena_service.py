@@ -6,8 +6,25 @@ from requests_aws4auth import AWS4Auth
 from retry import retry
 
 
-API_ENDPOINT = "https://webarena.orbyapi.com"
-REGION = "us-east-1"
+# Endpoint of the service that provisions WebArena EC2 instances. There is no
+# public instance of this service, so it has to be supplied by the caller.
+API_ENDPOINT = os.environ.get("WEBARENA_API_ENDPOINT", "")
+REGION = os.environ.get("WEBARENA_AWS_REGION", "us-east-1")
+
+
+def _api_endpoint() -> str:
+    """Return the configured WebArena endpoint.
+
+    Raises:
+        RuntimeError: if WEBARENA_API_ENDPOINT is not set.
+    """
+    if not API_ENDPOINT:
+        raise RuntimeError(
+            "WEBARENA_API_ENDPOINT is not set. This module talks to a "
+            "self-hosted service that provisions WebArena instances; point it "
+            "at your own deployment. It is not needed to run WARC-Bench."
+        )
+    return API_ENDPOINT
 
 
 def get_aws_auth():
@@ -27,7 +44,7 @@ def request_instance(
     instance_type=None, ttl_hours=None, experiment=""
 ) -> tuple[str, dict]:
     """Requests an EC2 instance and returns the instance ID."""
-    url = f"{API_ENDPOINT}/environments/request"
+    url = f"{_api_endpoint()}/environments/request"
 
     # Prepare request body with optional instance type
     body = {}
@@ -44,7 +61,7 @@ def request_instance(
 
 def get_instance(instance_id) -> tuple[bool, str]:
     """Checks the status of a requested instance and returns a readiness flag and public IP address of the instance."""
-    url = f"{API_ENDPOINT}/environments/{instance_id}/status"
+    url = f"{_api_endpoint()}/environments/{instance_id}/status"
 
     response = requests.get(url, auth=get_aws_auth())
     return response.json().get("status") == "available", response.json().get(
@@ -54,7 +71,7 @@ def get_instance(instance_id) -> tuple[bool, str]:
 
 def release_instance(instance_id):
     """Terminates an EC2 instance."""
-    url = f"{API_ENDPOINT}/environments/{instance_id}/release"
+    url = f"{_api_endpoint()}/environments/{instance_id}/release"
 
     requests.post(url, json={}, auth=get_aws_auth())
 

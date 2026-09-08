@@ -13,8 +13,8 @@ from typing import Literal
 
 import orby.digitalagent.utils.s3_utils as s3_utils
 import orby.digitalagent.utils.image_utils as image_utils
-from fm.trajectory_data_pb2 import TrajectoryData
-from fm.action_data_pb2 import ActionData, WebState
+from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
+from orby.protos.fm.action_data_pb2 import ActionData, WebState
 from orby.digitalagent.model.fm import FoundationModel
 
 

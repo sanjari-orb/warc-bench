@@ -16,7 +16,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1epb/v1alpha1/orbot_assets.proto\x12\x0bpb.v1alpha1\x1a\x1fgoogle/protobuf/timestamp.proto"\'\n\x0cRecordedFile\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t"\x9e\x02\n\x07UiState\x12\x36\n\x13viewport_screenshot\x18\x01 \x01(\x0b\x32\x19.pb.v1alpha1.RecordedFile\x12\x16\n\x0eviewport_width\x18\x02 \x01(\x05\x12\x17\n\x0fviewport_height\x18\x03 \x01(\x05\x12\x33\n\x0croot_element\x18\x04 \x01(\x0b\x32\x19.pb.v1alpha1.RecordedFileB\x02\x18\x01\x12\x37\n\x14root_element_wrapper\x18\x06 \x01(\x0b\x32\x19.pb.v1alpha1.RecordedFile\x12\x0b\n\x03url\x18\x05 \x01(\t\x12/\n\x0b\x63\x61ptured_at\x18/ \x01(\x0b\x32\x1a.google.protobuf.TimestampB;Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1b\x06proto3'
+    b'\n\x1epb/v1alpha1/orbot_assets.proto\x12\x0bpb.v1alpha1\x1a\x1fgoogle/protobuf/timestamp.proto"\'\n\x0cRecordedFile\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t"\x9e\x02\n\x07UiState\x126\n\x13viewport_screenshot\x18\x01 \x01(\x0b2\x19.pb.v1alpha1.RecordedFile\x12\x16\n\x0eviewport_width\x18\x02 \x01(\x05\x12\x17\n\x0fviewport_height\x18\x03 \x01(\x05\x123\n\x0croot_element\x18\x04 \x01(\x0b2\x19.pb.v1alpha1.RecordedFileB\x02\x18\x01\x127\n\x14root_element_wrapper\x18\x06 \x01(\x0b2\x19.pb.v1alpha1.RecordedFile\x12\x0b\n\x03url\x18\x05 \x01(\t\x12/\n\x0bcaptured_at\x18/ \x01(\x0b2\x1a.google.protobuf.TimestampB\x00b\x06proto3'
 )
 
 _globals = globals()
@@ -26,10 +26,6 @@ _builder.BuildTopDescriptorsAndMessages(
 )
 if _descriptor._USE_C_DESCRIPTORS == False:
 
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = (
-        b"Z9github.com/orby-ai-engineering/web-api-server/pb/v1alpha1"
-    )
     _UISTATE.fields_by_name["root_element"]._options = None
     _UISTATE.fields_by_name["root_element"]._serialized_options = b"\030\001"
     _globals["_RECORDEDFILE"]._serialized_start = 80

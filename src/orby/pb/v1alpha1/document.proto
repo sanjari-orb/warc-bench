@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb.v1alpha1;
 
-option go_package = "github.com/orby-ai-engineering/web-api-server/pb/v1alpha1";
 
 message DocumentBlob {
   // Mime type of the document, e.g. "application/pdf", "image/jpeg".

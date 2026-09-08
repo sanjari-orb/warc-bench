@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from functools import lru_cache
 from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
 
-# TODO: look into xz compression for the trajectory data based on https://github.com/orby-ai-engineering/digital-agent/pull/160
+# TODO: look into xz compression for the trajectory data.
 
 def load_s3_object_as_bytes(s3_uri: str) -> bytes:
     """

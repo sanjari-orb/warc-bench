@@ -1,8 +1,8 @@
 # Trajectory Collector
 
-See [here](https://docs.google.com/document/d/1vNDGHY2FX-dofbD0PAusSZLUHxIuLSZ59DZSCESDD08/edit?usp=sharing) for the design document.
-
-Trajectory collector attempts to use digital-agent to conduct guided web GUI interaction crawling. User should expect a `.pb` file for each data point stored on S3. For some sample data collected by the trajectory collector, see [this S3 folder](https://orby-osu-va.s3.us-east-1.amazonaws.com/trajectory_data/claude35_train_10/).
+Trajectory collector uses the digital agent to conduct guided web GUI interaction
+crawling. It writes one `.pb` file per data point to an S3 bucket that you supply;
+no sample dataset is published with this repository.
 
 **NOTE:** In each `ActionData` in the `trajectory_data.actions`, Trajectory Collector only stores `after_state`. The `before_state` should be fetched from the `after_state` of the previous action. The first `ActionData` will always have `START_OF_TRAJECTORY` as its `action_data.browser_gym_action.action_string`.
 
@@ -72,8 +72,8 @@ Fields to edit
 ```{python}
 # Edit the arguments as needed
 args = {
-    "read_s3_dir": "s3://orby-osu-va/trajectory_data/claude35_train_10/raw/",
-    "write_s3_dir": "s3://orby-osu-va/trajectory_data/claude35_train_10/processed/",
+    "read_s3_dir": "s3://your-bucket/trajectory_data/raw/",
+    "write_s3_dir": "s3://your-bucket/trajectory_data/processed/",
     "model_provider": "anthropic",
     "model_name": "claude-3-5-sonnet-20241022",
     "verbose": False,

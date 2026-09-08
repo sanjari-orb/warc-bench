@@ -115,8 +115,13 @@ class FoundationModel:
         elif self.model_provider == "mosaic":
             self.model_host_url = kwargs.get(
                 "host_url",
-                os.environ.get("MOSAIC_MODEL_HOST_URL", "https://orby-osu.ngrok.app"),
+                os.environ.get("MOSAIC_MODEL_HOST_URL", ""),
             )
+            if not self.model_host_url:
+                raise ValueError(
+                    "No host URL for the 'mosaic' provider. Pass host_url, or set "
+                    "MOSAIC_MODEL_HOST_URL to your own model server."
+                )
             if "host_url" in kwargs:
                 del kwargs["host_url"]
 
@@ -124,10 +129,13 @@ class FoundationModel:
         elif self.model_provider == "mosaic-vllm":
             self.model_host_url = kwargs.get(
                 "host_url",
-                os.environ.get(
-                    "MOSAIC_VLLM_MODEL_HOST_URL", "http://model.internal.orby.ai/v1"
-                ),
+                os.environ.get("MOSAIC_VLLM_MODEL_HOST_URL", ""),
             )
+            if not self.model_host_url:
+                raise ValueError(
+                    "No host URL for the 'mosaic-vllm' provider. Pass host_url, or "
+                    "set MOSAIC_VLLM_MODEL_HOST_URL to your own vLLM server."
+                )
             if "host_url" in kwargs:
                 del kwargs["host_url"]
             self.model_host_url, self._model_server_model_name = lookup_endpoint(

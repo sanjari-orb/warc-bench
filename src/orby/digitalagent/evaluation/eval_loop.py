@@ -28,7 +28,7 @@ from orby.protos.fm.trajectory_data_pb2 import TrajectoryData
 from orby.protos.fm import action_data_pb2
 import multiprocessing
 
-import browsergym.subtaskbench
+import orby.subtask_benchmark.browsergym_env  # registers subtaskbench gym environments
 from orby.subtask_benchmark.utils import (
     WebReplayServerSessionHandler,
     StaticWebAppServerSessionHandler,
