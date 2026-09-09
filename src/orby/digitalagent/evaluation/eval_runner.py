@@ -387,7 +387,7 @@ def run_single_benchmark(
     return {
         "num_success": sum(rewards),
         "num_total": len(rewards),
-        "output_dir": output_dir,  # Changed from visualizer_url to output_dir
+        "output_dir": output_dir,
     }
 
 
@@ -701,7 +701,7 @@ def aggregate_results_and_report_metrics_to_wandb(
 
     # Aggregate num_success and num_total
     aggregated = results.groupby(
-        ["benchmark", "agent", "model", "visualizer_url"], as_index=False
+        ["benchmark", "agent", "model", "output_dir"], as_index=False
     ).agg({"num_success": "sum", "num_total": "sum"})
     # Calculate score
     aggregated["score"] = aggregated["num_success"] / aggregated["num_total"]

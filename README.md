@@ -52,7 +52,14 @@ cd warc-bench
 # Install in editable mode
 pip install -e .
 
-# Check a the subtask environment for a task
+# Build the WARC replay server (editable installs do not build it for you)
+cd src/orby/subtask_benchmark/webreplay-standalone && npm install && npm run build
+cd -
+
+# Install the browser Playwright drives
+playwright install chromium
+
+# Check the subtask environment for a task
 python scripts/webreplay_server_check.py --task-id online.20 --timeout 6000 --debugging-port 4222
 
 # Run benchmark evaluation (saves trajectories locally to ./eval_outputs)
@@ -88,10 +95,23 @@ cd /path/to/warc-bench
 pip install -e .
 ```
 
-The installation will automatically:
-1. Install all Python dependencies from `pyproject.toml`
-2. Build the `webreplay-standalone` Node.js binary for serving WARC files
-3. Install the `orby` package with all submodules
+This installs all Python dependencies from `pyproject.toml` and the `orby`
+package with all its submodules.
+
+A plain `pip install .` also builds the `webreplay-standalone` Node.js server.
+An editable install (`pip install -e .`) does **not**, because pip's editable
+path skips the custom build step, so build it yourself:
+
+```bash
+cd src/orby/subtask_benchmark/webreplay-standalone
+npm install && npm run build
+```
+
+Then install the browser Playwright drives:
+
+```bash
+playwright install chromium
+```
 
 ### BrowserGym
 

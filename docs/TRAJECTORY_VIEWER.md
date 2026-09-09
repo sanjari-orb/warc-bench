@@ -34,7 +34,7 @@ runner:
 model_configs:
   claude:
     provider: anthropic
-    name: claude-sonnet-4-20250514
+    name: claude-sonnet-5
     temperature: 0
 
 agents:

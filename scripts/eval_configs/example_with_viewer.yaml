@@ -8,8 +8,9 @@ runner:
 model_configs:
   claude:
     provider: anthropic
-    name: claude-sonnet-4-20250514
-    temperature: 0
+    # claude-sonnet-4-20250514 was retired and now returns a 404.
+    # The paper's reported Claude numbers were produced with that model.
+    name: claude-sonnet-5
     max_tokens: 1024
 
 agents:

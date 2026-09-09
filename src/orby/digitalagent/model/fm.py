@@ -31,6 +31,27 @@ ELASTICACHE_HOST = os.environ.get(
 )
 
 
+def _anthropic_response_text(response) -> str:
+    """Return the text of an Anthropic response.
+
+    The first content block is not necessarily the answer. Models with adaptive
+    thinking enabled (Claude Sonnet 5, Opus 5 and later) put a ``thinking`` block
+    first, whose ``text`` is None, so indexing ``content[0]`` silently yields None
+    and every downstream parse fails on a NoneType.
+
+    Raises:
+        ValueError: if the response contains no text block at all.
+    """
+    for block in response.content:
+        if getattr(block, "type", None) == "text" and block.text is not None:
+            return block.text
+    raise ValueError(
+        "Anthropic response contained no text block "
+        f"(stop_reason={response.stop_reason!r}, "
+        f"blocks={[getattr(b, 'type', None) for b in response.content]})."
+    )
+
+
 class FoundationModel:
     """
     A common class to instantiate foundation models and use them to generate text.
@@ -375,6 +396,12 @@ class FoundationModel:
         generate_kwargs = copy.deepcopy(self.generate_kwargs)
         generate_kwargs.update(kwargs)
 
+        # An unset sampling parameter means "do not send it". Passing None
+        # through would be rejected by every provider.
+        for _sampling_param in ("temperature", "top_p", "top_k", "frequency_penalty"):
+            if generate_kwargs.get(_sampling_param, False) is None:
+                del generate_kwargs[_sampling_param]
+
         if "max_tokens" in generate_kwargs:
             max_tokens = generate_kwargs["max_tokens"]
             del generate_kwargs["max_tokens"]
@@ -463,12 +490,12 @@ class FoundationModel:
                 **generate_kwargs,
             )
             # Uncomment for debugging
-            # print(f"{'\033[32m'}LLM says: {raw.content[0].text} {'\033[0m'}")
+            # print(f"{'\033[32m'}LLM says: {_anthropic_response_text(raw)} {'\033[0m'}")
 
             if return_raw:
-                return raw.content[0].text, raw
+                return _anthropic_response_text(raw), raw
             else:
-                return raw.content[0].text
+                return _anthropic_response_text(raw)
         elif self.model_provider == "anthropic_beta":
             if "frequency_penalty" in generate_kwargs:
                 del generate_kwargs["frequency_penalty"]
@@ -483,12 +510,12 @@ class FoundationModel:
                 **generate_kwargs,
             )
             # Uncomment for debugging
-            # print(f"{'\033[32m'}LLM says: {raw.content[0].text} {'\033[0m'}")
+            # print(f"{'\033[32m'}LLM says: {_anthropic_response_text(raw)} {'\033[0m'}")
 
             if return_raw:
                 return raw
             else:
-                return raw.content[0].text
+                return _anthropic_response_text(raw)
 
         elif self.model_provider == "mosaic":
             # adopted from multimodal/scripts/inference/client.py

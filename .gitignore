@@ -21,14 +21,17 @@ wheels/
 *.egg
 MANIFEST
 
-# Virtual environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# Virtual environments.
+# Anchored to the repository root: unanchored "env/" also matched
+# webreplay-standalone/src/env/, which silently kept real source out of the
+# repo (git is case-insensitive here, so "ENV/" matched "env/" too).
+/.env
+/.venv
+/env/
+/venv/
+/ENV/
+/env.bak/
+/venv.bak/
 
 # IDEs
 .vscode/

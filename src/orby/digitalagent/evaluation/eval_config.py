@@ -7,7 +7,10 @@ ModelConfig = ForwardRef("ModelConfig")
 class ModelConfig(BaseModel):
     provider: str
     name: str
-    temperature: float = 0
+    # Optional, and not sent unless set. Claude models from the 4.6 generation
+    # onwards reject sampling parameters outright ("`temperature` is deprecated
+    # for this model", HTTP 400), so a default of 0 made every request fail.
+    temperature: Optional[float] = None
     max_tokens: int = 512
     frequency_penalty: float = 0
     grounder: Optional[ModelConfig] = None
