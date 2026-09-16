@@ -19,14 +19,38 @@ Training web agents to navigate complex, real-world websites requires them to ma
 
 ### Model Performances on WARC-Bench
 
+Trajectory-level success rates, averaged over 3 runs. "CUA" means the model was run
+through its computer-use agent scaffold.
+
+**Closed-source models**
+
 | Model | Dev Success Rate | Test Success Rate |
 |----------|-------------|-------------|
-| Claude Sonnet 4.0 (2025-05-14) | 83.61% | **64.8%** |
-| Ours-72B-SFT | 75.9% | 48.8% |
-| Ours-72B-RLVR (SFT+RLVR) | **84.3%** | 52.8% |
+| GPT-4o (2024-11-20) | 9.54% | 9.17% |
+| OpenAI computer-use-preview (2025-03-11) | 58.96% | 33.83% |
+| Claude Sonnet 4.0 (2025-05-14) with CUA | 78.96% | 47.17% |
+| GPT-5 (2025-08-07) | 69.89% | 51.33% |
+| Claude Sonnet 3.7 (2025-02-19) | 81.93% | 59.83% |
+| Claude Sonnet 4.0 (2025-05-14) | 83.61% | **64.83%** |
+
+**Open-source models**
+
+| Model | Dev Success Rate | Test Success Rate |
+|----------|-------------|-------------|
+| Qwen2.5-VL 7B | 15.54% | 4.67% |
+| UI-TARS 1.5 7B with CUA | 39.66% | 10.33% |
+| OpenCUA 7B with CUA* | 46.43% | 14.00% |
+| OpenCUA 32B with CUA* | 48.74% | 17.50% |
+| Ours-7B-SFT | 66.54% | 27.33% |
+| Ours-7B-RLVR (SFT+RLVR) | 72.13% | 29.17% |
+| Qwen2.5-VL 72B | 61.06% | 37.33% |
+| Ours-72B-SFT | 75.88% | 48.33% |
+| Ours-72B-RLVR (SFT+RLVR) | **84.31%** | 52.33% |
+
+\* Single-run results, because of the cost of hosted inference for these models.
 
 Our analysis shows that mastering these subtasks is essential for robust web planning and navigation - a capability not extensively evaluated by existing benchmarks.
-Please find performances of other models in our paper **[here](https://arxiv.org/abs/2510.09872)**.
+Full results, including per-task-type breakdowns, are in our paper **[here](https://arxiv.org/abs/2510.09872)**.
 
 ---
 
@@ -233,7 +257,7 @@ Agent implementations and training infrastructure:
 - **Evaluation framework**: Comprehensive metrics and trajectory recording
 
 **Key Modules:**
-- `agent/sva_v4.py`: Main vision agent achieving 48.8% (SFT) / 52.8% (RLVR) success rate
+- `agent/sva_v4.py`: Main vision agent achieving 48.33% (SFT) / 52.33% (RLVR) test success rate at 72B
 - `agent/agent.py`: Base agent class for custom implementations
 - `rewards/`: Verifiable reward computation for RLVR training
 - `evaluation/`: Evaluation runners, metrics, and analysis tools
