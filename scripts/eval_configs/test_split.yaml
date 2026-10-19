@@ -1,0 +1,38 @@
+# Runs the whitelisted test split (environments/benchmark_test_whitelist.json).
+# The test tasks share ids with benchmark.json, so select the test file:
+#   SUBTASK_BENCHMARK_FILE=benchmark_test.json python scripts/run_eval.py scripts/eval_configs/test_split.yaml
+# Add LLM_USAGE_LOG=<file>.jsonl to record token use and task times, then turn
+# the log into CSVs with scripts/usage_report.py.
+run_name: test_split
+
+runner:
+  threads: 8
+  output_dir: ./eval_outputs
+  seed: 17
+  timeout_secs: 600
+
+model_configs:
+  opus55:
+    provider: anthropic
+    name: claude-opus-5-5
+    # Claude Opus 5.5 always thinks before answering, and thinking counts
+    # toward max_tokens, so leave plenty of room.
+    max_tokens: 16000
+
+agents:
+  run1:
+    # sva_v4_note: SVA V4 without written-out reasoning. Claude Opus 5.5
+    # declines the original sva_v4 prompt.
+    name: sva_v4_note
+    model_config_name: opus55
+
+benchmarks:
+  subtaskbench:
+    dataset: subtaskbench_test
+    max_examples: -1
+    max_steps: 20
+    headless: true
+    reset_env: false
+    viewport_size:
+      width: 1280
+      height: 720
