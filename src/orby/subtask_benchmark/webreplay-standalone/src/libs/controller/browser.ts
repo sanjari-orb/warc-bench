@@ -94,6 +94,17 @@ export async function launchBrowser(
         args.push(...options.browserArgs);
       }
 
+      // Some archived sites only got SharedArrayBuffer through an origin
+      // trial token, which Chrome checks against the real clock. Once the
+      // token expires the site stops loading, so enable the feature directly.
+      // Chrome reads only one --enable-features flag, so merge into it.
+      const featureIndex = args.findIndex((a) => a.startsWith('--enable-features='));
+      if (featureIndex === -1) {
+        args.push('--enable-features=SharedArrayBuffer');
+      } else if (!args[featureIndex].split('=')[1].split(',').includes('SharedArrayBuffer')) {
+        args[featureIndex] += ',SharedArrayBuffer';
+      }
+
       // If in headless mode, add appropriate flag
       if (isHeadless()) {
         args.push('--headless=new');
@@ -125,6 +136,9 @@ export async function launchBrowser(
         executablePath,
         viewport: options?.viewport,
         bypassCSP: true,
+        // Service worker requests bypass context.route(), so an installed
+        // worker would fetch from the live site instead of the archive.
+        serviceWorkers: 'block' as const,
       };
       
       logger.info(`Launching browser with options: ${JSON.stringify(launchOptions, null, 2)}`);

@@ -9,7 +9,11 @@ import { logger } from '../libs/logger';
 import { LCGGenerator, SEED } from './overrides/generator';
 import { getRandomValues, randomUUID } from './overrides/crypto';
 import { random } from './overrides/math';
-import { createFixedDateConstructor } from './overrides/date';
+import {
+  createFixedDateConstructor,
+  createShiftedDateConstructor,
+} from './overrides/date';
+import { getArchiveCaptureTime } from '../libs/warc/wacz';
 
 interface SetupEnvOptions {
   warcFilePath: string;
@@ -29,7 +33,19 @@ export async function setupEnv({
 }: SetupEnvOptions): Promise<void> {
   // If timestamp is provided, use it to override the date
   let dateOverrideScript = '';
-  if (timestamp) {
+  if (!timestamp) {
+    // Pages often behave differently once the real date has moved past the
+    // capture date (expired sessions or trials, date-gated code paths), so
+    // start the page clock at the time the archive was captured. The clock
+    // keeps running: a frozen clock stalls apps that wait on elapsed time.
+    const captureTime = await getArchiveCaptureTime(warcFilePath);
+    if (captureTime) {
+      logger.info(
+        `No timestamp given; starting the clock at the archive capture time: ${new Date(captureTime).toISOString()}`,
+      );
+      dateOverrideScript = createShiftedDateConstructor(captureTime);
+    }
+  } else {
     logger.info(
       `Using recorded timestamp: ${new Date(timestamp).toISOString()} (${timestamp})`,
     );
