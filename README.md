@@ -182,6 +182,30 @@ results = eval_runner.run_evaluation(eval_config)
 ```
 
 
+### Running the test split
+
+The test split lives in `environments/benchmark_test.json`. Its task ids overlap
+with `benchmark.json`, so choose the file with `SUBTASK_BENCHMARK_FILE`:
+
+```bash
+SUBTASK_BENCHMARK_FILE=benchmark_test.json \
+LLM_USAGE_LOG=usage.jsonl \
+python scripts/run_eval.py scripts/eval_configs/test_split.yaml
+```
+
+The `subtaskbench_test` dataset runs the tasks listed in
+`environments/benchmark_test_whitelist.json`, the test tasks checked to run
+correctly. That file also lists the excluded tasks and why.
+
+`LLM_USAGE_LOG` is optional. When set, every model call's token use (uncached
+input, cached input, output, reasoning) and every task's run time are appended
+to that JSONL file. `scripts/usage_report.py` turns the log and the run's
+output directory into a per-task CSV and a row in `summary.csv`.
+
+Claude Opus 5.5 declines the `sva_v4` prompt, which asks for written-out
+reasoning, so the example config uses `sva_v4_note`: the same agent, with the
+model reasoning internally and writing a one-line note for its step history.
+
 ### Agent Architecture: Subtask Vision Agent V4 (SvaV4)
 
 The main agent implementation is Subtask Vision Agent V4 (`SvaV4`), a pure-vision agent designed for short-horizon subtasks (typically 5 steps or less).

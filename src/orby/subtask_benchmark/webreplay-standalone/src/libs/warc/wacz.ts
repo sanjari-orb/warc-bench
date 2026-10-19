@@ -4,9 +4,12 @@ import AdmZip from 'adm-zip';
 import { promisify } from 'node:util';
 import { unzip } from 'node:zlib';
 import { createWarcIndex, WarcIndex } from './warc-record';
+import { logger } from '../logger';
 
 export interface WarcMetadata {
   mainPageUrl?: string;
+  // ISO 8601 time the archive was created, written by the crawler.
+  created?: string;
   browserState?: {
     localStorage?: Record<string, Record<string, string>>;
     sessionStorage?: Record<string, Record<string, string>>;
@@ -41,6 +44,27 @@ async function getWarcIndex(warcFilePath: string): Promise<WarcIndex> {
 async function getWarcMetadata(warcFilePath: string): Promise<WarcMetadata> {
   const bytes = await readWarcFileByte(warcFilePath, 'datapackage.json');
   return JSON.parse(bytes.toString('utf-8'));
+}
+
+/**
+ * Return the time the archive was captured, in milliseconds since the Unix
+ * epoch, or undefined if the archive has no usable `created` field.
+ */
+export async function getArchiveCaptureTime(
+  warcFilePath: string,
+): Promise<number | undefined> {
+  if (!warcFilePath.endsWith('.wacz')) {
+    return undefined;
+  }
+  let metadata: WarcMetadata;
+  try {
+    metadata = await getWarcMetadata(warcFilePath);
+  } catch (error) {
+    logger.warn(`Could not read datapackage.json from ${warcFilePath}: ${error}`);
+    return undefined;
+  }
+  const created = metadata.created ? Date.parse(metadata.created) : NaN;
+  return Number.isFinite(created) ? created : undefined;
 }
 
 export async function readWarcData(

@@ -4,6 +4,7 @@ from orby.digitalagent.agent import Agent
 from orby.digitalagent.model import FoundationModel
 from orby.digitalagent.agent.utils import prompt_to_messages
 from orby.digitalagent.prompts.default import sva_v4 as prompts
+from orby.digitalagent.prompts.default import sva_v4_note as note_prompts
 from orby.digitalagent.utils.action_parsing_utils import (
     extract_content_by_tags,
     extract_action,
@@ -43,6 +44,12 @@ class SvaV4(Agent):
       Model first evaluates task completion, then generates action based on that evaluation.
       More efficient and potentially more coherent reasoning.
     """
+
+    # The prompt template, the response tag that holds the model's step text,
+    # and the tag used for that text in the step history.
+    PROMPT = prompts
+    THINKING_TAG = SVA_THINKING_TAG
+    HISTORY_TAG = "thought"
 
     def __init__(
         self,
@@ -106,7 +113,7 @@ class SvaV4(Agent):
         variables.update(image_dict)
 
         # Single model call that handles both evaluation and action generation
-        prompt, images = prompts.render(**variables)
+        prompt, images = self.PROMPT.render(**variables)
         messages = prompt_to_messages(prompt, images=images)
         model_response = self.model.generate(messages=messages, **kwargs)
 
@@ -147,9 +154,9 @@ class SvaV4(Agent):
             ValueError: If the action is not found in the response
         """
         contents = extract_content_by_tags(
-            text_response, [SVA_THINKING_TAG, SVA_ACTION_TAG]
+            text_response, [self.THINKING_TAG, SVA_ACTION_TAG]
         )
-        thinking, action = contents[SVA_THINKING_TAG], contents[SVA_ACTION_TAG]
+        thinking, action = contents[self.THINKING_TAG], contents[SVA_ACTION_TAG]
 
         if thinking is not None:
             thinking = thinking.strip().replace("\n", " ")
@@ -193,7 +200,7 @@ class SvaV4(Agent):
             # Add the thought and action to the history string
             history_str += f"Step {i+1}:\n"
             history_str += f"<image:{image_name}>"
-            history_str += f"<thought>{thought}</thought>\n"
+            history_str += f"<{self.HISTORY_TAG}>{thought}</{self.HISTORY_TAG}>\n"
             history_str += f"<action>{action}</action>\n"
             history_str += "\n"
 
@@ -201,3 +208,17 @@ class SvaV4(Agent):
         history_str = history_str.rstrip()
 
         return image_dict, history_str
+
+
+class SvaV4Note(SvaV4):
+    """
+    SVA V4 with a prompt that does not ask for written-out reasoning.
+
+    The model reasons internally and replies with a one-line <note> for the
+    step history plus the action. Claude Opus 5.5 declines the original
+    prompt, which asks for the reasoning in a visible <thinking> section.
+    """
+
+    PROMPT = note_prompts
+    THINKING_TAG = "note"
+    HISTORY_TAG = "note"

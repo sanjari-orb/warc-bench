@@ -11,6 +11,8 @@ import warnings
 
 import openai
 import anthropic
+import time
+from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage
 from anthropic import Anthropic
 import fireworks.client
 from openai import OpenAI
@@ -468,12 +470,21 @@ class FoundationModel:
             or self.model_provider == "mosaic-vllm"
             or self.model_provider == "fireworks"
         ):
+            # OpenAI reasoning models reject max_tokens; they take max_completion_tokens.
+            token_arg = (
+                {"max_completion_tokens": max_tokens}
+                if self.model_provider == "openai"
+                else {"max_tokens": max_tokens}
+            )
+            _t0 = time.time()
             raw = self.cached_raw_generate(self.model)(
                 model=self._model_server_model_name,
                 messages=messages,
-                max_tokens=max_tokens,
+                **token_arg,
                 **generate_kwargs,
             )
+            if self.model_provider == "openai":
+                log_openai_usage(self._model_server_model_name, raw, time.time() - _t0)
             if return_raw:
                 return raw.choices[0].message.content, raw
             else:
@@ -482,13 +493,15 @@ class FoundationModel:
             if "frequency_penalty" in generate_kwargs:
                 del generate_kwargs["frequency_penalty"]
             messages = self._convert_image_format_for_anthropic(messages)
-            
+
+            _t0 = time.time()
             raw = self.cached_raw_generate(self.model)(
                 model=self._model_server_model_name,
                 messages=messages,
                 max_tokens=max_tokens,
                 **generate_kwargs,
             )
+            log_anthropic_usage(self._model_server_model_name, raw, time.time() - _t0)
             # Uncomment for debugging
             # print(f"{'\033[32m'}LLM says: {_anthropic_response_text(raw)} {'\033[0m'}")
 

@@ -33,6 +33,7 @@ from orby.subtask_benchmark.utils import (
     WebReplayServerSessionHandler,
     StaticWebAppServerSessionHandler,
 )
+from orby.digitalagent.model.usage_log import write_usage_record
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +51,7 @@ def find_unused_port():
     return port
 
 
-def run_example(
+def _run_example_inner(
     example_env_name: str,
     task_kwargs: Optional[dict],
     agent_config: AgentConfig,
@@ -254,6 +255,20 @@ def run_example(
 
     logger.debug("Final reward:", reward)
     return reward
+
+
+def run_example(example_env_name: str, *args, **kwargs) -> float:
+    """Run one example, tagging its LLM calls and logging its wall-clock time."""
+    os.environ["EVAL_TASK_ID"] = example_env_name
+    start = time.time()
+    write_usage_record({"event": "task_start", "task": example_env_name, "time": start})
+    reward = None
+    try:
+        reward = _run_example_inner(example_env_name, *args, **kwargs)
+        return reward
+    finally:
+        write_usage_record({"event": "task_end", "task": example_env_name, "time": time.time(),
+                            "elapsed_s": round(time.time() - start, 2), "reward": reward})
 
 
 def run_examples(
