@@ -225,6 +225,14 @@ python scripts/run_repeated.py --label opus55 \
     --s3-prefix s3://<bucket>/<prefix> --aws-profile <profile>
 ```
 
+`scripts/summarize_results.py --runs-dir runs --out-dir runs/results` combines
+every model's aggregate JSON into `results.csv` and a Markdown table,
+`results.md`.
+
+Each run directory is uploaded with `aws s3 sync` and then checked by file
+count, and synced once more if the counts differ. A plain recursive copy was
+seen to leave out a few trajectory files without reporting an error.
+
 There is one config per model in `scripts/eval_configs/test_split_<model>.yaml`.
 Each one runs at the highest reasoning effort its API accepts, passed through
 `extra_body`:
