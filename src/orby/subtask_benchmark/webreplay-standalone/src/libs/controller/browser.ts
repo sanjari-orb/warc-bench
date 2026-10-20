@@ -136,6 +136,10 @@ export async function launchBrowser(
         executablePath,
         viewport: options?.viewport,
         bypassCSP: true,
+        // Pages format dates in the browser's time zone, and evaluators compare
+        // that text (e.g. "GMT+0000 (Coordinated Universal Time)"), so replay in
+        // UTC regardless of the machine's zone.
+        timezoneId: 'UTC',
         // Service worker requests bypass context.route(), so an installed
         // worker would fetch from the live site instead of the archive.
         serviceWorkers: 'block' as const,
@@ -178,6 +182,7 @@ export async function launchBrowser(
             headless: isHeadless(),
             timeout: 60000,
             viewport: options?.viewport,
+            timezoneId: 'UTC',
           });
           logger.info('Browser launched without extension - limited functionality will be available');
           break;
