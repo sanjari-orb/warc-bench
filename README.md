@@ -243,7 +243,10 @@ shell set up for another tool cannot send requests to a proxy.
 `20261016_note.jinja2` told the model to reply with "single python function
 calls, without any additional text" and then asked for `<note>` and `<action>`
 tags. GPT-6 models followed the first instruction and every reply failed to
-parse. The new prompt changes only that line.
+parse. The new prompt rewrites that line and adds one more, telling the model
+to put only the requested value in `complete(answer=...)`. 53 of the 192 test
+tasks use `string_matcher`, which needs an exact match, and only 17 of their
+goals say to return only the value.
 
 GLM 5.3 is not included: `glm-5p3` on Fireworks does not accept images.
 
