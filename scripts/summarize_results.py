@@ -100,6 +100,19 @@ def main():
         )
     dates = sorted({r["rate_card_date"] for r in rows if r["rate_card_date"]})
     lines += ["", f"Cost uses list prices from scripts/rate_card.json (dated {', '.join(dates) or 'n/a'})."]
+    reruns = []
+    for label in order:
+        for p in sorted(glob.glob(os.path.join(args.runs_dir, label, "run*", "rerun_*", "rerun_info.json"))):
+            with open(p) as f:
+                info = json.load(f)
+            changed = sum(t["after_success"] != t["before_success"] for t in info["tasks"].values())
+            passed = sum(t["after_success"] for t in info["tasks"].values())
+            reruns.append(f"- {aggs[label]['model']} {info['run'].split('_')[-1]}: {len(info['tasks'])} task(s) "
+                          f"rerun ({', '.join(info['tasks'])}), {passed} passed on rerun, {changed} changed result. "
+                          f"Reason: {info['reason']}.")
+    if reruns:
+        lines += ["", "Reruns (tasks that never got a real attempt; their rows were replaced, originals kept in "
+                      "report/*_tasks.before_<name>.csv):", *reruns]
     killed = [r for r in rows if r["tasks_without_time"]]
     if killed:
         notes = ", ".join(

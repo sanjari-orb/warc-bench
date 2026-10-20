@@ -67,3 +67,21 @@ def log_openai_usage(model: str, raw, latency_s: float, provider: str = "openai"
         "output": u.completion_tokens or 0, "reasoning": reasoning,
         "stop_reason": raw.choices[0].finish_reason if raw.choices else None,
     })
+
+
+def log_raw_response(raw) -> None:
+    """Append the full response to the JSONL file named by LLM_RAW_LOG, if set.
+
+    For debugging only: it keeps fields the agent ignores, such as
+    reasoning_content, so a reply with an empty answer can be inspected.
+    """
+    path = os.environ.get("LLM_RAW_LOG")
+    if not path:
+        return
+    try:
+        body = raw.model_dump()
+    except AttributeError:
+        body = str(raw)
+    with open(path, "a") as f:
+        f.write(json.dumps({"task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+                            "pid": os.getpid(), "response": body}, default=str) + "\n")

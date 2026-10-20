@@ -12,7 +12,7 @@ import warnings
 import openai
 import anthropic
 import time
-from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage
+from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage, log_raw_response
 from anthropic import Anthropic
 from openai import OpenAI
 from retry import retry
@@ -370,6 +370,10 @@ class FoundationModel:
             anthropic.UnprocessableEntityError,
             openai.RateLimitError,
             anthropic.RateLimitError,
+            # A dropped connection says nothing about the model; without these
+            # one network blip ended the whole task with a score of 0.
+            openai.APIConnectionError,
+            anthropic.APIConnectionError,
         ),
         tries=10,
         delay=1,
@@ -497,6 +501,7 @@ class FoundationModel:
                     time.time() - _t0,
                     provider=self.model_provider,
                 )
+                log_raw_response(raw)
             if return_raw:
                 return raw.choices[0].message.content, raw
             else:

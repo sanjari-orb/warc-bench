@@ -233,6 +233,15 @@ Each run directory is uploaded with `aws s3 sync` and then checked by file
 count, and synced once more if the counts differ. A plain recursive copy was
 seen to leave out a few trajectory files without reporting an error.
 
+`scripts/rerun_tasks.py` reruns chosen tasks of a finished run, for tasks that
+never got a real attempt (such as a dropped connection). It merges their rows
+into the run's tasks CSV, keeps the original CSV, and records the reason in
+`rerun_<name>/rerun_info.json`. `summarize_results.py` lists every rerun under
+the results table.
+
+Set `LLM_RAW_LOG=<file>.jsonl` to save every OpenAI-compatible response in
+full, including `reasoning_content`, for debugging.
+
 There is one config per model in `scripts/eval_configs/test_split_<model>.yaml`.
 Each one runs at the highest reasoning effort its API accepts, passed through
 `extra_body`:
