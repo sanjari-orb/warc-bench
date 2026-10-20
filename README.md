@@ -206,6 +206,50 @@ Claude Opus 5.5 declines the `sva_v4` prompt, which asks for written-out
 reasoning, so the example config uses `sva_v4_note`: the same agent, with the
 model reasoning internally and writing a one-line note for its step history.
 
+#### Repeated runs (avg@k)
+
+`scripts/run_repeated.py` runs the test split k times for one model. For each
+run it writes the usage log and `usage_report.py` CSV, then uploads the run to
+S3. After the last run, `scripts/aggregate_runs.py` writes one JSON per model
+with:
+
+- score averaged over runs, with the standard error between runs and a
+  task-level standard error and 95% CI
+- tokens per task (uncached, cached, cache-write, output, reasoning)
+- cost per task from `scripts/rate_card.json`
+- mean, median and p90 task time
+
+```bash
+python scripts/run_repeated.py --label opus55 \
+    --config scripts/eval_configs/test_split_opus55.yaml --runs 3 \
+    --s3-prefix s3://<bucket>/<prefix> --aws-profile <profile>
+```
+
+There is one config per model in `scripts/eval_configs/test_split_<model>.yaml`.
+Each one runs at the highest reasoning effort its API accepts, passed through
+`extra_body`:
+
+| Model | Setting |
+|---|---|
+| GPT-6.1 Sol, GPT-6 Astra | `reasoning_effort: xhigh` (`max` is rejected) |
+| Claude Opus 5.5 | `output_config.effort: max` (the default is `medium`) |
+| Kimi K3, DeepSeek V4.1 Flash 1017 (Fireworks) | `reasoning_effort: max` |
+
+The script removes `ANTHROPIC_BASE_URL`, `ANTHROPIC_AUTH_TOKEN`,
+`ANTHROPIC_CUSTOM_HEADERS` and `OPENAI_BASE_URL` before each run, so that a
+shell set up for another tool cannot send requests to a proxy.
+
+`sva_v4_note` now uses `sva_v4/20261019_note.jinja2`. The earlier
+`20261016_note.jinja2` told the model to reply with "single python function
+calls, without any additional text" and then asked for `<note>` and `<action>`
+tags. GPT-6 models followed the first instruction and every reply failed to
+parse. The new prompt rewrites that line and adds one more, telling the model
+to put only the requested value in `complete(answer=...)`. 53 of the 192 test
+tasks use `string_matcher`, which needs an exact match, and only 17 of their
+goals say to return only the value.
+
+GLM 5.3 is not included: `glm-5p3` on Fireworks does not accept images.
+
 ### Agent Architecture: Subtask Vision Agent V4 (SvaV4)
 
 The main agent implementation is Subtask Vision Agent V4 (`SvaV4`), a pure-vision agent designed for short-horizon subtasks (typically 5 steps or less).

@@ -13,6 +13,12 @@ class ModelConfig(BaseModel):
     temperature: Optional[float] = None
     max_tokens: int = 512
     frequency_penalty: float = 0
+    # Extra request fields the SDK has no argument for, sent as-is, such as
+    # {"reasoning_effort": "xhigh"} (OpenAI, Fireworks) or
+    # {"output_config": {"effort": "max"}} (Anthropic).
+    extra_body: Optional[dict] = None
+    # Per-request timeout in seconds. Not sent unless set.
+    timeout: Optional[float] = None
     grounder: Optional[ModelConfig] = None
     executor: Optional[ModelConfig] = None
     planner: Optional[ModelConfig] = None

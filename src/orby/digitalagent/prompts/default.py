@@ -46,5 +46,5 @@ subtask_hybrid_agent_v1 = Template(
 sva_v2 = Template(os.path.join(os.path.dirname(__file__), "sva_v2", "20250428.jinja2"))
 sva_v3 = Template(os.path.join(os.path.dirname(__file__), "sva_v3", "20250508.jinja2"))
 sva_v4 = Template(os.path.join(os.path.dirname(__file__), "sva_v4", "20250814.jinja2"))
-sva_v4_note = Template(os.path.join(os.path.dirname(__file__), "sva_v4", "20261016_note.jinja2"))
+sva_v4_note = Template(os.path.join(os.path.dirname(__file__), "sva_v4", "20261019_note.jinja2"))
 claude_cua = Template(os.path.join(os.path.dirname(__file__), "claude_cua", "20250807.jinja2"))

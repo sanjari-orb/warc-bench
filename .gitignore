@@ -77,3 +77,6 @@ digital-agent/
 .cache/
 **/web_archives/*.zip
 **/.cache/*.parquet
+
+# Repeated eval runs written by scripts/run_repeated.py
+/runs/
