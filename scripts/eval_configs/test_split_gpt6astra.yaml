@@ -1,0 +1,40 @@
+# Runs the whitelisted test split (environments/benchmark_test_whitelist.json).
+# The test tasks share ids with benchmark.json, so select the test file:
+#   SUBTASK_BENCHMARK_FILE=benchmark_test.json python scripts/run_eval.py scripts/eval_configs/test_split.yaml
+# Add LLM_USAGE_LOG=<file>.jsonl to record token use and task times, then turn
+# the log into CSVs with scripts/usage_report.py.
+run_name: test_split_gpt6astra
+
+runner:
+  threads: 8
+  output_dir: ./eval_outputs
+  seed: 17
+  timeout_secs: 1800
+
+model_configs:
+  gpt6astra:
+    # GPT-6 Astra. Reasoning tokens count toward max_tokens, so leave room.
+    provider: openai
+    name: gpt-6-astra
+    max_tokens: 32000
+    # xhigh is the highest effort these models accept (max returns 400).
+    extra_body: {reasoning_effort: xhigh}
+    timeout: 600
+
+agents:
+  run1:
+    # sva_v4_note: SVA V4 without written-out reasoning. Claude Opus 5.5
+    # declines the original sva_v4 prompt.
+    name: sva_v4_note
+    model_config_name: gpt6astra
+
+benchmarks:
+  subtaskbench:
+    dataset: subtaskbench_test
+    max_examples: -1
+    max_steps: 20
+    headless: true
+    reset_env: false
+    viewport_size:
+      width: 1280
+      height: 720

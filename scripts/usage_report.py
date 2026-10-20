@@ -68,7 +68,8 @@ def main():
         }
         for field in TOKEN_FIELDS:
             values = [c.get(field) for c in task_calls]
-            # Anthropic reports thinking inside output tokens, so reasoning is unknown there.
+            # Left empty when no call reported the field (older Anthropic models
+            # count thinking inside output tokens without a separate figure).
             row[field] = "" if values and all(v is None for v in values) else sum(v or 0 for v in values)
         row["refusals"] = sum(1 for c in task_calls if c.get("stop_reason") == "refusal")
         row["truncated_calls"] = sum(1 for c in task_calls if c.get("stop_reason") in ("max_tokens", "length"))

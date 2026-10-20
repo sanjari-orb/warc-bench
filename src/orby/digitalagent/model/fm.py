@@ -14,7 +14,6 @@ import anthropic
 import time
 from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage
 from anthropic import Anthropic
-import fireworks.client
 from openai import OpenAI
 from retry import retry
 from transformers import AutoModelForCausalLM, AutoModelForVision2Seq, AutoProcessor
@@ -170,9 +169,17 @@ class FoundationModel:
             )
             self.model = self.model.chat.completions.create
         elif self.model_provider == "fireworks":
-            fireworks.client.api_key = os.environ.get("FIREWORKS_API_KEY")
-
-            self.model = fireworks.client.ChatCompletion.create
+            # Fireworks' OpenAI-compatible endpoint returns the same usage
+            # fields as OpenAI (cached and reasoning tokens included), so its
+            # calls can be logged by log_openai_usage.
+            api_key = os.environ.get("FIREWORKS_API_KEY")
+            if not api_key:
+                raise ValueError("FIREWORKS_API_KEY is not set.")
+            self.model = OpenAI(
+                api_key=api_key,
+                base_url="https://api.fireworks.ai/inference/v1",
+            )
+            self.model = self.model.chat.completions.create
         else:
             raise ValueError(f"Invalid model provider: {self.model_provider}.")
 
@@ -483,8 +490,13 @@ class FoundationModel:
                 **token_arg,
                 **generate_kwargs,
             )
-            if self.model_provider == "openai":
-                log_openai_usage(self._model_server_model_name, raw, time.time() - _t0)
+            if self.model_provider in ("openai", "fireworks"):
+                log_openai_usage(
+                    self._model_server_model_name,
+                    raw,
+                    time.time() - _t0,
+                    provider=self.model_provider,
+                )
             if return_raw:
                 return raw.choices[0].message.content, raw
             else:
