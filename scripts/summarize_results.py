@@ -37,6 +37,7 @@ def row_for(agg):
         "duration_median_s": dur.get("median"),
         "duration_p90_s": dur.get("p90"),
         "tasks_without_time": dur.get("tasks_without_time"),
+        "missing_time_counted_as_s": dur.get("missing_time_counted_as_s"),
     }
     for field in TOKEN_FIELDS:
         row[f"{field}_per_task"] = tok.get(field)
@@ -99,6 +100,14 @@ def main():
         )
     dates = sorted({r["rate_card_date"] for r in rows if r["rate_card_date"]})
     lines += ["", f"Cost uses list prices from scripts/rate_card.json (dated {', '.join(dates) or 'n/a'})."]
+    killed = [r for r in rows if r["tasks_without_time"]]
+    if killed:
+        notes = ", ".join(
+            f"{r['model']}: {r['tasks_without_time']} "
+            + (f"counted at {num(r['missing_time_counted_as_s'])} s" if r["missing_time_counted_as_s"]
+               else "left out")
+            for r in killed)
+        lines.append(f"Tasks killed at the time limit have no recorded time and score 0. In the duration figures: {notes}.")
     with open(os.path.join(args.out_dir, "results.md"), "w") as f:
         f.write("\n".join(lines) + "\n")
     print("\n".join(lines))

@@ -145,6 +145,10 @@ def main():
            "--label", args.label, "--task-csvs", *task_csvs, "--out", agg]
     if os.path.exists(args.rate_card):
         cmd += ["--rate-card", args.rate_card]
+    # Tasks killed at the time limit have no recorded time; count them at the limit.
+    time_limit = base_config.get("runner", {}).get("timeout_secs")
+    if time_limit:
+        cmd += ["--time-limit-s", str(time_limit)]
     subprocess.run(cmd, check=True)
     s3_copy(agg, f"{s3_base}/{args.label}_aggregate.json", profile=args.aws_profile)
 

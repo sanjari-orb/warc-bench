@@ -92,6 +92,10 @@ def main():
     parser.add_argument("--label", required=True)
     parser.add_argument("--task-csvs", nargs="+", required=True, help="One usage_report.py tasks CSV per run")
     parser.add_argument("--rate-card", help="JSON of USD per 1M tokens, keyed by model name")
+    parser.add_argument("--time-limit-s", type=float,
+                        help="Per-task time limit of the runs. A task with no recorded time was killed at "
+                             "this limit (it scores 0), so its duration counts as this value. Without it, "
+                             "such tasks are left out of the duration figures.")
     parser.add_argument("--out", required=True, help="Output JSON path")
     args = parser.parse_args()
 
@@ -128,9 +132,14 @@ def main():
         entry["cost_usd_per_task"] = r(run_cost_per_task(run, rates), 5)
         per_run.append(entry)
 
+    if args.time_limit_s is not None and args.time_limit_s <= 0:
+        raise SystemExit("--time-limit-s must be positive")
     times = [num(t["task_time_s"]) for run in runs for t in run.values()]
     missing_times = sum(v is None for v in times)
-    times = [v for v in times if v is not None]
+    if args.time_limit_s is not None:
+        times = [args.time_limit_s if v is None else v for v in times]
+    else:
+        times = [v for v in times if v is not None]
 
     def mean_over_runs(key):
         values = [p[key] for p in per_run]
@@ -151,6 +160,8 @@ def main():
             "median": r(statistics.median(times), 2) if times else None,
             "p90": r(percentile(times, 90), 2) if times else None,
             "tasks_without_time": missing_times,
+            # The value those tasks were counted at, or None if they were left out.
+            "missing_time_counted_as_s": args.time_limit_s,
         },
         "tokens_per_task": {f: r(mean_over_runs(f"{f}_per_task"), 1) for f in TOKEN_FIELDS},
         "cost_usd_per_task": r(mean_over_runs("cost_usd_per_task"), 5),
