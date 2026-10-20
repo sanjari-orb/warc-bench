@@ -203,5 +203,11 @@
   "online.210": "Needs the Zoho ticket editor, which the archive did not capture",
   "online.131": "Needs the Zoho profile (myInfo) panel, which the archive did not capture",
   "online.118": "Evaluator already returns success on the untouched start page"
+ },
+ "depend_on_live_site": {
+  "online.95": "Scrimba's Home video is streamed from the live site over a WebSocket the replay does not intercept; the archive does not contain it. Goal and expected answer match the live site as of 2026-10-19.",
+  "online.96": "Scrimba's Home video is streamed from the live site over a WebSocket the replay does not intercept; the archive does not contain it. Goal and expected answer match the live site as of 2026-10-19.",
+  "online.97": "Scrimba's Home video is streamed from the live site over a WebSocket the replay does not intercept; the archive does not contain it. Goal and expected answer match the live site as of 2026-10-19.",
+  "online.98": "Scrimba's Home video is streamed from the live site over a WebSocket the replay does not intercept; the archive does not contain it. Goal and expected answer match the live site as of 2026-10-19."
  }
 }

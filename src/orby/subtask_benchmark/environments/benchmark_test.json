@@ -1365,7 +1365,7 @@
       "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
       "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
     },
-    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at timestamp 0.46",
+    "goal": "Go to Home > Open the video next to \"Learn to Code Like a Pro\" > Return the caption on the screen at timestamp 0.46",
     "eval": {
       "eval_type": "string_matcher",
       "evaluate_scripts": [
@@ -1381,12 +1381,12 @@
       "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
       "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
     },
-    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at timestamp 0.02",
+    "goal": "Go to Home > Open the video next to \"Learn to Code Like a Pro\" > Return the caption on the screen at timestamp 0.02",
     "eval": {
       "eval_type": "string_matcher",
       "evaluate_scripts": [
         {
-          "script": "Do you know what's a little bit cool? It is that what"
+          "script": "good old buddy old pal."
         }
       ]
     }
@@ -1397,7 +1397,7 @@
       "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
       "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
     },
-    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen 50 seconds into the video",
+    "goal": "Go to Home > Open the video next to \"Learn to Code Like a Pro\" > Return the caption on the screen 50 seconds into the video",
     "eval": {
       "eval_type": "string_matcher",
       "evaluate_scripts": [
@@ -1413,7 +1413,7 @@
       "data_path": "environments/web_archives/scrimba/scrimba-archive.wacz",
       "start_url": "https://scrimba.com/fullstack-path-c0fullstack"
     },
-    "goal": "Go to Home > Open the video next to \"Become a fullstack developer\" > Return the caption on the screen at the end of the video",
+    "goal": "Go to Home > Open the video next to \"Learn to Code Like a Pro\" > Return the caption on the screen at the end of the video",
     "eval": {
       "eval_type": "string_matcher",
       "evaluate_scripts": [
