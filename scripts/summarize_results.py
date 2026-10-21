@@ -100,6 +100,7 @@ def main():
         )
     dates = sorted({r["rate_card_date"] for r in rows if r["rate_card_date"]})
     lines += ["", f"Cost uses list prices from scripts/rate_card.json (dated {', '.join(dates) or 'n/a'})."]
+    lines.append("See NOTES.md, if present, for the setup and known issues behind these numbers.")
     reruns = []
     for label in order:
         for p in sorted(glob.glob(os.path.join(args.runs_dir, label, "run*", "rerun_*", "rerun_info.json"))):
