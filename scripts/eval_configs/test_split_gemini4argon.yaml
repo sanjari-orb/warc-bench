@@ -1,0 +1,41 @@
+# Runs the whitelisted test split (environments/benchmark_test_whitelist.json).
+# The test tasks share ids with benchmark.json, so select the test file:
+#   SUBTASK_BENCHMARK_FILE=benchmark_test.json python scripts/run_eval.py scripts/eval_configs/test_split.yaml
+# Add LLM_USAGE_LOG=<file>.jsonl to record token use and task times, then turn
+# the log into CSVs with scripts/usage_report.py.
+run_name: test_split_gemini4argon
+
+runner:
+  threads: 8
+  output_dir: ./eval_outputs
+  seed: 17
+  timeout_secs: 1800
+
+model_configs:
+  gemini4argon:
+    # Gemini 4 Argon. Run at the highest reasoning effort the API
+    # accepts. Reasoning tokens count toward max_tokens, so leave room.
+    provider: gemini
+    name: gemini-4-argon
+    max_tokens: 32000
+    # Thinking levels are low, medium (default) and high; high is the highest.
+    extra_body: {generationConfig: {thinkingConfig: {thinkingLevel: high}}}
+    timeout: 600
+
+agents:
+  run1:
+    # sva_v4_note: SVA V4 without written-out reasoning. Claude Opus 5.5
+    # declines the original sva_v4 prompt.
+    name: sva_v4_note
+    model_config_name: gemini4argon
+
+benchmarks:
+  subtaskbench:
+    dataset: subtaskbench_test
+    max_examples: -1
+    max_steps: 20
+    headless: true
+    reset_env: false
+    viewport_size:
+      width: 1280
+      height: 720

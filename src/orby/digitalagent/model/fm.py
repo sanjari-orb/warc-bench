@@ -12,7 +12,12 @@ import warnings
 import openai
 import anthropic
 import time
-from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage, log_raw_response
+from orby.digitalagent.model.usage_log import (
+    log_anthropic_usage,
+    log_gemini_usage,
+    log_openai_usage,
+    log_raw_response,
+)
 from anthropic import Anthropic
 from openai import OpenAI
 from retry import retry
@@ -51,6 +56,61 @@ def _anthropic_response_text(response) -> str:
         f"(stop_reason={response.stop_reason!r}, "
         f"blocks={[getattr(b, 'type', None) for b in response.content]})."
     )
+
+
+GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
+# finishReason values that mean the reply was withheld rather than finished.
+GEMINI_BLOCKED_REASONS = {"SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST", "SPII", "IMAGE_SAFETY", "RECITATION"}
+
+
+class GeminiRetryableError(Exception):
+    """A Gemini request that failed for a reason worth retrying (429, 5xx, network)."""
+
+
+def _gemini_contents(messages: List[Dict[str, Any]]) -> tuple[dict | None, list]:
+    """Convert OpenAI-style messages to Gemini's systemInstruction and contents.
+
+    Images must be data URLs or http(s) URLs; anything else raises ValueError.
+    """
+    system_parts, contents = [], []
+    for message in messages:
+        content = message["content"]
+        items = [{"type": "text", "text": content}] if isinstance(content, str) else content
+        parts = []
+        for item in items:
+            if item["type"] == "text":
+                if item["text"]:
+                    parts.append({"text": item["text"]})
+            elif item["type"] == "image_url":
+                url = item["image_url"]["url"]
+                if url.startswith("data:"):
+                    header, _, data = url.partition(",")
+                    mime = header[len("data:"):].split(";")[0] or "image/png"
+                elif url.startswith(("http://", "https://")):
+                    data, mime = download_image_as_base64_str(url), "image/png"
+                else:
+                    raise ValueError(f"Unsupported image URL scheme: {url[:30]!r}")
+                parts.append({"inline_data": {"mime_type": mime, "data": data}})
+            else:
+                raise ValueError(f"Unsupported content type for Gemini: {item['type']!r}")
+        if message["role"] == "system":
+            system_parts.extend(parts)
+        elif parts:
+            contents.append({"role": "model" if message["role"] == "assistant" else "user", "parts": parts})
+    return ({"parts": system_parts} if system_parts else None), contents
+
+
+def _gemini_response_text(response: dict) -> str:
+    """The answer text of a Gemini response, without thought summaries.
+
+    Returns "" when the reply was blocked or empty; the caller's parser then
+    fails the step, which is how other providers' refusals are scored.
+    """
+    candidates = response.get("candidates") or []
+    if not candidates:
+        return ""
+    parts = (candidates[0].get("content") or {}).get("parts") or []
+    return "".join(p.get("text", "") for p in parts if not p.get("thought"))
 
 
 class FoundationModel:
@@ -180,6 +240,13 @@ class FoundationModel:
                 base_url="https://api.fireworks.ai/inference/v1",
             )
             self.model = self.model.chat.completions.create
+        elif self.model_provider == "gemini":
+            # Native generateContent API: it reports cached and thinking tokens
+            # separately, which the OpenAI-compatible endpoint does not.
+            self._gemini_api_key = os.environ.get("GEMINI_API_KEY")
+            if not self._gemini_api_key:
+                raise ValueError("GEMINI_API_KEY is not set.")
+            self.model = requests.Session()
         else:
             raise ValueError(f"Invalid model provider: {self.model_provider}.")
 
@@ -374,6 +441,7 @@ class FoundationModel:
             # one network blip ended the whole task with a score of 0.
             openai.APIConnectionError,
             anthropic.APIConnectionError,
+            GeminiRetryableError,
         ),
         tries=10,
         delay=1,
@@ -546,6 +614,41 @@ class FoundationModel:
                 return raw
             else:
                 return _anthropic_response_text(raw)
+
+        elif self.model_provider == "gemini":
+            system, contents = _gemini_contents(messages)
+            extra = generate_kwargs.get("extra_body") or {}
+            unknown = set(extra) - {"generationConfig"}
+            if unknown:
+                raise ValueError(f"Unsupported extra_body keys for Gemini: {sorted(unknown)}")
+            generation_config = {"maxOutputTokens": max_tokens, **(extra.get("generationConfig") or {})}
+            if generate_kwargs.get("temperature") is not None:
+                generation_config["temperature"] = generate_kwargs["temperature"]
+            body = {"contents": contents, "generationConfig": generation_config}
+            if system:
+                body["systemInstruction"] = system
+            url = f"{GEMINI_API_BASE}/{self._model_server_model_name}:generateContent"
+            _t0 = time.time()
+            try:
+                # The key goes in a header, not the URL, so it never shows up in logs.
+                resp = self.model.post(
+                    url,
+                    json=body,
+                    headers={"x-goog-api-key": self._gemini_api_key},
+                    timeout=generate_kwargs.get("timeout", 600),
+                )
+            except (requests.ConnectionError, requests.Timeout) as ex:
+                raise GeminiRetryableError(f"Gemini request failed: {type(ex).__name__}") from ex
+            if resp.status_code == 429 or resp.status_code >= 500:
+                raise GeminiRetryableError(f"Gemini HTTP {resp.status_code}: {resp.text[:300]}")
+            if resp.status_code != 200:
+                raise ValueError(f"Gemini HTTP {resp.status_code}: {resp.text[:500]}")
+            raw = resp.json()
+            log_gemini_usage(self._model_server_model_name, raw, time.time() - _t0)
+            text = _gemini_response_text(raw)
+            if return_raw:
+                return text, raw
+            return text
 
         elif self.model_provider == "mosaic":
             # adopted from multimodal/scripts/inference/client.py

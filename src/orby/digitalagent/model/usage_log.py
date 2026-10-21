@@ -85,3 +85,32 @@ def log_raw_response(raw) -> None:
     with open(path, "a") as f:
         f.write(json.dumps({"task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
                             "pid": os.getpid(), "response": body}, default=str) + "\n")
+
+
+# Gemini finishReason values mapped to the stop reasons usage_report.py counts.
+_GEMINI_STOP = {"MAX_TOKENS": "max_tokens", "SAFETY": "refusal", "PROHIBITED_CONTENT": "refusal",
+                "BLOCKLIST": "refusal", "SPII": "refusal", "IMAGE_SAFETY": "refusal", "RECITATION": "refusal"}
+
+
+def log_gemini_usage(model: str, raw: dict, latency_s: float) -> None:
+    u = raw.get("usageMetadata") or {}
+    candidates = raw.get("candidates") or []
+    finish = candidates[0].get("finishReason") if candidates else None
+    if not candidates and (raw.get("promptFeedback") or {}).get("blockReason"):
+        finish = "SAFETY"
+    prompt = u.get("promptTokenCount") or 0
+    cached = u.get("cachedContentTokenCount") or 0
+    thoughts = u.get("thoughtsTokenCount") or 0
+    write_usage_record({
+        "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+        "provider": "gemini", "model": model, "latency_s": round(latency_s, 2),
+        # promptTokenCount includes the cached tokens.
+        "input_uncached": max(prompt - cached, 0), "input_cache_read": cached,
+        # Gemini has implicit caching only, with no separate write charge.
+        "input_cache_write": 0,
+        # candidatesTokenCount excludes thinking; Google bills thinking as output.
+        "output": (u.get("candidatesTokenCount") or 0) + thoughts, "reasoning": thoughts,
+        "stop_reason": _GEMINI_STOP.get(finish, (finish or "").lower() or None),
+        "finish_reason_raw": finish,
+        **({"usage_missing": True} if not u else {}),
+    })
