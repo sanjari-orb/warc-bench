@@ -18,8 +18,10 @@ model_configs:
     provider: gemini
     name: gemini-4-argon
     max_tokens: 32000
-    # Thinking levels are low, medium (default) and high; high is the highest.
-    extra_body: {generationConfig: {thinkingConfig: {thinkingLevel: high}}}
+    # Called through the Interactions API (google-genai SDK), Google's
+    # recommended interface. Thinking levels are minimal, low, medium
+    # (default) and high; high is the highest. Standard (paid) service tier.
+    extra_body: {generation_config: {thinking_level: high}, service_tier: standard}
     timeout: 600
 
 agents:

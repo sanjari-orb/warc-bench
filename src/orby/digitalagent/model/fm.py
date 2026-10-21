@@ -58,31 +58,36 @@ def _anthropic_response_text(response) -> str:
     )
 
 
-GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
-# finishReason values that mean the reply was withheld rather than finished.
-GEMINI_BLOCKED_REASONS = {"SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST", "SPII", "IMAGE_SAFETY", "RECITATION"}
-
-
 class GeminiRetryableError(Exception):
     """A Gemini request that failed for a reason worth retrying (429, 5xx, network)."""
 
 
-def _gemini_contents(messages: List[Dict[str, Any]]) -> tuple[dict | None, list]:
-    """Convert OpenAI-style messages to Gemini's systemInstruction and contents.
+def _gemini_interaction_input(messages: List[Dict[str, Any]]) -> tuple[str | None, list]:
+    """Convert OpenAI-style messages to an Interactions API system_instruction and input.
 
+    Only system and user messages are supported: every call is stateless
+    (store=False) and carries its full context, as the agents here send it.
     Images must be data URLs or http(s) URLs; anything else raises ValueError.
     """
-    system_parts, contents = [], []
+    system_texts, items = [], []
     for message in messages:
+        role = message["role"]
+        if role not in ("system", "user"):
+            raise ValueError(f"Gemini provider supports system and user messages only, got {role!r}")
         content = message["content"]
-        items = [{"type": "text", "text": content}] if isinstance(content, str) else content
-        parts = []
-        for item in items:
-            if item["type"] == "text":
-                if item["text"]:
-                    parts.append({"text": item["text"]})
-            elif item["type"] == "image_url":
-                url = item["image_url"]["url"]
+        parts = [{"type": "text", "text": content}] if isinstance(content, str) else content
+        for part in parts:
+            if part["type"] == "text":
+                if not part["text"]:
+                    continue
+                if role == "system":
+                    system_texts.append(part["text"])
+                else:
+                    items.append({"type": "text", "text": part["text"]})
+            elif part["type"] == "image_url":
+                if role == "system":
+                    raise ValueError("Gemini system_instruction cannot hold images")
+                url = part["image_url"]["url"]
                 if url.startswith("data:"):
                     header, _, data = url.partition(",")
                     mime = header[len("data:"):].split(";")[0] or "image/png"
@@ -90,27 +95,24 @@ def _gemini_contents(messages: List[Dict[str, Any]]) -> tuple[dict | None, list]
                     data, mime = download_image_as_base64_str(url), "image/png"
                 else:
                     raise ValueError(f"Unsupported image URL scheme: {url[:30]!r}")
-                parts.append({"inline_data": {"mime_type": mime, "data": data}})
+                items.append({"type": "image", "mime_type": mime, "data": data})
             else:
-                raise ValueError(f"Unsupported content type for Gemini: {item['type']!r}")
-        if message["role"] == "system":
-            system_parts.extend(parts)
-        elif parts:
-            contents.append({"role": "model" if message["role"] == "assistant" else "user", "parts": parts})
-    return ({"parts": system_parts} if system_parts else None), contents
+                raise ValueError(f"Unsupported content type for Gemini: {part['type']!r}")
+    return ("\n\n".join(system_texts) or None), items
 
 
-def _gemini_response_text(response: dict) -> str:
-    """The answer text of a Gemini response, without thought summaries.
+def _gemini_interaction_text(interaction: dict) -> str:
+    """The answer text of an interaction: its model_output steps, without thoughts.
 
-    Returns "" when the reply was blocked or empty; the caller's parser then
-    fails the step, which is how other providers' refusals are scored.
+    Returns "" when there is no model output (blocked, failed or cut off); the
+    caller's parser then fails the step, as for other providers' refusals.
     """
-    candidates = response.get("candidates") or []
-    if not candidates:
-        return ""
-    parts = (candidates[0].get("content") or {}).get("parts") or []
-    return "".join(p.get("text", "") for p in parts if not p.get("thought"))
+    return "".join(
+        content.get("text", "")
+        for step in interaction.get("steps") or []
+        if step.get("type") == "model_output"
+        for content in step.get("content") or []
+    )
 
 
 class FoundationModel:
@@ -241,12 +243,17 @@ class FoundationModel:
             )
             self.model = self.model.chat.completions.create
         elif self.model_provider == "gemini":
-            # Native generateContent API: it reports cached and thinking tokens
-            # separately, which the OpenAI-compatible endpoint does not.
-            self._gemini_api_key = os.environ.get("GEMINI_API_KEY")
-            if not self._gemini_api_key:
+            # Google's recommended interface: the Interactions API through the
+            # google-genai SDK. It reports cached and thinking tokens separately.
+            from google import genai
+
+            api_key = os.environ.get("GEMINI_API_KEY")
+            if not api_key:
                 raise ValueError("GEMINI_API_KEY is not set.")
-            self.model = requests.Session()
+            # Keep the client itself: it closes its HTTP connection when it is
+            # garbage collected, which would break the bound create method.
+            self._gemini_client = genai.Client(api_key=api_key)
+            self.model = self._gemini_client.interactions.create
         else:
             raise ValueError(f"Invalid model provider: {self.model_provider}.")
 
@@ -616,36 +623,38 @@ class FoundationModel:
                 return _anthropic_response_text(raw)
 
         elif self.model_provider == "gemini":
-            system, contents = _gemini_contents(messages)
+            from google.genai._gaos.lib.compat_errors import (
+                APIConnectionError as GeminiConnectionError,
+                InternalServerError as GeminiServerError,
+                RateLimitError as GeminiRateLimitError,
+            )
+
+            system, items = _gemini_interaction_input(messages)
             extra = generate_kwargs.get("extra_body") or {}
-            unknown = set(extra) - {"generationConfig"}
+            unknown = set(extra) - {"generation_config", "service_tier"}
             if unknown:
                 raise ValueError(f"Unsupported extra_body keys for Gemini: {sorted(unknown)}")
-            generation_config = {"maxOutputTokens": max_tokens, **(extra.get("generationConfig") or {})}
+            generation_config = {"max_output_tokens": max_tokens, **(extra.get("generation_config") or {})}
             if generate_kwargs.get("temperature") is not None:
                 generation_config["temperature"] = generate_kwargs["temperature"]
-            body = {"contents": contents, "generationConfig": generation_config}
+            request = {
+                "model": self._model_server_model_name,
+                "input": items,
+                "generation_config": generation_config,
+                # Each step carries its full context, so keep nothing server-side.
+                "store": False,
+                "service_tier": extra.get("service_tier", "standard"),
+            }
             if system:
-                body["systemInstruction"] = system
-            url = f"{GEMINI_API_BASE}/{self._model_server_model_name}:generateContent"
+                request["system_instruction"] = system
             _t0 = time.time()
             try:
-                # The key goes in a header, not the URL, so it never shows up in logs.
-                resp = self.model.post(
-                    url,
-                    json=body,
-                    headers={"x-goog-api-key": self._gemini_api_key},
-                    timeout=generate_kwargs.get("timeout", 600),
-                )
-            except (requests.ConnectionError, requests.Timeout) as ex:
-                raise GeminiRetryableError(f"Gemini request failed: {type(ex).__name__}") from ex
-            if resp.status_code == 429 or resp.status_code >= 500:
-                raise GeminiRetryableError(f"Gemini HTTP {resp.status_code}: {resp.text[:300]}")
-            if resp.status_code != 200:
-                raise ValueError(f"Gemini HTTP {resp.status_code}: {resp.text[:500]}")
-            raw = resp.json()
+                interaction = self.model(**request, timeout=generate_kwargs.get("timeout", 600))
+            except (GeminiConnectionError, GeminiServerError, GeminiRateLimitError) as ex:
+                raise GeminiRetryableError(f"Gemini request failed: {type(ex).__name__}: {str(ex)[:300]}") from ex
+            raw = interaction.model_dump(mode="json", exclude_none=True)
             log_gemini_usage(self._model_server_model_name, raw, time.time() - _t0)
-            text = _gemini_response_text(raw)
+            text = _gemini_interaction_text(raw)
             if return_raw:
                 return text, raw
             return text

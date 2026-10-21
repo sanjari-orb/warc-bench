@@ -87,30 +87,33 @@ def log_raw_response(raw) -> None:
                             "pid": os.getpid(), "response": body}, default=str) + "\n")
 
 
-# Gemini finishReason values mapped to the stop reasons usage_report.py counts.
-_GEMINI_STOP = {"MAX_TOKENS": "max_tokens", "SAFETY": "refusal", "PROHIBITED_CONTENT": "refusal",
-                "BLOCKLIST": "refusal", "SPII": "refusal", "IMAGE_SAFETY": "refusal", "RECITATION": "refusal"}
+# Interactions API status values mapped to the stop reasons usage_report.py counts.
+_GEMINI_STOP = {"completed": "stop", "incomplete": "max_tokens", "budget_exceeded": "max_tokens"}
 
 
 def log_gemini_usage(model: str, raw: dict, latency_s: float) -> None:
-    u = raw.get("usageMetadata") or {}
-    candidates = raw.get("candidates") or []
-    finish = candidates[0].get("finishReason") if candidates else None
-    if not candidates and (raw.get("promptFeedback") or {}).get("blockReason"):
-        finish = "SAFETY"
-    prompt = u.get("promptTokenCount") or 0
-    cached = u.get("cachedContentTokenCount") or 0
-    thoughts = u.get("thoughtsTokenCount") or 0
+    """Log one Gemini Interactions API call.
+
+    total_input_tokens includes the cached tokens, and total_output_tokens
+    excludes thinking (total_tokens = input + output + thought), which Google
+    bills as output.
+    """
+    u = raw.get("usage") or {}
+    status = raw.get("status")
+    inp = u.get("total_input_tokens") or 0
+    cached = u.get("total_cached_tokens") or 0
+    thoughts = u.get("total_thought_tokens") or 0
+    has_output = any(s.get("type") == "model_output" for s in raw.get("steps") or [])
+    stop = _GEMINI_STOP.get(status, status)
+    if status == "completed" and not has_output:
+        stop = "no_output"
     write_usage_record({
         "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
         "provider": "gemini", "model": model, "latency_s": round(latency_s, 2),
-        # promptTokenCount includes the cached tokens.
-        "input_uncached": max(prompt - cached, 0), "input_cache_read": cached,
+        "input_uncached": max(inp - cached, 0), "input_cache_read": cached,
         # Gemini has implicit caching only, with no separate write charge.
         "input_cache_write": 0,
-        # candidatesTokenCount excludes thinking; Google bills thinking as output.
-        "output": (u.get("candidatesTokenCount") or 0) + thoughts, "reasoning": thoughts,
-        "stop_reason": _GEMINI_STOP.get(finish, (finish or "").lower() or None),
-        "finish_reason_raw": finish,
+        "output": (u.get("total_output_tokens") or 0) + thoughts, "reasoning": thoughts,
+        "stop_reason": stop, "status_raw": status, "service_tier": raw.get("service_tier"),
         **({"usage_missing": True} if not u else {}),
     })

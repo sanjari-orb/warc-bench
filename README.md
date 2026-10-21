@@ -251,7 +251,7 @@ Each one runs at the highest reasoning effort its API accepts, passed through
 | GPT-6.1 Sol, GPT-6 Astra | `reasoning_effort: xhigh` (`max` is rejected) |
 | Claude Opus 5.5 | `output_config.effort: max` (the default is `medium`) |
 | Kimi K3, DeepSeek V4.1 Flash 1017 (Fireworks) | `reasoning_effort: max` |
-| Gemini 4 Argon | `thinkingLevel: high` (levels are low, medium and high) |
+| Gemini 4 Argon | `thinking_level: high` (levels are minimal, low, medium and high) |
 
 The script removes `ANTHROPIC_BASE_URL`, `ANTHROPIC_AUTH_TOKEN`,
 `ANTHROPIC_CUSTOM_HEADERS` and `OPENAI_BASE_URL` before each run, so that a
@@ -266,11 +266,13 @@ to put only the requested value in `complete(answer=...)`. 53 of the 192 test
 tasks use `string_matcher`, which needs an exact match, and only 17 of their
 goals say to return only the value.
 
-Gemini models use the `gemini` provider, which calls the native `generateContent`
-API with `GEMINI_API_KEY` sent in a header. Uncached input is
-`promptTokenCount` minus `cachedContentTokenCount`, and output is
-`candidatesTokenCount` plus `thoughtsTokenCount`, since Google bills thinking as
-output.
+Gemini models use the `gemini` provider. It calls Google's recommended Interactions
+API through the `google-genai` SDK (`client.interactions.create`), with
+`store=False` (each step carries its full context, so nothing is kept
+server-side) and the standard service tier. It reads `GEMINI_API_KEY`.
+Uncached input is `total_input_tokens` minus `total_cached_tokens`, and output
+is `total_output_tokens` plus `total_thought_tokens`, since Google bills thinking
+as output.
 
 GLM 5.3 is not included: `glm-5p3` on Fireworks does not accept images.
 
