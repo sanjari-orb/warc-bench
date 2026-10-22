@@ -56,6 +56,10 @@ def log_openai_usage(model: str, raw, latency_s: float, provider: str = "openai"
     if details is not None:
         cache_write = getattr(details, "cache_write_tokens", None) or (getattr(details, "model_extra", None) or {}).get("cache_write_tokens") or 0
     reasoning = (getattr(u.completion_tokens_details, "reasoning_tokens", 0) or 0) if u.completion_tokens_details else 0
+    # OpenRouter adds the call's cost (USD) to usage and names the provider
+    # that served it; record both when present.
+    extra = getattr(u, "model_extra", None) or {}
+    served = (getattr(raw, "model_extra", None) or {}).get("provider")
     write_usage_record({
         "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
         "provider": provider, "model": model, "latency_s": round(latency_s, 2),
@@ -66,6 +70,8 @@ def log_openai_usage(model: str, raw, latency_s: float, provider: str = "openai"
         # completion_tokens includes reasoning tokens.
         "output": u.completion_tokens or 0, "reasoning": reasoning,
         "stop_reason": raw.choices[0].finish_reason if raw.choices else None,
+        **({"provider_cost_usd": extra["cost"]} if extra.get("cost") is not None else {}),
+        **({"served_by": served} if served else {}),
     })
 
 

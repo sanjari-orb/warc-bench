@@ -252,6 +252,7 @@ Each one runs at the highest reasoning effort its API accepts, passed through
 | Claude Opus 5.5 | `output_config.effort: max` (the default is `medium`) |
 | Kimi K3, DeepSeek V4.1 Flash 1017 (Fireworks) | `reasoning_effort: max` |
 | Gemini 4 Argon | `thinking_level: high` (levels are minimal, low, medium and high) |
+| Grok 4.7 (OpenRouter) | `reasoning.effort: xhigh` (OpenRouter lists xhigh, high, medium, low; `max` is mapped lower) |
 
 The script removes `ANTHROPIC_BASE_URL`, `ANTHROPIC_AUTH_TOKEN`,
 `ANTHROPIC_CUSTOM_HEADERS` and `OPENAI_BASE_URL` before each run, so that a
@@ -273,6 +274,11 @@ server-side) and the standard service tier. It reads `GEMINI_API_KEY`.
 Uncached input is `total_input_tokens` minus `total_cached_tokens`, and output
 is `total_output_tokens` plus `total_thought_tokens`, since Google bills thinking
 as output.
+
+Grok uses the `openrouter` provider: OpenRouter's OpenAI-compatible endpoint with
+`OPENROUTER_API_KEY`. Its usage block has OpenAI's fields, and the usage log also
+keeps OpenRouter's per-call cost (`provider_cost_usd`) and the serving provider
+(`served_by`).
 
 GLM 5.3 is not included: `glm-5p3` on Fireworks does not accept images.
 

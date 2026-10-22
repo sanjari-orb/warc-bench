@@ -242,6 +242,17 @@ class FoundationModel:
                 base_url="https://api.fireworks.ai/inference/v1",
             )
             self.model = self.model.chat.completions.create
+        elif self.model_provider == "openrouter":
+            # OpenRouter's OpenAI-compatible endpoint (used for Grok). Its usage
+            # block has the same fields as OpenAI's, plus a per-call cost.
+            api_key = os.environ.get("OPENROUTER_API_KEY")
+            if not api_key:
+                raise ValueError("OPENROUTER_API_KEY is not set.")
+            self.model = OpenAI(
+                api_key=api_key,
+                base_url="https://openrouter.ai/api/v1",
+            )
+            self.model = self.model.chat.completions.create
         elif self.model_provider == "gemini":
             # Google's recommended interface: the Interactions API through the
             # google-genai SDK. It reports cached and thinking tokens separately.
@@ -555,6 +566,7 @@ class FoundationModel:
             self.model_provider == "openai"
             or self.model_provider == "mosaic-vllm"
             or self.model_provider == "fireworks"
+            or self.model_provider == "openrouter"
         ):
             # OpenAI reasoning models reject max_tokens; they take max_completion_tokens.
             token_arg = (
@@ -569,7 +581,7 @@ class FoundationModel:
                 **token_arg,
                 **generate_kwargs,
             )
-            if self.model_provider in ("openai", "fireworks"):
+            if self.model_provider in ("openai", "fireworks", "openrouter"):
                 log_openai_usage(
                     self._model_server_model_name,
                     raw,
