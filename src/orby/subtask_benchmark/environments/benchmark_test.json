@@ -949,7 +949,7 @@
       "data_path": "environments/web_archives/github/github_1.wacz",
       "start_url": "https://github.com/NVIDIA/NeMo/tree/main"
     },
-    "goal": "Return the number of commits present in the noise_emb branch of jimHalpert123/NeMo. Only return integer values (no commas)",
+    "goal": "Return the number of commits present in the noise_emb branch of NVIDIA/NeMo. Only return integer values (no commas)",
     "eval": {
       "eval_type": "string_matcher",
       "evaluate_scripts": [
