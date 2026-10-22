@@ -56,6 +56,10 @@ def log_openai_usage(model: str, raw, latency_s: float, provider: str = "openai"
     if details is not None:
         cache_write = getattr(details, "cache_write_tokens", None) or (getattr(details, "model_extra", None) or {}).get("cache_write_tokens") or 0
     reasoning = (getattr(u.completion_tokens_details, "reasoning_tokens", 0) or 0) if u.completion_tokens_details else 0
+    # OpenRouter adds the call's cost (USD) to usage and names the provider
+    # that served it; record both when present.
+    extra = getattr(u, "model_extra", None) or {}
+    served = (getattr(raw, "model_extra", None) or {}).get("provider")
     write_usage_record({
         "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
         "provider": provider, "model": model, "latency_s": round(latency_s, 2),
@@ -66,4 +70,56 @@ def log_openai_usage(model: str, raw, latency_s: float, provider: str = "openai"
         # completion_tokens includes reasoning tokens.
         "output": u.completion_tokens or 0, "reasoning": reasoning,
         "stop_reason": raw.choices[0].finish_reason if raw.choices else None,
+        **({"provider_cost_usd": extra["cost"]} if extra.get("cost") is not None else {}),
+        **({"served_by": served} if served else {}),
+    })
+
+
+def log_raw_response(raw) -> None:
+    """Append the full response to the JSONL file named by LLM_RAW_LOG, if set.
+
+    For debugging only: it keeps fields the agent ignores, such as
+    reasoning_content, so a reply with an empty answer can be inspected.
+    """
+    path = os.environ.get("LLM_RAW_LOG")
+    if not path:
+        return
+    try:
+        body = raw.model_dump()
+    except AttributeError:
+        body = str(raw)
+    with open(path, "a") as f:
+        f.write(json.dumps({"task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+                            "pid": os.getpid(), "response": body}, default=str) + "\n")
+
+
+# Interactions API status values mapped to the stop reasons usage_report.py counts.
+_GEMINI_STOP = {"completed": "stop", "incomplete": "max_tokens", "budget_exceeded": "max_tokens", "blocked": "refusal"}
+
+
+def log_gemini_usage(model: str, raw: dict, latency_s: float) -> None:
+    """Log one Gemini Interactions API call.
+
+    total_input_tokens includes the cached tokens, and total_output_tokens
+    excludes thinking (total_tokens = input + output + thought), which Google
+    bills as output.
+    """
+    u = raw.get("usage") or {}
+    status = raw.get("status")
+    inp = u.get("total_input_tokens") or 0
+    cached = u.get("total_cached_tokens") or 0
+    thoughts = u.get("total_thought_tokens") or 0
+    has_output = any(s.get("type") == "model_output" for s in raw.get("steps") or [])
+    stop = _GEMINI_STOP.get(status, status)
+    if status == "completed" and not has_output:
+        stop = "no_output"
+    write_usage_record({
+        "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+        "provider": "gemini", "model": model, "latency_s": round(latency_s, 2),
+        "input_uncached": max(inp - cached, 0), "input_cache_read": cached,
+        # Gemini has implicit caching only, with no separate write charge.
+        "input_cache_write": 0,
+        "output": (u.get("total_output_tokens") or 0) + thoughts, "reasoning": thoughts,
+        "stop_reason": stop, "status_raw": status, "service_tier": raw.get("service_tier"),
+        **({"usage_missing": True} if not u else {}),
     })

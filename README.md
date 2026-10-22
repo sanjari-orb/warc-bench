@@ -225,6 +225,23 @@ python scripts/run_repeated.py --label opus55 \
     --s3-prefix s3://<bucket>/<prefix> --aws-profile <profile>
 ```
 
+`scripts/summarize_results.py --runs-dir runs --out-dir runs/results` combines
+every model's aggregate JSON into `results.csv` and a Markdown table,
+`results.md`.
+
+Each run directory is uploaded with `aws s3 sync` and then checked by file
+count, and synced once more if the counts differ. A plain recursive copy was
+seen to leave out a few trajectory files without reporting an error.
+
+`scripts/rerun_tasks.py` reruns chosen tasks of a finished run, for tasks that
+never got a real attempt (such as a dropped connection). It merges their rows
+into the run's tasks CSV, keeps the original CSV, and records the reason in
+`rerun_<name>/rerun_info.json`. `summarize_results.py` lists every rerun under
+the results table.
+
+Set `LLM_RAW_LOG=<file>.jsonl` to save every OpenAI-compatible response in
+full, including `reasoning_content`, for debugging.
+
 There is one config per model in `scripts/eval_configs/test_split_<model>.yaml`.
 Each one runs at the highest reasoning effort its API accepts, passed through
 `extra_body`:
@@ -234,6 +251,8 @@ Each one runs at the highest reasoning effort its API accepts, passed through
 | GPT-6.1 Sol, GPT-6 Astra | `reasoning_effort: xhigh` (`max` is rejected) |
 | Claude Opus 5.5 | `output_config.effort: max` (the default is `medium`) |
 | Kimi K3, DeepSeek V4.1 Flash 1017 (Fireworks) | `reasoning_effort: max` |
+| Gemini 4 Argon | `thinking_level: high` (levels are minimal, low, medium and high) |
+| Grok 4.7 (OpenRouter) | `reasoning.effort: xhigh` (OpenRouter lists xhigh, high, medium, low; `max` is mapped lower) |
 
 The script removes `ANTHROPIC_BASE_URL`, `ANTHROPIC_AUTH_TOKEN`,
 `ANTHROPIC_CUSTOM_HEADERS` and `OPENAI_BASE_URL` before each run, so that a
@@ -247,6 +266,19 @@ parse. The new prompt rewrites that line and adds one more, telling the model
 to put only the requested value in `complete(answer=...)`. 53 of the 192 test
 tasks use `string_matcher`, which needs an exact match, and only 17 of their
 goals say to return only the value.
+
+Gemini models use the `gemini` provider. It calls Google's recommended Interactions
+API through the `google-genai` SDK (`client.interactions.create`), with
+`store=False` (each step carries its full context, so nothing is kept
+server-side) and the standard service tier. It reads `GEMINI_API_KEY`.
+Uncached input is `total_input_tokens` minus `total_cached_tokens`, and output
+is `total_output_tokens` plus `total_thought_tokens`, since Google bills thinking
+as output.
+
+Grok uses the `openrouter` provider: OpenRouter's OpenAI-compatible endpoint with
+`OPENROUTER_API_KEY`. Its usage block has OpenAI's fields, and the usage log also
+keeps OpenRouter's per-call cost (`provider_cost_usd`) and the serving provider
+(`served_by`).
 
 GLM 5.3 is not included: `glm-5p3` on Fireworks does not accept images.
 

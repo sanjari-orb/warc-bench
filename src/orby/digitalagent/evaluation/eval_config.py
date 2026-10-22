@@ -19,6 +19,11 @@ class ModelConfig(BaseModel):
     extra_body: Optional[dict] = None
     # Per-request timeout in seconds. Not sent unless set.
     timeout: Optional[float] = None
+    # Coordinate convention of the model's actions, read by the agent and
+    # never sent to the API. Unset means screenshot pixels. "normalized_1000"
+    # means a 0-1000 grid over the screenshot (Muse Spark Open); the agent then
+    # states that grid in the prompt and converts actions back to pixels.
+    coordinate_space: Optional[str] = None
     grounder: Optional[ModelConfig] = None
     executor: Optional[ModelConfig] = None
     planner: Optional[ModelConfig] = None

@@ -12,7 +12,12 @@ import warnings
 import openai
 import anthropic
 import time
-from orby.digitalagent.model.usage_log import log_anthropic_usage, log_openai_usage
+from orby.digitalagent.model.usage_log import (
+    log_anthropic_usage,
+    log_gemini_usage,
+    log_openai_usage,
+    log_raw_response,
+)
 from anthropic import Anthropic
 from openai import OpenAI
 from retry import retry
@@ -50,6 +55,63 @@ def _anthropic_response_text(response) -> str:
         "Anthropic response contained no text block "
         f"(stop_reason={response.stop_reason!r}, "
         f"blocks={[getattr(b, 'type', None) for b in response.content]})."
+    )
+
+
+class GeminiRetryableError(Exception):
+    """A Gemini request that failed for a reason worth retrying (429, 5xx, network)."""
+
+
+def _gemini_interaction_input(messages: List[Dict[str, Any]]) -> tuple[str | None, list]:
+    """Convert OpenAI-style messages to an Interactions API system_instruction and input.
+
+    Only system and user messages are supported: every call is stateless
+    (store=False) and carries its full context, as the agents here send it.
+    Images must be data URLs or http(s) URLs; anything else raises ValueError.
+    """
+    system_texts, items = [], []
+    for message in messages:
+        role = message["role"]
+        if role not in ("system", "user"):
+            raise ValueError(f"Gemini provider supports system and user messages only, got {role!r}")
+        content = message["content"]
+        parts = [{"type": "text", "text": content}] if isinstance(content, str) else content
+        for part in parts:
+            if part["type"] == "text":
+                if not part["text"]:
+                    continue
+                if role == "system":
+                    system_texts.append(part["text"])
+                else:
+                    items.append({"type": "text", "text": part["text"]})
+            elif part["type"] == "image_url":
+                if role == "system":
+                    raise ValueError("Gemini system_instruction cannot hold images")
+                url = part["image_url"]["url"]
+                if url.startswith("data:"):
+                    header, _, data = url.partition(",")
+                    mime = header[len("data:"):].split(";")[0] or "image/png"
+                elif url.startswith(("http://", "https://")):
+                    data, mime = download_image_as_base64_str(url), "image/png"
+                else:
+                    raise ValueError(f"Unsupported image URL scheme: {url[:30]!r}")
+                items.append({"type": "image", "mime_type": mime, "data": data})
+            else:
+                raise ValueError(f"Unsupported content type for Gemini: {part['type']!r}")
+    return ("\n\n".join(system_texts) or None), items
+
+
+def _gemini_interaction_text(interaction: dict) -> str:
+    """The answer text of an interaction: its model_output steps, without thoughts.
+
+    Returns "" when there is no model output (blocked, failed or cut off); the
+    caller's parser then fails the step, as for other providers' refusals.
+    """
+    return "".join(
+        content.get("text", "")
+        for step in interaction.get("steps") or []
+        if step.get("type") == "model_output"
+        for content in step.get("content") or []
     )
 
 
@@ -180,6 +242,29 @@ class FoundationModel:
                 base_url="https://api.fireworks.ai/inference/v1",
             )
             self.model = self.model.chat.completions.create
+        elif self.model_provider == "openrouter":
+            # OpenRouter's OpenAI-compatible endpoint (used for Grok). Its usage
+            # block has the same fields as OpenAI's, plus a per-call cost.
+            api_key = os.environ.get("OPENROUTER_API_KEY")
+            if not api_key:
+                raise ValueError("OPENROUTER_API_KEY is not set.")
+            self.model = OpenAI(
+                api_key=api_key,
+                base_url="https://openrouter.ai/api/v1",
+            )
+            self.model = self.model.chat.completions.create
+        elif self.model_provider == "gemini":
+            # Google's recommended interface: the Interactions API through the
+            # google-genai SDK. It reports cached and thinking tokens separately.
+            from google import genai
+
+            api_key = os.environ.get("GEMINI_API_KEY")
+            if not api_key:
+                raise ValueError("GEMINI_API_KEY is not set.")
+            # Keep the client itself: it closes its HTTP connection when it is
+            # garbage collected, which would break the bound create method.
+            self._gemini_client = genai.Client(api_key=api_key)
+            self.model = self._gemini_client.interactions.create
         else:
             raise ValueError(f"Invalid model provider: {self.model_provider}.")
 
@@ -370,6 +455,11 @@ class FoundationModel:
             anthropic.UnprocessableEntityError,
             openai.RateLimitError,
             anthropic.RateLimitError,
+            # A dropped connection says nothing about the model; without these
+            # one network blip ended the whole task with a score of 0.
+            openai.APIConnectionError,
+            anthropic.APIConnectionError,
+            GeminiRetryableError,
         ),
         tries=10,
         delay=1,
@@ -476,6 +566,7 @@ class FoundationModel:
             self.model_provider == "openai"
             or self.model_provider == "mosaic-vllm"
             or self.model_provider == "fireworks"
+            or self.model_provider == "openrouter"
         ):
             # OpenAI reasoning models reject max_tokens; they take max_completion_tokens.
             token_arg = (
@@ -490,13 +581,14 @@ class FoundationModel:
                 **token_arg,
                 **generate_kwargs,
             )
-            if self.model_provider in ("openai", "fireworks"):
+            if self.model_provider in ("openai", "fireworks", "openrouter"):
                 log_openai_usage(
                     self._model_server_model_name,
                     raw,
                     time.time() - _t0,
                     provider=self.model_provider,
                 )
+                log_raw_response(raw)
             if return_raw:
                 return raw.choices[0].message.content, raw
             else:
@@ -541,6 +633,55 @@ class FoundationModel:
                 return raw
             else:
                 return _anthropic_response_text(raw)
+
+        elif self.model_provider == "gemini":
+            from google.genai._gaos.lib.compat_errors import (
+                APIConnectionError as GeminiConnectionError,
+                BadRequestError as GeminiBadRequestError,
+                InternalServerError as GeminiServerError,
+                RateLimitError as GeminiRateLimitError,
+            )
+
+            system, items = _gemini_interaction_input(messages)
+            extra = generate_kwargs.get("extra_body") or {}
+            unknown = set(extra) - {"generation_config", "service_tier"}
+            if unknown:
+                raise ValueError(f"Unsupported extra_body keys for Gemini: {sorted(unknown)}")
+            generation_config = {"max_output_tokens": max_tokens, **(extra.get("generation_config") or {})}
+            if generate_kwargs.get("temperature") is not None:
+                generation_config["temperature"] = generate_kwargs["temperature"]
+            request = {
+                "model": self._model_server_model_name,
+                "input": items,
+                "generation_config": generation_config,
+                # Each step carries its full context, so keep nothing server-side.
+                "store": False,
+                "service_tier": extra.get("service_tier", "standard"),
+            }
+            if system:
+                request["system_instruction"] = system
+            _t0 = time.time()
+            try:
+                interaction = self.model(**request, timeout=generate_kwargs.get("timeout", 600))
+            except (GeminiConnectionError, GeminiServerError, GeminiRateLimitError) as ex:
+                raise GeminiRetryableError(f"Gemini request failed: {type(ex).__name__}: {str(ex)[:300]}") from ex
+            except GeminiBadRequestError as ex:
+                # Google's content filters reject a request with a 400 ("Request
+                # blocked due to ...") rather than a reply; record it as a refusal
+                # so it is counted, then fail the step as before.
+                if "blocked" in str(ex).lower():
+                    log_gemini_usage(
+                        self._model_server_model_name,
+                        {"status": "blocked", "usage": {}},
+                        time.time() - _t0,
+                    )
+                raise
+            raw = interaction.model_dump(mode="json", exclude_none=True)
+            log_gemini_usage(self._model_server_model_name, raw, time.time() - _t0)
+            text = _gemini_interaction_text(raw)
+            if return_raw:
+                return text, raw
+            return text
 
         elif self.model_provider == "mosaic":
             # adopted from multimodal/scripts/inference/client.py

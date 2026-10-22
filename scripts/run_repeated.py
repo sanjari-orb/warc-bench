@@ -29,18 +29,41 @@ LABEL_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 PROXY_ENV_VARS = ["ANTHROPIC_BASE_URL", "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_CUSTOM_HEADERS", "OPENAI_BASE_URL"]
 
 
-def s3_copy(src, dest, recursive=False, profile=None):
-    """Copy to S3. Returns False on failure so a long batch of runs is not lost
-    to an expired login; the files stay on disk and can be copied later."""
-    cmd = ["aws", "s3", "cp", src, dest, "--only-show-errors"]
-    if recursive:
-        cmd.append("--recursive")
+def s3_count(dest, profile=None):
+    """Number of objects under an S3 prefix, or None if listing failed."""
+    cmd = ["aws", "s3", "ls", "--recursive", dest]
     if profile:
         cmd += ["--profile", profile]
-    if subprocess.run(cmd).returncode != 0:
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode not in (0, 1):  # 1 means nothing listed
+        return None
+    return len([line for line in proc.stdout.splitlines() if line.strip()])
+
+
+def s3_copy(src, dest, recursive=False, profile=None):
+    """Copy to S3. Returns False on failure so a long batch of runs is not lost
+    to an expired login; the files stay on disk and can be copied later.
+
+    A directory is synced and then checked by file count, because a recursive
+    copy has been seen to leave out a few files without reporting an error.
+    """
+    base = ["--profile", profile] if profile else []
+    if not recursive:
+        ok = subprocess.run(["aws", "s3", "cp", src, dest, "--only-show-errors", *base]).returncode == 0
+    else:
+        local = sum(len(files) for _, _, files in os.walk(src))
+        ok = False
+        for _ in range(2):
+            if subprocess.run(["aws", "s3", "sync", src, dest, "--only-show-errors", *base]).returncode != 0:
+                break
+            remote = s3_count(dest, profile)
+            if remote == local:
+                ok = True
+                break
+            print(f"upload check: {remote} files in {dest}, {local} on disk; syncing again", flush=True)
+    if not ok:
         print(f"WARNING: upload of {src} to {dest} failed; copy it again later", flush=True)
-        return False
-    return True
+    return ok
 
 
 def main():
@@ -122,6 +145,10 @@ def main():
            "--label", args.label, "--task-csvs", *task_csvs, "--out", agg]
     if os.path.exists(args.rate_card):
         cmd += ["--rate-card", args.rate_card]
+    # Tasks killed at the time limit have no recorded time; count them at the limit.
+    time_limit = base_config.get("runner", {}).get("timeout_secs")
+    if time_limit:
+        cmd += ["--time-limit-s", str(time_limit)]
     subprocess.run(cmd, check=True)
     s3_copy(agg, f"{s3_base}/{args.label}_aggregate.json", profile=args.aws_profile)
 

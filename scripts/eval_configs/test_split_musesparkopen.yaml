@@ -1,0 +1,43 @@
+# Runs the whitelisted test split (environments/benchmark_test_whitelist.json).
+# The test tasks share ids with benchmark.json, so select the test file:
+#   SUBTASK_BENCHMARK_FILE=benchmark_test.json python scripts/run_eval.py scripts/eval_configs/test_split.yaml
+# Add LLM_USAGE_LOG=<file>.jsonl to record token use and task times, then turn
+# the log into CSVs with scripts/usage_report.py.
+run_name: test_split_musesparkopen
+
+runner:
+  threads: 8
+  output_dir: ./eval_outputs
+  seed: 17
+  timeout_secs: 1800
+
+model_configs:
+  musesparkopen:
+    # Muse Spark Open (Fireworks). Reasoning tokens count toward max_tokens, so leave room.
+    provider: fireworks
+    name: accounts/fireworks/models/muse-spark-open
+    max_tokens: 32000
+    # Fireworks' highest reasoning effort.
+    extra_body: {reasoning_effort: max}
+    # Muse answers on a 0-1000 grid over the screenshot (confirmed by the
+    # provider); the agent states the grid in the prompt and converts to pixels.
+    coordinate_space: normalized_1000
+    timeout: 600
+
+agents:
+  run1:
+    # sva_v4_note: SVA V4 without written-out reasoning. Claude Opus 5.5
+    # declines the original sva_v4 prompt.
+    name: sva_v4_note
+    model_config_name: musesparkopen
+
+benchmarks:
+  subtaskbench:
+    dataset: subtaskbench_test
+    max_examples: -1
+    max_steps: 20
+    headless: true
+    reset_env: false
+    viewport_size:
+      width: 1280
+      height: 720
