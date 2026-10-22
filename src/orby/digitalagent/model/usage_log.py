@@ -88,7 +88,7 @@ def log_raw_response(raw) -> None:
 
 
 # Interactions API status values mapped to the stop reasons usage_report.py counts.
-_GEMINI_STOP = {"completed": "stop", "incomplete": "max_tokens", "budget_exceeded": "max_tokens"}
+_GEMINI_STOP = {"completed": "stop", "incomplete": "max_tokens", "budget_exceeded": "max_tokens", "blocked": "refusal"}
 
 
 def log_gemini_usage(model: str, raw: dict, latency_s: float) -> None:

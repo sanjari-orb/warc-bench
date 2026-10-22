@@ -625,6 +625,7 @@ class FoundationModel:
         elif self.model_provider == "gemini":
             from google.genai._gaos.lib.compat_errors import (
                 APIConnectionError as GeminiConnectionError,
+                BadRequestError as GeminiBadRequestError,
                 InternalServerError as GeminiServerError,
                 RateLimitError as GeminiRateLimitError,
             )
@@ -652,6 +653,17 @@ class FoundationModel:
                 interaction = self.model(**request, timeout=generate_kwargs.get("timeout", 600))
             except (GeminiConnectionError, GeminiServerError, GeminiRateLimitError) as ex:
                 raise GeminiRetryableError(f"Gemini request failed: {type(ex).__name__}: {str(ex)[:300]}") from ex
+            except GeminiBadRequestError as ex:
+                # Google's content filters reject a request with a 400 ("Request
+                # blocked due to ...") rather than a reply; record it as a refusal
+                # so it is counted, then fail the step as before.
+                if "blocked" in str(ex).lower():
+                    log_gemini_usage(
+                        self._model_server_model_name,
+                        {"status": "blocked", "usage": {}},
+                        time.time() - _t0,
+                    )
+                raise
             raw = interaction.model_dump(mode="json", exclude_none=True)
             log_gemini_usage(self._model_server_model_name, raw, time.time() - _t0)
             text = _gemini_interaction_text(raw)
