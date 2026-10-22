@@ -1,3 +1,5 @@
+import ast
+import inspect
 from dataclasses import dataclass
 
 from orby.digitalagent.agent import Agent
@@ -51,6 +53,29 @@ class SvaV4(Agent):
     THINKING_TAG = SVA_THINKING_TAG
     HISTORY_TAG = "thought"
 
+    # For models that answer on a 0-1000 grid (coordinate_space
+    # "normalized_1000"), this prompt sentence is replaced so the prompt
+    # states the grid instead of pixels.
+    PIXEL_COORDINATES_SENTENCE = (
+        "Pixel coordinates originate from the top left corner of the image, where the first "
+        "coordinate refers to the horizontal/width axis and the second refers to the vertical/height axis."
+    )
+    NORMALIZED_COORDINATES_SENTENCE = (
+        "Coordinates are integers on a 0 to 1000 grid over this screenshot, independent of its size in "
+        "pixels: (0, 0) is the top left corner and (1000, 1000) the bottom right, where the first coordinate "
+        "refers to the horizontal/width axis and the second refers to the vertical/height axis. "
+        "Use this grid for every x and y in your actions."
+    )
+    # Action arguments that are screen positions, by axis. scroll's delta_x and
+    # delta_y are distances, so they stay as they are.
+    COORDINATE_ARGS = {
+        "click": {"x": "x", "y": "y"},
+        "hover": {"x": "x", "y": "y"},
+        "type": {"x": "x", "y": "y"},
+        "scroll": {"x": "x", "y": "y"},
+        "drag_and_release": {"x1": "x", "y1": "y", "x2": "x", "y2": "y"},
+    }
+
     def __init__(
         self,
         actions: str,
@@ -59,8 +84,12 @@ class SvaV4(Agent):
     ):
         super().__init__()
 
-        # Single model for both evaluation and action generation
-        self.model_configs = model_configs
+        # Single model for both evaluation and action generation. The
+        # coordinate convention is for the agent, not the API, so take it out.
+        self.model_configs = dict(model_configs)
+        self.coordinate_space = self.model_configs.pop("coordinate_space", None)
+        if self.coordinate_space not in (None, "normalized_1000"):
+            raise ValueError(f"Unknown coordinate_space: {self.coordinate_space!r}")
         self.model = FoundationModel(**self.model_configs)
 
         # The action hints are the actions that the agent can take as a string
@@ -114,6 +143,10 @@ class SvaV4(Agent):
 
         # Single model call that handles both evaluation and action generation
         prompt, images = self.PROMPT.render(**variables)
+        if self.coordinate_space == "normalized_1000":
+            if self.PIXEL_COORDINATES_SENTENCE not in prompt:
+                raise ValueError("The prompt has no pixel-coordinate sentence to replace.")
+            prompt = prompt.replace(self.PIXEL_COORDINATES_SENTENCE, self.NORMALIZED_COORDINATES_SENTENCE)
         messages = prompt_to_messages(prompt, images=images)
         model_response = self.model.generate(messages=messages, **kwargs)
 
@@ -176,7 +209,44 @@ class SvaV4(Agent):
         """
         if extract_action(action) not in BrowserGymActions.get_action_space():
             raise ValueError(f"Invalid action: {action}")
+        if self.coordinate_space == "normalized_1000":
+            action = self._grid_to_pixels(action)
         return eval(action)
+
+    def _grid_to_pixels(self, action: str) -> str:
+        """Rewrite an action's 0-1000 grid positions as pixels of the current screenshot.
+
+        x_px = round(x * width / 1000) and y_px = round(y * height / 1000),
+        after clamping to 0-1000 (edge positions can come back slightly outside
+        the grid), capped at the last pixel. Arguments must be literals; anything else raises
+        ValueError, which fails the step like any other invalid action.
+        """
+        try:
+            call = ast.parse(action.strip(), mode="eval").body
+        except SyntaxError as ex:
+            raise ValueError(f"Invalid action: {action}") from ex
+        if not isinstance(call, ast.Call) or not isinstance(call.func, ast.Name):
+            raise ValueError(f"Invalid action: {action}")
+        name = call.func.id
+        axes = self.COORDINATE_ARGS.get(name)
+        if not axes:
+            return action
+        try:
+            args = [ast.literal_eval(a) for a in call.args]
+            kwargs = {k.arg: ast.literal_eval(k.value) for k in call.keywords}
+            bound = inspect.signature(getattr(BrowserGymActions, name)).bind(*args, **kwargs)
+        except (ValueError, TypeError, SyntaxError) as ex:
+            raise ValueError(f"Invalid action: {action}") from ex
+        height, width = self.screenshot_history[-1].shape[:2]
+        size = {"x": width, "y": height}
+        for arg, axis in axes.items():
+            value = bound.arguments.get(arg)
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                raise ValueError(f"Invalid {arg} in action: {action}")
+            pixel = round(min(max(value, 0), 1000) * size[axis] / 1000)
+            # 1000 maps to one past the last pixel; keep it on screen.
+            bound.arguments[arg] = min(pixel, size[axis] - 1)
+        return f"{name}(" + ", ".join(f"{k}={v!r}" for k, v in bound.arguments.items()) + ")"
 
     def _create_history_str(self) -> tuple[dict, str]:
         """
