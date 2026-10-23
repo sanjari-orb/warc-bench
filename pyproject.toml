@@ -19,7 +19,7 @@ dependencies = [
     # attaches over CDP to a browser that Node launches, so the two clients need
     # to stay on the same release line.
     "playwright==1.48.0",
-    "openai==1.55.3",
+    "openai==3.37.0",
     "anthropic==0.40.0",
 
     # BrowserGym and related.

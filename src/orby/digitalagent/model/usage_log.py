@@ -123,3 +123,34 @@ def log_gemini_usage(model: str, raw: dict, latency_s: float) -> None:
         "stop_reason": stop, "status_raw": status, "service_tier": raw.get("service_tier"),
         **({"usage_missing": True} if not u else {}),
     })
+
+
+def log_xai_usage(model: str, raw, latency_s: float) -> None:
+    """Log one xAI Responses API call.
+
+    input_tokens includes cached_tokens, and output_tokens includes
+    reasoning_tokens. xAI also returns the call's cost in ticks of 1e-10 USD.
+    """
+    u = raw.usage
+    status = getattr(raw, "status", None)
+    incomplete = getattr(getattr(raw, "incomplete_details", None), "reason", None)
+    if u is None:
+        write_usage_record({
+            "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+            "provider": "xai", "model": model, "latency_s": round(latency_s, 2),
+            "usage_missing": True, "stop_reason": status,
+        })
+        return
+    inp = u.input_tokens or 0
+    cached = (getattr(u.input_tokens_details, "cached_tokens", 0) or 0) if u.input_tokens_details else 0
+    reasoning = (getattr(u.output_tokens_details, "reasoning_tokens", 0) or 0) if u.output_tokens_details else 0
+    ticks = (getattr(u, "model_extra", None) or {}).get("cost_in_usd_ticks")
+    stop = "stop" if status == "completed" else ("max_tokens" if incomplete == "max_output_tokens" else (incomplete or status))
+    write_usage_record({
+        "event": "llm_call", "task": os.environ.get("EVAL_TASK_ID"), "time": time.time(),
+        "provider": "xai", "model": model, "latency_s": round(latency_s, 2),
+        "input_uncached": max(inp - cached, 0), "input_cache_read": cached, "input_cache_write": 0,
+        "output": u.output_tokens or 0, "reasoning": reasoning,
+        "stop_reason": stop, "status_raw": status,
+        **({"provider_cost_usd": ticks / 1e10} if ticks is not None else {}),
+    })
