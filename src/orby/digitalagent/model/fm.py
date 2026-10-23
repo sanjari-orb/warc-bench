@@ -16,6 +16,7 @@ from orby.digitalagent.model.usage_log import (
     log_anthropic_usage,
     log_gemini_usage,
     log_openai_usage,
+    log_xai_usage,
     log_raw_response,
 )
 from anthropic import Anthropic
@@ -98,6 +99,32 @@ def _gemini_interaction_input(messages: List[Dict[str, Any]]) -> tuple[str | Non
                 items.append({"type": "image", "mime_type": mime, "data": data})
             else:
                 raise ValueError(f"Unsupported content type for Gemini: {part['type']!r}")
+    return ("\n\n".join(system_texts) or None), items
+
+
+def _xai_responses_input(messages: List[Dict[str, Any]]) -> tuple[str | None, list]:
+    """Convert OpenAI-style chat messages to a Responses API system text and user content.
+
+    Only system and user messages are supported, as the agents here send them.
+    """
+    system_texts, items = [], []
+    for message in messages:
+        role = message["role"]
+        if role not in ("system", "user"):
+            raise ValueError(f"xai provider supports system and user messages only, got {role!r}")
+        content = message["content"]
+        parts = [{"type": "text", "text": content}] if isinstance(content, str) else content
+        for part in parts:
+            if part["type"] == "text":
+                if part["text"]:
+                    (system_texts if role == "system" else items).append(
+                        part["text"] if role == "system" else {"type": "input_text", "text": part["text"]})
+            elif part["type"] == "image_url":
+                if role == "system":
+                    raise ValueError("xai system message cannot hold images")
+                items.append({"type": "input_image", "image_url": part["image_url"]["url"]})
+            else:
+                raise ValueError(f"Unsupported content type for xai: {part['type']!r}")
     return ("\n\n".join(system_texts) or None), items
 
 
@@ -242,6 +269,14 @@ class FoundationModel:
                 base_url="https://api.fireworks.ai/inference/v1",
             )
             self.model = self.model.chat.completions.create
+        elif self.model_provider == "xai":
+            # xAI's API through the OpenAI SDK's Responses API, which xAI
+            # recommends over its (legacy) Chat Completions endpoint.
+            api_key = os.environ.get("XAI_API_KEY")
+            if not api_key:
+                raise ValueError("XAI_API_KEY is not set.")
+            self._xai_client = OpenAI(api_key=api_key, base_url="https://api.x.ai/v1")
+            self.model = self._xai_client.responses.create
         elif self.model_provider == "openrouter":
             # OpenRouter's OpenAI-compatible endpoint (used for Grok). Its usage
             # block has the same fields as OpenAI's, plus a per-call cost.
@@ -633,6 +668,30 @@ class FoundationModel:
                 return raw
             else:
                 return _anthropic_response_text(raw)
+
+        elif self.model_provider == "xai":
+            system, items = _xai_responses_input(messages)
+            request = {
+                "model": self._model_server_model_name,
+                "input": ([{"role": "system", "content": system}] if system else [])
+                + [{"role": "user", "content": items}],
+                "max_output_tokens": max_tokens,
+                # Each step carries its full context, so keep nothing server-side.
+                "store": False,
+            }
+            if generate_kwargs.get("temperature") is not None:
+                request["temperature"] = generate_kwargs["temperature"]
+            _t0 = time.time()
+            raw = self.model(
+                **request,
+                extra_body=generate_kwargs.get("extra_body"),
+                timeout=generate_kwargs.get("timeout", 600),
+            )
+            log_xai_usage(self._model_server_model_name, raw, time.time() - _t0)
+            text = raw.output_text or ""
+            if return_raw:
+                return text, raw
+            return text
 
         elif self.model_provider == "gemini":
             from google.genai._gaos.lib.compat_errors import (

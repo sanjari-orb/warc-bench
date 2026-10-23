@@ -40,6 +40,25 @@ def s3_count(dest, profile=None):
     return len([line for line in proc.stdout.splitlines() if line.strip()])
 
 
+def s3_missing(src, dest, profile=None):
+    """Paths under src (relative) with no object under the dest prefix, or None if listing failed."""
+    cmd = ["aws", "s3", "ls", "--recursive", dest]
+    if profile:
+        cmd += ["--profile", profile]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode not in (0, 1):
+        return None
+    # `aws s3 ls --recursive` prints keys from the bucket root; keep the part after the prefix.
+    prefix = dest.split("://", 1)[1].split("/", 1)[1] if "/" in dest.split("://", 1)[1] else ""
+    remote = set()
+    for line in proc.stdout.splitlines():
+        parts = line.split(None, 3)
+        if len(parts) == 4 and parts[3].startswith(prefix):
+            remote.add(parts[3][len(prefix):])
+    local = {os.path.relpath(os.path.join(root, f), src) for root, _, files in os.walk(src) for f in files}
+    return sorted(local - remote)
+
+
 def s3_copy(src, dest, recursive=False, profile=None):
     """Copy to S3. Returns False on failure so a long batch of runs is not lost
     to an expired login; the files stay on disk and can be copied later.
@@ -61,6 +80,16 @@ def s3_copy(src, dest, recursive=False, profile=None):
                 ok = True
                 break
             print(f"upload check: {remote} files in {dest}, {local} on disk; syncing again", flush=True)
+        if not ok:
+            # sync has been seen to skip the same large file twice; copy the
+            # files still missing one at a time.
+            missing = s3_missing(src, dest, profile)
+            for rel in missing or []:
+                subprocess.run(["aws", "s3", "cp", os.path.join(src, rel), dest.rstrip("/") + "/" + rel,
+                                "--only-show-errors", *base])
+            ok = missing is not None and s3_count(dest, profile) == local
+            if missing:
+                print(f"upload check: copied {len(missing)} missing file(s) one by one; complete={ok}", flush=True)
     if not ok:
         print(f"WARNING: upload of {src} to {dest} failed; copy it again later", flush=True)
     return ok
