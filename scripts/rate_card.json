@@ -62,5 +62,13 @@
     "output": 6.0,
     "source": "OpenRouter models API pricing for x-ai/grok-4.7 (served by xAI); matched OpenRouter's billed cost on a test call",
     "date": "2026-10-22"
+  },
+  "grok-4.7": {
+    "input": 2.0,
+    "cache_read": 0.5,
+    "cache_write": 0,
+    "output": 6.0,
+    "source": "https://docs.x.ai/docs/models (prompts under 200K tokens; prompts of 200K or more are billed at double; matched xAI's cost_in_usd_ticks on a test call)",
+    "date": "2026-10-23"
   }
 }

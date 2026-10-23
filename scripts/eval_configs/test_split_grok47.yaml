@@ -13,13 +13,12 @@ runner:
 
 model_configs:
   grok47:
-    # Grok 4.7 through OpenRouter (served by xAI). Run at the highest
-    # reasoning effort it accepts. Reasoning tokens count toward max_tokens.
-    provider: openrouter
-    name: x-ai/grok-4.7
+    # Grok 4.7 through xAI's API (Responses API). Run at the highest reasoning
+    # effort it accepts (low, medium, high, xhigh). Reasoning tokens count
+    # toward max_tokens, so leave room.
+    provider: xai
+    name: grok-4.7
     max_tokens: 32000
-    # OpenRouter lists supported_efforts xhigh, high, medium, low for this
-    # model (default high). It also accepts "max" but maps it lower.
     extra_body: {reasoning: {effort: xhigh}}
     timeout: 600
 
