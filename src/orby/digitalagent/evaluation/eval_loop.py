@@ -2,7 +2,6 @@
 Module that runs the agent for a specific example and records artifacts.
 """
 
-from retry import retry
 from typing import Optional
 import random
 import string
@@ -295,7 +294,9 @@ def run_examples(
         output_queue.put(rewards)
 
 
-@retry((TimeoutError), tries=3, delay=2)
+# No retry on TimeoutError: a task that runs past its time limit is a
+# failure, not something to attempt again. A retry also hid the timeout,
+# scored a later attempt, and counted only that attempt's time.
 def run_examples_in_subprocess(
     example_env_names: list[str],
     task_kwargs: Optional[list[dict]],
