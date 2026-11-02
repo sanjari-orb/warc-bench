@@ -7,6 +7,7 @@ WARC-Bench is a comprehensive benchmark featuring 438 carefully designed tasks t
 
 
 ## 📢 News
+* **[Oct 2026]** 🎉 WARC-Bench was featured in Fireworks' Specialized Intelligence Index suite of benchmarks for frontier models. Check out the results here under **Web Search > Computer Use** [Fireworks SII](https://fireworks.ai/specialized-intelligence-index/).
 * **[Feb 2026]** 🎉 Our paper "WARC-Bench: Web Archive Based Benchmark for GUI Subtask Executions" has been accepted to **ICLR 2026**! Check out the [OpenReview camera-ready version](https://openreview.net/forum?id=Hgw56DUFzD).
 
 
