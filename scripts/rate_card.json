@@ -70,5 +70,13 @@
     "output": 6.0,
     "source": "https://docs.x.ai/docs/models (prompts under 200K tokens; prompts of 200K or more are billed at double; matched xAI's cost_in_usd_ticks on a test call)",
     "date": "2026-10-23"
+  },
+  "accounts/fireworks/models/minimax-m3p1-flash": {
+    "input": 0.15,
+    "cache_read": 0.015,
+    "cache_write": 0,
+    "output": 0.6,
+    "source": "https://fireworks.ai/models/fireworks/minimax-m3p1-flash (serverless; not yet on docs.fireworks.ai/serverless/pricing; no separate cache-write charge)",
+    "date": "2026-11-09"
   }
 }

@@ -24,6 +24,9 @@ class ModelConfig(BaseModel):
     # means a 0-1000 grid over the screenshot (Muse Spark Open); the agent then
     # states that grid in the prompt and converts actions back to pixels.
     coordinate_space: Optional[str] = None
+    # For coordinate_space "scaled": the [width, height] of the image the model
+    # answers in (MiniMax M3.1 Flash: measured, see NOTES.md). Agent-only.
+    coordinate_grid: Optional[list[float]] = None
     grounder: Optional[ModelConfig] = None
     executor: Optional[ModelConfig] = None
     planner: Optional[ModelConfig] = None
