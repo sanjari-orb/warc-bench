@@ -88,7 +88,19 @@ class SvaV4(Agent):
         # coordinate convention is for the agent, not the API, so take it out.
         self.model_configs = dict(model_configs)
         self.coordinate_space = self.model_configs.pop("coordinate_space", None)
-        if self.coordinate_space not in (None, "normalized_1000"):
+        grid = self.model_configs.pop("coordinate_grid", None)
+        if self.coordinate_space is None:
+            self.coordinate_grid = None
+        elif self.coordinate_space == "normalized_1000":
+            self.coordinate_grid = (1000, 1000)
+        elif self.coordinate_space == "scaled":
+            # The model answers in pixels of a smaller copy of the screenshot,
+            # of size coordinate_grid = [width, height].
+            if (not isinstance(grid, (list, tuple)) or len(grid) != 2
+                    or not all(isinstance(v, (int, float)) and not isinstance(v, bool) and v > 0 for v in grid)):
+                raise ValueError(f"coordinate_space 'scaled' needs coordinate_grid [width, height], got {grid!r}")
+            self.coordinate_grid = (float(grid[0]), float(grid[1]))
+        else:
             raise ValueError(f"Unknown coordinate_space: {self.coordinate_space!r}")
         self.model = FoundationModel(**self.model_configs)
 
@@ -209,17 +221,19 @@ class SvaV4(Agent):
         """
         if extract_action(action) not in BrowserGymActions.get_action_space():
             raise ValueError(f"Invalid action: {action}")
-        if self.coordinate_space == "normalized_1000":
+        if self.coordinate_grid is not None:
             action = self._grid_to_pixels(action)
         return eval(action)
 
     def _grid_to_pixels(self, action: str) -> str:
-        """Rewrite an action's 0-1000 grid positions as pixels of the current screenshot.
+        """Rewrite an action's grid positions as pixels of the current screenshot.
 
-        x_px = round(x * width / 1000) and y_px = round(y * height / 1000),
-        after clamping to 0-1000 (edge positions can come back slightly outside
-        the grid), capped at the last pixel. Arguments must be literals; anything else raises
-        ValueError, which fails the step like any other invalid action.
+        With a grid of gw x gh (1000 x 1000 for normalized_1000, the measured
+        model image size for scaled): x_px = round(x * width / gw) and
+        y_px = round(y * height / gh), after clamping to the grid (edge
+        positions can come back slightly outside it), capped at the last pixel.
+        Arguments must be literals; anything else raises ValueError, which
+        fails the step like any other invalid action.
         """
         try:
             call = ast.parse(action.strip(), mode="eval").body
@@ -239,12 +253,13 @@ class SvaV4(Agent):
             raise ValueError(f"Invalid action: {action}") from ex
         height, width = self.screenshot_history[-1].shape[:2]
         size = {"x": width, "y": height}
+        grid = {"x": self.coordinate_grid[0], "y": self.coordinate_grid[1]}
         for arg, axis in axes.items():
             value = bound.arguments.get(arg)
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 raise ValueError(f"Invalid {arg} in action: {action}")
-            pixel = round(min(max(value, 0), 1000) * size[axis] / 1000)
-            # 1000 maps to one past the last pixel; keep it on screen.
+            pixel = round(min(max(value, 0), grid[axis]) * size[axis] / grid[axis])
+            # The grid edge maps to one past the last pixel; keep it on screen.
             bound.arguments[arg] = min(pixel, size[axis] - 1)
         return f"{name}(" + ", ".join(f"{k}={v!r}" for k, v in bound.arguments.items()) + ")"
 
